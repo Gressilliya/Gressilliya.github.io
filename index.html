@@ -9,39 +9,44 @@
       margin: 0;
       height: 100vh;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #ffe4ec, #fff0f5);
+      background: linear-gradient(135deg, #f8f9fa, #f1f3f5);
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .card {
+    .container {
       background: #ffffff;
       padding: 55px 45px;
-      border-radius: 28px;
+      border-radius: 24px;
       text-align: center;
-      box-shadow: 0 18px 45px rgba(255, 182, 193, 0.45);
-      max-width: 420px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.12);
+      max-width: 450px;
       width: 90%;
     }
 
     h1 {
-      font-size: 38px;
-      margin-bottom: 10px;
+      font-size: 34px;
       letter-spacing: 3px;
-      color: #d81b60;
+      margin-bottom: 15px;
+      color: #343a40;
     }
 
     h2 {
       font-size: 22px;
-      margin-bottom: 22px;
-      color: #ad1457;
-      font-weight: normal;
+      margin-bottom: 5px;
+      color: #495057;
+    }
+
+    .nim {
+      font-size: 15px;
+      color: #868e96;
+      margin-bottom: 25px;
     }
 
     p {
       font-size: 16px;
-      color: #666;
+      color: #6c757d;
       line-height: 1.7;
     }
 
@@ -50,23 +55,36 @@
       font-size: 18px;
       font-weight: bold;
       letter-spacing: 4px;
-      color: #c2185b;
+      color: #212529;
+    }
+
+    .note {
+      margin-top: 20px;
+      font-size: 14px;
+      font-style: italic;
+      color: #adb5bd;
     }
   </style>
 </head>
 
 <body>
-  <div class="card">
+  <div class="container">
     <h1>WELCOME</h1>
+
     <h2>Gressilliya Damanik</h2>
+    <div class="nim">NIM 230709088</div>
 
     <p>
-      This website is under development.<br>
-      Something beautiful is coming soon.
+      This website is currently under development.<br>
+      Please stay tuned for future updates.
     </p>
 
     <div class="coming">
       COMING SOON
+    </div>
+
+    <div class="note">
+      *This page is part of a personal academic project.*
     </div>
   </div>
 </body>
