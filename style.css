@@ -89,3 +89,52 @@ footer {
     padding: 15px;
     font-size: 14px;
 }
+
+/* HAMBURGER ICON */
+.hamburger {
+    position: fixed;
+    top: 15px;
+    left: 15px;
+    font-size: 26px;
+    cursor: pointer;
+    z-index: 1001;
+    background: #f8dcdc;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* SIDE MENU */
+#sideMenu {
+    position: fixed;
+    top: 0;
+    left: -220px;
+    width: 200px;
+    height: 100%;
+    background-color: #fff;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    padding-top: 60px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+}
+
+/* MENU ACTIVE */
+#sideMenu.active {
+    left: 0;
+}
+
+#sideMenu a {
+    display: block;
+    padding: 15px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+#sideMenu a:hover {
+    background-color: #f8dcdc;
+}
+
+/* SMOOTH SLIDE */
+html {
+    scroll-behavior: smooth;
+}
