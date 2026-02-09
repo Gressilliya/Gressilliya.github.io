@@ -138,3 +138,17 @@ footer {
 html {
     scroll-behavior: smooth;
 }
+
+/* CONTACT ICON FIX */
+.contact-icon {
+    width: 22px;
+    height: 22px;
+    padding: 6px;
+    background: #f8dcdc;
+    border-radius: 50%;
+}
+
+/* JANGAN IKUT KEATURAN IMG BESAR */
+.contact img {
+    width: auto;
+}
