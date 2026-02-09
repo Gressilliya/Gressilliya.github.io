@@ -69,8 +69,9 @@ section {
     color: #b83280;
 
 .contact img {
-    width: 28px;
-    height: 28px;
+    width: 16px;
+    height: 16px;
+    object-fit: contain;
 }
 
 footer {
