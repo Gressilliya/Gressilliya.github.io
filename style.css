@@ -21,10 +21,14 @@ section {
     text-align: center;
 }
 
-.profile img { 
-    width: 160px;
-    border-radius: 50%;
-    margin-bottom: 15px;
+.profile-img {
+    width: 260px;        /* lebih besar */
+    height: 260px;
+    object-fit: cover;  /* biar gambar nggak ketarik */
+    border-radius: 0; /* persegi tapi tetap estetik */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    margin: 20px auto;
+    display: block;
 }
 
 .services {
