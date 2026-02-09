@@ -1,0 +1,57 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff0f5;
+    color: #444;
+}
+
+header {
+    background-color: #f8c8dc;
+    text-align: center;
+    padding: 40px;
+}
+
+header h1 {
+    margin: 0;
+    letter-spacing: 3px;
+}
+
+section {
+    padding: 40px;
+    text-align: center;
+}
+
+.profile img { 
+    width: 160px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.services {
+    background-color: #fff;
+}
+
+.service-box {
+    display: inline-block;
+    width: 250px;
+    margin: 15px;
+    background: #ffe4ec;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.service-box img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.contact {
+    background-color: #fdf1f6;
+}
+
+footer {
+    background-color: #f8c8dc;
+    text-align: center;
+    padding: 15px;
+    font-size: 14px;
+}
