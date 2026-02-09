@@ -69,10 +69,10 @@ section {
 
 /* FORCE CONTACT ICON SIZE */
 .contact a img {
-    width: 25px !important;
-    height: 25px !important;
-    max-width: 25px !important;
-    max-height: 25px !important;
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px !important;
+    max-height: 16px !important;
 
     border-radius: 50%;
     object-fit: cover;
