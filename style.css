@@ -49,10 +49,11 @@ section {
     border-radius: 10px;
 }
 
+/* ===== CONTACT ICON FIX ===== */
+
 .contact {
     max-width: 400px;
     margin: auto;
-    text-align: left;
 }
 
 .contact a {
@@ -63,15 +64,25 @@ section {
     color: #333;
     margin: 10px 0;
     font-weight: 500;
+    font-size: 14px;
 }
 
-.contact a:hover {
-    color: #b83280;
-
+/* ICON SIZE & SHAPE */
 .contact img {
-    width: 16px;
-    height: 16px;
+    width: 16px !important;
+    height: 16px !important;
+    max-width: 16px;
+    max-height: 16px;
+
+    border-radius: 50%;
+    object-fit: cover;
+
+    background-color: #f2f2f2;
+    padding: 6px;
+
+    flex-shrink: 0;
 }
+
 
 footer {
     background-color: #f8c8dc;
