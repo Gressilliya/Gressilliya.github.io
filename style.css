@@ -152,3 +152,46 @@ html {
 .contact img {
     width: auto;
 }
+
+/* COLLECTION SECTION */
+.collections {
+    background-color: #fff0f5;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.collections h2 {
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.collection-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.collection-box {
+    background: #f8dcdc;
+    padding: 15px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.collection-box:hover {
+    transform: translateY(-6px);
+}
+
+.collection-box img {
+    width: 100%;
+    height: 140px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.collection-box h3 {
+    margin-top: 12px;
+    font-size: 16px;
+}
