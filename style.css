@@ -52,7 +52,7 @@ section {
 /* ===== CONTACT ICON FIX ===== */
 
 .contact {
-    max-width: 400px;
+    max-width: 100px;
     margin: auto;
 }
 
@@ -69,10 +69,10 @@ section {
 
 /* FORCE CONTACT ICON SIZE */
 .contact a img {
-    width: 16px !important;
-    height: 16px !important;
-    max-width: 16px !important;
-    max-height: 16px !important;
+    width: 18px !important;
+    height: 18px !important;
+    max-width: 18px !important;
+    max-height: 18px !important;
 
     border-radius: 50%;
     object-fit: cover;
