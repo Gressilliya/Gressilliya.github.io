@@ -50,7 +50,27 @@ section {
 }
 
 .contact {
-    background-color: #fdf1f6;
+    max-width: 400px;
+    margin: auto;
+    text-align: left;
+}
+
+.contact a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #333;
+    margin: 10px 0;
+    font-weight: 500;
+}
+
+.contact a:hover {
+    color: #b83280;
+
+.contact img {
+    width: 28px;
+    height: 28px;
 }
 
 footer {
