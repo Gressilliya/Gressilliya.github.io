@@ -67,21 +67,22 @@ section {
     font-size: 14px;
 }
 
-/* ICON SIZE & SHAPE */
-.contact img {
+/* FORCE CONTACT ICON SIZE */
+.contact a img {
     width: 16px !important;
     height: 16px !important;
-    max-width: 16px;
-    max-height: 16px;
+    max-width: 16px !important;
+    max-height: 16px !important;
 
     border-radius: 50%;
     object-fit: cover;
 
-    background-color: #f2f2f2;
     padding: 6px;
+    background: #f3f3f3;
 
-    flex-shrink: 0;
+    display: inline-block;
 }
+
 
 
 footer {
