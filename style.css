@@ -69,15 +69,15 @@ section {
 
 /* FORCE CONTACT ICON SIZE */
 .contact a img {
-    width: 18px !important;
-    height: 18px !important;
-    max-width: 18px !important;
-    max-height: 18px !important;
+    width: 25px !important;
+    height: 25px !important;
+    max-width: 25px !important;
+    max-height: 25px !important;
 
     border-radius: 50%;
     object-fit: cover;
 
-    padding: 6px;
+    padding: 18px;
     background: #f3f3f3;
 
     display: inline-block;
