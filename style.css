@@ -1,3 +1,20 @@
+#home {
+    background: transparent;
+    text-align: center;
+    padding: 120px 20px;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+
+    background-image: url("background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -194,4 +211,11 @@ html {
 .collection-box h3 {
     margin-top: 12px;
     font-size: 16px;
+}
+section {
+    background-color: rgba(255, 255, 255, 0.85);
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 1000px;
 }
