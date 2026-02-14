@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>About Me - Gressilliya Damanik</title>
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 
@@ -99,6 +101,29 @@ iframe{
     }
 }
 
+    .contact-link{
+display:inline-flex;
+align-items:center;
+gap:10px;
+text-decoration:none;
+color:white;
+background:linear-gradient(135deg,#3a3a3a,#8a8a8a);
+padding:10px 18px;
+border-radius:25px;
+margin-top:8px;
+font-weight:600;
+transition:0.3s;
+}
+
+.contact-link i{
+font-size:18px;
+}
+
+.contact-link:hover{
+transform:translateY(-3px);
+background:linear-gradient(135deg,#1f1f1f,#5f5f5f);
+box-shadow:0 6px 15px rgba(0,0,0,0.4);
+}
 </style>
 </head>
 
@@ -123,9 +148,21 @@ iframe{
 <p><b>Name:</b> Gressilliya Damanik</p>
 <p><b>NIM:</b> 230709088</p>
 <p><b>Kelas:</b> B</p>
-<p><b>Kontak:</b> 081269812898</p>
-<p><b>Gmail:</b> gressdamanik@gmail.com</p>
 <p>
+<a href="mailto:gressdamanik@gmail.com" class="contact-link">
+<i class="fa-solid fa-envelope"></i>
+gressdamanik@gmail.com
+</a>
+</p>
+
+<p>
+<a href="https://wa.me/6281260912898?text=Hello%20Gressilliya,%20I%20visited%20your%20website"
+target="_blank"
+class="contact-link">
+<i class="fa-brands fa-whatsapp"></i>
+081260912898
+</a>
+</p>
 I am a Library and Information Science student who is passionate about
 digital libraries and modern information technology. This website represents
 my learning journey in exploring digital information services and academic
