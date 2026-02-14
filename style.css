@@ -1,3 +1,17 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.home {
+    background-image: url("images/background.jpg");
+    background-size: cover;
+    background-position: center;
+    padding: 80px 20px;
+    text-align: center;
+    color: white;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +19,6 @@
     font-family: Arial, sans-serif;
 }
 
-/* NAVBAR */
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -82,7 +95,6 @@
     border-radius: 20px;
 }
 
-/* FOOTER */
 footer {
     text-align: center;
     padding: 20px;
