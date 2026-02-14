@@ -1,112 +1,63 @@
 <!DOCTYPE html>
-<html 
+<html>
 <head>
     <title>Homepage saya</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<header>
-    <section id="home Page">
-    <h1>Selamat Datang di Perpustakaan Saya</h1>
-    <p>Gressilliya Damanik – Digital Library</p>
-         <p>
-        Perkenalkan, nama saya Gressilliya Damanik. 
-        Ini adalah <i>homepage</i> 
-        <b>pertama</b> saya, karena saya baru belajar tentang 
-        cara membuat <b><i>homepage</i></b>.
-</header>
-    
-<section id="profile">
-    <img src="profile.jpg" class="profile-img">
-     <h2>Profile</h2>
-    <p>
-        This is a small digital library created to share knowledge,
-        collections, and library services in a simple and elegant way.
-    </p>
-</section>
-
-<section id="services"
-   <h2>Library Services</h2>
-
-    <div class="service-box">
-        <img src="service1.jpg">
-        <h3>Book Lending</h3>
-        <p>Borrow printed and digital books easily.</p>
+    <div class="navbar">
+        <h3>Gressilliya Digital Library</h3>
+        <div class="menu">
+            <a href="#home">Home</a>
+            <a href="#profile">Profile</a>
+            <a href="#media">Media</a>
+        </div>
     </div>
 
-    <div class="service-box">
-        <img src="service2.jpg">
-        <h3>Reading Room</h3>
-        <p>A quiet and comfortable reading space.</p>
+    <div class="home" id="home">
+
+        <h1>Selamat Datang di Perpustakaan Saya</h1>
+        <h2>Gressilliya Damanik – Digital Library</h2>
+
+        <p>
+            Perkenalkan, nama saya Gressilliya Damanik.
+            Ini adalah <i>homepage</i>
+            <b>pertama</b> saya, karena saya baru belajar tentang
+            cara membuat <b><i>homepage</i></b>.
+        </p>
+
+        <input type="text" placeholder="Cari buku, artikel, atau topik...">
+
     </div>
 
-    <div class="service-box">
-        <img src="service3.jpg">
-        <h3>Digital Access</h3>
-        <p>Access digital collections anytime.</p>
-    </div>
-</section>
+    <div class="profile" id="profile">
 
-  </section>
-<section class="collections">
-  <h2>Library Collections</h2>
+        <img src="images/profile.jpg" alt="Foto Profil">
 
-  <div class="collection-container">
-    <div class="collection-box">
-      <img src="novel.jpg" alt="Novel">
-      <h3>Novel</h3>
+        <div class="profile-text">
+            <h2>About Me & This Website</h2>
+            <p>
+                Website ini saya buat sebagai media pembelajaran
+                dan perpustakaan digital sederhana.
+            </p>
+        </div>
+
     </div>
 
-    <div class="collection-box">
-      <img src="pelajaran.jpg" alt="Buku Mata Pelajaran">
-      <h3>Buku Mata Pelajaran</h3>
+    <div class="media" id="media">
+        <h2>Media</h2>
+
+       <iframe 
+    src="https://www.youtube.com/embed/YyBfMY3_dKg"
+    allowfullscreen>
+</iframe>
     </div>
 
-    <div class="collection-box">
-      <img src="ensiklopedia.jpg" alt="Ensiklopedia">
-      <h3>Ensiklopedia</h3>
+    <div class="footer">
+        <p>© Gressilliya Damanik 2026</p>
     </div>
 
-    <div class="collection-box">
-      <img src="ebook.jpg" alt="E-Book">
-      <h3>E-Book</h3>
-    </div>
-  </div>
-</section>
-  
-    <div class="contact">
-  <a href="mailto:gressdamanik@gmail.com" target="_blank">
-    <img src="gmail.png" class="contact-icon" alt="Email">
-    gressdamanik@gmail.com
-  </a>
-
-  <a href="https://wa.me/6281269812898" target="_blank">
-    <img src="whatsapp.png" class="contact-icon" alt="WhatsApp">
-    081269812898
-  </a>
-
-  <a href="https://instagram.com/LibraryYours" target="_blank">
-    <img src="instagram.png" class="contact-icon" alt="Instagram">
-    @LibraryYours
-  </a>
-</div>
-
-<footer>
-    <p>Gressilliya Damanik © 2026</p>
-</footer>
-<script src="script.js"></script>
 </body>
-    <div class="hamburger" onclick="toggleMenu()">
-  ☰
-</div>
-
-<nav id="sideMenu">
-  <a href="#home" onclick="toggleMenu()">Home</a>
-  <a href="#profile" onclick="toggleMenu()">Profile</a>
-  <a href="#services" onclick="toggleMenu()">Services</a>
-  <a href="#collection" onclick="toggleMenu()">Collection</a>
-  <a href="#contact" onclick="toggleMenu()">Contact</a>
-</nav>
-    
 </html>
