@@ -3,14 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>More About Me</title>
+<title>About Me - Gressilliya Damanik</title>
 
 <style>
 
 body{
     margin:0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(135deg,#2b2b2b,#8a8a8a);
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#2c2c2c,#9e9e9e);
     color:white;
 }
 
@@ -18,7 +18,7 @@ body{
 nav{
     display:flex;
     justify-content:space-between;
-    padding:15px 40px;
+    padding:18px 40px;
     background:rgba(0,0,0,0.4);
 }
 
@@ -28,53 +28,75 @@ nav a{
     font-weight:bold;
 }
 
+/* CONTAINER */
 .container{
-    max-width:900px;
+    max-width:1100px;
     margin:auto;
     padding:60px 20px;
+}
+
+/* ABOUT SECTION */
+.about-box{
+    display:flex;
+    gap:40px;
+    align-items:center;
+    background:rgba(255,255,255,0.08);
+    padding:30px;
+    border-radius:18px;
+    backdrop-filter: blur(8px);
+}
+
+/* FOTO */
+.about-box img{
+    width:300px;
+    border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.4);
+}
+
+/* TEXT */
+.about-text h1{
+    margin-top:0;
+    font-size:34px;
+}
+
+.about-text p{
+    line-height:1.7;
+    color:#f1f1f1;
+}
+
+/* MUSIC SECTION */
+.music{
     text-align:center;
-}
-
-h1{
-    font-size:36px;
-    margin-bottom:20px;
-}
-
-.info{
-    background:rgba(255,255,255,0.1);
-    padding:25px;
-    border-radius:15px;
-    margin-bottom:40px;
+    margin-top:60px;
 }
 
 iframe{
-    border-radius:12px;
     margin-top:20px;
+    border-radius:12px;
     max-width:100%;
 }
 
+/* BUTTON */
 .back{
     display:inline-block;
     margin-top:30px;
-    padding:10px 20px;
-    background:#444;
-    border-radius:20px;
+    padding:12px 25px;
+    background:#3a3a3a;
+    border-radius:25px;
     text-decoration:none;
     color:white;
+    transition:0.3s;
 }
 
 .back:hover{
-    background:#222;
+    background:#1f1f1f;
 }
 
-.back-btn{
-display:inline-block;
-margin-top:30px;
-padding:10px 20px;
-background:#333;
-color:white;
-border-radius:20px;
-text-decoration:none;
+@media(max-width:900px){
+    .about-box{
+        flex-direction:column;
+        text-align:center;
+    }
 }
 
 </style>
@@ -83,36 +105,63 @@ text-decoration:none;
 <body>
 
 <nav>
-<a href="index.html" class="back-btn">← Back to Home</a>
+<a href="index.html">← Back to Home</a>
 </nav>
 
 <div class="container">
-    
-        <h1>About Me</h1>
 
-        <p><b>Name:</b> Gressilliya Damanik</p>
-        <p><b>NIM:</b> 230709088</p>
+<div class="about-box">
+
+<!-- FOTO -->
+<img src="profile2.jpg" width="300">
+
+<!-- TEXT -->
+<div class="about-text">
+
+<h1>About Me</h1>
+
+<p><b>Name:</b> Gressilliya Damanik</p>
+<p><b>NIM:</b> 230709088</p>
 
 <p>
-I am a Library and Information Science student who is interested in
-digital libraries, information literacy, and modern library technology.
-I enjoy learning new digital skills and exploring creative ways to
-present information through websites.
+I am a Library and Information Science student who is passionate about
+digital libraries and modern information technology. This website represents
+my learning journey in exploring digital information services and academic
+development.
 </p>
+
+<p>
+My academic interests include digital libraries, information literacy,
+and library technology. I am currently developing skills in basic web
+development, digital library systems, and information organization.
+</p>
+
+<p>
+Outside academic activities, I enjoy listening to music because it helps
+me stay focused and inspired while learning new things.
+</p>
+
+<p>
+My future goal is to contribute to innovative and accessible digital
+library services that support learning and knowledge sharing.
+</p>
+
+</div>
 </div>
 
+<!-- MUSIC -->
+<div class="music">
 <h2>My Favorite Music 🎵</h2>
 
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/56WBK4ZK_cw?si=8v4A-eDIC2HMY760"
-title="YouTube video player"
 frameborder="0"
 allowfullscreen>
 </iframe>
 
 <br>
-
 <a href="index.html" class="back">Back</a>
+</div>
 
 </div>
 
