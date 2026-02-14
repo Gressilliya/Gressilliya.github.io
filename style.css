@@ -1,11 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 40px;
+    background: white;
+    position: sticky;
+    top: 0;
+}
+
+.menu a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #2f5d50;
+    font-weight: bold;
+}
+
+/* HOME */
+.home {
+    height: 90vh;
+    background: linear-gradient(
+        rgba(0,0,0,0.5),
+        rgba(0,0,0,0.5)
+    ),
+    url("images/bg-library.jpg");
+
+    background-size: cover;
+    background-position: center;
+
+    color: white;
+    text-align: center;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 15px;
+}
+
+.home input {
+    width: 300px;
+    padding: 10px;
+    border-radius: 25px;
+    border: none;
+    margin: auto;
+}
+
+/* PROFILE */
+.profile {
+    display: flex;
+    gap: 40px;
+    padding: 80px;
+    background: #e7f6ec;
+    align-items: center;
+}
+
+.profile img {
+    width: 250px;
+    border-radius: 20px;
+}
+
+.profile-text {
+    max-width: 500px;
+}
+
+/* MEDIA */
 .media {
     text-align: center;
-    padding: 40px;
+    padding: 80px;
 }
 
 .media iframe {
-    width: 80%;
-    max-width: 700px;
-    height: 380px;
-    border-radius: 12px;
+    width: 700px;
+    height: 400px;
+    border-radius: 20px;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #2f5d50;
+    color: white;
 }
