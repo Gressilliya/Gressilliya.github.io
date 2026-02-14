@@ -1,49 +1,246 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Homepage Saya</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Gressilliya Damanik Digital Library</title>
+
+<!-- FONT -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+
+/* ===== RESET ===== */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+/* ===== NAVBAR ===== */
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 60px;
+    background:white;
+    position:sticky;
+    top:0;
+    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+}
+
+nav h2{
+    color:#2f5d50;
+}
+
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#2f5d50;
+    font-weight:500;
+}
+
+/* ===== HOME / HERO ===== */
+.hero{
+    height:100vh;
+    background:url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da") center/cover;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.overlay{
+    background:rgba(34,94,74,0.75);
+    width:100%;
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    text-align:center;
+    padding:40px;
+}
+
+.overlay h1{
+    font-size:48px;
+}
+
+.overlay p{
+    margin-top:10px;
+}
+
+/* SEARCH */
+.search-box{
+    margin-top:25px;
+}
+
+.search-box input{
+    padding:12px;
+    width:320px;
+    border-radius:25px;
+    border:none;
+}
+
+.search-box button{
+    padding:12px 18px;
+    border:none;
+    border-radius:25px;
+    background:#2f5d50;
+    color:white;
+    cursor:pointer;
+}
+
+/* ===== PROFILE ===== */
+.profile{
+    background:#cfe3d7;
+    padding:80px;
+}
+
+.profile-container{
+    display:flex;
+    align-items:center;
+    gap:40px;
+    flex-wrap:wrap;
+}
+
+.profile img{
+    width:280px;
+    border-radius:20px;
+}
+
+.profile-text{
+    max-width:600px;
+}
+
+.profile-text h2{
+    margin-bottom:15px;
+    color:#1e3f35;
+}
+
+.buttons{
+    margin-top:20px;
+}
+
+.btn{
+    text-decoration:none;
+    background:#2f5d50;
+    color:white;
+    padding:10px 20px;
+    border-radius:25px;
+    margin-right:10px;
+    display:inline-block;
+}
+
+.btn:hover{
+    opacity:0.85;
+}
+
+.ig{
+    background:#3b7d6b;
+}
+
+/* ===== MEDIA ===== */
+.media{
+    text-align:center;
+    padding:80px;
+}
+
+.media h2{
+    color:#2f5d50;
+    margin-bottom:30px;
+}
+
+iframe{
+    max-width:100%;
+    border-radius:15px;
+}
+
+</style>
 </head>
+
 <body>
 
-<section class="home">
-    <h1>Selamat Datang di Perpustakaan Digital Saya</h1>
-    <h2>Gressilliya Damanik</h2>
+<!-- ===== NAVBAR ===== -->
+<nav>
+    <h2>Digital Library</h2>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#media">Media</a></li>
+    </ul>
+</nav>
 
-    <input type="text" placeholder="Cari buku, artikel, atau topik...">
-</section>
+<!-- ===== HOME ===== -->
+<section id="home" class="hero">
+    <div class="overlay">
+        <h1>Gressilliya Damanik<br>Digital Library</h1>
+        <p>Selamat datang di website perpustakaan digital pribadi saya</p>
 
-<section class="profile">
-    <a href="cv.html" class="profile-link">
-        <img src="images/profile.jpg" alt="Foto Profil">
-
-        <div class="profile-text">
-            <h2>About Me</h2>
-            <p>Klik untuk melihat CV & Media Sosial saya</p>
+        <div class="search-box">
+            <input type="text" placeholder="Cari koleksi, artikel, atau topik...">
+            <button>🔍</button>
         </div>
-    </a>
+    </div>
 </section>
 
-<section class="media">
-    <h2>Musik Favorit</h2>
+<!-- ===== PROFILE ===== -->
+<section id="profile" class="profile">
 
-    <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/56WBK4ZK_cw"
-        allowfullscreen>
-    </iframe>
+<div class="profile-container">
+
+<img src="https://via.placeholder.com/300" alt="Foto Profil">
+
+<div class="profile-text">
+<h2>About Me & This Website</h2>
+
+<p>
+Halo, saya <b>Gressilliya Damanik</b>. Saya merupakan mahasiswa
+Ilmu Perpustakaan yang memiliki ketertarikan pada pengembangan
+perpustakaan digital dan pemanfaatan teknologi informasi dalam
+layanan perpustakaan modern.
+Website ini dibuat sebagai media personal branding sekaligus
+representasi perpustakaan digital yang saya kembangkan.
+</p>
+
+<div class="buttons">
+<a href="#" class="btn">📄 CV</a>
+<a href="https://instagram.com/gressilliya" target="_blank" class="btn ig">
+📷 @gressilliya
+</a>
+</div>
+
+</div>
+</div>
+
 </section>
 
-<footer>
-    <p>© Gressilliya Damanik 2026</p>
-    <p>
-        <a href="https://instagram.com/gressilliya" target="_blank">
-            Instagram @gressilliya
-        </a>
-    </p>
-</footer>
+<!-- ===== MEDIA ===== -->
+<section id="media" class="media">
+
+<h2>Media</h2>
+
+<iframe width="560" height="315"
+src="https://www.youtube.com/embed/YyBfMY3_dKg?si=mjkIcowxgLXU7cro"
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+referrerpolicy="strict-origin-when-cross-origin"
+allowfullscreen>
+</iframe>
+
+</section>
 
 </body>
 </html>
