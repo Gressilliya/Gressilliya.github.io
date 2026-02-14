@@ -6,11 +6,10 @@
 
 <title>Gressilliya Damanik | Digital Library</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
 
-/* ===== RESET ===== */
 *{
 margin:0;
 padding:0;
@@ -22,7 +21,6 @@ html{
 scroll-behavior:smooth;
 }
 
-/* ===== NAVBAR ===== */
 nav{
 display:flex;
 justify-content:space-between;
@@ -36,9 +34,11 @@ box-shadow:0 3px 12px rgba(0,0,0,0.08);
 }
 
 .logo{
-font-weight:700;
-color:#2b2b2b;
-font-size:20px;
+    font-family: 'Great Vibes', cursive;
+    font-size:32px;
+    font-weight:bold;
+    color:#1f1f1f;
+    letter-spacing:1px;
 }
 
 nav ul{
@@ -58,7 +58,6 @@ nav a:hover{
 color:#000;
 }
 
-/* ===== HERO SECTION ===== */
 .hero{
 height:100vh;
 background:url("https://images.unsplash.com/photo-1507842217343-583bb7270b66") center/cover;
@@ -95,7 +94,6 @@ font-weight:300;
 opacity:.9;
 }
 
-/* SEARCH BAR */
 .search{
 margin-top:30px;
 display:flex;
@@ -125,7 +123,6 @@ transition:.3s;
 background:#000;
 }
 
-/* ===== ABOUT SECTION ===== */
 .about{
 padding:90px;
 background:#f4f4f4;
@@ -153,7 +150,6 @@ margin-bottom:15px;
 color:#222;
 }
 
-/* BUTTON */
 .buttons{
 margin-top:25px;
 }
@@ -178,7 +174,6 @@ background:#000;
 background:#555;
 }
 
-/* ===== MEDIA SECTION ===== */
 .media{
 padding:90px;
 text-align:center;
@@ -204,54 +199,89 @@ color:white;
 font-size:14px;
 }
 
+/* ===== NAVBAR LAYOUT ===== */
+nav{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:20px 60px;
+background:white;
+position:sticky;
+top:0;
+box-shadow:0 3px 12px rgba(0,0,0,0.08);
+}
+
+.menu{
+display:flex;
+gap:30px;
+list-style:none;
+}
+
+.nav-search input{
+font-family:'Montserrat', sans-serif;
+padding:12px 20px;
+width:220px;
+border-radius:30px;
+border:none;
+outline:none;
+font-size:15px;
+background:linear-gradient(145deg,#f0f0f0,#ffffff);
+box-shadow:
+inset 3px 3px 6px rgba(0,0,0,0.08),
+inset -3px -3px 6px rgba(255,255,255,0.9);
+transition:0.3s;
+}
+
+.nav-search input:focus{
+width:260px;
+box-shadow:0 0 10px rgba(0,0,0,0.15);
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- ===== NAVBAR ===== -->
 <nav>
-<div class="logo">Gressilliya Library</div>
 
-<ul>
+<div class="logo">Gressilliya Archive</div>
+
+<ul class="menu">
 <li><a href="#beranda">Beranda</a></li>
-<li><a href="#tentang">Tentang Saya</a></li>
-<li><a href="#galeri">Galeri Edukasi</a></li>
+<li><a href="#tentang">Profil</a></li>
+<li><a href="#galeri">Galeri</a></li>
 </ul>
+
+<div class="nav-search">
+<input type="text" placeholder="🔎 Search resources...">
+</div>
+
 </nav>
 
-<!-- ===== HERO ===== -->
 <section id="beranda" class="hero">
 <div class="overlay">
 
-<h1>Digital Library<br>Gressilliya Damanik</h1>
-<p>Ruang pembelajaran digital dan eksplorasi ilmu perpustakaan</p>
+<h1>Knowledge Space<br>Gressilliya Damanik</h1>
+<p>Explore Knowledge Digital Library Space</p>
 
-<div class="search">
-<input type="text" placeholder="Temukan referensi, topik, atau artikel...">
-<button>Cari</button>
-</div>
 
 </div>
 </section>
 
-<!-- ===== ABOUT ===== -->
 <section id="tentang" class="about">
 
 <div class="about-container">
 
-<img src="https://via.placeholder.com/300" alt="Foto Gressilliya">
+<img src="profile.jpg" alt="Foto Gressilliya">
 
 <div class="about-text">
 <h2>Tentang Saya</h2>
 
 <p>
-Halo, saya <b>Gressilliya Damanik</b>, mahasiswa Ilmu Perpustakaan
-yang memiliki minat pada pengembangan perpustakaan digital,
-akses informasi modern, serta pemanfaatan teknologi dalam
-pengelolaan pengetahuan.
-Website ini saya bangun sebagai ruang representasi akademik
-sekaligus portofolio digital pribadi.
+Halo, saya <b>Gressilliya Damanik</b>, Nim 230709088 a Library and Information Science student
+who is passionate about digital libraries and information technology.
+This website serves as my personal digital space to share learning,
+knowledge, and academic exploration.
 </p>
 
 <div class="buttons">
@@ -266,10 +296,9 @@ Instagram @gressilliya
 
 </section>
 
-<!-- ===== MEDIA ===== -->
 <section id="galeri" class="media">
 
-<h2>Galeri Edukasi</h2>
+<h2>Galeri Education</h2>
 
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/YyBfMY3_dKg?si=mjkIcowxgLXU7cro"
@@ -281,7 +310,7 @@ allowfullscreen>
 </section>
 
 <footer>
-© 2026 — Website Digital Library | Gressilliya Damanik
+© Gressilliya Damanik  — Website Digital Library  2026  
 </footer>
 
 </body>
