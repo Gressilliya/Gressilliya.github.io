@@ -6,7 +6,6 @@
 
 <title>Gressilliya Damanik Digital Library</title>
 
-<!-- FONT -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -32,11 +31,11 @@ nav{
     background:white;
     position:sticky;
     top:0;
-    box-shadow:0 2px 8px rgba(0,0,0,0.05);
+    box-shadow:0 4px 15px rgba(0,0,0,0.08);
 }
 
 nav h2{
-    color:#2f5d50;
+    color:#4c3cff;
 }
 
 nav ul{
@@ -47,11 +46,16 @@ nav ul{
 
 nav a{
     text-decoration:none;
-    color:#2f5d50;
+    color:#333;
     font-weight:500;
+    transition:0.3s;
 }
 
-/* ===== HOME / HERO ===== */
+nav a:hover{
+    color:#6c63ff;
+}
+
+/* ===== HERO SECTION ===== */
 .hero{
     height:100vh;
     background:url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da") center/cover;
@@ -60,64 +64,74 @@ nav a{
     align-items:center;
 }
 
+/* GRADIENT OVERLAY */
 .overlay{
-    background:rgba(34,94,74,0.75);
     width:100%;
     height:100%;
+    background:linear-gradient(
+        135deg,
+        rgba(108,99,255,0.85),
+        rgba(142,68,255,0.85),
+        rgba(255,99,196,0.85)
+    );
     display:flex;
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    color:white;
     text-align:center;
+    color:white;
     padding:40px;
 }
 
 .overlay h1{
-    font-size:48px;
+    font-size:50px;
+    font-weight:700;
 }
 
 .overlay p{
     margin-top:10px;
+    font-weight:300;
 }
 
-/* SEARCH */
+/* SEARCH BOX */
 .search-box{
-    margin-top:25px;
+    margin-top:30px;
 }
 
 .search-box input{
-    padding:12px;
-    width:320px;
-    border-radius:25px;
+    padding:14px;
+    width:340px;
+    border-radius:30px;
     border:none;
+    outline:none;
 }
 
 .search-box button{
-    padding:12px 18px;
+    padding:14px 20px;
     border:none;
-    border-radius:25px;
-    background:#2f5d50;
+    border-radius:30px;
+    background:linear-gradient(45deg,#6c63ff,#ff63c4);
     color:white;
     cursor:pointer;
 }
 
 /* ===== PROFILE ===== */
 .profile{
-    background:#cfe3d7;
-    padding:80px;
+    padding:90px;
+    background:linear-gradient(120deg,#f6f7ff,#fff0fb);
 }
 
 .profile-container{
     display:flex;
     align-items:center;
-    gap:40px;
+    gap:50px;
     flex-wrap:wrap;
 }
 
 .profile img{
     width:280px;
     border-radius:20px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 .profile-text{
@@ -126,45 +140,50 @@ nav a{
 
 .profile-text h2{
     margin-bottom:15px;
-    color:#1e3f35;
+    color:#4c3cff;
 }
 
+/* BUTTONS */
 .buttons{
-    margin-top:20px;
+    margin-top:25px;
 }
 
 .btn{
     text-decoration:none;
-    background:#2f5d50;
+    padding:12px 22px;
+    border-radius:30px;
     color:white;
-    padding:10px 20px;
-    border-radius:25px;
     margin-right:10px;
     display:inline-block;
+    background:linear-gradient(45deg,#6c63ff,#9f6bff);
+    transition:0.3s;
 }
 
 .btn:hover{
-    opacity:0.85;
+    transform:translateY(-3px);
+    box-shadow:0 6px 15px rgba(0,0,0,0.2);
 }
 
 .ig{
-    background:#3b7d6b;
+    background:linear-gradient(45deg,#ff63c4,#ff8a65);
 }
 
 /* ===== MEDIA ===== */
 .media{
     text-align:center;
-    padding:80px;
+    padding:90px;
+    background:white;
 }
 
 .media h2{
-    color:#2f5d50;
+    color:#4c3cff;
     margin-bottom:30px;
 }
 
 iframe{
     max-width:100%;
     border-radius:15px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
 </style>
@@ -172,7 +191,7 @@ iframe{
 
 <body>
 
-<!-- ===== NAVBAR ===== -->
+<!-- NAVBAR -->
 <nav>
     <h2>Digital Library</h2>
     <ul>
@@ -182,20 +201,20 @@ iframe{
     </ul>
 </nav>
 
-<!-- ===== HOME ===== -->
+<!-- HOME -->
 <section id="home" class="hero">
-    <div class="overlay">
-        <h1>Gressilliya Damanik<br>Digital Library</h1>
-        <p>Selamat datang di website perpustakaan digital pribadi saya</p>
+<div class="overlay">
+    <h1>Gressilliya Damanik<br>Digital Library</h1>
+    <p>Selamat datang di website perpustakaan digital pribadi saya</p>
 
-        <div class="search-box">
-            <input type="text" placeholder="Cari koleksi, artikel, atau topik...">
-            <button>🔍</button>
-        </div>
+    <div class="search-box">
+        <input type="text" placeholder="Cari koleksi, artikel, atau topik...">
+        <button>🔍</button>
     </div>
+</div>
 </section>
 
-<!-- ===== PROFILE ===== -->
+<!-- PROFILE -->
 <section id="profile" class="profile">
 
 <div class="profile-container">
@@ -206,12 +225,11 @@ iframe{
 <h2>About Me & This Website</h2>
 
 <p>
-Halo, saya <b>Gressilliya Damanik</b>. Saya merupakan mahasiswa
-Ilmu Perpustakaan yang memiliki ketertarikan pada pengembangan
-perpustakaan digital dan pemanfaatan teknologi informasi dalam
-layanan perpustakaan modern.
-Website ini dibuat sebagai media personal branding sekaligus
-representasi perpustakaan digital yang saya kembangkan.
+Halo, saya <b>Gressilliya Damanik</b>. Saya mahasiswa Ilmu
+Perpustakaan yang tertarik pada pengembangan perpustakaan digital
+dan inovasi teknologi informasi dalam layanan perpustakaan modern.
+Website ini menjadi media personal branding sekaligus representasi
+perpustakaan digital yang saya kembangkan.
 </p>
 
 <div class="buttons">
@@ -226,7 +244,7 @@ representasi perpustakaan digital yang saya kembangkan.
 
 </section>
 
-<!-- ===== MEDIA ===== -->
+<!-- MEDIA -->
 <section id="media" class="media">
 
 <h2>Media</h2>
@@ -236,7 +254,6 @@ src="https://www.youtube.com/embed/YyBfMY3_dKg?si=mjkIcowxgLXU7cro"
 title="YouTube video player"
 frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-referrerpolicy="strict-origin-when-cross-origin"
 allowfullscreen>
 </iframe>
 
