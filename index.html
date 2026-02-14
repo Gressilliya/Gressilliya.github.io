@@ -237,6 +237,47 @@ width:260px;
 box-shadow:0 0 10px rgba(0,0,0,0.15);
 }
 
+.subtitle{
+margin-top:10px;
+margin-bottom:35px;
+color:#666;
+text-align:center;
+}
+
+/* GRID GALERI */
+.video-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+padding:0 40px;
+}
+
+.video-card{
+background:#f3f3f3;
+padding:15px;
+border-radius:15px;
+box-shadow:0 6px 15px rgba(0,0,0,0.1);
+transition:0.3s;
+text-align:center;
+}
+
+.video-card:hover{
+transform:translateY(-6px);
+}
+
+.video-card iframe{
+width:100%;
+height:200px;
+border-radius:10px;
+border:none;
+}
+
+.video-card p{
+margin-top:12px;
+font-weight:600;
+color:#333;
+}
+
 </style>
 </head>
 
@@ -298,14 +339,40 @@ Instagram @gressilliya
 
 <section id="galeri" class="media">
 
-<h2>Galeri Education</h2>
+<h2>Galeri Edukasi</h2>
 
-<iframe width="560" height="315"
-src="https://www.youtube.com/embed/YyBfMY3_dKg?si=mjkIcowxgLXU7cro"
-title="YouTube video player"
-frameborder="0"
-allowfullscreen>
-</iframe>
+<p class="subtitle">
+Educational videos related to digital libraries, information literacy,
+and modern library technology.
+</p>
+
+<div class="video-grid">
+
+<!-- VIDEO 1 -->
+<div class="video-card">
+<iframe src="https://www.youtube.com/embed/6FByj7-Aj60"
+title="Digital Library"
+allowfullscreen></iframe>
+<p>Digital Library</p>
+</div>
+
+<!-- VIDEO 2 -->
+<div class="video-card">
+<iframe src="https://www.youtube.com/embed/x6H8jpbcI0U"
+title="Information Literacy"
+allowfullscreen></iframe>
+<p>Information Literacy</p>
+</div>
+
+<!-- VIDEO 3 -->
+<div class="video-card">
+<iframe src="https://www.youtube.com/embed/np7gg88v-Ow"
+title="Library Technology"
+allowfullscreen></iframe>
+<p>Library Technology</p>
+</div>
+
+</div>
 
 </section>
 
