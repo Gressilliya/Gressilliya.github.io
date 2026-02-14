@@ -4,186 +4,204 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Gressilliya Damanik Digital Library</title>
+<title>Gressilliya Damanik | Digital Library</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
 
 /* ===== RESET ===== */
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Poppins', sans-serif;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 html{
-    scroll-behavior:smooth;
+scroll-behavior:smooth;
 }
 
 /* ===== NAVBAR ===== */
 nav{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:20px 60px;
-    background:white;
-    position:sticky;
-    top:0;
-    box-shadow:0 4px 15px rgba(0,0,0,0.08);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 70px;
+background:#ffffff;
+position:sticky;
+top:0;
+z-index:100;
+box-shadow:0 3px 12px rgba(0,0,0,0.08);
 }
 
-nav h2{
-    color:#4c3cff;
+.logo{
+font-weight:700;
+color:#2b2b2b;
+font-size:20px;
 }
 
 nav ul{
-    display:flex;
-    list-style:none;
-    gap:30px;
+display:flex;
+gap:35px;
+list-style:none;
 }
 
 nav a{
-    text-decoration:none;
-    color:#333;
-    font-weight:500;
-    transition:0.3s;
+text-decoration:none;
+color:#444;
+font-weight:500;
+transition:.3s;
 }
 
 nav a:hover{
-    color:#6c63ff;
+color:#000;
 }
 
 /* ===== HERO SECTION ===== */
 .hero{
-    height:100vh;
-    background:url("https://images.unsplash.com/photo-1521587760476-6c12a4b040da") center/cover;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+height:100vh;
+background:url("https://images.unsplash.com/photo-1507842217343-583bb7270b66") center/cover;
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-/* GRADIENT OVERLAY */
 .overlay{
-    width:100%;
-    height:100%;
-    background:linear-gradient(
-        135deg,
-        rgba(108,99,255,0.85),
-        rgba(142,68,255,0.85),
-        rgba(255,99,196,0.85)
-    );
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    padding:40px;
+width:100%;
+height:100%;
+background:linear-gradient(
+rgba(30,30,30,0.75),
+rgba(80,80,80,0.75)
+);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:40px;
 }
 
 .overlay h1{
-    font-size:50px;
-    font-weight:700;
+font-size:48px;
+font-weight:700;
+letter-spacing:1px;
 }
 
 .overlay p{
-    margin-top:10px;
-    font-weight:300;
+margin-top:12px;
+font-weight:300;
+opacity:.9;
 }
 
-/* SEARCH BOX */
-.search-box{
-    margin-top:30px;
+/* SEARCH BAR */
+.search{
+margin-top:30px;
+display:flex;
+gap:10px;
 }
 
-.search-box input{
-    padding:14px;
-    width:340px;
-    border-radius:30px;
-    border:none;
-    outline:none;
+.search input{
+padding:14px 18px;
+width:340px;
+border-radius:30px;
+border:none;
+outline:none;
+background:#f1f1f1;
 }
 
-.search-box button{
-    padding:14px 20px;
-    border:none;
-    border-radius:30px;
-    background:linear-gradient(45deg,#6c63ff,#ff63c4);
-    color:white;
-    cursor:pointer;
+.search button{
+border:none;
+padding:14px 20px;
+border-radius:30px;
+background:#2c2c2c;
+color:white;
+cursor:pointer;
+transition:.3s;
 }
 
-/* ===== PROFILE ===== */
-.profile{
-    padding:90px;
-    background:linear-gradient(120deg,#f6f7ff,#fff0fb);
+.search button:hover{
+background:#000;
 }
 
-.profile-container{
-    display:flex;
-    align-items:center;
-    gap:50px;
-    flex-wrap:wrap;
+/* ===== ABOUT SECTION ===== */
+.about{
+padding:90px;
+background:#f4f4f4;
 }
 
-.profile img{
-    width:280px;
-    border-radius:20px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+.about-container{
+display:flex;
+align-items:center;
+gap:50px;
+flex-wrap:wrap;
 }
 
-.profile-text{
-    max-width:600px;
+.about img{
+width:270px;
+border-radius:18px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-.profile-text h2{
-    margin-bottom:15px;
-    color:#4c3cff;
+.about-text{
+max-width:600px;
 }
 
-/* BUTTONS */
+.about-text h2{
+margin-bottom:15px;
+color:#222;
+}
+
+/* BUTTON */
 .buttons{
-    margin-top:25px;
+margin-top:25px;
 }
 
 .btn{
-    text-decoration:none;
-    padding:12px 22px;
-    border-radius:30px;
-    color:white;
-    margin-right:10px;
-    display:inline-block;
-    background:linear-gradient(45deg,#6c63ff,#9f6bff);
-    transition:0.3s;
+text-decoration:none;
+padding:12px 24px;
+border-radius:25px;
+background:#2b2b2b;
+color:white;
+margin-right:10px;
+display:inline-block;
+transition:.3s;
 }
 
 .btn:hover{
-    transform:translateY(-3px);
-    box-shadow:0 6px 15px rgba(0,0,0,0.2);
+transform:translateY(-3px);
+background:#000;
 }
 
-.ig{
-    background:linear-gradient(45deg,#ff63c4,#ff8a65);
+.instagram{
+background:#555;
 }
 
-/* ===== MEDIA ===== */
+/* ===== MEDIA SECTION ===== */
 .media{
-    text-align:center;
-    padding:90px;
-    background:white;
+padding:90px;
+text-align:center;
+background:white;
 }
 
 .media h2{
-    color:#4c3cff;
-    margin-bottom:30px;
+margin-bottom:30px;
+color:#222;
 }
 
 iframe{
-    max-width:100%;
-    border-radius:15px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
+max-width:100%;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+footer{
+text-align:center;
+padding:25px;
+background:#1f1f1f;
+color:white;
+font-size:14px;
 }
 
 </style>
@@ -191,51 +209,55 @@ iframe{
 
 <body>
 
-<!-- NAVBAR -->
+<!-- ===== NAVBAR ===== -->
 <nav>
-    <h2>Digital Library</h2>
-    <ul>
-        <li><a href="#home">Home</a></li>
-        <li><a href="#profile">Profile</a></li>
-        <li><a href="#media">Media</a></li>
-    </ul>
+<div class="logo">Gressilliya Library</div>
+
+<ul>
+<li><a href="#beranda">Beranda</a></li>
+<li><a href="#tentang">Tentang Saya</a></li>
+<li><a href="#galeri">Galeri Edukasi</a></li>
+</ul>
 </nav>
 
-<!-- HOME -->
-<section id="home" class="hero">
+<!-- ===== HERO ===== -->
+<section id="beranda" class="hero">
 <div class="overlay">
-    <h1>Gressilliya Damanik<br>Digital Library</h1>
-    <p>Selamat datang di website perpustakaan digital pribadi saya</p>
 
-    <div class="search-box">
-        <input type="text" placeholder="Cari koleksi, artikel, atau topik...">
-        <button>🔍</button>
-    </div>
+<h1>Digital Library<br>Gressilliya Damanik</h1>
+<p>Ruang pembelajaran digital dan eksplorasi ilmu perpustakaan</p>
+
+<div class="search">
+<input type="text" placeholder="Temukan referensi, topik, atau artikel...">
+<button>Cari</button>
+</div>
+
 </div>
 </section>
 
-<!-- PROFILE -->
-<section id="profile" class="profile">
+<!-- ===== ABOUT ===== -->
+<section id="tentang" class="about">
 
-<div class="profile-container">
+<div class="about-container">
 
-<img src="https://via.placeholder.com/300" alt="Foto Profil">
+<img src="https://via.placeholder.com/300" alt="Foto Gressilliya">
 
-<div class="profile-text">
-<h2>About Me & This Website</h2>
+<div class="about-text">
+<h2>Tentang Saya</h2>
 
 <p>
-Halo, saya <b>Gressilliya Damanik</b>. Saya mahasiswa Ilmu
-Perpustakaan yang tertarik pada pengembangan perpustakaan digital
-dan inovasi teknologi informasi dalam layanan perpustakaan modern.
-Website ini menjadi media personal branding sekaligus representasi
-perpustakaan digital yang saya kembangkan.
+Halo, saya <b>Gressilliya Damanik</b>, mahasiswa Ilmu Perpustakaan
+yang memiliki minat pada pengembangan perpustakaan digital,
+akses informasi modern, serta pemanfaatan teknologi dalam
+pengelolaan pengetahuan.
+Website ini saya bangun sebagai ruang representasi akademik
+sekaligus portofolio digital pribadi.
 </p>
 
 <div class="buttons">
-<a href="#" class="btn">📄 CV</a>
-<a href="https://instagram.com/gressilliya" target="_blank" class="btn ig">
-📷 @gressilliya
+<a href="#" class="btn">Lihat CV</a>
+<a href="https://instagram.com/gressilliya" target="_blank" class="btn instagram">
+Instagram @gressilliya
 </a>
 </div>
 
@@ -244,20 +266,23 @@ perpustakaan digital yang saya kembangkan.
 
 </section>
 
-<!-- MEDIA -->
-<section id="media" class="media">
+<!-- ===== MEDIA ===== -->
+<section id="galeri" class="media">
 
-<h2>Media</h2>
+<h2>Galeri Edukasi</h2>
 
 <iframe width="560" height="315"
 src="https://www.youtube.com/embed/YyBfMY3_dKg?si=mjkIcowxgLXU7cro"
 title="YouTube video player"
 frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
 allowfullscreen>
 </iframe>
 
 </section>
+
+<footer>
+© 2026 — Website Digital Library | Gressilliya Damanik
+</footer>
 
 </body>
 </html>
