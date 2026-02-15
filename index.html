@@ -278,32 +278,38 @@ font-weight:600;
 color:#333;
 }
 
+/* ===== AUDIO SECTION ===== */
+
 .audio-section{
     padding:80px 20px;
     background:#f5f7fb;
+}
+
+/* ini yang memaksa semua isi ke tengah */
+.audio-center{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
     text-align:center;
 }
 
-/* pembungkus tengah */
-.audio-wrapper{
-    display:flex;
-    justify-content:center;   /* tengah horizontal */
-    align-items:center;       /* tengah vertikal */
-    margin-top:30px;
-}
-
-/* kartu audio */
+/* card audio */
 .audio-card{
+    margin-top:25px;
     width:420px;
+    max-width:90%;
     background:white;
     padding:25px;
     border-radius:18px;
-    box-shadow:0 10px 25px rgba(0,0,0,0.12);
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-/* player audio */
+/* player */
 .audio-card audio{
     width:100%;
+    display:block;
 }
 
 </style>
@@ -372,16 +378,18 @@ knowledge, and academic exploration.
 </div>
 <section id="audio" class="audio-section">
 
-    <h2>🎧 My Audio</h2>
-    <p>Music that helps me focus while learning📀</p>
+<div class="audio-center">
 
-    <div class="audio-wrapper">
-        <div class="audio-card">
-            <audio controls>
-                <source src="audio/lagu.mp3" type="audio/mpeg">
-            </audio>
-        </div>
-    </div>
+<h2>🎧 My Favorite Audio</h2>
+<p>Music that helps me focus while learning</p>
+
+<div class="audio-card">
+    <audio controls>
+        <source src="audio/lagu.mp3" type="audio/mpeg">
+    </audio>
+</div>
+
+</div>
 
 </section>
 
