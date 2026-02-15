@@ -278,6 +278,35 @@ font-weight:600;
 color:#333;
 }
 
+/* ===== AUDIO SECTION ===== */
+.audio-section {
+    text-align: center;
+    padding: 60px 20px;
+    background: #f5f7fb;
+}
+
+/* Judul */
+.audio-section h2 {
+    font-size: 28px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+/* Card audio */
+.audio-card {
+    margin: 30px auto;
+    padding: 25px;
+    width: 350px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* Audio player */
+.audio-card audio {
+    width: 100%;
+}
+
 </style>
 </head>
 
@@ -342,15 +371,17 @@ knowledge, and academic exploration.
 </div>
 
 </div>
-<!-- ===== AUDIO ===== -->
-<section id="audio">
-    <h2>Audio</h2>
-    <p>Audio yang saya tampilkan pada website:</p>
+<!-- ===== AUDIO SECTION ===== -->
+<section id="audio" class="audio-section">
+    <h2>My Audio</h2>
+    <p>Audio favorit yang saya tampilkan pada website ini.</p>
 
-    <audio controls>
-        <source src="audio/lagu.mp3" type="audio/mpeg">
-        Browser tidak mendukung audio.
-    </audio>
+    <div class="audio-card">
+        <audio controls>
+            <source src="audio/lagu.mp3" type="audio/mpeg">
+            Browser tidak mendukung audio.
+        </audio>
+    </div>
 </section>
 </div>
 
