@@ -278,48 +278,38 @@ font-weight:600;
 color:#333;
 }
 
-.audio-section {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-    
-}
-.audio-card {
-  background-color: white;
-  padding: 30px;
-  width: 350px;
-  border-radius: 20px;
+/* ===== AUDIO SECTION ===== */
+
+.audio-section{
+    padding:80px 20px;
+    background:#f5f7fb;
 }
 
-.audio-card {
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+/* ini yang memaksa semua isi ke tengah */
+.audio-center{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    text-align:center;
 }
 
-.audio-card h2 {
-  text-align: center;
-  font-size: 22px;
-  margin-bottom: 10px;
+/* card audio */
+.audio-card{
+    margin-top:25px;
+    width:420px;
+    max-width:90%;
+    background:white;
+    padding:25px;
+    border-radius:18px;
+    box-shadow:0 10px 25px rgba(0,0,0,0.15);
 }
 
-.audio-card p {
-  text-align: center;
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.audio-card audio {
-  width: 100%;
-  border-radius: 10px;
-}
-
-.audio-card {
-  transition: 0.3s ease;
-}
-
-.audio-card:hover {
-  transform: translateY(-8px);
+/* player */
+.audio-card audio{
+    width:100%;
+    display:block;
 }
 
 </style>
