@@ -1,4 +1,43 @@
 <!DOCTYPE html>
+<html>
+<head>
+    <title>Login Anggota</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg">
+
+<div class="card">
+
+    <h2>Login Anggota</h2>
+
+    <form onsubmit="return loginUser()">
+
+        <input type="text" id="firstname" placeholder="First Name" required>
+
+        <input type="text" id="lastname" placeholder="Last Name" required>
+
+        <input type="email" id="email" placeholder="Gmail" required>
+
+        <input type="number" id="phone" placeholder="No Handphone" required>
+
+        <button type="submit">Masuk</button>
+
+    </form>
+
+    <p>
+        Belum punya akun?
+        <a href="daftar.html">Klik disini untuk daftar</a>
+    </p>
+
+</div>
+
+<script src="script.js"></script>
+
+</body>
+</html>
+
+
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -394,6 +433,65 @@ nav{
 
 .login-menu:hover .dropdown-login{
     display:block;
+}
+
+body.bg{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg,#6bb5e7,#4a90e2);
+    height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.card{
+    background:white;
+    padding:35px;
+    width:320px;
+    border-radius:12px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.2);
+    text-align:center;
+}
+
+.card h2{
+    margin-bottom:20px;
+}
+
+.card input{
+    width:100%;
+    padding:12px;
+    margin:8px 0;
+    border-radius:8px;
+    border:1px solid #ccc;
+    font-size:14px;
+}
+
+.card input:focus{
+    outline:none;
+    border-color:#4a90e2;
+}
+
+.card button{
+    width:100%;
+    padding:12px;
+    margin-top:12px;
+    background:#4a90e2;
+    border:none;
+    color:white;
+    border-radius:8px;
+    font-size:16px;
+    cursor:pointer;
+}
+
+.card button:hover{
+    background:#357abd;
+}
+
+.card a{
+    color:#4a90e2;
+    text-decoration:none;
+    font-weight:bold;
 }
 
 
