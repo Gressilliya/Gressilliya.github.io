@@ -1,23 +1,12 @@
-<?php
-session_start();
-
-if(!isset($_SESSION['email'])){
-    header("Location: index.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
-<title>Gressilliya Damanik | Digital Library</title>
-
-    
-</body>
-</html>
+<body>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&family=Great+Vibes&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
 
@@ -448,6 +437,81 @@ nav{
     cursor: pointer;
 }
 
+/* NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #2c3e50;
+    padding: 15px 30px;
+}
+
+/* LOGO */
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* BAGIAN KANAN */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* MENU */
+.menu a {
+    color: white;
+    text-decoration: none;
+    margin-right: 15px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #f1c40f;
+}
+
+/* LOGIN */
+.login-btn {
+    background-color: #f1c40f;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* DROPDOWN */
+.login-menu {
+    position: relative;
+}
+
+.dropdown-login {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: white;
+    min-width: 160px;
+    box-shadow: 0px 4px 8px rgba(0,0,0,0.2);
+}
+
+.dropdown-login a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.dropdown-login a:hover {
+    background: #eee;
+}
+
+/* SHOW DROPDOWN */
+.login-menu:hover .dropdown-login {
+    display: block;
+}
+
 </style>
 </head>
 
@@ -457,19 +521,15 @@ nav{
 
     <div class="logo">Gressilliya Library</div>
 
-    <ul class="menu">
-        <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#tentang">Profile</a></li>
-        <li><a href="#galeri">Media</a></li>
-    </ul>
-
-    <!-- BAGIAN KANAN -->
+    <!-- MENU + LOGIN (dibungkus jadi satu) -->
     <div class="nav-right">
 
-        <!-- SEARCH -->
-        <div class="nav-search">
-            <input type="text" placeholder="🔎 Search resources...">
-        </div>
+    <!-- MENU -->
+        <nav class="menu">
+            <a href="index.html">Beranda</a>
+            <a href="profile.html">Profile</a>
+            <a href="media.html">Media</a>
+        </nav>
 
         <!-- LOGIN DROPDOWN -->
         <div class="login-menu">
