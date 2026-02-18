@@ -312,6 +312,86 @@ color:#333;
     display:block;
 }
 
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 70px;
+    background:white;
+    position:sticky;
+    top:0;
+    box-shadow:0 3px 10px rgba(0,0,0,0.1);
+}
+
+.logo{
+    font-size:26px;
+    font-weight:bold;
+}
+
+.menu{
+    display:flex;
+    gap:35px;
+    list-style:none;
+}
+
+.menu a{
+    text-decoration:none;
+    color:black;
+    font-weight:500;
+}
+
+.nav-right{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+.nav-search input{
+    padding:7px 12px;
+    border-radius:6px;
+    border:1px solid #ccc;
+}
+
+.login-menu{
+    position:relative;
+}
+
+.login-btn{
+    padding:8px 15px;
+    border:none;
+    background:#2c6ed5;
+    color:white;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+.dropdown-login{
+    display:none;
+    position:absolute;
+    right:0;
+    top:40px;
+    background:white;
+    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+    border-radius:6px;
+    overflow:hidden;
+    min-width:160px;
+}
+
+.dropdown-login a{
+    display:block;
+    padding:10px;
+    text-decoration:none;
+    color:black;
+}
+
+.dropdown-login a:hover{
+    background:#f1f1f1;
+}
+
+.login-menu:hover .dropdown-login{
+    display:block;
+}
+
 
 </style>
 </head>
@@ -328,8 +408,24 @@ color:#333;
         <li><a href="#galeri">Media</a></li>
     </ul>
 
-    <div class="nav-search">
-        <input type="text" placeholder="🔎 Search resources...">
+    <!-- BAGIAN KANAN -->
+    <div class="nav-right">
+
+        <!-- SEARCH -->
+        <div class="nav-search">
+            <input type="text" placeholder="🔎 Search resources...">
+        </div>
+
+        <!-- LOGIN DROPDOWN -->
+        <div class="login-menu">
+            <button class="login-btn">Login ▾</button>
+
+            <div class="dropdown-login">
+                <a href="login.html">Login Anggota</a>
+                <a href="daftar.html">Daftar Anggota</a>
+            </div>
+        </div>
+
     </div>
 
 </nav>
