@@ -1,41 +1,4 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <title>Login Library</title>
-
-    <!-- MENGHUBUNGKAN CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body class="login-body">
-
-<div class="login-box">
-
-    <h2>Login</h2>
-
-    <!-- FORM LOGIN -->
-    <form onsubmit="return loginUser()">
-
-        <input type="email" id="email" placeholder="Email" required>
-
-        <input type="password" id="password" placeholder="Password" required>
-
-        <button type="submit">Login</button>
-
-    </form>
-
-    <p>Belum punya akun? 
-        <a href="daftar.html">Daftar</a>
-    </p>
-
-</div>
-
-<!-- MENGHUBUNGKAN JAVASCRIPT -->
-<script src="script.js"></script>
-
-</body>
-</html>
-
 <html lang="id">
 <head>
 <meta charset="UTF-8">
@@ -43,9 +6,6 @@
 
 <title>Gressilliya Damanik | Digital Library</title>
 
-<button onclick="logout()">Logout</button>
-
-<script src="script.js"></script>
     
 </body>
 </html>
@@ -434,37 +394,6 @@ nav{
 
 .login-menu:hover .dropdown-login{
     display:block;
-}
-
-body.login-body{
-    background:#6aa1c8;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    height:100vh;
-    font-family:Arial;
-}
-
-.login-box{
-    background:white;
-    padding:40px;
-    border-radius:10px;
-    width:320px;
-    text-align:center;
-}
-
-.login-box input{
-    width:100%;
-    padding:10px;
-    margin:10px 0;
-}
-
-.login-box button{
-    width:100%;
-    padding:10px;
-    background:#4f8db6;
-    color:white;
-    border:none;
 }
 
 
