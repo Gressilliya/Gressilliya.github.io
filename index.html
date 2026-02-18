@@ -576,6 +576,43 @@ nav{
   width: 100%;
 }
 
+.menu {
+  list-style: none;        /* HILANGKAN BULLET */
+  padding: 0;              /* HILANGKAN JARAK KIRI */
+  margin: 0;
+  display: flex;           /* BIKIN SEJAJAR */
+  align-items: center;
+}
+
+.menu li {
+  margin-left: 24px;       /* JARAK ANTAR MENU */
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 500;
+}
+
+.menu li a {
+  position: relative;
+}
+
+.menu li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #1e60ff;
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s;
+}
+
+.menu li a:hover::after {
+  width: 100%;
+}
+
 </style>
 </head>
 
