@@ -4,12 +4,3 @@ CREATE TABLE saran_pengunjung (
     pesan TEXT,
     tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE anggota (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    firstname VARCHAR(50),
-    lastname VARCHAR(50),
-    email VARCHAR(100),
-    no_hp VARCHAR(20)
-);
-
