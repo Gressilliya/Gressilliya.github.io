@@ -1,0 +1,6 @@
+CREATE TABLE saran_pengunjung (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nama VARCHAR(100),
+    pesan TEXT,
+    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
