@@ -541,6 +541,41 @@ nav{
     margin-left: 20px;
 }
 
+.nav-menu {
+  background: transparent !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
+
+.nav-menu a {
+  color: #000;              /* hitam */
+  text-decoration: none;
+  margin-left: 24px;
+  font-weight: 500;
+  position: relative;
+}
+
+.nav-menu a:hover {
+  color: #1e60ff;           /* warna hover */
+}
+
+/* underline halus saat hover */
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #1e60ff;
+  left: 0;
+  bottom: -6px;
+  transition: 0.3s;
+}
+
+.nav-menu a:hover::after {
+  width: 100%;
+}
+
 </style>
 </head>
 
