@@ -396,6 +396,49 @@ nav{
     display:block;
 }
 
+/* Tombol Saran */
+#saranButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #2c7be5;
+    color: white;
+    padding: 12px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: bold;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Box Saran */
+#saranBox {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 250px;
+    background: white;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0px 4px 15px rgba(0,0,0,0.3);
+    display: none;
+}
+
+#saranBox input,
+#saranBox textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 8px;
+}
+
+#saranBox button {
+    width: 100%;
+    background: #2c7be5;
+    color: white;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+}
+
 </style>
 </head>
 
@@ -541,6 +584,41 @@ allowfullscreen></iframe>
 <footer>
 © Gressilliya Damanik  — Website Digital Library  2026  
 </footer>
+
+<!-- BUTTON SARAN -->
+<div id="saranButton" onclick="toggleSaran()">
+    💬 Saran
+</div>
+
+<!-- BOX SARAN -->
+<div id="saranBox">
+    <h4>Kirim Saran</h4>
+
+    <form action="kirim_saran.php" method="POST">
+        <input type="text" name="nama" placeholder="Nama Anda" required>
+
+        <textarea name="pesan" placeholder="Tulis saran anda..." required></textarea>
+
+        <button type="submit">Kirim</button>
+    </form>
+</div>
+
+<script>
+function toggleSaran() {
+
+    // ambil kotak saran
+    var box = document.getElementById("saranBox");
+
+    // jika sedang tampil → sembunyikan
+    if (box.style.display === "block") {
+        box.style.display = "none";
+    } 
+    // jika sedang tersembunyi → tampilkan
+    else {
+        box.style.display = "block";
+    }
+}
+</script>
 
 </body>
 </html>
