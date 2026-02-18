@@ -439,6 +439,28 @@ nav{
     cursor: pointer;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* ukuran gambar logo */
+.logo-img {
+    width: 40px;
+    height: 40px;
+    object-fit: cover;
+}
+
+.logo-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* jadi bulat */
+}
+
 </style>
 </head>
 
@@ -446,7 +468,10 @@ nav{
 
 <nav>
 
-    <div class="logo">Gressilliya Library</div>
+    <div class="logo">
+    <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
+    <span>Gressilliya Library</span>
+</div>
 
    <ul class="menu">
         <li><a href="#beranda">Beranda</a></li>
