@@ -1,31 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Daftar</title>
+    <title>Daftar Anggota</title>
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="login-body">
+<body class="bg">
 
-<div class="login-box">
+<div class="card">
 
-<h2>Daftar Akun</h2>
+    <h2>Pendaftaran Anggota</h2>
 
-<form onsubmit="return daftarUser()">
+    <form>
 
-<input type="text" id="fname" placeholder="First Name" required>
-<input type="text" id="lname" placeholder="Last Name" required>
-<input type="tel" id="phone" placeholder="No HP" required>
-<input type="email" id="emailDaftar" placeholder="Email" required>
-<input type="password" id="passDaftar" placeholder="Password" required>
+        <input type="text" placeholder="First Name" required>
 
-<button type="submit">Daftar</button>
+        <input type="text" placeholder="Last Name" required>
 
-</form>
+        <input type="email" placeholder="Gmail" required>
+
+        <input type="number" placeholder="No Handphone" required>
+
+        <button type="submit">Daftar</button>
+
+    </form>
+
+    <p>
+        Sudah punya akun?
+        <a href="index.html">Login disini</a>
+    </p>
 
 </div>
-
-<script src="script.js"></script>
 
 </body>
 </html>
