@@ -510,6 +510,37 @@ nav{
     transition: 0.3s;
 }
 
+    /* NAVBAR UTAMA */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 30px;
+}
+
+/* MENU DI KANAN */
+.menu {
+    display: flex;
+    gap: 25px;
+    margin-left: auto;
+}
+
+.menu a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+}
+
+.menu a:hover {
+    color: #2c7be5;
+}
+
+/* LOGIN */
+.login-menu {
+    margin-left: 20px;
+}
+
 </style>
 </head>
 
@@ -522,19 +553,11 @@ nav{
     <span class="logo-text">Gressilliya Library</span>
 </div>
 
-   <ul class="menu">
-        <li><a href="#beranda">Beranda</a></li>
-        <li><a href="#tentang">Profile</a></li>
-        <li><a href="#galeri">Media</a></li>
-    </ul>
-
-    <!-- BAGIAN KANAN -->
-    <div class="nav-right">
-
-        <!-- SEARCH -->
-        <div class="nav-search">
-            <input type="text" placeholder="🔎 Search resources...">
-        </div>
+   <nav class="menu">
+        <a href="index.html">Beranda</a>
+        <a href="profile.html">Profile</a>
+        <a href="media.html">Media</a>
+    </nav>
         
         <!-- LOGIN DROPDOWN -->
         <div class="login-menu">
