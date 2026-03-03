@@ -638,6 +638,43 @@ nav{
     font-family: 'Poppins', sans-serif;
 }
 
+/* Latar Belakang Gradient yang Modern */
+body {
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+/* Card dengan Efek Kaca Transparan */
+.bento-card, .video-card, .audio-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 25px !important; /* Buat lebih membulat/curvy */
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+}
+
+/* Tombol dengan Efek Glow */
+.btn-hero, .btn, .login-btn {
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.4);
+    transition: 0.4s !important;
+}
+
+.btn:hover {
+    transform: scale(1.1) rotate(2deg) !important; /* Efek goyang sedikit saat hover */
+}
+
+.floating-icons .icon {
+    position: absolute;
+    font-size: 2rem;
+    opacity: 0.2;
+    animation: move 10s linear infinite;
+}
+
+@keyframes move {
+    from { transform: translateY(100vh) rotate(0deg); }
+    to { transform: translateY(-10vh) rotate(360deg); }
+}
+/* Atur posisi masing-masing ikon dengan left: 10%, 30%, dll */
+
 </style>
 </head>
 
@@ -677,6 +714,15 @@ nav{
 
 <section id="beranda" class="hero">
     <div class="overlay">
+
+        <div class="floating-icons">
+            <span class="icon">📚</span>
+            <span class="icon">💻</span>
+            <span class="icon">🔍</span>
+            <span class="icon">🎮</span>
+            <span class="icon">🚀</span>
+        </div>
+        
         <div class="animate-box">
             <h1 class="main-title">DigiSmart <span class="highlight">Library</span></h1>
             <p class="typing-text">Menghapus Jarak, Memperluas Wawasan.</p>
@@ -685,7 +731,7 @@ nav{
         <div class="quick-links">
             <a href="#bento" class="btn-hero pulse">🎮 Mulai Game Literasi</a>
             <a href="#Media" class="btn-hero pulse">📖 Materi Pelajaran</a>
-            <a href="#tentang" class="btn-hero outline">👤 Profil Pustakawan</a>
+            <a href="#tentang" class="btn-hero pulse">👤 Profil Pustakawan</a>
         </div>
     </div>
 </section>
