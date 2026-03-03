@@ -1341,6 +1341,99 @@ input:checked + .slider:before { transform: translateX(30px); }
         font-size: 0.9rem;
     }
 }
+
+/* RESET & NAVBAR BASE */
+.navbar-futuristic {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 75px;
+    z-index: 9999;
+    background: rgba(255, 255, 255, 0.85); /* Glassmorphism */
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    display: flex;
+    align-items: center;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 95%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* LOGO SECTION */
+.logo-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.main-logo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #2c7be5;
+}
+
+.brand-name {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #1e293b;
+}
+
+.accent { color: #2c7be5; }
+
+/* MENU LINKS */
+.nav-links {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    margin: 0; padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    position: relative;
+}
+
+.nav-links a:hover { color: #2c7be5; }
+
+/* LOGIN & MODE */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.login-trigger {
+    background: linear-gradient(135deg, #2c7be5, #2dd4bf);
+    color: white;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+}
+
+/* RESPONSIVE: KHUSUS HP (iOS/ANDROID) */
+@media (max-width: 992px) {
+    .nav-links { display: none; } /* Sembunyikan menu di HP agar tidak berantakan */
+    
+    .nav-container { padding: 0 10px; }
+    
+    .brand-name { font-size: 1.1rem; }
+}
     
 </style>
 </head>
@@ -1351,37 +1444,39 @@ input:checked + .slider:before { transform: translateX(30px); }
 
     <nav class="navbar-futuristic">
     <div class="nav-container">
-        <div class="logo-wrapper">
-            <img src="logo.jpg" alt="Logo" class="logo-img-animated">
-            <span class="logo-text-gradient">DigiSmart Library</span>
+        <div class="logo-box">
+            <div class="logo-glow">
+                <img src="logo.jpg" alt="Logo" class="main-logo">
+            </div>
+            <span class="brand-name">DigiSmart <span class="accent">Library</span></span>
         </div>
 
      <!-- BAGIAN KANAN -->
     <div class="nav-right">
         
-   <ul class="nav-menu">
-            <li><a href="#beranda" class="nav-link">Beranda</a></li>
-            <li><a href="#bento" class="nav-link">Fitur Literasi</a></li>
-            <li><a href="profil.html" class="nav-link">Profile</a></li>
-            <li><a href="#Media" class="nav-link">Media</a></li>
+   <ul class="nav-links">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#bento">Fitur Literasi</a></li>
+            <li><a href="profil.html">Profile</a></li>
+            <li><a href="#Media">Media</a></li>
         </ul>
         
         <!-- LOGIN DROPDOWN -->
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
 
-            <div class="nav-actions">
-            <div class="login-dropdown">
-                <button class="btn-glow">Login <i class="fas fa-chevron-down"></i></button>
-                <div class="dropdown-content">
+            <div class="nav-right">
+            <div class="login-wrapper">
+                <button class="login-trigger">Login <i class="fas fa-caret-down"></i></button>
+                <div class="dropdown-box">
                     <a href="login.html">Anggota</a>
                     <a href="daftar.html">Daftar</a>
                 </div>
             </div>
-       <div class="theme-toggle">
-                <label class="switch">
+       <div class="mode-control">
+                <label class="toggle-ui">
                     <input type="checkbox" id="mode-checkbox">
-                    <span class="slider-toggle">
+                    <span class="toggle-slider">
                         <i class="fas fa-sun"></i>
                         <i class="fas fa-moon"></i>
                     </span>
