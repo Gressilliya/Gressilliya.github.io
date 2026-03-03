@@ -578,6 +578,61 @@ nav{
 .bento-card h3 { margin-bottom: 10px; color: #2c7be5; font-size: 22px; }
 .bento-card p { font-size: 14px; color: #666; } 
 
+/* Animasi Judul */
+.main-title {
+    font-size: 56px;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+/* Efek Tombol Berdenyut (Pulse) */
+.pulse {
+    animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+    0% { box-shadow: 0 0 0 0px rgba(44, 123, 229, 0.7); }
+    100% { box-shadow: 0 0 0 20px rgba(44, 123, 229, 0); }
+}
+
+.highlight { color: #2c7be5; }
+
+/* Styling Statistik Profil */
+.profile-library-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.stat-item {
+    background: #e9ecef;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #2c7be5;
+}
+
+.btn-hero {
+    text-decoration: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    background: #2c7be5;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    margin: 10px;
+}
+
+.btn-hero.outline {
+    background: transparent;
+    border: 2px solid white;
+}
+
 </style>
 </head>
 
@@ -616,13 +671,18 @@ nav{
 </section>
 
 <section id="beranda" class="hero">
-<div class="overlay">
-
-<h1>Knowledge Space<br>Gressilliya Damanik</h1>
-<p>Explore Knowledge Digital Library Space</p>
-
-
-</div>
+    <div class="overlay">
+        <div class="animate-box">
+            <h1 class="main-title">DigiSmart <span class="highlight">Library</span></h1>
+            <p class="typing-text">Menghapus Jarak, Memperluas Wawasan.</p>
+        </div>
+        
+        <div class="quick-links">
+            <a href="#bento" class="btn-hero pulse">🎮 Mulai Game Literasi</a>
+            <a href="#Media" class="btn-hero pulse">📖 Materi Pelajaran</a>
+            <a href="#tentang" class="btn-hero outline">👤 Profil Pustakawan</a>
+        </div>
+    </div>
 </section>
 
 <section id="bento" class="bento-section">
@@ -661,48 +721,48 @@ nav{
 <img src="profile.jpg" alt="Foto Gressilliya">
 
 <div class="about-text">
-<h2>Profile</h2>
+    <h2>👤 Profil Pustakawan Sahabat</h2>
+    
+    <p>
+        Halo, Sobat Digi! Saya <strong>Gressilliya Damanik</strong>, mahasiswa Perpustakaan dan Sains Informasi yang berfokus pada pengembangan <i>Digital Library</i> untuk masa depan. 
+        Melalui platform <strong>DigiSmart</strong> ini, saya hadir sebagai partner belajar kalian dalam menjelajahi dunia digital yang luas tanpa batas.
+    </p>
 
-<p>
-Halo, saya Gressilliya Damanik, a Library and Information Science student
-who is passionate about digital libraries and information technology.
-This website serves as my personal digital space to share learning,
-knowledge, and academic exploration.
-</p>
+    <p style="margin-top: 10px; font-size: 14px; color: #555;">
+        Tujuan utama saya adalah membantu kalian menjadi <b>"Detektif Informasi"</b> yang hebat—mampu menemukan sumber tugas yang valid dan kebal terhadap berita hoaks. Yuk, kembangkan literasi digital bersama!
+    </p>
 
-<div class="about-buttons">
-    <a href="cv.jpg" target="_blank" class="btn">
-    Lihat CV
-</a>
+    <div class="about-buttons">
+        <a href="cv.jpg" target="_blank" class="btn">
+            Lihat CV
+        </a>
 
-    <a href="https://instagram.com/gressilliya" 
-       target="_blank" class="btn">
-       Instagram @gressilliya
-    </a>
+        <a href="https://instagram.com/gressilliya" target="_blank" class="btn instagram">
+            Instagram @gressilliya
+        </a>
 
-    <!-- tombol baru -->
-    <a href="about-detail.html" class="btn">
-        More About Me
-    </a>
+        <a href="about-detail.html" class="btn">
+            Misi Literasi Saya
+        </a>
+    </div>
 </div>
 
 </div>
 <section id="audio" class="audio-section">
+    <div class="audio-center">
+        <h2>🎧 Podcast & Fokus Literasi</h2>
+        <p class="subtitle">Dengarkan musik pembangun fokus atau panduan suara seputar tips mencari informasi aman.</p>
 
-<div class="audio-center">
-
-<h2>🎧 My Audio</h2>
-<p>Music that helps me focus while learning</p>
-
-<div class="audio-card">
-    <audio controls>
-    <source src="lagu.mp3" type="audio/mpeg">
-    Browser anda tidak mendukung audio.
-</audio>
-</div>
-
-</div>
-
+        <div class="audio-card">
+            <audio controls>
+                <source src="lagu.mp3" type="audio/mpeg">
+                Browser anda tidak mendukung audio.
+            </audio>
+            <p style="font-size: 12px; margin-top: 10px; color: #2c7be5; font-weight: bold;">
+                Status: 🎵 Musik Fokus Sedang Diputar
+            </p>
+        </div>
+    </div>
 </section>
 
 </div>
@@ -787,5 +847,22 @@ function toggleSaran() {
 }
 </script>
 
+<script>
+    // Animasi Teks Mengetik Sederhana
+    const text = document.querySelector(".overlay p");
+    const strText = text.textContent;
+    text.textContent = "";
+    let i = 0;
+
+    function typeWriter() {
+        if (i < strText.length) {
+            text.textContent += strText.charAt(i);
+            i++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    window.onload = typeWriter;
+</script>
+    
 </body>
 </html>
