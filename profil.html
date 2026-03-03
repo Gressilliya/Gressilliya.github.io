@@ -3,51 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Sekolah - DigiSmart Library</title>
-    <link rel="stylesheet" href="style.css"> <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Profil Sekolah Kita - DigiSmart Library</title>
+    <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        .profile-page-wrapper {
+            padding: 110px 5% 50px;
+            background: transparent;
+            min-height: 100vh;
+        }
+
+        .welcome-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .welcome-header h1 {
+            font-size: 3rem;
+            color: #2c7be5;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .welcome-header p {
+            font-size: 1.1rem;
+            color: #777;
+        }
+
+        .school-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .school-photo-box {
+            position: relative;
+        }
+
+        .img-school {
+            width: 100%;
+            border-radius: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transition: 0.5s;
+        }
+
+        .img-school:hover {
+            transform: scale(1.03);
+            box-shadow: 0 25px 70px rgba(44, 123, 229, 0.2);
+        }
+
+        .founding-year {
+            position: absolute;
+            bottom: -20px;
+            right: -20px;
+            background: #2c7be5;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        /* TAMPILAN GAYA KACA (GLASSMORPHISM) */
+        .glass-info-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 35px;
+            border: 1px solid rgba(44, 123, 229, 0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.03);
+        }
+
+        .glass-info-card h2 {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: #222;
+        }
+
+        .glass-info-card p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .fun-fact-pills {
+            display: flex;
+            gap: 15px;
+        }
+
+        .fun-fact-pills span {
+            background: #eef6ff;
+            color: #2c7be5;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        /* VISI & MISI GRID */
+        .vision-mission-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .v-card {
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            transition: 0.3s;
+            border-bottom: 5px solid transparent;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.03);
+        }
+
+        .v-card:hover {
+            transform: translateY(-8px);
+            border-color: #2c7be5;
+            box-shadow: 0 12px 30px rgba(44, 123, 229, 0.1);
+        }
+
+        .v-card i {
+            font-size: 35px;
+            color: #2c7be5;
+            margin-bottom: 18px;
+        }
+
+        .v-card h3 {
+            font-size: 1.8rem;
+            color: #222;
+            margin-bottom: 15px;
+        }
+
+        .v-card p { color: #555; }
+        .v-card ul { color: #555; list-style-type: none; padding-left: 0; }
+        .v-card ul li { margin-bottom: 10px; position: relative; padding-left: 20px; }
+        .v-card ul li::before {
+            content: "\f00c"; /* FontAwesome Check Icon */
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            color: #2c7be5;
+        }
+
+        /* --- SUPAYA TERBACA DI MODE GELAP --- */
+        [data-theme="dark"] .profile-page-wrapper { background: #121212; }
+        [data-theme="dark"] .welcome-header p { color: #bbb; }
+        [data-theme="dark"] .glass-info-card { background: rgba(30, 30, 30, 0.7); border-color: rgba(255, 255, 255, 0.05); }
+        [data-theme="dark"] .glass-info-card h2, [data-theme="dark"] .v-card h3 { color: #fff; }
+        [data-theme="dark"] .glass-info-card p, [data-theme="dark"] .v-card p, [data-theme="dark"] .v-card ul { color: #ccc; }
+        [data-theme="dark"] .v-card { background: #1a1a1a; box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+        [data-theme="dark"] .fun-fact-pills span { background: #333; color: #2c7be5; }
+    </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">DigiSmart Library</div>
-        <ul>
-            <li><a href="index.html">Beranda</a></li>
-            <li><a href="profil.html" class="active">Profil Sekolah</a></li>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-book-reader"></i> DigiSmart Library
+            </div>
+            <ul>
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="index.html#bento">Fitur Literasi</a></li>
+                <li><a href="profil.html" class="active">Profil Sekolah</a></li>
+                <li><a href="index.html#Media">Media</a></li>
+            </ul>
         </div>
     </nav>
 
-    <section class="profile-page-content">
-        <div class="container">
-            <div class="header-profile">
-                <h1>Mengenal Sekolah Kita</h1>
+    <main class="profile-page-wrapper">
+        <div class="container-full">
+            
+            <div class="welcome-header">
+                <span class="badge-special">#RumahLiterasiKita</span>
+                <h1>Selamat Datang di Sekolah Kita</h1>
                 <p>Membangun masa depan lewat literasi digital yang cerdas.</p>
             </div>
 
-            <div class="profile-grid">
-                <div class="profile-card-large">
-                    <h2>Tentang DigiSmart</h2>
-                    <p>DigiSmart Library adalah inovasi perpustakaan digital sekolah yang dirancang untuk mendukung proses belajar mengajar di era modern. Kami percaya bahwa setiap siswa berhak mendapatkan akses informasi yang cepat, akurat, dan menyenangkan.</p>
+            <div class="school-info-grid">
+                <div class="school-photo-box">
+                    <img src="foto-sekolah.jpg" alt="Foto Sekolah Kita yang Keren" class="img-school">
+                    <div class="founding-year">Est. 2026</div>
                 </div>
 
-                <div class="vision-mission-grid">
-                    <div class="v-card">
-                        <i class="fas fa-eye"></i>
-                        <h3>Visi</h3>
-                        <p>Menjadi pusat literasi digital terdepan yang membentuk siswa cerdas, kreatif, dan berwawasan global.</p>
+                <div class="glass-info-card">
+                    <div class="status-indicator">
+                        <span class="dot-blink green"></span>
+                        <p>Status: **Pusat Digital Aktif**</p>
                     </div>
-                    <div class="v-card">
-                        <i class="fas fa-bullseye"></i>
-                        <h3>Misi</h3>
-                        <ul>
-                            <li>Menyediakan konten edukasi digital yang berkualitas.</li>
-                            <li>Mengembangkan minat baca siswa melalui platform yang interaktif.</li>
-                            <li>Membangun karakter siswa yang kritis terhadap informasi (Anti-Hoax).</li>
-                        </ul>
+                    <h2>Tentang DigiSmart</h2>
+                    <p>DigiSmart Library bukan cuma rak buku biasa. Ini adalah pusat inovasi digital sekolah kita, tempat seru buat kamu ngerjain tugas, cari referensi tugas, denger podcast keren, sampai main game literasi yang menguji wawasan. Kami percaya literasi itu harus asik dan seru.</p>
+                    
+                    <div class="fun-fact-pills">
+                        <span><i class="fas fa-bolt"></i> Cepat</span>
+                        <span><i class="fas fa-shield-alt"></i> Aman</span>
+                        <span><i class="fas fa-smile-beam"></i> Fun</span>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-</body>
+            <div class="vision-mission-grid">
+                <div class="v-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Visi</h3>
+                    <p>Menjadi pusat literasi digital sekolah terdepan yang membentuk siswa cerdas, kreatif, berwawasan global, dan jago teknologi.</p>
+                </div>
+                <div class="v-card">
+                    <i class="fas fa-check-double"></i>
+                    <h3>Misi Kita</h3>
+                    <ul>
+                        <li>Menyediakan konten edukasi digital berkualitas, dari buku sampai video.</li>
+                        <li>Mengembangkan minat baca siswa SMP lewat platform yang interaktif dan *game-like*.</li>
+                        <li>Membangun karakter siswa yang kritis, pandai memilah informasi, dan anti hoax.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    </body>
 </html>
