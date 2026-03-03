@@ -556,276 +556,59 @@ nav{
     margin-top: 40px;
 }
 
-/* GAYA SEMUA KARTU (PASTI BIRU & TEKS PUTIH) */
-.bento-card {
-    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
-    color: white !important; 
-    padding: 30px;
-    border-radius: 25px !important;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    justify-content: space-between;
-    min-height: 350px;
-    box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
-    transition: 0.3s ease;
-    border: none !important;
-}
-
-/* Efek saat kursor menyentuh kotak (Hover) */
-.bento-card:hover { 
-    transform: translateY(-10px) scale(1.02); 
-    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.5); 
-}
-
-/* Pastikan Judul H3 Berwarna Putih Tebal */
-.bento-card h3 {
-    color: #ffffff !important;
-    font-size: 24px;
-    font-weight: 800;
-    margin-bottom: 15px;
-    display: block !important;
-}
-
-/* Pastikan Deskripsi P Berwarna Putih Terang */
-.bento-card p {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 14px;
-    line-height: 1.6;
-    display: block !important;
-}
-
-/* Membuat variasi ukuran kotak agar terlihat seperti Bento */
-.item-big { grid-row: span 2; background: #2c7be5; color: white; }
-.item-big h3 { color: white !important; }
-.item-big p { color: #e0e0e0; }
-
-.bento-card h3 { margin-bottom: 10px; color: #2c7be5; font-size: 22px; }
-.bento-card p { font-size: 14px; color: #666; } 
-
-/* Animasi Judul */
-.main-title {
-    font-size: 56px;
-    animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-15px); }
-}
-
-/* Efek Tombol Berdenyut (Pulse) */
-.pulse {
-    animation: pulse-animation 2s infinite;
-}
-
-@keyframes pulse-animation {
-    0% { box-shadow: 0 0 0 0px rgba(44, 123, 229, 0.7); }
-    100% { box-shadow: 0 0 0 20px rgba(44, 123, 229, 0); }
-}
-
-.highlight { color: #2c7be5; }
-
-/* Styling Statistik Profil */
-.profile-library-stats {
-    display: flex;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.stat-item {
-    background: #e9ecef;
-    padding: 10px 15px;
-    border-radius: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: #2c7be5;
-}
-
-.btn-hero {
-    text-decoration: none;
-    padding: 15px 30px;
-    border-radius: 50px;
-    background: #2c7be5;
-    color: white;
-    font-weight: bold;
-    display: inline-block;
-    margin: 10px;
-}
-
-.btn-hero.outline {
-    background: transparent;
-    border: 2px solid white;
-}
-
-.overlay p {
-    min-height: 1.5em; /* Memberi ruang agar teks tidak 'anjlok' saat mulai mengetik */
-    font-family: 'Poppins', sans-serif;
-}
-
-/* Latar Belakang Gradient yang Modern */
-body {
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-}
-
-/* 1. GAYA UMUM UNTUK SEMUA KARTU (Bento, Video, Audio) */
-.bento-card, .video-card, .audio-card {
-    background: white; /* Default warna putih agar aman di mata */
-    border-radius: 25px !important;
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.05);
-    transition: 0.3s ease;
-    border: 1px solid #eee;
-    padding: 25px;
-    text-align: center;
-}
-
-/* 2. KHUSUS ARCADE LITERASI (Vibe Gaming - Biru Solid) */
-/* Ini agar tulisan "Arcade Literasi" TERLIHAT JELAS */
-.bento-card.item-big {
-    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
-    color: white !important;
-    border: none;
-}
-
-/* Memastikan teks di dalam Arcade berwarna putih tebal */
-.item-big h2, .item-big p {
-    color: #ffffff !important;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.2);
-}
-
-/* 3. KARTU LAINNYA (Efek Kaca Halus - Tidak Sakit Mata) */
-/* Kita targetkan selain kartu pertama agar tidak tabrakan */
-.bento-card:not(.item-big) {
-    background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(10px);
-}
-
-/* Tombol dengan Efek Glow */
-.btn-hero, .btn, .login-btn {
-    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.4);
-    transition: 0.4s !important;
-}
-
-.btn:hover {
-    transform: scale(1.1) rotate(2deg) !important; /* Efek goyang sedikit saat hover */
-}
-
-.floating-icons .icon {
-    position: absolute;
-    font-size: 2rem;
-    opacity: 0.2;
-    animation: move 10s linear infinite;
-}
-
-@keyframes move {
-    from { transform: translateY(100vh) rotate(0deg); }
-    to { transform: translateY(-10vh) rotate(360deg); }
-}
-/* Atur posisi masing-masing ikon dengan left: 10%, 30%, dll */
-
-/* Efek tombol 'Mulai Main' agar lebih kontras */
-.item-big .btn {
-    background: white !important;
-    color: #2c7be5 !important;
-    border-radius: 50px;
-    padding: 10px 25px;
-    font-weight: bold;
-    margin-top: 20px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-}
-
-/* Animasi sederhana agar kartu sedikit membesar saat disentuh (Hover) */
-.bento-card:hover {
-    transform: scale(1.03);
-    transition: all 0.3s ease;
-    border: 2px solid #2c7be5;
-}
-
-/* Font Poppins yang membulat lebih ramah untuk mata anak muda */
-body {
-    font-family: 'Poppins', sans-serif;
-    color: #333; /* Gunakan abu-abu gelap, jangan hitam pekat agar tidak tajam */
-    line-height: 1.6;
-}
-
-/* Warna judul fitur yang segar */
-.bento-card h2 {
-    color: #2c7be5;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-}
-
-/* GAYA SEMUA KARTU BENTO (SAMA SEPERTI ARCADE) */
+/* Gaya Utama Kartu (Semua Jadi Biru) */
 .bento-card {
     background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
     color: white !important;
-    padding: 40px 30px;
+    padding: 40px 30px !important;
     border-radius: 30px !important;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Agar tombol selalu di bawah */
-    align-items: center;
-    text-align: center;
-    min-height: 380px; /* Tinggi seragam agar rapi */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    justify-content: space-between !important;
+    min-height: 400px !important;
+    box-shadow: 0 10px 30px rgba(44, 123, 229, 0.4) !important;
     border: none !important;
-    box-shadow: 0 10px 25px rgba(44, 123, 229, 0.3);
+    transition: 0.4s ease !important;
 }
 
-.bento-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.5);
+/* Biar kotak 'naik' saat disentuh kursor */
+.bento-card:hover { 
+    transform: translateY(-15px) scale(1.03); 
+    box-shadow: 0 20px 40px rgba(44, 123, 229, 0.6) !important;
 }
 
-/* GAYA SEMUA JUDUL & TEKS DI DALAM KOTAK */
+/* Tulisan Judul (H2/H3) Jadi Putih & Besar */
 .bento-card h2, .bento-card h3 {
     color: #ffffff !important;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 15px;
+    font-size: 26px !important;
+    font-weight: 800 !important;
+    margin-bottom: 15px !important;
+    display: block !important;
 }
 
+/* Tulisan Deskripsi (P) Jadi Putih Terang */
 .bento-card p {
-    color: rgba(255, 255, 255, 0.9) !important;
-    font-size: 14px;
-    line-height: 1.6;
-    margin-bottom: 25px;
+    color: rgba(255, 255, 255, 0.95) !important;
+    font-size: 15px !important;
+    line-height: 1.6 !important;
+    margin-bottom: 25px !important;
+    display: block !important;
 }
 
-/* GAYA TOMBOL KLIK (PUTIH BERSIH) */
-.btn-card {
-    background: white !important;
-    color: #2c7be5 !important;
-    padding: 12px 25px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    transition: 0.3s;
-    display: inline-block;
-    width: fit-content;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
-
-.btn-card:hover {
-    background: #f0f0f0 !important;
-    transform: scale(1.05);
-}
-
-/* GAYA TOMBOL DI DALAM KOTAK */
+/* Gaya Tombol Klik (Putih agar Kontras) */
 .btn-card {
     background: #ffffff !important;
     color: #2c7be5 !important;
-    padding: 12px 25px;
-    border-radius: 50px;
-    font-weight: bold;
-    text-decoration: none;
-    font-size: 14px;
-    margin-top: 20px;
-    display: inline-block;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    transition: 0.3s;
+    padding: 12px 30px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    text-decoration: none !important;
+    font-size: 15px !important;
+    display: inline-block !important;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2) !important;
+    transition: 0.3s !important;
 }
 
 .btn-card:hover {
@@ -898,31 +681,31 @@ body {
     <h2 class="section-title">Pusat Literasi Digital</h2>
     <p class="subtitle">Fitur utama untuk membantu siswa SMP melawan kesenjangan digital.</p>
 
-    <div class="video-grid"> <div class="bento-card">
-            <h3>Arcade Literasi 🎮</h3>
-            <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru dan menantang!</p>
-            <a href="game-literasi.html" class="btn-card">START MISSION ⚡</a>
-        </div>
-
-        <div class="bento-card">
-            <h3>Pojok Baca 📚</h3>
-            <p>Akses koleksi buku digital pilihan yang ringan dibaca dan hemat kuota internet.</p>
-            <a href="perpustakaan-digital.html" class="btn-card">BACA SEKARANG 📖</a>
-        </div>
-
-        <div class="bento-card">
-            <h3>Media Belajar 🎥</h3>
-            <p>Video tutorial singkat tentang cara riset tugas sekolah dengan cepat dan akurat.</p>
-            <a href="#Media" class="btn-card">TONTON VIDEO 📺</a>
-        </div>
-
-        <div class="bento-card">
-            <h3>Hoax Buster 🔍</h3>
-            <p>Alat deteksi dini untuk memverifikasi kebenaran sebuah berita secara instan.</p>
-            <a href="cek-hoaks.html" class="btn-card">CEK BERITA 🕵️‍♂️</a>
-        </div>
-
+    <div class="video-grid">
+    <div class="bento-card">
+        <h3>Arcade Literasi 🎮</h3>
+        <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru!</p>
+        <a href="game.html" class="btn-card">MULAI MAIN ⚡</a>
     </div>
+
+    <div class="bento-card">
+        <h3>Pojok Baca 📖</h3>
+        <p>Koleksi buku digital pilihan untuk pelajar SMP agar makin pinter.</p>
+        <a href="perpustakaan.html" class="btn-card">BACA SEKARANG 📚</a>
+    </div>
+    
+    <div class="bento-card">
+        <h3>Media Belajar 🎥</h3>
+        <p>Video tutorial singkat cara riset tugas sekolah dengan benar.</p>
+        <a href="#Media" class="btn-card">TONTON VIDEO 📺</a>
+    </div>
+
+    <div class="bento-card">
+        <h3>Hoax Buster 🕵️‍♂️</h3>
+        <p>Alat cek fakta sederhana untuk membedakan berita asli dan palsu.</p>
+        <a href="cek-hoax.html" class="btn-card">CEK BERITA 🔍</a>
+    </div>
+</div>
 </section>
     
 <section id="tentang" class="about">
