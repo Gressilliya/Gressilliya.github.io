@@ -816,6 +816,76 @@ nav{
 
 @keyframes typing { from { width: 0 } to { width: 100% } }
 @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #2c7be5; } }
+
+/* --- GAYA SWITCH TOMBOL --- */
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-switch {
+    display: inline-block;
+    height: 30px;
+    position: relative;
+    width: 60px;
+}
+
+.theme-switch input { display: none; }
+
+.slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 5px;
+}
+
+.slider i { font-size: 12px; color: white; }
+
+.slider:before {
+    background-color: white;
+    bottom: 4px;
+    content: "";
+    height: 22px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 22px;
+    z-index: 2;
+}
+
+input:checked + .slider { background-color: #2c7be5; }
+input:checked + .slider:before { transform: translateX(30px); }
+.slider.round { border-radius: 34px; }
+.slider.round:before { border-radius: 50%; }
+
+/* --- ATURAN MODE GELAP --- */
+[data-theme="dark"] {
+    background-color: #121212 !important;
+    color: #ffffff !important;
+}
+
+[data-theme="dark"] body {
+    background: #1a1a1a !important;
+}
+
+/* Biar kotak fitur tetap putih/terang tapi teksnya menyesuaikan */
+[data-theme="dark"] .bento-card:not(.item-big) {
+    background: #252525 !important;
+    border: 1px solid #444 !important;
+}
+
+[data-theme="dark"] .about-text p {
+    color: #ddd !important;
+}
     
 </style>
 </head>
@@ -846,7 +916,16 @@ nav{
                 <a href="login.html">Login Anggota</a>
                 <a href="daftar.html">Daftar Anggota</a>
             </div>
+        </div> <div class="theme-switch-wrapper">
+    <label class="theme-switch" for="checkbox">
+        <input type="checkbox" id="checkbox" />
+        <div class="slider round">
+            <i class="fas fa-sun"></i>
+            <i class="fas fa-moon"></i>
         </div>
+    </label>
+    <span id="mode-text">Mode Terang</span>
+</div>
 
     </div>
 
@@ -1063,6 +1142,35 @@ function toggleSaran() {
         }
     }
     window.onload = typeWriter;
+</script>
+
+<script>
+    const toggleSwitch = document.querySelector('#checkbox');
+    const modeText = document.querySelector('#mode-text');
+
+    function switchTheme(e) {
+        if (e.target.checked) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            modeText.innerText = "Mode Gelap";
+            localStorage.setItem('theme', 'dark'); // Biar gak balik terang pas di-refresh
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            modeText.innerText = "Mode Terang";
+            localStorage.setItem('theme', 'light');
+        }    
+    }
+
+    toggleSwitch.addEventListener('change', switchTheme, false);
+
+    // Cek pilihan terakhir user
+    const currentTheme = localStorage.getItem('theme') ? localStorage.getItem('theme') : null;
+    if (currentTheme) {
+        document.documentElement.setAttribute('data-theme', currentTheme);
+        if (currentTheme === 'dark') {
+            toggleSwitch.checked = true;
+            modeText.innerText = "Mode Gelap";
+        }
+    }
 </script>
     
 </body>
