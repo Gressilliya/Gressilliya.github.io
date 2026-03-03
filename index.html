@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
 <title>DigiPath | Level Up Your Skills</title>
 
     
@@ -1148,6 +1148,94 @@ input:checked + .slider:before { transform: translateX(30px); }
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
+}
+
+/* =======================================================
+   RESPONSIVE ENGINE - AGAR RAPI DI IOS & ANDROID
+   ======================================================= */
+
+/* Pengaturan untuk layar Tablet & HP (Lebar maksimal 768px) */
+@media (max-width: 768px) {
+    
+    /* 1. Header & Hero Section */
+    .hero {
+        padding: 100px 20px 60px; /* Kurangi padding agar tidak terlalu jauh */
+        text-align: center;
+    }
+
+    .main-title {
+        font-size: 2.2rem !important; /* Perkecil judul di HP */
+    }
+
+    /* 2. Navigasi (Menu Atas) */
+    .nav-container {
+        padding: 10px 15px;
+    }
+
+    nav ul {
+        display: none; /* Sembunyikan menu standar (opsional: bisa ganti hamburger menu) */
+    }
+
+    /* 3. Bento Grid / Fitur Literasi */
+    .video-grid, .features-grid, .grid-science {
+        grid-template-columns: 1fr !important; /* Ubah dari sampingan jadi 1 kolom ke bawah */
+        gap: 20px;
+    }
+
+    .bento-card, .sci-box {
+        padding: 20px;
+        margin: 0 auto;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* 4. Bagian Media (Video YouTube) */
+    .media-container {
+        display: flex;
+        flex-direction: column; /* Video jadi berjejer ke bawah */
+        gap: 20px;
+    }
+
+    iframe {
+        width: 100% !important; /* Video menyesuaikan lebar layar HP */
+        height: auto;
+        aspect-ratio: 16 / 9;
+        border-radius: 15px;
+    }
+
+    /* 5. Gambar & Foto (Termasuk foto-sekolah.jpg) */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+
+    .glass-card {
+        flex-direction: column !important; /* Paksa tumpukan vertikal */
+        padding: 20px;
+    }
+
+    /* 6. Form & Input (Saran/Login) */
+    input, textarea, button {
+        width: 100% !important;
+        font-size: 16px !important; /* Hindari auto-zoom di iOS */
+    }
+}
+
+/* Pengaturan khusus untuk HP Kecil (Lebar maksimal 480px) */
+@media (max-width: 480px) {
+    .main-title {
+        font-size: 1.8rem !important;
+    }
+    
+    .typing-text {
+        font-size: 0.9rem !important;
+    }
+    
+    .btn-hero {
+        display: block;
+        width: 100%;
+        margin-bottom: 10px;
+    }
 }
     
 </style>
