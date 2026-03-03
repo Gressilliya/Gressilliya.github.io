@@ -1681,6 +1681,114 @@ body {
 .podcast-container:hover {
     box-shadow: 0 15px 40px rgba(45, 212, 191, 0.4);
 }
+
+/* CONTAINER UTAMA */
+.podcast-section {
+    padding: 80px 5%;
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.podcast-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+/* EMOJI MENTAL-MENTUL */
+.emoji-bounce {
+    font-size: 3rem;
+    display: inline-block;
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+}
+
+/* PLAYER CARD (GLASSMORPHISM) */
+.player-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px;
+    border-radius: 35px;
+    box-shadow: 0 20px 50px rgba(44, 123, 229, 0.1);
+    border: 2px solid #2c7be5;
+    margin: 30px 0;
+    transition: 0.3s;
+}
+
+/* ANIMASI VISUALIZER (BATANG BERGERAK) */
+.visualizer {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    height: 30px;
+    margin-bottom: 20px;
+}
+
+.bar {
+    width: 6px;
+    background: #2c7be5;
+    border-radius: 10px;
+    animation: wave 1s infinite ease-in-out;
+}
+
+.bar:nth-child(2) { animation-delay: 0.1s; background: #2dd4bf; }
+.bar:nth-child(3) { animation-delay: 0.2s; background: #2c7be5; }
+.bar:nth-child(4) { animation-delay: 0.3s; background: #2dd4bf; }
+.bar:nth-child(5) { animation-delay: 0.4s; background: #2c7be5; }
+
+@keyframes wave {
+    0%, 100% { height: 10px; }
+    50% { height: 30px; }
+}
+
+/* TOMBOL MOOD */
+.mood-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-mood {
+    background: white;
+    border: 2px solid #e2e8f0;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+    color: #475569;
+}
+
+.btn-mood:hover {
+    transform: scale(1.1);
+    border-color: #2c7be5;
+    color: #2c7be5;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+}
+
+/* IKON MELAYANG (DEKORASI) */
+.floating-decor i {
+    position: absolute;
+    color: rgba(44, 123, 229, 0.2);
+    font-size: 2rem;
+    z-index: 1;
+}
+
+.note-1 { top: 10%; left: 5%; animation: float 5s infinite; }
+.note-2 { top: 20%; right: 5%; animation: float 7s infinite reverse; }
+.note-3 { bottom: 10%; left: 15%; animation: float 6s infinite 1s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0); }
+    50% { transform: translateY(-30px) rotate(20deg); }
+}
     
 </style>
 </head>
@@ -1805,19 +1913,40 @@ body {
     </div>
 </section>
     
-<section id="audio" class="audio-section">
-    <div class="audio-center">
-        <h2>🎧 Podcast & Fokus Literasi</h2>
-        <p class="subtitle">Dengarkan musik pembangun fokus atau panduan suara seputar tips mencari informasi aman.</p>
+<section id="podcast" class="podcast-section reveal">
+    <div class="podcast-wrapper">
+        <div class="floating-decor">
+            <i class="fas fa-music note-1"></i>
+            <i class="fas fa-headphones note-2"></i>
+            <i class="fas fa-star note-3"></i>
+        </div>
 
-        <div class="audio-card">
-            <audio controls>
-                <source src="lagu.mp3" type="audio/mpeg">
-                Browser anda tidak mendukung audio.
+        <div class="podcast-header">
+            <span class="emoji-bounce">🎧</span>
+            <h2>Podcast & Fokus Literasi</h2>
+            <p>Dengarkan musik pembangun fokus atau panduan suara tips mencari informasi aman.</p>
+        </div>
+
+        <div class="player-card">
+            <div class="visualizer">
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+            </div>
+
+            <audio id="main-audio" controls>
+                <source src="musik-fokus.mp3" type="audio/mpeg">
+                Browser kamu tidak mendukung pemutar audio.
             </audio>
-            <p style="font-size: 12px; margin-top: 10px; color: #2c7be5; font-weight: bold;">
-                Status: 🎵 Musik Fokus Sedang Diputar
-            </p>
+
+            <div class="status-badge">
+                <i class="fas fa-volume-up"></i> Status: <span id="audio-status">Musik Fokus Sedang Diputar</span>
+            </div>
+        </div>
+
+        <div class="mood-selector">
+            <button onclick="changeMood('Lofi Fokus', 'blue')" class="btn-mood"><i class="fas fa-brain"></i> Fokus Belajar</button>
+            <button onclick="changeMood('Suara Hujan', 'teal')" class="btn-mood"><i class="fas fa-cloud-showers-heavy"></i> Suara Hujan</button>
+            <button onclick="changeMood('Tips Anti-Hoax', 'orange')" class="btn-mood"><i class="fas fa-shield-alt"></i> Tips Anti-Hoax</button>
         </div>
     </div>
 </section>
