@@ -655,80 +655,81 @@ nav{
     color: #f0f0f0 !important;
 }
 
-/* --- PERBAIKAN TAMPILAN PROFIL --- */
+/* --- STYLING PROFIL PREMIUM --- */
 
-/* Membuat area teks profil muncul perlahan (Animasi) */
+/* 1. Animasi Masuk untuk Seluruh Blok Teks */
 .about-text {
-    animation: fadeInText 1.5s ease-in-out;
-    padding: 20px;
+    animation: slideUpFade 1.2s ease-out;
+    font-family: 'Poppins', sans-serif; /* Pastikan font ini terpasang */
 }
 
-@keyframes fadeInText {
-    from { opacity: 0; transform: translateY(20px); }
+@keyframes slideUpFade {
+    from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Mempercantik Judul */
+/* 2. Judul dengan Gradasi Biru */
 .about-text h2 {
-    color: #2c7be5 !important; /* Biru konsisten */
-    font-size: 28px;
-    font-weight: 800;
-    margin-bottom: 20px;
+    font-size: 32px !important;
+    font-weight: 800 !important;
+    background: linear-gradient(to right, #2c7be5, #1a5ab5);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 20px !important;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-/* Mempercantik Paragraf */
+/* 3. Font Paragraf agar Tidak Monoton */
 .about-text p {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #444;
+    font-size: 17px !important;
+    line-height: 1.8 !important;
+    color: #444 !important;
+    margin-bottom: 25px !important;
     text-align: justify;
 }
 
-/* --- GAYA TOMBOL (BIRU SOLID) --- */
-.about-buttons {
+/* 4. Styling Container Tombol */
+.btn-container {
     display: flex;
     gap: 15px;
-    margin-top: 25px;
-    flex-wrap: wrap; /* Supaya rapi di HP */
+    flex-wrap: wrap;
+    margin-top: 30px;
 }
 
-/* Tombol Umum (CV & Misi) */
-.about-buttons .btn {
-    background: #2c7be5 !important;
+/* 5. Tombol Biru Solid & Glow (Sesuai Permintaanmu) */
+.btn-container a {
+    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
     color: white !important;
-    padding: 12px 25px;
-    border-radius: 50px;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 14px;
-    transition: 0.3s ease;
-    display: inline-block;
-    border: none;
-    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+    padding: 14px 28px !important;
+    border-radius: 50px !important;
+    text-decoration: none !important;
+    font-weight: 700 !important;
+    font-size: 14px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3) !important;
+    border: none !important;
 }
 
-/* Tombol Khusus Instagram (Bisa dibuat sedikit beda atau tetap biru) */
-.about-buttons .btn.instagram {
-    background: #1a5ab5 !important; /* Biru lebih gelap agar variatif */
+/* 6. Efek Hover Tombol (Sangat Interaktif) */
+.btn-container a:hover {
+    transform: translateY(-8px) scale(1.05) !important;
+    box-shadow: 0 15px 30px rgba(44, 123, 229, 0.5) !important;
+    background: linear-gradient(135deg, #1a5ab5 0%, #2c7be5 100%) !important;
 }
 
-/* Efek Hover: Tombol sedikit membesar saat disentuh */
-.about-buttons .btn:hover {
-    transform: translateY(-5px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(44, 123, 229, 0.5);
-    filter: brightness(1.1);
+/* 7. Animasi Icon di Dalam Tombol */
+.btn-container a i {
+    font-size: 18px;
+    transition: 0.3s;
 }
 
-/* --- ANIMASI FOTO (Tambahan agar menarik) --- */
-.about-img img {
-    border-radius: 30px;
-    transition: 0.5s;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-}
-
-.about-img img:hover {
-    transform: rotate(-3deg) scale(1.05);
-    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.3);
+.btn-container a:hover i {
+    transform: rotate(15deg) scale(1.2);
 }
     
 </style>
@@ -830,9 +831,11 @@ nav{
     </p>
     
     <div class="btn-container">
-        <a href="#cv"><i class="fas fa-file-alt"></i> Lihat CV</a>
-        <a href="https://instagram.com/gressilliya"><i class="fab fa-instagram"></i> Instagram</a>
-        <a href="#misi"><i class="fas fa-bullseye"></i> Misi Literasi Saya</a>
+        <a href="cv.jpg" target="_blank"><i class="fas fa-file-alt"></i> Lihat CV</a>
+        
+        <a href="https://instagram.com/gressilliya" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+        
+        <a href="about-detail.html"><i class="fas fa-bullseye"></i> Misi Literasi Saya</a>
     </div>
 </div>
 
