@@ -615,6 +615,45 @@ nav{
     background: #f0f0f0 !important;
     transform: scale(1.1);
 }
+
+/* --- PERBAIKAN TOMBOL BERANDA (HOME) --- */
+
+/* Membuat tombol di Beranda jadi Biru Solid */
+.btn-hero {
+    background: #2c7be5 !important; /* Biru yang sama dengan Arcade */
+    color: white !important;
+    border: none !important;
+    padding: 15px 30px !important;
+    border-radius: 50px !important;
+    font-weight: bold !important;
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.4) !important;
+    text-decoration: none !important;
+    display: inline-flex !important;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Menghapus garis outline putih di tombol Profil Pustakawan */
+.btn-hero.outline {
+    background: #2c7be5 !important; 
+    border: none !important;
+}
+
+/* Efek saat tombol di Beranda disentuh */
+.btn-hero:hover {
+    transform: scale(1.05) !important;
+    background: #1a5ab5 !important; /* Biru sedikit lebih gelap saat hover */
+}
+
+/* Memastikan teks "DigiSmart Library" di Beranda tetap Putih Jelas */
+.hero-content h1 {
+    color: white !important;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5) !important;
+}
+
+.hero-content p {
+    color: #f0f0f0 !important;
+}
     
 </style>
 </head>
@@ -655,14 +694,6 @@ nav{
 
 <section id="beranda" class="hero">
     <div class="overlay">
-
-        <div class="floating-icons">
-            <span class="icon">📚</span>
-            <span class="icon">💻</span>
-            <span class="icon">🔍</span>
-            <span class="icon">🎮</span>
-            <span class="icon">🚀</span>
-        </div>
         
         <div class="animate-box">
             <h1 class="main-title">DigiSmart <span class="highlight">Library</span></h1>
