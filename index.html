@@ -643,13 +643,26 @@ body {
     background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
-/* Card dengan Efek Kaca Transparan */
+/* 1. Efek Kaca untuk kartu biasa (Pojok Baca, Media, Hoax Buster) */
 .bento-card, .video-card, .audio-card {
-    background: rgba(255, 255, 255, 0.7) !important;
+    background: rgba(255, 255, 255, 0.8); 
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px !important; /* Buat lebih membulat/curvy */
-    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1) !important;
+    border-radius: 25px !important;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+}
+
+/* 2. KHUSUS untuk Arcade Literasi (Agar Teks Muncul & Menarik Anak SMP) */
+.bento-card.item-big {
+    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
+    color: white !important; /* Memaksa teks jadi putih di atas background biru */
+}
+
+/* 3. Pastikan Judul di dalam Arcade Literasi berwarna putih */
+.item-big h2 {
+    color: #ffffff !important;
+    font-weight: 700;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.2);
 }
 
 /* Tombol dengan Efek Glow */
@@ -761,9 +774,9 @@ body {
     <div class="bento-grid">
         <div class="bento-card item-big">
             <h3>Arcade Literasi 🎮</h3>
-            <p>Admin menyediakan game interaktif agar siswa dapat menguji kemampuan kognitif dalam membedakan informasi valid dan hoaks.</p>
+            <p>Uji kemampuanmu melawan hoaks di sini!</p>
             <br>
-            <a href="#" class="btn" style="background:white; color:#2c7be5;">Mulai Main</a>
+            <a href="#" class="btn">START MISSION ⚡</a>
         </div>
 
         <div class="bento-card">
