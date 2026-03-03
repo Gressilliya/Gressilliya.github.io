@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoax Buster | DigiSmart Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --scanner-green: #00ff41;
+            --alert-red: #ff3e3e;
+            --dark-scanner: #0a0a0a;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-scanner);
+            color: var(--scanner-green);
+            overflow-x: hidden;
+        }
+
+        /* Background Grid Matrix */
+        .scanner-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        /* Header Detektif */
+        .header-buster h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            text-shadow: 0 0 15px var(--scanner-green);
+            margin-bottom: 10px;
+        }
+
+        /* Kotak Input Scanner */
+        .scanner-box {
+            background: rgba(0, 255, 65, 0.05);
+            border: 2px solid var(--scanner-green);
+            border-radius: 30px;
+            padding: 40px;
+            margin-top: 40px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.2);
+        }
+
+        /* Animasi Garis Scanner */
+        .scanner-line {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: var(--scanner-green);
+            box-shadow: 0 0 15px var(--scanner-green);
+            animation: scan 3s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { top: 0%; }
+            50% { top: 100%; }
+            100% { top: 0%; }
+        }
+
+        textarea {
+            width: 100%;
+            height: 150px;
+            background: rgba(0,0,0,0.5);
+            border: 1px solid var(--scanner-green);
+            border-radius: 15px;
+            padding: 15px;
+            color: var(--scanner-green);
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            margin-bottom: 20px;
+            resize: none;
+            box-sizing: border-box;
+        }
+
+        .btn-analyze {
+            background: var(--scanner-green);
+            color: black;
+            border: none;
+            padding: 15px 40px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+            letter-spacing: 2px;
+        }
+
+        .btn-analyze:hover {
+            box-shadow: 0 0 30px var(--scanner-green);
+            transform: scale(1.05);
+        }
+
+        /* Hasil Deteksi (Hanya Simulasi) */
+        .result-area {
+            margin-top: 30px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            text-align: left;
+            border-left: 3px solid var(--scanner-green);
+            padding-left: 15px;
+            display: none; /* Muncul saat diklik */
+        }
+
+        .back-btn {
+            position: fixed;
+            top: 20px; left: 20px;
+            color: var(--scanner-green);
+            text-decoration: none;
+            border: 1px solid var(--scanner-green);
+            padding: 8px 15px;
+            border-radius: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .scanner-box { padding: 20px; }
+            textarea { height: 120px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="scanner-bg"></div>
+    <a href="index.html" class="back-btn"><i class="fas fa-terminal"></i> EXIT_LAB</a>
+
+    <div class="container">
+        <header class="header-buster">
+            <i class="fas fa-fingerprint" style="font-size: 4rem; margin-bottom: 20px;"></i>
+            <h1>HOAX BUSTER</h1>
+            <p>Sistem Analisis Kebenaran Informasi v1.0</p>
+        </header>
+
+        <div class="scanner-box">
+            <div class="scanner-line"></div>
+            <p style="text-align: left; margin-bottom: 10px;">[INPUT_DATA_KE_SINI]</p>
+            <textarea placeholder="Tempelkan link berita atau cuplikan teks yang mencurigakan di sini..."></textarea>
+            
+            <button class="btn-analyze" onclick="startScan()">MULAI ANALISIS</button>
+
+            <div id="result" class="result-area">
+                <p>> Menghubungkan ke pusat data...</p>
+                <p>> Memeriksa pola kalimat...</p>
+                <p>> Memvalidasi sumber berita...</p>
+                <p style="color: yellow;">> HASIL: Sedang memproses data. Gunakan logika kritis!</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; font-size: 0.8rem; opacity: 0.6;">
+            <p>Ingat: Kebenaran dimulai dari caramu berpikir kritis. <br> Periksa sumbernya, periksa tanggalnya!</p>
+        </div>
+    </div>
+
+    <script>
+        function startScan() {
+            const result = document.getElementById('result');
+            result.style.display = 'block';
+            alert("Memulai pemindaian data digital...");
+        }
+    </script>
+
+</body>
+</html>
