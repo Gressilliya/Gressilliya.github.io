@@ -1789,6 +1789,110 @@ body {
     0%, 100% { transform: translateY(0) rotate(0); }
     50% { transform: translateY(-30px) rotate(20deg); }
 }
+
+/* Latar Belakang Global Bergradasi & Bergerak */
+body {
+    background: linear-gradient(-45deg, #00d2ff, #3a7bd5, #00c6ff, #0072ff);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    scroll-behavior: smooth;
+    color: white; /* Tulisan jadi putih agar terbaca di bg biru */
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Animasi Muncul Saat Scroll (Reveal) */
+.reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+#tentang .about-container {
+    background: rgba(255, 255, 255, 0.15); /* Efek Kaca */
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 40px;
+    padding: 50px;
+    box-shadow: 0 25px 45px rgba(0,0,0,0.2);
+    animation: floatingAdmin 4s infinite ease-in-out;
+}
+
+@keyframes floatingAdmin {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+}
+
+#tentang .blue-text { color: #fff; text-shadow: 0 0 10px #00d2ff; }
+
+.pusat-literasi .bento-card {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    transition: 0.5s;
+    overflow: hidden;
+}
+
+.pusat-literasi .bento-card:hover {
+    background: #ffffff;
+    color: #2c7be5; /* Teks jadi biru saat di-hover */
+    transform: scale(1.05) rotate(2deg); /* Animasi bergerak lucu */
+}
+
+/* Tombol di dalam kartu literasi */
+.pusat-literasi .bento-card button {
+    background: white;
+    color: #2c7be5;
+    animation: pulseButton 2s infinite;
+}
+
+@keyframes pulseButton {
+    0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+    70% { box-shadow: 0 0 0 15px rgba(255, 255, 255, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+}
+
+.podcast-section {
+    background: transparent; /* Ikut background body biru */
+}
+
+.player-card {
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid #fff;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.5);
+}
+
+.visualizer .bar {
+    background: #fff; /* Batang visualizer putih agar kontras */
+}
+
+.jam-kunjungan {
+    background: rgba(0, 0, 0, 0.2);
+    padding: 30px;
+    border-radius: 20px;
+    border-left: 8px solid #2dd4bf;
+    animation: neonBorder 1.5s infinite alternate;
+}
+
+@keyframes neonBorder {
+    from { border-left-color: #2dd4bf; }
+    to { border-left-color: #ffffff; }
+}
+
+.jam-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px dashed rgba(255,255,255,0.2);
+}
     
 </style>
 </head>
@@ -2129,6 +2233,24 @@ function toggleSaran() {
         }
     }
     window.addEventListener("scroll", reveal);
+</script>
+
+    <script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 100;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
+    
+    // Panggil sekali saat load agar bagian atas langsung muncul
+    window.onload = reveal;
 </script>
     
 </body>
