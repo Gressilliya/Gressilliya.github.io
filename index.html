@@ -1112,34 +1112,56 @@ input:checked + .slider:before { transform: translateX(30px); }
     color: #222;
 }
 
-/* --- AKSEN 24 JAM (PALING MENONJOL) --- */
-.special-access {
-    background: linear-gradient(135deg, #2c7be5, #1a5ab5);
-    border: none;
-}
-.special-access .text-info span, 
-.special-access .text-info strong { color: white !important; }
-.special-access .icon-circle { background: rgba(255,255,255,0.2); }
-
-/* --- KONFIGURASI DARK MODE (PENTING!) --- */
-[data-theme="dark"] .glass-card-container {
-    background: rgba(30, 30, 30, 0.8);
-    border-color: rgba(255, 255, 255, 0.1);
+/* Pastikan semua kotak jam memiliki dasar yang sama */
+.hour-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: white; /* Semua kotak sekarang dasarnya putih */
+    border-radius: 25px;
+    transition: 0.4s;
+    border: 1px solid #f0f0f0;
 }
 
-[data-theme="dark"] .hour-box:not(.special-access) {
+/* Hanya ikon kotak kecil ini yang tetap berwarna biru */
+.icon-circle {
+    width: 60px;
+    height: 60px;
+    background: #2c7be5; /* Biru khas DigiSmart */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 18px;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+/* Tambahkan sedikit animasi 'glow' tipis khusus untuk Sabtu-Minggu agar tetap terasa spesial tanpa harus jadi biru semua */
+.hour-box:last-child .icon-circle {
+    box-shadow: 0 0 15px rgba(44, 123, 229, 0.3);
+    animation: iconPulse 2s infinite;
+}
+
+@keyframes iconPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Supaya tulisan di Sabtu-Minggu tetap hitam (sebelumnya putih karena background biru) */
+.hour-box .text-info strong {
+    color: #222;
+}
+
+/* Penyesuaian untuk Mode Gelap */
+[data-theme="dark"] .hour-box {
     background: #252525;
     border-color: #333;
 }
-
-[data-theme="dark"] .text-info strong { color: #fff; }
-[data-theme="dark"] .text-info span { color: #aaa; }
-[data-theme="dark"] .status-indicator { background: #333; color: #fff; }
-
-@keyframes pulse-green {
-    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
-    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+[data-theme="dark"] .hour-box .text-info strong {
+    color: #ffffff;
 }
     
 </style>
@@ -1367,13 +1389,15 @@ allowfullscreen></iframe>
                 </div>
             </div>
 
-            <div class="hour-box special-access">
-                <div class="icon-circle pulse"><i class="fas fa-bolt"></i></div>
-                <div class="text-info">
-                    <span>Sabtu - Minggu</span>
-                    <strong>Akses Digital 24/7</strong>
-                </div>
-            </div>
+            <div class="hour-box">
+    <div class="icon-circle">
+        <i class="fas fa-bolt"></i>
+    </div>
+    <div class="text-info">
+        <span>Sabtu - Minggu</span>
+        <strong>Akses Digital 24/7</strong>
+    </div>
+</div>
         </div>
     </div>
 </section>
