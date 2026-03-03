@@ -1604,6 +1604,83 @@ nav {
     .profile-library-stats { flex-direction: column; }
     .profile-img { width: 200px; height: 280px; }
 }
+
+/* Animasi Muncul Saat Scroll */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animasi Background Bergerak */
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    background: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #dcfce7, #f0fdf4);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    scroll-behavior: smooth;
+}
+
+.bento-card {
+    border-radius: 30px;
+    padding: 30px;
+    transition: 0.4s;
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(10px);
+    color: white;
+}
+
+/* Warna-warni tiap kartu */
+.card-arcade { background: linear-gradient(135deg, #2c7be5, #2dd4bf); }
+.card-baca { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+.card-media { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+.card-hoax { background: linear-gradient(135deg, #10b981, #3b82f6); }
+
+.bento-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.about-container {
+    background: rgba(255, 255, 255, 0.8);
+    border: 2px solid #2c7be5;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efek hiasan lingkaran warna di pojok */
+.about-container::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 150px; height: 150px;
+    background: rgba(45, 212, 191, 0.2);
+    border-radius: 50%;
+    z-index: -1;
+}
+
+.podcast-container {
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(44, 123, 229, 0.2);
+    border-bottom: 5px solid #2c7be5;
+    transition: 0.3s;
+}
+
+.podcast-container:hover {
+    box-shadow: 0 15px 40px rgba(45, 212, 191, 0.4);
+}
     
 </style>
 </head>
@@ -1908,6 +1985,21 @@ function toggleSaran() {
             modeText.innerText = "Mode Gelap";
         }
     }
+</script>
+
+    <script>
+    function reveal() {
+        var reveals = document.querySelectorAll(".reveal");
+        for (var i = 0; i < reveals.length; i++) {
+            var windowHeight = window.innerHeight;
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            var elementVisible = 150;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+    window.addEventListener("scroll", reveal);
 </script>
     
 </body>
