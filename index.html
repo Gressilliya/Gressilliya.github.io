@@ -556,19 +556,45 @@ nav{
     margin-top: 40px;
 }
 
+/* GAYA SEMUA KARTU (PASTI BIRU & TEKS PUTIH) */
 .bento-card {
-    background: white;
+    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
+    color: white !important; 
     padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-radius: 25px !important;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    transition: 0.3s;
-    border: 1px solid #eee;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+    min-height: 350px;
+    box-shadow: 0 10px 20px rgba(44, 123, 229, 0.3);
+    transition: 0.3s ease;
+    border: none !important;
 }
 
-.bento-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+/* Efek saat kursor menyentuh kotak (Hover) */
+.bento-card:hover { 
+    transform: translateY(-10px) scale(1.02); 
+    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.5); 
+}
+
+/* Pastikan Judul H3 Berwarna Putih Tebal */
+.bento-card h3 {
+    color: #ffffff !important;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    display: block !important;
+}
+
+/* Pastikan Deskripsi P Berwarna Putih Terang */
+.bento-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 14px;
+    line-height: 1.6;
+    display: block !important;
+}
 
 /* Membuat variasi ukuran kotak agar terlihat seperti Bento */
 .item-big { grid-row: span 2; background: #2c7be5; color: white; }
@@ -785,6 +811,26 @@ body {
 .btn-card:hover {
     background: #f0f0f0 !important;
     transform: scale(1.05);
+}
+
+/* GAYA TOMBOL DI DALAM KOTAK */
+.btn-card {
+    background: #ffffff !important;
+    color: #2c7be5 !important;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 14px;
+    margin-top: 20px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: 0.3s;
+}
+
+.btn-card:hover {
+    background: #f0f0f0 !important;
+    transform: scale(1.1);
 }
     
 </style>
