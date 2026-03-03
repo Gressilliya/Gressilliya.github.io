@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Belajar | DigiSmart Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --neon-red: #ff2d55;
+            --sci-blue: #2c7be5;
+            --dark-space: #020617;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark-space);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Header Gaya Bioskop Sains */
+        .media-header {
+            padding: 120px 8% 40px;
+            background: linear-gradient(to bottom, rgba(44, 123, 229, 0.15), transparent);
+            text-align: left;
+        }
+
+        .media-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--sci-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Filter Kategori */
+        .filter-tags {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            scrollbar-width: none;
+        }
+
+        .tag {
+            padding: 8px 20px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tag.active, .tag:hover {
+            background: var(--sci-blue);
+            border-color: var(--sci-blue);
+        }
+
+        /* Grid Video */
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            padding: 20px 8% 100px;
+        }
+
+        /* Kartu Video */
+        .video-card {
+            background: #1e293b;
+            border-radius: 20px;
+            overflow: hidden;
+            transition: 0.4s;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .video-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            border-color: var(--sci-blue);
+        }
+
+        .thumbnail {
+            width: 100%;
+            height: 180px;
+            background: #0f172a;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .thumbnail i {
+            font-size: 3rem;
+            color: var(--sci-blue);
+            opacity: 0.8;
+        }
+
+        .play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: 0.3s;
+        }
+
+        .video-card:hover .play-overlay { opacity: 1; }
+
+        .video-info { padding: 20px; }
+        .video-info h3 { margin: 0 0 10px; font-size: 1.1rem; }
+        .video-info p { font-size: 0.85rem; color: #94a3b8; margin: 0; }
+
+        /* Back Button */
+        .btn-back {
+            position: fixed;
+            top: 30px; left: 5%;
+            z-index: 100;
+            color: white;
+            text-decoration: none;
+            background: rgba(255,255,255,0.1);
+            padding: 10px 20px;
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            .media-header h1 { font-size: 2rem; }
+            .video-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+    <header class="media-header">
+        <h1>SCIENCE CINEMA</h1>
+        <p>Tonton dan pelajari cara menaklukkan dunia digital.</p>
+        
+        <div class="filter-tags">
+            <div class="tag active">Semua Video</div>
+            <div class="tag">Tutorial Riset</div>
+            <div class="tag">Keamanan Data</div>
+            <div class="tag">Tips Anti-Hoax</div>
+        </div>
+    </header>
+
+    <main class="video-container">
+        <div class="video-card">
+            <div class="thumbnail">
+                <i class="fas fa-search"></i>
+                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Cara Riset di Google ala Ilmuwan</h3>
+                <p>Durasi: 05:20 • Teknik mencari sumber terpercaya untuk tugas sekolah.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="thumbnail" style="background: #312e81;">
+                <i class="fas fa-user-shield" style="color: var(--neon-red);"></i>
+                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Lindungi Password-mu!</h3>
+                <p>Durasi: 03:45 • Tips membuat keamanan digital tingkat tinggi di medsos.</p>
+            </div>
+        </div>
+
+        <div class="video-card">
+            <div class="thumbnail" style="background: #1e1b4b;">
+                <i class="fas fa-vial" style="color: #2dd4bf;"></i>
+                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
+            </div>
+            <div class="video-info">
+                <h3>Eksperimen Cek Fakta</h3>
+                <p>Durasi: 04:10 • Membedakan foto editan AI dan foto asli dengan mudah.</p>
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
