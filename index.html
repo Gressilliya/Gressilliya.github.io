@@ -654,6 +654,82 @@ nav{
 .hero-content p {
     color: #f0f0f0 !important;
 }
+
+/* --- PERBAIKAN TAMPILAN PROFIL --- */
+
+/* Membuat area teks profil muncul perlahan (Animasi) */
+.about-text {
+    animation: fadeInText 1.5s ease-in-out;
+    padding: 20px;
+}
+
+@keyframes fadeInText {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mempercantik Judul */
+.about-text h2 {
+    color: #2c7be5 !important; /* Biru konsisten */
+    font-size: 28px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+/* Mempercantik Paragraf */
+.about-text p {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #444;
+    text-align: justify;
+}
+
+/* --- GAYA TOMBOL (BIRU SOLID) --- */
+.about-buttons {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    flex-wrap: wrap; /* Supaya rapi di HP */
+}
+
+/* Tombol Umum (CV & Misi) */
+.about-buttons .btn {
+    background: #2c7be5 !important;
+    color: white !important;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s ease;
+    display: inline-block;
+    border: none;
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+}
+
+/* Tombol Khusus Instagram (Bisa dibuat sedikit beda atau tetap biru) */
+.about-buttons .btn.instagram {
+    background: #1a5ab5 !important; /* Biru lebih gelap agar variatif */
+}
+
+/* Efek Hover: Tombol sedikit membesar saat disentuh */
+.about-buttons .btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(44, 123, 229, 0.5);
+    filter: brightness(1.1);
+}
+
+/* --- ANIMASI FOTO (Tambahan agar menarik) --- */
+.about-img img {
+    border-radius: 30px;
+    transition: 0.5s;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.about-img img:hover {
+    transform: rotate(-3deg) scale(1.05);
+    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.3);
+}
     
 </style>
 </head>
@@ -746,25 +822,17 @@ nav{
 <img src="profile.jpg" alt="Foto Gressilliya">
 
 <div class="about-text">
-    <h2>👤 Profil Pustakawan Sahabat</h2>
-    
+    <h2><i class="fas fa-user-graduate"></i> Admin Perpustakaan</h2>
     <p>
-        Halo, Sobat Digi! Saya <strong>Gressilliya Damanik</strong>, mahasiswa Perpustakaan dan Sains Informasi yang berfokus pada pengembangan <i>Digital Library</i> untuk masa depan. 
-        Melalui platform <strong>DigiSmart</strong> ini, saya hadir sebagai partner belajar kalian dalam menjelajahi dunia digital yang luas tanpa batas.
+        Halo, <strong>Sobat Digi!</strong> Saya <strong>Gressilliya Damanik</strong>. 
+        Sebagai mahasiswa Perpustakaan & Sains Informasi, saya percaya bahwa akses informasi adalah kunci sukses masa depan. 
+        Melalui platform <strong>DigiSmart</strong> ini, saya hadir sebagai partner navigasimu dalam menjelajahi rimba digital yang luas. 
     </p>
-
-    <div class="about-buttons">
-        <a href="cv.jpg" target="_blank" class="btn">
-            Lihat CV
-        </a>
-
-        <a href="https://instagram.com/gressilliya" target="_blank" class="btn instagram">
-            Instagram @gressilliya
-        </a>
-
-        <a href="about-detail.html" class="btn">
-            Misi Literasi Saya
-        </a>
+    
+    <div class="btn-container">
+        <a href="#cv"><i class="fas fa-file-alt"></i> Lihat CV</a>
+        <a href="https://instagram.com/gressilliya"><i class="fab fa-instagram"></i> Instagram</a>
+        <a href="#misi"><i class="fas fa-bullseye"></i> Misi Literasi Saya</a>
     </div>
 </div>
 
