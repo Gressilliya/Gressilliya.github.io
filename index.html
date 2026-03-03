@@ -729,6 +729,63 @@ body {
     font-size: 1.5rem;
     margin-bottom: 10px;
 }
+
+/* GAYA SEMUA KARTU BENTO (SAMA SEPERTI ARCADE) */
+.bento-card {
+    background: linear-gradient(135deg, #2c7be5 0%, #1a5ab5 100%) !important;
+    color: white !important;
+    padding: 40px 30px;
+    border-radius: 30px !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Agar tombol selalu di bawah */
+    align-items: center;
+    text-align: center;
+    min-height: 380px; /* Tinggi seragam agar rapi */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none !important;
+    box-shadow: 0 10px 25px rgba(44, 123, 229, 0.3);
+}
+
+.bento-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(44, 123, 229, 0.5);
+}
+
+/* GAYA SEMUA JUDUL & TEKS DI DALAM KOTAK */
+.bento-card h2, .bento-card h3 {
+    color: #ffffff !important;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.bento-card p {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 25px;
+}
+
+/* GAYA TOMBOL KLIK (PUTIH BERSIH) */
+.btn-card {
+    background: white !important;
+    color: #2c7be5 !important;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+    display: inline-block;
+    width: fit-content;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.btn-card:hover {
+    background: #f0f0f0 !important;
+    transform: scale(1.05);
+}
     
 </style>
 </head>
@@ -792,31 +849,33 @@ body {
 </section>
 
 <section id="bento" class="bento-section">
-    <h2>Pusat Literasi Digital</h2>
-    <p>Fitur utama untuk membantu siswa SMP melawan kesenjangan digital.</p>
+    <h2 class="section-title">Pusat Literasi Digital</h2>
+    <p class="subtitle">Fitur utama untuk membantu siswa SMP melawan kesenjangan digital.</p>
 
-    <div class="bento-grid">
-        <div class="bento-card item-big">
+    <div class="video-grid"> <div class="bento-card">
             <h3>Arcade Literasi 🎮</h3>
-            <p>Uji kemampuanmu melawan hoaks di sini!</p>
-            <br>
-            <a href="#" class="btn">START MISSION ⚡</a>
+            <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru dan menantang!</p>
+            <a href="game-literasi.html" class="btn-card">START MISSION ⚡</a>
         </div>
 
         <div class="bento-card">
             <h3>Pojok Baca 📚</h3>
-            <p>Akses koleksi buku digital yang ringan dan hemat kuota data internet.</p>
+            <p>Akses koleksi buku digital pilihan yang ringan dibaca dan hemat kuota internet.</p>
+            <a href="perpustakaan-digital.html" class="btn-card">BACA SEKARANG 📖</a>
         </div>
 
         <div class="bento-card">
             <h3>Media Belajar 🎥</h3>
-            <p>Video micro-learning tentang cara riset tugas sekolah yang benar.</p>
+            <p>Video tutorial singkat tentang cara riset tugas sekolah dengan cepat dan akurat.</p>
+            <a href="#Media" class="btn-card">TONTON VIDEO 📺</a>
         </div>
 
         <div class="bento-card">
             <h3>Hoax Buster 🔍</h3>
-            <p>Alat deteksi dini untuk memverifikasi kebenaran sebuah berita.</p>
+            <p>Alat deteksi dini untuk memverifikasi kebenaran sebuah berita secara instan.</p>
+            <a href="cek-hoaks.html" class="btn-card">CEK BERITA 🕵️‍♂️</a>
         </div>
+
     </div>
 </section>
     
