@@ -731,6 +731,91 @@ nav{
 .btn-container a:hover i {
     transform: rotate(15deg) scale(1.2);
 }
+
+/* --- GAYA KARTU STATISTIK (GAMIFIKASI) --- */
+.profile-library-stats {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap; /* Supaya rapi kalau dibuka di HP */
+}
+
+.stat-item {
+    background: #f0f7ff; /* Biru sangat muda */
+    border: 2px solid #2c7be5; /* Garis tepi biru sesuai tema */
+    padding: 15px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1; /* Biar ukurannya sama rata */
+    min-width: 140px;
+    transition: 0.3s;
+}
+
+.stat-item:hover {
+    transform: scale(1.05); /* Membesar sedikit saat disentuh */
+    background: #2c7be5;
+    color: white;
+}
+
+.stat-item i {
+    font-size: 24px;
+    color: #2c7be5;
+}
+
+.stat-item:hover i {
+    color: white; /* Ikon jadi putih saat di-hover */
+}
+
+.stat-info span {
+    display: block;
+    font-size: 20px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.stat-info p {
+    margin: 0 !important;
+    font-size: 12px !important;
+    font-weight: 600;
+    color: inherit !important; /* Biar ikut berubah warna saat hover */
+}
+
+.btn-container a[href*="instagram"] {
+    background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%) !important;
+}
+
+.about-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.floating-shape {
+    position: absolute;
+    z-index: -1;
+    opacity: 0.1;
+    animation: floatAnim 6s ease-in-out infinite;
+}
+
+@keyframes floatAnim {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(10deg); }
+}
+
+.about-text h2 {
+    overflow: hidden; 
+    border-right: .15em solid #2c7be5; 
+    white-space: nowrap; 
+    margin: 0 auto; 
+    letter-spacing: .15em; 
+    animation: 
+      typing 3.5s steps(40, end),
+      blink-caret .75s step-end infinite;
+}
+
+@keyframes typing { from { width: 0 } to { width: 100% } }
+@keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #2c7be5; } }
     
 </style>
 </head>
@@ -829,6 +914,30 @@ nav{
         Sebagai mahasiswa Perpustakaan & Sains Informasi, saya percaya bahwa akses informasi adalah kunci sukses masa depan. 
         Melalui platform <strong>DigiSmart</strong> ini, saya hadir sebagai partner navigasimu dalam menjelajahi rimba digital yang luas. 
     </p>
+    
+   <div class="profile-library-stats">
+        <div class="stat-item">
+            <i class="fas fa-book-open"></i>
+            <div class="stat-info">
+                <span>100+</span>
+                <p>Koleksi Buku</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-play-circle"></i>
+            <div class="stat-info">
+                <span>50+</span>
+                <p>Video Edukasi</p>
+            </div>
+        </div>
+        <div class="stat-item">
+            <i class="fas fa-shield-alt"></i>
+            <div class="stat-info">
+                <span>Anti</span>
+                <p>Hoax</p>
+            </div>
+        </div>
+    </div>
     
     <div class="btn-container">
         <a href="cv.jpg" target="_blank"><i class="fas fa-file-alt"></i> Lihat CV</a>
