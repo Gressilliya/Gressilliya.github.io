@@ -1237,6 +1237,110 @@ input:checked + .slider:before { transform: translateX(30px); }
         margin-bottom: 10px;
     }
 }
+
+/* NAVBAR UTAMA */
+.navbar-futuristic {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.1); /* Efek Kaca */
+    backdrop-filter: blur(15px); /* Blur di belakang navbar */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    transition: 0.3s;
+    padding: 10px 0;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ANIMASI LOGO */
+.logo-img-animated {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    border: 2px solid #2c7be5;
+    animation: pulse-border 2s infinite;
+}
+
+@keyframes pulse-border {
+    0% { box-shadow: 0 0 0 0 rgba(44, 123, 229, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(44, 123, 229, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(44, 123, 229, 0); }
+}
+
+.logo-text-gradient {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: bold;
+    background: linear-gradient(90deg, #2c7be5, #2dd4bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-left: 10px;
+}
+
+/* MENU NAVIGASI DENGAN ANIMASI UNDERLINE */
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 25px;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: #333; /* Sesuaikan jika dark mode jadi white */
+    font-weight: 500;
+    position: relative;
+    padding: 5px 0;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background: #2c7be5;
+    transition: 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* TOMBOL LOGIN GLOW */
+.btn-glow {
+    background: linear-gradient(45deg, #2c7be5, #2dd4bf);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(44, 123, 229, 0.3);
+    transition: 0.3s;
+}
+
+.btn-glow:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(44, 123, 229, 0.5);
+}
+
+/* RESPONSIVE: RAPI DI HP */
+@media (max-width: 768px) {
+    .nav-menu {
+        display: none; /* Kita bisa ganti dengan menu hamburger nanti */
+    }
+    .logo-text-gradient {
+        font-size: 0.9rem;
+    }
+}
     
 </style>
 </head>
@@ -1245,35 +1349,47 @@ input:checked + .slider:before { transform: translateX(30px); }
 
 <nav>
 
-    <div class="logo">
-    <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
-    <span class="logo-text">DigiSmart Library</span>
-</div>
+    <nav class="navbar-futuristic">
+    <div class="nav-container">
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Logo" class="logo-img-animated">
+            <span class="logo-text-gradient">DigiSmart Library</span>
+        </div>
 
      <!-- BAGIAN KANAN -->
     <div class="nav-right">
         
-   <ul class="menu">
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#bento">Fitur Literasi</a></li> <li><a href="profil.html">Profile</a></li>
-            <li><a href="#Media">Media</a></li>
+   <ul class="nav-menu">
+            <li><a href="#beranda" class="nav-link">Beranda</a></li>
+            <li><a href="#bento" class="nav-link">Fitur Literasi</a></li>
+            <li><a href="profil.html" class="nav-link">Profile</a></li>
+            <li><a href="#Media" class="nav-link">Media</a></li>
         </ul>
         
         <!-- LOGIN DROPDOWN -->
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
 
-            <div class="dropdown-login">
-                <a href="login.html">Login Anggota</a>
-                <a href="daftar.html">Daftar Anggota</a>
+            <div class="nav-actions">
+            <div class="login-dropdown">
+                <button class="btn-glow">Login <i class="fas fa-chevron-down"></i></button>
+                <div class="dropdown-content">
+                    <a href="login.html">Anggota</a>
+                    <a href="daftar.html">Daftar</a>
+                </div>
             </div>
-        </div> <div class="theme-switch-wrapper">
-    <label class="theme-switch" for="checkbox">
-        <input type="checkbox" id="checkbox" />
-        <div class="slider round">
-            <i class="fas fa-sun"></i>
-            <i class="fas fa-moon"></i>
+       <div class="theme-toggle">
+                <label class="switch">
+                    <input type="checkbox" id="mode-checkbox">
+                    <span class="slider-toggle">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </span>
+                </label>
+            </div>
         </div>
+    </div>
+</nav>
     </label>
     <span id="mode-text">Mode Terang</span>
 </div>
