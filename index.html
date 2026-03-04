@@ -1730,232 +1730,52 @@ body {
     transform: scale(1.05);
 }
 
-/* Container Utama Navigasi */
-.navbar {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: #fff; /* Sesuaikan warna background */
-    position: relative;
-    overflow: hidden;
-}
-
-/* Tombol Hamburger */
-.hamburger {
-    cursor: pointer;
-    z-index: 1000;
-    margin-right: 15px; /* Jarak antara hamburger dan logo */
-}
-
-.hamburger span {
-    display: block;
-    width: 25px;
-    height: 3px;
-    background: #333;
-    margin: 5px 0;
-    transition: 0.3s;
-}
-
-/* Logo Area - Efek Geser */
-.logo-container {
-    display: flex;
-    align-items: center;
-    transition: transform 0.4s ease; /* Kecepatan geser */
-}
-
-/* Sidebar Menu */
-.sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Sembunyi di luar layar */
-    width: 250px;
-    height: 100%;
-    background: #1a1a1a;
-    padding-top: 60px;
-    transition: 0.4s ease;
-    z-index: 999;
-}
-
-.sidebar ul { list-style: none; padding: 0; }
-.sidebar ul li a {
-    display: block;
-    padding: 15px 25px;
-    color: white;
-    text-decoration: none;
-    border-bottom: 1px solid #333;
-}
-
-/* Class Aktif (Saat Diklik) */
-.sidebar.active { left: 0; }
-
-/* Saat menu aktif, dorong logo ke kanan sejauh lebar sidebar */
-.sidebar.active ~ .logo-container {
-    transform: translateX(250px);
-}
-
-/* Layout Navigasi Utama */
-.nav-container {
-    display: flex;
-    align-items: center;
-    padding: 10px 20px;
-    background: #ffffff; /* Bisa diganti sesuai tema */
-    position: relative;
-    z-index: 1001;
-}
-
-/* Logo tetap diam di sebelah hamburger */
-.logo {
-    display: flex;
-    align-items: center;
-    margin-left: 15px;
-}
-
-/* Ikon Hamburger */
-.hamburger {
-    cursor: pointer;
-    display: inline-block;
-}
-
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 5px 0;
-    transition: 0.4s; /* Kecepatan animasi jadi X */
-}
-
-/* Animasi Hamburger menjadi X */
-.open .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
-.open .bar2 { opacity: 0; }
-.open .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
-
-/* Dropdown Menu (Meluncur ke Bawah) */
-.dropdown-menu {
-    position: absolute;
-    top: -400px; /* Sembunyi di atas navbar */
-    left: 0;
-    width: 100%;
-    background-color: #1a1a1a;
-    transition: 0.5s ease-in-out; /* Animasi turun */
-    z-index: 1000;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
-}
-
-/* Saat menu terbuka */
-.dropdown-menu.active {
-    top: 60px; /* Turun tepat di bawah navbar */
-}
-
-.dropdown-menu ul {
-    list-style: none;
-    padding: 20px;
-    margin: 0;
-}
-
-.dropdown-menu ul li {
-    padding: 15px 0;
-    border-bottom: 1px solid #333;
-}
-
-.dropdown-menu ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-    display: block;
-}
-
-/* Navbar Utama */
-.navbar {
-    display: flex;
-    justify-content: space-between; /* Kiri dan Kanan terpisah jauh */
-    align-items: center;
-    padding: 10px 20px;
-    background: white;
-    position: relative;
-}
-
-/* Membungkus Hamburger & Logo agar LURUS KESAMPING */
-.nav-left {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Jarak antara hamburger dan logo */
-}
-
-/* Animasi Hamburger */
-.hamburger { cursor: pointer; }
-.hamburger div {
-    width: 25px;
-    height: 3px;
-    background-color: #333;
-    margin: 5px 0;
-    transition: 0.4s;
-}
-
-/* Dropdown yang menjuntai ke bawah */
-.dropdown-content {
-    display: none; /* Sembunyi dulu */
-    position: absolute;
-    top: 100%; /* Pas di bawah navbar */
-    left: 0;
-    width: 250px;
-    background: #1a1a1a;
-    flex-direction: column;
-    z-index: 1000;
-}
-
-/* Saat aktif, tampilkan dropdown */
-.dropdown-content.show {
-    display: flex;
-}
-
-.dropdown-content a {
-    color: white;
-    padding: 15px;
-    text-decoration: none;
-    border-bottom: 1px solid #333;
-}
-
-/* Efek X pada hamburger */
-.open .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
-.open .bar2 { opacity: 0; }
-.open .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
-    
 </style>
 </head>
 
 <body>
 
-<nav class="navbar">
-    <div class="nav-left">
-        <div class="hamburger" id="hamburger-icon" onclick="toggleMenu()">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
-        </div>
+<nav>
 
-        <div class="logo">
-            <img src="logo.jpg" alt="Logo" class="logo-img">
-            <span class="logo-text">DigiSmart Library</span>
-        </div>
+    <div class="logo">
+        <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
+        <span class="logo-text">DigiSmart Library</span>
     </div>
 
     <div class="nav-right">
+        <ul class="menu">
+            <li><a href="#beranda">Beranda</a></li>
+            <li><a href="#bento">Fitur Literasi</a></li> 
+            <li><a href="profil.html">Profile</a></li>
+            <li><a href="#Media">Media</a></li>
+        </ul>
+        
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
+            <div class="dropdown-login">
+                <a href="login.html">Login Anggota</a>
+                <a href="daftar.html">Daftar Anggota</a>
+            </div>
         </div>
+
         <div class="theme-switch-wrapper">
-             <input type="checkbox" id="checkbox" />
-             <span id="mode-text">Mode Terang</span>
+            <label class="theme-switch" for="checkbox">
+                <input type="checkbox" id="checkbox" />
+                <div class="slider round">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                </div>
+            </label>
+            <span id="mode-text">Mode Terang</span>
         </div>
+    </div>
+</nav>
+    </label>
+    <span id="mode-text">Mode Terang</span>
+</div>
+
     </div>
 
-    <div class="dropdown-content" id="dropdownMenu">
-        <a href="#beranda">Beranda</a>
-        <a href="perpustakaan_sekolah.html">Perpustakaan Sekolah</a>
-        <a href="admin.html">Admin Perpustakaan</a>
-        <a href="profil.html">Profile</a>
-        <a href="#media">Media</a>
-    </div>
 </nav>
 </section>
 
@@ -2243,44 +2063,6 @@ function toggleSaran() {
     }
     window.addEventListener("scroll", reveal);
 </script>
-
-<script>
-function toggleMenu() {
-    const sidebar = document.getElementById("sidebarMenu");
-    const logoArea = document.getElementById("logoArea");
-
-    // Buka/Tutup Sidebar
-    sidebar.classList.toggle("active");
-
-    // Geser Logo secara otomatis
-    if (sidebar.classList.contains("active")) {
-        logoArea.style.transform = "translateX(230px)"; // Sesuaikan jarak gesernya
-    } else {
-        logoArea.style.transform = "translateX(0)";
-    }
-}
-</script>
-
-<script>
-function toggleMenu() {
-    const icon = document.getElementById("hamburger-icon");
-    const menu = document.getElementById("dropdownMenu");
-
-    // Animasi Ikon Hamburger jadi X
-    icon.classList.toggle("open");
-
-    // Animasi Menu Turun ke Bawah
-    menu.classList.toggle("active");
-}
-<script> // Buka dengan ini
-function toggleMenu() {
-    const icon = document.getElementById("hamburger-icon");
-    const menu = document.getElementById("dropdownMenu");
-
-    icon.classList.toggle("open"); // Mengaktifkan animasi X
-    menu.classList.toggle("show"); // Memunculkan menu dropdown
-}
-</script> 
 
 </body>
 </html>
