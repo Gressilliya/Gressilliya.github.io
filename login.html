@@ -1,28 +1,143 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
-<title>Login Anggota</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Anggota - DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
+        body {
+            /* Background menggunakan tema perpustakaan agar senada */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                        url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Box Login dengan Efek Kaca (Glassmorphism) */
+        .login-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            padding: 40px;
+            border-radius: 20px;
+            width: 400px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: fadeInDown 0.8s ease; /* Animasi Muncul */
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-card h2 {
+            color: #fff;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 28px;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.7);
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px 12px 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-group input:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: #007bff;
+            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Tombol Login dengan Animasi Hover */
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background: #007bff;
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.4s;
+            text-transform: uppercase;
+        }
+
+        .btn-login:hover {
+            background: #0056b3;
+            transform: scale(1.02);
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+        }
+
+        .footer-link {
+            text-align: center;
+            margin-top: 20px;
+            color: #ddd;
+            font-size: 14px;
+        }
+
+        .footer-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
 <body>
 
-<h2>Login Anggota</h2>
-
-<form>
-     <label>Fisrt Name:</label><br>
-    <input type="text"><br><br>
-
-    <label>Last Name:</label><br>
-    <input type="text"><br><br>
-    
-    <label>Email:</label><br>
-    <input type="email"><br><br>
-
-    <label>No Handphone:</label><br>
-    <input type="No Handphone"><br><br>
-
-    <button type="submit">Login</button>
-</form>
+    <div class="login-card">
+        <h2>Login Anggota</h2>
+        <form action="#">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" placeholder="First Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user-tag"></i>
+                <input type="text" placeholder="Last Name" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" placeholder="Email Address" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" placeholder="No Handphone" required>
+            </div>
+            <button type="submit" class="btn-login">Masuk Perpustakaan</button>
+        </form>
+        <div class="footer-link">
+            Belum punya akun? <a href="daftar.html">Daftar Sekarang</a>
+        </div>
+    </div>
 
 </body>
 </html>
