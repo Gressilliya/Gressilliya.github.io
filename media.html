@@ -207,4 +207,82 @@
         }
 
         .btn-back:hover {
-            background: rgba(255,255,255,0
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <div class="container">
+        <h1 class="main-title">Pusat Media Belajar Digital</h1>
+        <p class="sub-title">Jelajahi wawasan literasi terbaru melalui koleksi video seru kami!</p>
+        
+        <div class="video-grid">
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/6FByj7-Aj60" title="Digital Library" allowfullscreen></iframe>
+                    <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3><i class="fas fa-book-reader"></i> Digital Library</h3>
+                    <p>Mengenal perpustakaan digital masa kini dan bagaimana cara kerjanya.</p>
+                    <a href="#" class="btn-watch">Mulai Belajar</a>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/x6H8jpbcI0U" title="Information Literacy" allowfullscreen></iframe>
+                    <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3><i class="fas fa-search"></i> Information Literacy</h3>
+                    <p>Cerdas memilih informasi akurat dan menghindari berita palsu (hoax).</p>
+                    <a href="#" class="btn-watch">Mulai Belajar</a>
+                </div>
+            </div>
+
+            <div class="video-card">
+                <div class="video-wrapper">
+                    <iframe src="https://www.youtube.com/embed/np7gg88v-Ow" title="Library Technology" allowfullscreen></iframe>
+                    <div class="play-overlay"><i class="fas fa-play-circle"></i></div>
+                </div>
+                <div class="video-info">
+                    <h3><i class="fas fa-microchip"></i> Library Technology</h3>
+                    <p>Teknologi seru yang bikin proses belajar di perpus jadi lebih mudah!</p>
+                    <a href="#" class="btn-watch">Mulai Belajar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <a href="index.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        /* --- KONFIGURASI PARTIKEL (EFEK CAHAYA MENGAMBANG) --- */
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#ffffff" },
+                "shape": { "type": "circle" },
+                "opacity": { "value": 0.5, "random": true },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#ffffff", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } },
+                "modes": { "grab": { "distance": 140, "line_linked": { "opacity": 1 } }, "push": { "particles_nb": 4 } }
+            },
+            "retina_detect": true
+        });
+    </script>
+</body>
+</html>
