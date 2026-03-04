@@ -1730,53 +1730,67 @@ body {
     transform: scale(1.05);
 }
 
-/* Styling Tombol Hamburger */
-.hamburger {
-    cursor: pointer;
-    display: block; /* Munculkan hamburger */
-    padding: 10px;
-    z-index: 1001;
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 5px 0;
-    transition: 0.4s;
-}
-
-/* Mengubah Menu UL menjadi Sidebar yang Tersembunyi */
-.menu {
-    position: fixed;
-    left: -250px; /* Sembunyi di luar layar kiri */
-    top: 0;
-    width: 250px;
-    height: 100vh;
-    background-color: #1a1a1a; /* Warna gelap sidebar */
-    flex-direction: column;
-    padding-top: 80px;
-    transition: 0.5s; /* Kecepatan geser */
-    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
-}
-
-/* Saat menu aktif (terbuka) */
-.menu.active {
-    left: 0;
-}
-
-/* Transisi untuk Logo agar bisa tergeser */
-#logo-area {
-    transition: transform 0.5s;
+/* Container Utama Navigasi */
+.navbar {
     display: flex;
     align-items: center;
+    padding: 10px 20px;
+    background: #fff; /* Sesuaikan warna background */
+    position: relative;
+    overflow: hidden;
 }
 
-/* Hilangkan titik (bullet) pada list menu */
-.menu li {
-    list-style: none;
-    margin: 20px 0;
-    text-align: center;
+/* Tombol Hamburger */
+.hamburger {
+    cursor: pointer;
+    z-index: 1000;
+    margin-right: 15px; /* Jarak antara hamburger dan logo */
+}
+
+.hamburger span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: #333;
+    margin: 5px 0;
+    transition: 0.3s;
+}
+
+/* Logo Area - Efek Geser */
+.logo-container {
+    display: flex;
+    align-items: center;
+    transition: transform 0.4s ease; /* Kecepatan geser */
+}
+
+/* Sidebar Menu */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Sembunyi di luar layar */
+    width: 250px;
+    height: 100%;
+    background: #1a1a1a;
+    padding-top: 60px;
+    transition: 0.4s ease;
+    z-index: 999;
+}
+
+.sidebar ul { list-style: none; padding: 0; }
+.sidebar ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid #333;
+}
+
+/* Class Aktif (Saat Diklik) */
+.sidebar.active { left: 0; }
+
+/* Saat menu aktif, dorong logo ke kanan sejauh lebar sidebar */
+.sidebar.active ~ .logo-container {
+    transform: translateX(250px);
 }
     
 </style>
@@ -1784,43 +1798,36 @@ body {
 
 <body>
 
-<nav>
+<nav class="navbar">
     <div class="hamburger" onclick="toggleMenu()">
-        <div class="bar"></div>
-        <div class="bar"></div>
-        <div class="bar"></div>
+        <span></span>
+        <span></span>
+        <span></span>
     </div>
 
-    <div class="logo" id="logo-area">
-        <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
+    <div class="logo-container" id="logoArea">
+        <img src="logo.jpg" alt="Logo" class="logo-img">
         <span class="logo-text">DigiSmart Library</span>
     </div>
 
-    <div class="nav-right">
-        <ul class="menu" id="side-menu">
+    <div class="sidebar" id="sidebarMenu">
+        <ul>
             <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#bento">Fitur Literasi</a></li> 
+            <li><a href="#fitur">Fitur Literasi</a></li>
+            <li><a href="perpustakaan_sekolah.html">Perpustakaan Sekolah</a></li>
+            <li><a href="admin.html">Admin Perpustakaan</a></li>
             <li><a href="profil.html">Profile</a></li>
-            <li><a href="#Media">Media</a></li>
+            <li><a href="#media">Media</a></li>
         </ul>
-        
+    </div>
+
+    <div class="nav-right">
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
-            <div class="dropdown-login">
-                <a href="login.html">Login Anggota</a>
-                <a href="daftar.html">Daftar Anggota</a>
-            </div>
         </div>
-
         <div class="theme-switch-wrapper">
-            <label class="theme-switch" for="checkbox">
-                <input type="checkbox" id="checkbox" />
-                <div class="slider round">
-                    <i class="fas fa-sun"></i>
-                    <i class="fas fa-moon"></i>
-                </div>
-            </label>
-            <span id="mode-text">Mode Terang</span>
+             <input type="checkbox" id="checkbox" />
+             <span id="mode-text">Mode Terang</span>
         </div>
     </div>
 </nav>
@@ -2110,6 +2117,23 @@ function toggleSaran() {
         }
     }
     window.addEventListener("scroll", reveal);
+</script>
+
+<script>
+function toggleMenu() {
+    const sidebar = document.getElementById("sidebarMenu");
+    const logoArea = document.getElementById("logoArea");
+
+    // Buka/Tutup Sidebar
+    sidebar.classList.toggle("active");
+
+    // Geser Logo secara otomatis
+    if (sidebar.classList.contains("active")) {
+        logoArea.style.transform = "translateX(230px)"; // Sesuaikan jarak gesernya
+    } else {
+        logoArea.style.transform = "translateX(0)";
+    }
+}
 </script>
     
 </body>
