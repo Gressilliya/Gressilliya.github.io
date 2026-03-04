@@ -1729,6 +1729,55 @@ body {
     color: white;
     transform: scale(1.05);
 }
+
+/* Styling Tombol Hamburger */
+.hamburger {
+    cursor: pointer;
+    display: block; /* Munculkan hamburger */
+    padding: 10px;
+    z-index: 1001;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* Mengubah Menu UL menjadi Sidebar yang Tersembunyi */
+.menu {
+    position: fixed;
+    left: -250px; /* Sembunyi di luar layar kiri */
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    background-color: #1a1a1a; /* Warna gelap sidebar */
+    flex-direction: column;
+    padding-top: 80px;
+    transition: 0.5s; /* Kecepatan geser */
+    box-shadow: 2px 0 5px rgba(0,0,0,0.5);
+}
+
+/* Saat menu aktif (terbuka) */
+.menu.active {
+    left: 0;
+}
+
+/* Transisi untuk Logo agar bisa tergeser */
+#logo-area {
+    transition: transform 0.5s;
+    display: flex;
+    align-items: center;
+}
+
+/* Hilangkan titik (bullet) pada list menu */
+.menu li {
+    list-style: none;
+    margin: 20px 0;
+    text-align: center;
+}
     
 </style>
 </head>
@@ -1736,14 +1785,19 @@ body {
 <body>
 
 <nav>
+    <div class="hamburger" onclick="toggleMenu()">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+    </div>
 
-    <div class="logo">
+    <div class="logo" id="logo-area">
         <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
         <span class="logo-text">DigiSmart Library</span>
     </div>
 
     <div class="nav-right">
-        <ul class="menu">
+        <ul class="menu" id="side-menu">
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#bento">Fitur Literasi</a></li> 
             <li><a href="profil.html">Profile</a></li>
@@ -1770,13 +1824,6 @@ body {
         </div>
     </div>
 </nav>
-    </label>
-    <span id="mode-text">Mode Terang</span>
-</div>
-
-    </div>
-
-</nav>
 
 </section>
 
@@ -1791,12 +1838,6 @@ body {
             <p class="typing-text">Menghapus Jarak, Memperluas Wawasan.</p>
         </div>
         
-        <div class="quick-links">
-            <a href="#bento" class="btn-hero pulse">🎮 Mulai Game Literasi</a>
-            <a href="#Media" class="btn-hero pulse">📖 Materi Pelajaran</a>
-            <a href="#tentang" class="btn-hero pulse">👤 Profil Pustakawan</a>
-        </div>
-    </div>
 </section>
 
 <section id="bento" class="bento-section">
