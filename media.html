@@ -3,191 +3,208 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Media Belajar | DigiSmart Lab</title>
+    <title>Pusat Media Belajar - DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <style>
+        /* --- KUNCI DESAIN 1: GAYA MODERN & CERIA --- */
         :root {
-            --neon-red: #ff2d55;
-            --sci-blue: #2c7be5;
-            --dark-space: #020617;
+            --primary-blue: #007bff;
+            --accent-purple: #6f42c1;
+            --bg-dark: #1a1a1a;
+            --text-white: #ffffff;
+            --glass-white: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: 'Poppins', sans-serif; /* Font bersih & modern */
         }
 
         body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--dark-space);
-            color: white;
+            /* Background gradasi modern sesuai selera SMP */
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: var(--text-white);
+            min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        /* Header Gaya Bioskop Sains */
-        .media-header {
-            padding: 120px 8% 40px;
-            background: linear-gradient(to bottom, rgba(44, 123, 229, 0.15), transparent);
-            text-align: left;
-        }
-
-        .media-header h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 3rem;
-            margin: 0;
-            background: linear-gradient(to right, #fff, var(--sci-blue));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        /* Filter Kategori */
-        .filter-tags {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-            overflow-x: auto;
-            padding-bottom: 10px;
-            scrollbar-width: none;
-        }
-
-        .tag {
-            padding: 8px 20px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            white-space: nowrap;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .tag.active, .tag:hover {
-            background: var(--sci-blue);
-            border-color: var(--sci-blue);
-        }
-
-        /* Grid Video */
-        .video-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-            gap: 25px;
-            padding: 20px 8% 100px;
-        }
-
-        /* Kartu Video */
-        .video-card {
-            background: #1e293b;
-            border-radius: 20px;
-            overflow: hidden;
-            transition: 0.4s;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .video-card:hover {
-            transform: scale(1.03);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-color: var(--sci-blue);
-        }
-
-        .thumbnail {
-            width: 100%;
-            height: 180px;
-            background: #0f172a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             position: relative;
         }
 
-        .thumbnail i {
-            font-size: 3rem;
-            color: var(--sci-blue);
-            opacity: 0.8;
+        /* --- KUNCI DESAIN 2: ANIMASI PARTIKEL LATAR BELAKANG --- */
+        #particles-js {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Berada di belakang konten */
         }
 
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 50px 20px;
+            text-align: center;
+        }
+
+        /* --- HEADER DENGAN ANIMASI MUNCUL --- */
+        .main-title {
+            font-size: 36px;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #00d2ff, #3a7bd5);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: fadeInDown 1s ease; /* Animasi muncul dari atas */
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .sub-title {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 50px;
+            animation: fadeInUp 1s ease 0.5s forwards; /* Muncul dari bawah dengan delay */
+            opacity: 0;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- LAYOUT GRID VIDEO --- */
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* --- KUNCI DESAIN 3: KARTU VIDEO INTERAKTIF (GLASSMORPHISM) --- */
+        .video-card {
+            background: rgba(255, 255, 255, 0.05); /* Efek Kaca Transparan */
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transisi halus & membal */
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Animasi Hover: Card terangkat & bersinar */
+        .video-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 123, 255, 0.3);
+            border-color: rgba(0, 123, 255, 0.5);
+        }
+
+        /* Pembungkus video agar proporsional (16:9) */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* Ratio 16:9 */
+            height: 0;
+            background: #000;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- KUNCI DESAIN 4: TOMBOL PLAY BERDENYUT --- */
         .play-overlay {
             position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.4);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 50px;
+            color: rgba(255, 255, 255, 0.8);
+            opacity: 1;
+            transition: 0.3s;
+            pointer-events: none; /* Biar tidak menghalangi klik video */
+            animation: pulse 2s infinite; /* Animasi denyut */
+        }
+
+        /* Hilangkan tombol play saat video diputar (diklik) */
+        .video-wrapper:focus-within .play-overlay {
+            opacity: 0;
+        }
+
+        @keyframes pulse {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+        }
+
+        .video-info {
+            padding: 20px;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .video-info h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
             display: flex;
             align-items: center;
-            justify-content: center;
-            opacity: 0;
+            gap: 10px;
+            color: #00d2ff; /* Warna aksen judul */
+        }
+
+        .video-info h3 i {
+            font-size: 16px;
+        }
+
+        .video-info p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.5;
+        }
+
+        /* Tombol Tonton di bawah deskripsi */
+        .btn-watch {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 8px 20px;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
             transition: 0.3s;
         }
 
-        .video-card:hover .play-overlay { opacity: 1; }
+        .btn-watch:hover {
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.5);
+            padding-right: 30px; /* Efek memanjang sedikit */
+        }
 
-        .video-info { padding: 20px; }
-        .video-info h3 { margin: 0 0 10px; font-size: 1.1rem; }
-        .video-info p { font-size: 0.85rem; color: #94a3b8; margin: 0; }
-
-        /* Back Button */
+        /* Tombol Kembali ke Beranda yang Melayang */
         .btn-back {
             position: fixed;
-            top: 30px; left: 5%;
-            z-index: 100;
+            bottom: 30px;
+            left: 30px;
+            padding: 12px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
             color: white;
             text-decoration: none;
-            background: rgba(255,255,255,0.1);
-            padding: 10px 20px;
             border-radius: 50px;
-            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            font-size: 14px;
+            z-index: 100;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        @media (max-width: 768px) {
-            .media-header h1 { font-size: 2rem; }
-            .video-container { grid-template-columns: 1fr; }
-        }
-    </style>
-</head>
-<body>
-
-    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
-
-    <header class="media-header">
-        <h1>SCIENCE CINEMA</h1>
-        <p>Tonton dan pelajari cara menaklukkan dunia digital.</p>
-        
-        <div class="filter-tags">
-            <div class="tag active">Semua Video</div>
-            <div class="tag">Tutorial Riset</div>
-            <div class="tag">Keamanan Data</div>
-            <div class="tag">Tips Anti-Hoax</div>
-        </div>
-    </header>
-
-    <main class="video-container">
-        <div class="video-card">
-            <div class="thumbnail">
-                <i class="fas fa-search"></i>
-                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
-            </div>
-            <div class="video-info">
-                <h3>Cara Riset di Google ala Ilmuwan</h3>
-                <p>Durasi: 05:20 • Teknik mencari sumber terpercaya untuk tugas sekolah.</p>
-            </div>
-        </div>
-
-        <div class="video-card">
-            <div class="thumbnail" style="background: #312e81;">
-                <i class="fas fa-user-shield" style="color: var(--neon-red);"></i>
-                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
-            </div>
-            <div class="video-info">
-                <h3>Lindungi Password-mu!</h3>
-                <p>Durasi: 03:45 • Tips membuat keamanan digital tingkat tinggi di medsos.</p>
-            </div>
-        </div>
-
-        <div class="video-card">
-            <div class="thumbnail" style="background: #1e1b4b;">
-                <i class="fas fa-vial" style="color: #2dd4bf;"></i>
-                <div class="play-overlay"><i class="fas fa-play-circle" style="color: white;"></i></div>
-            </div>
-            <div class="video-info">
-                <h3>Eksperimen Cek Fakta</h3>
-                <p>Durasi: 04:10 • Membedakan foto editan AI dan foto asli dengan mudah.</p>
-            </div>
-        </div>
-    </main>
-
-</body>
-</html>
+        .btn-back:hover {
+            background: rgba(255,255,255,0
