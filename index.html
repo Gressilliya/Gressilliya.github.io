@@ -1919,6 +1919,65 @@ body {
 .open .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
 .open .bar2 { opacity: 0; }
 .open .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
+
+/* Navbar agar lurus kesamping */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    background: white;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+    z-index: 1001;
+}
+
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 20px; /* Jarak hamburger ke logo */
+}
+
+/* Kotak Menu Dropdown */
+.dropdown-menu {
+    position: absolute;
+    top: -500px; /* Sembunyi di atas layar */
+    left: 0;
+    width: 280px;
+    background: #1a1a1a; /* Warna gelap agar elegan */
+    transition: 0.5s ease; /* Animasi meluncur */
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    border-radius: 0 0 10px 0;
+}
+
+/* Saat menu terbuka */
+.dropdown-menu.active {
+    top: 70px; /* Muncul tepat di bawah navbar */
+}
+
+.dropdown-menu a {
+    color: white;
+    padding: 15px 25px;
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px solid #333;
+    transition: 0.3s;
+}
+
+.dropdown-menu a:hover {
+    background: #007bff; /* Warna biru saat kursor di atasnya */
+}
+
+/* Animasi Hamburger jadi X */
+.hamburger { cursor: pointer; }
+.hamburger div { width: 25px; height: 3px; background: #333; margin: 5px; transition: 0.4s; }
+.open .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
+.open .bar2 { opacity: 0; }
+.open .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
     
 </style>
 </head>
@@ -1926,35 +1985,36 @@ body {
 <body>
 
 <nav class="navbar">
-    <div class="nav-left">
-        <div class="hamburger" id="hamburger-icon" onclick="toggleMenu()">
-            <div class="bar1"></div>
-            <div class="bar2"></div>
-            <div class="bar3"></div>
+    <div class="nav-container">
+        <div class="nav-left">
+            <div class="hamburger" id="hamburger-icon" onclick="toggleMenu()">
+                <div class="bar1"></div>
+                <div class="bar2"></div>
+                <div class="bar3"></div>
+            </div>
+
+            <div class="logo">
+                <img src="logo.jpg" alt="Logo" class="logo-img">
+                <span class="logo-text">DigiSmart Library</span>
+            </div>
         </div>
 
-        <div class="logo">
-            <img src="logo.jpg" alt="Logo" class="logo-img">
-            <span class="logo-text">DigiSmart Library</span>
-        </div>
-    </div>
-
-    <div class="nav-right">
-        <div class="login-menu">
+        <div class="nav-right">
             <button class="login-btn">Login ▾</button>
-        </div>
-        <div class="theme-switch-wrapper">
-             <input type="checkbox" id="checkbox" />
-             <span id="mode-text">Mode Terang</span>
+            <div class="theme-switch">
+                <input type="checkbox" id="checkbox">
+                <span>Mode Terang</span>
+            </div>
         </div>
     </div>
 
-    <div class="dropdown-content" id="dropdownMenu">
-        <a href="#beranda">Beranda</a>
-        <a href="perpustakaan_sekolah.html">Perpustakaan Sekolah</a>
-        <a href="admin.html">Admin Perpustakaan</a>
-        <a href="profil.html">Profile</a>
-        <a href="#media">Media</a>
+    <div class="dropdown-menu" id="dropdownMenu">
+        <a href="#beranda"><i class="fas fa-home"></i> Beranda</a>
+        <a href="#koleksi"><i class="fas fa-book"></i> Koleksi Buku (Katalog)</a>
+        <a href="#elibrary"><i class="fas fa-tablet-alt"></i> E-Library (Baca Online)</a>
+        <a href="#jadwal"><i class="fas fa-calendar-alt"></i> Jadwal Kunjungan Kelas</a>
+        <a href="admin.html"><i class="fas fa-user-shield"></i> Admin Perpustakaan</a>
+        <a href="#saran"><i class="fas fa-comment-dots"></i> Kotak Saran</a>
     </div>
 </nav>
 </section>
@@ -2272,15 +2332,30 @@ function toggleMenu() {
     // Animasi Menu Turun ke Bawah
     menu.classList.toggle("active");
 }
-</script>
+<script> // Buka dengan ini
+function toggleMenu() {
+    const icon = document.getElementById("hamburger-icon");
+    const menu = document.getElementById("dropdownMenu");
+
+    // Pastikan ID di atas (hamburger-icon & dropdownMenu) 
+    // sama persis dengan yang ada di HTML kamu.
+
+    icon.classList.toggle("open"); // Mengaktifkan animasi X
+    menu.classList.toggle("show"); // Memunculkan menu dropdown
+}
+</script> 
 
 function toggleMenu() {
     const icon = document.getElementById("hamburger-icon");
     const menu = document.getElementById("dropdownMenu");
 
-    icon.classList.toggle("open"); // Animasi X
-    menu.classList.toggle("show"); // Munculkan menu kebawah
+    // Toggle class open untuk animasi X
+    icon.classList.toggle("open");
+    
+    // Toggle class active untuk memunculkan menu kebawah
+    menu.classList.toggle("active");
 }
+</script>   
     
 </body>
 </html>
