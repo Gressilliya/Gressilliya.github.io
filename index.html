@@ -1863,6 +1863,62 @@ body {
     font-size: 18px;
     display: block;
 }
+
+/* Navbar Utama */
+.navbar {
+    display: flex;
+    justify-content: space-between; /* Kiri dan Kanan terpisah jauh */
+    align-items: center;
+    padding: 10px 20px;
+    background: white;
+    position: relative;
+}
+
+/* Membungkus Hamburger & Logo agar LURUS KESAMPING */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Jarak antara hamburger dan logo */
+}
+
+/* Animasi Hamburger */
+.hamburger { cursor: pointer; }
+.hamburger div {
+    width: 25px;
+    height: 3px;
+    background-color: #333;
+    margin: 5px 0;
+    transition: 0.4s;
+}
+
+/* Dropdown yang menjuntai ke bawah */
+.dropdown-content {
+    display: none; /* Sembunyi dulu */
+    position: absolute;
+    top: 100%; /* Pas di bawah navbar */
+    left: 0;
+    width: 250px;
+    background: #1a1a1a;
+    flex-direction: column;
+    z-index: 1000;
+}
+
+/* Saat aktif, tampilkan dropdown */
+.dropdown-content.show {
+    display: flex;
+}
+
+.dropdown-content a {
+    color: white;
+    padding: 15px;
+    text-decoration: none;
+    border-bottom: 1px solid #333;
+}
+
+/* Efek X pada hamburger */
+.open .bar1 { transform: rotate(-45deg) translate(-5px, 6px); }
+.open .bar2 { opacity: 0; }
+.open .bar3 { transform: rotate(45deg) translate(-5px, -6px); }
     
 </style>
 </head>
@@ -1870,7 +1926,7 @@ body {
 <body>
 
 <nav class="navbar">
-    <div class="nav-container">
+    <div class="nav-left">
         <div class="hamburger" id="hamburger-icon" onclick="toggleMenu()">
             <div class="bar1"></div>
             <div class="bar2"></div>
@@ -1881,29 +1937,26 @@ body {
             <img src="logo.jpg" alt="Logo" class="logo-img">
             <span class="logo-text">DigiSmart Library</span>
         </div>
+    </div>
 
-        <div class="nav-right">
-            <div class="login-menu">
-                <button class="login-btn">Login ▾</button>
-            </div>
-            <div class="theme-switch-wrapper">
-                <span id="mode-text">Mode Terang</span>
-            </div>
+    <div class="nav-right">
+        <div class="login-menu">
+            <button class="login-btn">Login ▾</button>
+        </div>
+        <div class="theme-switch-wrapper">
+             <input type="checkbox" id="checkbox" />
+             <span id="mode-text">Mode Terang</span>
         </div>
     </div>
 
-    <div class="dropdown-menu" id="dropdownMenu">
-        <ul>
-            <li><a href="#beranda">Beranda</a></li>
-            <li><a href="#fitur">Fitur Literasi</a></li>
-            <li><a href="perpustakaan_sekolah.html">Perpustakaan Sekolah</a></li>
-            <li><a href="admin_perpustakaan.html">Admin Perpustakaan</a></li>
-            <li><a href="profil.html">Profil</a></li>
-            <li><a href="#media">Media</a></li>
-        </ul>
+    <div class="dropdown-content" id="dropdownMenu">
+        <a href="#beranda">Beranda</a>
+        <a href="perpustakaan_sekolah.html">Perpustakaan Sekolah</a>
+        <a href="admin.html">Admin Perpustakaan</a>
+        <a href="profil.html">Profile</a>
+        <a href="#media">Media</a>
     </div>
 </nav>
-
 </section>
 
 <section id="beranda" class="hero">
@@ -2220,6 +2273,14 @@ function toggleMenu() {
     menu.classList.toggle("active");
 }
 </script>
+
+function toggleMenu() {
+    const icon = document.getElementById("hamburger-icon");
+    const menu = document.getElementById("dropdownMenu");
+
+    icon.classList.toggle("open"); // Animasi X
+    menu.classList.toggle("show"); // Munculkan menu kebawah
+}
     
 </body>
 </html>
