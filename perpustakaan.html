@@ -5,188 +5,175 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pojok Baca Digital | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --glass-bg: rgba(255, 255, 255, 0.07);
-            --sci-teal: #2dd4bf;
-            --sci-blue: #2c7be5;
-        }
-
+        /* Base Styling sesuai Gambar */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
         body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: #0f172a; /* Dark Blue Science Theme */
+            background-color: #0b1120; /* Dark background sesuai referensi */
             color: white;
+            padding: 40px 20px;
             min-height: 100vh;
         }
 
-        /* Header dengan Efek Cahaya */
-        .library-header {
-            text-align: center;
-            padding: 100px 20px 50px;
-            background: radial-gradient(circle at top, rgba(44, 123, 229, 0.2), transparent);
+        .header { text-align: center; margin-bottom: 50px; }
+        .header h1 { 
+            font-size: 2.5rem; 
+            font-weight: 800; 
+            color: #2dd4bf; /* Teal color sesuai gambar */
+            text-transform: uppercase;
+            letter-spacing: 2px;
         }
+        .header p { color: #94a3b8; margin-top: 10px; }
 
-        .lib-title {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 2.5rem;
-            color: var(--sci-teal);
-            margin-bottom: 10px;
-            text-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
-        }
-
-        /* Search Bar Futuristik */
+        /* Search Bar */
         .search-container {
             max-width: 600px;
             margin: 0 auto 50px;
-            padding: 0 20px;
         }
-
-        .search-box {
+        .search-bar {
             width: 100%;
             padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid #2dd4bf;
             border-radius: 50px;
-            border: 1px solid var(--sci-teal);
-            background: var(--glass-bg);
             color: white;
-            backdrop-filter: blur(10px);
-            font-family: 'Poppins';
+            outline: none;
         }
 
-        /* Grid Rak Buku */
+        /* Grid Buku */
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
-            padding: 0 8% 80px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Kartu Buku */
+        /* Card Style sesuai Gambar */
         .book-card {
-            background: var(--glass-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(30, 41, 59, 0.5);
             border-radius: 25px;
-            padding: 20px;
+            padding: 30px;
             text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
         }
 
         .book-card:hover {
-            transform: translateY(-15px) rotate(2deg);
-            border-color: var(--sci-teal);
-            background: rgba(255, 255, 255, 0.12);
+            transform: translateY(-15px);
+            border-color: #2dd4bf;
+            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
         }
 
-        .book-cover {
-            width: 140px;
-            height: 200px;
-            background: linear-gradient(135deg, var(--sci-blue), var(--sci-teal));
+        /* Category Label */
+        .category-tag {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: #2dd4bf;
+            font-weight: 800;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Icon Wrapper with Gradient */
+        .icon-box {
+            width: 100px;
+            height: 130px;
             margin: 0 auto 20px;
-            border-radius: 10px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 3rem;
+            color: white;
             box-shadow: 0 10px 20px rgba(0,0,0,0.3);
         }
 
-        .category-tag {
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--sci-teal);
-            margin-bottom: 10px;
-            display: block;
-        }
+        /* Gradient Colors */
+        .bg-teal { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
+        .bg-purple { background: linear-gradient(135deg, #a855f7, #7e22ce); }
+        .bg-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
+        .bg-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
+        .bg-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+        .book-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
+        .book-card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px; }
 
         .btn-read {
-            display: block;
-            margin-top: 15px;
-            padding: 10px;
+            display: inline-block;
+            padding: 10px 25px;
             background: transparent;
-            border: 2px solid var(--sci-teal);
-            color: var(--sci-teal);
+            border: 1px solid #2dd4bf;
+            color: white;
             text-decoration: none;
-            border-radius: 15px;
+            border-radius: 10px;
             font-weight: 600;
+            font-size: 0.9rem;
             transition: 0.3s;
         }
 
         .btn-read:hover {
-            background: var(--sci-teal);
-            color: #0f172a;
-        }
-
-        /* Navigasi Back */
-        .back-nav {
-            position: absolute;
-            top: 30px;
-            left: 5%;
-            color: white;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-        }
-
-        @media (max-width: 768px) {
-            .book-grid { grid-template-columns: 1fr; }
-            .lib-title { font-size: 1.8rem; }
+            background: #2dd4bf;
+            color: #0b1120;
         }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-nav"><i class="fas fa-chevron-left"></i> Kembali ke Lab</a>
-
-    <header class="library-header">
-        <h1 class="lib-title">POJOK BACA DIGITAL</h1>
+    <div class="header">
+        <h1>Pojok Baca Digital</h1>
         <p>Eksplorasi ribuan pengetahuan dalam genggamanmu.</p>
-    </header>
-
-    <div class="search-container">
-        <input type="text" class="search-box" placeholder="Cari judul buku atau topik sains...">
     </div>
 
-    <main class="book-grid">
+    <div class="search-container">
+        <input type="text" class="search-bar" placeholder="Cari judul buku atau topik sains...">
+    </div>
+
+    <div class="book-grid">
+        <div class="book-card">
+            <span class="category-tag">Novel Remaja</span>
+            <div class="icon-box bg-pink">
+                <i class="fas fa-heart"></i>
+            </div>
+            <h3>Persahabatan SMP</h3>
+            <p>Kisah seru petualangan 5 sahabat di sekolah baru.</p>
+            <a href="#" class="btn-read">BACA SEKARANG</a>
+        </div>
+
+        <div class="book-card">
+            <span class="category-tag">Komik</span>
+            <div class="icon-box bg-orange">
+                <i class="fas fa-mask"></i>
+            </div>
+            <h3>Si Jagoan IT</h3>
+            <p>Belajar teknologi lewat cerita komik yang kocak!</p>
+            <a href="#" class="btn-read">BACA SEKARANG</a>
+        </div>
+
         <div class="book-card">
             <span class="category-tag">Sains & Tekno</span>
-            <div class="book-cover"><i class="fas fa-atom"></i></div>
+            <div class="icon-box bg-teal">
+                <i class="fas fa-atom"></i>
+            </div>
             <h3>Misteri Atom</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Belajar partikel terkecil dengan cara yang seru.</p>
-            <a href="#" class="btn-read">BACA SEKARANG</a>
-        </div>
-
-        <div class="book-card">
-            <span class="category-tag">Literasi</span>
-            <div class="book-cover" style="background: linear-gradient(135deg, #a855f7, #2c7be5);"><i class="fas fa-brain"></i></div>
-            <h3>Anti-Hoax Guide</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Cara cerdas membedakan fakta dan fiksi di internet.</p>
-            <a href="#" class="btn-read">BACA SEKARANG</a>
-        </div>
-
-        <div class="book-card">
-            <span class="category-tag">Sejarah</span>
-            <div class="book-cover" style="background: linear-gradient(135deg, #f59e0b, #ef4444);"><i class="fas fa-landmark"></i></div>
-            <h3>Perjalanan Waktu</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Menelusuri sejarah peradaban manusia dunia.</p>
+            <p>Belajar partikel terkecil dengan cara yang seru.</p>
             <a href="#" class="btn-read">BACA SEKARANG</a>
         </div>
 
         <div class="book-card">
             <span class="category-tag">Astronomi</span>
-            <div class="book-cover" style="background: linear-gradient(135deg, #1e1b4b, #2c7be5);"><i class="fas fa-rocket"></i></div>
+            <div class="icon-box bg-blue">
+                <i class="fas fa-rocket"></i>
+            </div>
             <h3>Orbit Planet</h3>
-            <p style="font-size: 0.8rem; opacity: 0.7;">Menjelajahi rahasia tata surya kita yang luas.</p>
+            <p>Menjelajahi rahasia tata surya kita yang luas.</p>
             <a href="#" class="btn-read">BACA SEKARANG</a>
         </div>
-    </main>
+    </div>
 
 </body>
 </html>
