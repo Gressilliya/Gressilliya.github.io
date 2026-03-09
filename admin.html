@@ -137,6 +137,39 @@
     color: #007bff !important;          /* Warna biru saat hover */
     background: none !important;
 }
+
+    /* RESET TOTAL: Hapus semua gaya aneh pada menu Admin */
+li.nav-item.admin, 
+li.admin, 
+.nav-item.admin {
+    background: none !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    animation: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Buat tulisan Admin jadi normal seperti Beranda/Profil */
+li.nav-item.admin a, 
+li.admin a, 
+.nav-item.admin a {
+    color: #444 !important; /* Warna teks standar menu kamu */
+    background: none !important;
+    border: none !important;
+    font-weight: 600 !important;
+    text-decoration: none !important;
+    padding: 10px 15px !important;
+    display: inline-block !important;
+}
+
+/* Efek Hover: Berubah biru saat disentuh (samakan dengan menu lain) */
+li.nav-item.admin a:hover {
+    color: #007bff !important; 
+    background: none !important;
+}
     </style>
 </head>
 <body>
