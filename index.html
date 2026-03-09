@@ -2131,6 +2131,73 @@ body {
 
 .close-icon:hover { color: #f472b6; transform: rotate(90deg); }
 
+    /* Mengatur agar semua elemen di kanan sejajar horizontal */
+    .theme-switch-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* Jarak antar elemen agar tidak menempel */
+    }
+
+    /* Container untuk input dan ikon cari */
+    .search-wrapper {
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+
+    /* Input Pencarian Kecil (Awalnya Sembunyi) */
+    #searchInput {
+        width: 0; /* Awalnya tidak lebar */
+        opacity: 0; /* Awalnya transparan */
+        padding: 8px 0;
+        border: none;
+        border-bottom: 2px solid #38bdf8; /* Garis bawah biru DigiSmart */
+        background: transparent;
+        color: #333; /* Warna teks saat mode terang */
+        font-family: 'Poppins', sans-serif;
+        font-size: 14px;
+        transition: all 0.4s ease-in-out; /* Animasi melebar */
+        outline: none;
+    }
+
+    /* Input warna placeholder */
+    #searchInput::placeholder {
+        color: #94a3b8;
+        font-size: 12px;
+        letter-spacing: 1px;
+    }
+
+    /* Ikon Pencarian */
+    .search-icon {
+        font-size: 1.1rem;
+        color: #38bdf8;
+        cursor: pointer;
+        transition: 0.3s;
+        margin-left: 5px; /* Jarak dari input */
+    }
+
+    .search-icon:hover {
+        color: #f472b6; /* Berubah pink saat disentuh */
+        transform: scale(1.1);
+    }
+
+    /* --- JAVASCRIPT CLASS --- */
+    /* Class ini akan ditambahkan lewat JS saat ikon diklik */
+    .search-wrapper.active #searchInput {
+        width: 180px; /* Lebar imut setelah melebar */
+        opacity: 1;
+        padding: 8px 10px;
+    }
+
+    /* --- PENYESUAIAN DARK MODE --- */
+    /* Pastikan warna teks berubah saat mode malam aktif */
+    body.dark-mode #searchInput {
+        color: white;
+        border-bottom-color: #f472b6; /* Garis bawah jadi pink di mode malam */
+    }
+    
+</style>
+
 </style>
 </head>
 
@@ -2174,7 +2241,8 @@ body {
 
         <div class="nav-right">
     <div class="theme-switch-wrapper">
-        <div class="search-container">
+        <div class="search-wrapper">
+            <input type="text" placeholder="TYPE HERE..." id="searchInput">
             <i class="fas fa-search search-icon" id="searchBtn"></i>
         </div>
 
@@ -2479,6 +2547,31 @@ function toggleSaran() {
             searchOverlay.style.display = 'none';
         }
     }
+</script>
+
+<script>
+    // Ambil elemen
+    const searchWrapper = document.querySelector('.search-wrapper');
+    const searchBtn = document.getElementById('searchBtn');
+    const searchInput = document.getElementById('searchInput');
+
+    // Fungsi Buka-Tutup saat Ikon Diklik
+    searchBtn.addEventListener('click', () => {
+        searchWrapper.classList.toggle('active');
+        if (searchWrapper.classList.contains('active')) {
+            searchInput.focus(); // Otomatis kursor aktif saat melebar
+        } else {
+            searchInput.value = ''; // Hapus teks jika ditutup
+        }
+    });
+
+    // Menutup otomatis jika user klik di luar kotak pencarian
+    document.addEventListener('click', (event) => {
+        if (!searchWrapper.contains(event.target)) {
+            searchWrapper.classList.remove('active');
+            searchInput.value = ''; // Hapus teks
+        }
+    });
 </script>
     
 </body>
