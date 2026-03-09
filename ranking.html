@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking Literasi | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 50px 20px;
+            color: white;
+        }
+
+        .btn-back {
+            position: fixed;
+            top: 25px; left: 25px;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border-radius: 50px;
+            text-decoration: none;
+            color: white;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            transition: 0.3s;
+        }
+        .btn-back:hover { background: white; color: #764ba2; transform: scale(1.1); }
+
+        h1 { margin-bottom: 30px; font-weight: 800; font-size: 2.5rem; text-shadow: 2px 2px 10px rgba(0,0,0,0.2); }
+
+        /* Container Papan Peringkat */
+        .leaderboard {
+            width: 100%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.2);
+            animation: slideUp 0.8s ease-out;
+        }
+
+        /* Baris Tiap Juara */
+        .rank-item {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: 0.3s;
+            animation: fadeIn 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .rank-item:hover {
+            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .number {
+            width: 40px; height: 40px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        /* Warna Medali */
+        .gold { background: #ffd700; color: #554400; box-shadow: 0 0 15px #ffd700; }
+        .silver { background: #c0c0c0; color: #333; }
+        .bronze { background: #cd7f32; color: white; }
+        .other { background: rgba(255, 255, 255, 0.2); color: white; }
+
+        .user-info { flex-grow: 1; }
+        .user-name { font-weight: 600; font-size: 1.1rem; }
+        .user-points { font-size: 0.8rem; opacity: 0.8; }
+
+        .trophy { font-size: 1.5rem; margin-left: 10px; }
+
+        /* Animasi */
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
+
+        /* Delay Animasi Tiap Baris */
+        .rank-item:nth-child(1) { animation-delay: 0.2s; }
+        .rank-item:nth-child(2) { animation-delay: 0.4s; }
+        .rank-item:nth-child(3) { animation-delay: 0.6s; }
+        .rank-item:nth-child(4) { animation-delay: 0.8s; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Home</a>
+
+    <h1>🏆 Top <span style="color: #ffeb3b;">Champions</span></h1>
+
+    <div class="leaderboard">
+        <div class="rank-item">
+            <div class="number gold">1</div>
+            <div class="user-info">
+                <p class="user-name">Aditya Pratama</p>
+                <p class="user-points">1,250 Poin Literasi</p>
+            </div>
+            <i class="fas fa-crown trophy" style="color: #ffd700;"></i>
+        </div>
+
+        <div class="rank-item">
+            <div class="number silver">2</div>
+            <div class="user-info">
+                <p class="user-name">Siti Aminah</p>
+                <p class="user-points">1,100 Poin Literasi</p>
+            </div>
+            <i class="fas fa-medal trophy" style="color: #c0c0c0;"></i>
+        </div>
+
+        <div class="rank-item">
+            <div class="number bronze">3</div>
+            <div class="user-info">
+                <p class="user-name">Budi Santoso</p>
+                <p class="user-points">950 Poin Literasi</p>
+            </div>
+            <i class="fas fa-medal trophy" style="color: #cd7f32;"></i>
+        </div>
+
+        <div class="rank-item">
+            <div class="number other">4</div>
+            <div class="user-info">
+                <p class="user-name">Rina Wijaya</p>
+                <p class="user-points">800 Poin Literasi</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
