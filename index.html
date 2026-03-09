@@ -1730,6 +1730,128 @@ body {
     transform: scale(1.05);
 }
 
+/* Container Utama */
+.ranking-section {
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    font-family: 'Poppins', sans-serif;
+}
+
+.ranking-container {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    padding: 30px;
+    width: 100%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.ranking-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.ranking-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+/* List Leaderboard */
+.leaderboard {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.rank-item {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    border-radius: 20px;
+    background: white;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.rank-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Warna Spesial Tiap Juara */
+.gold { border-color: #ffd700; background: linear-gradient(90deg, #fff, #fff9e6); }
+.silver { border-color: #c0c0c0; background: linear-gradient(90deg, #fff, #f5f5f5); }
+.bronze { border-color: #cd7f32; background: linear-gradient(90deg, #fff, #faf0e6); }
+
+.rank-number {
+    font-size: 20px;
+    font-weight: bold;
+    width: 35px;
+    height: 35px;
+    background: #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+.rank-info {
+    flex-grow: 1;
+    text-align: left;
+}
+
+.player-name {
+    display: block;
+    font-weight: 700;
+    font-size: 18px;
+    color: #333;
+}
+
+.player-points {
+    font-size: 14px;
+    color: #007bff;
+    font-weight: 600;
+}
+
+.rank-badge {
+    font-size: 24px;
+}
+
+/* Tombol CTA */
+.btn-play {
+    background: linear-gradient(45deg, #007bff, #00d4ff);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.3);
+}
+
+.btn-play:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 123, 255, 0.5);
+}
+
+/* Animasi Masuk */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
 </head>
 
@@ -1845,41 +1967,41 @@ body {
     </div>
 </section>
     
-<section id="podcast" class="podcast-section reveal">
-    <div class="podcast-wrapper">
-        <div class="floating-decor">
-            <i class="fas fa-music note-1"></i>
-            <i class="fas fa-headphones note-2"></i>
-            <i class="fas fa-star note-3"></i>
-        </div>
-
-        <div class="podcast-header">
-            <span class="emoji-bounce">🎧</span>
-            <h2>Podcast & Fokus Literasi</h2>
-            <p>Dengarkan musik pembangun fokus atau panduan suara tips mencari informasi aman.</p>
-        </div>
-
-        <div class="player-card">
-            <div class="visualizer">
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
-                <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+<section class="ranking-section">
+    <div class="ranking-container">
+        <h2 class="ranking-title">🔥 Ranking Game Literasi</h2>
+        <p class="ranking-subtitle">🏆 Top Player Minggu Ini</p>
+        
+        <div class="leaderboard">
+            <div class="rank-item gold">
+                <div class="rank-number">1</div>
+                <div class="rank-info">
+                    <span class="player-name">Andi</span>
+                    <span class="player-points">1200 poin</span>
+                </div>
+                <div class="rank-badge">🥇</div>
             </div>
 
-            <audio id="main-audio" controls>
-                <source src="lagu.mp3" type="audio/mpeg">
-                Browser kamu tidak mendukung pemutar audio.
-            </audio>
+            <div class="rank-item silver">
+                <div class="rank-number">2</div>
+                <div class="rank-info">
+                    <span class="player-name">Siti</span>
+                    <span class="player-points">1100 poin</span>
+                </div>
+                <div class="rank-badge">🥈</div>
+            </div>
 
-            <div class="status-badge">
-                <i class="fas fa-volume-up"></i> Status: <span id="audio-status">Musik Fokus Sedang Diputar</span>
+            <div class="rank-item bronze">
+                <div class="rank-number">3</div>
+                <div class="rank-info">
+                    <span class="player-name">Budi</span>
+                    <span class="player-points">1000 poin</span>
+                </div>
+                <div class="rank-badge">🥉</div>
             </div>
         </div>
-
-        <div class="mood-selector">
-            <button onclick="changeMood('Lofi Fokus', 'blue')" class="btn-mood"><i class="fas fa-brain"></i> Fokus Belajar</button>
-            <button onclick="changeMood('Suara Hujan', 'teal')" class="btn-mood"><i class="fas fa-cloud-showers-heavy"></i> Suara Hujan</button>
-            <button onclick="changeMood('Tips Anti-Hoax', 'orange')" class="btn-mood"><i class="fas fa-shield-alt"></i> Tips Anti-Hoax</button>
-        </div>
+        
+        <button class="btn-play">Main Sekarang & Kejar Skor! 🚀</button>
     </div>
 </section>
 
