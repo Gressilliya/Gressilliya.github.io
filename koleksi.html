@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Buku & Kuis | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #f8fafc;
+            color: #1e293b;
+            padding-bottom: 50px;
+        }
+
+        /* Header & Navigasi */
+        .header {
+            background: white;
+            padding: 30px 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin-bottom: 40px;
+        }
+
+        .btn-back {
+            position: absolute;
+            top: 30px; left: 20px;
+            text-decoration: none;
+            color: #007bff;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header h1 { font-size: 2rem; font-weight: 800; }
+        .header h1 span { color: #007bff; }
+
+        /* Tab System */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+
+        .tab-btn {
+            padding: 12px 30px;
+            border: 2px solid #007bff;
+            background: transparent;
+            color: #007bff;
+            border-radius: 50px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Content Sections */
+        .content-section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .content-section.active { display: block; }
+
+        .section-title {
+            margin-bottom: 25px;
+            font-size: 1.5rem;
+            border-left: 5px solid #007bff;
+            padding-left: 15px;
+        }
+
+        /* Grid Buku */
+        .grid-buku {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+
+        .card-buku {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+            transition: 0.3s;
+            cursor: pointer;
+        }
+
+        .card-buku:hover {
+            transform: translateY(-8px);
+            border-color: #007bff;
+            box-shadow: 0 10px 25px rgba(0,123,255,0.1);
+        }
+
+        .card-buku i { font-size: 2.5rem; color: #007bff; margin-bottom: 15px; }
+        .card-buku h4 { font-size: 1rem; color: #334155; }
+
+        /* Fokus UN Styling */
+        .un-special {
+            background: #eff6ff;
+            border: 2px dashed #3b82f6;
+        }
+
+        /* Kuis Styling */
+        .grid-kuis {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .card-kuis {
+            background: white;
+            padding: 20px;
+            border-radius: 25px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .card-kuis i { font-size: 2rem; margin-bottom: 10px; }
+        .btn-kuis {
+            margin-top: 15px;
+            padding: 8px 20px;
+            border-radius: 50px;
+            border: none;
+            background: #1e293b;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* Warna Mapel */
+        .mtk { color: #f59e0b; }
+        .ipa { color: #10b981; }
+        .ips { color: #3b82f6; }
+        .inggris { color: #ec4899; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+        <h1>Koleksi <span>Buku Sekolah</span></h1>
+    </header>
+
+    <div class="tabs-container">
+        <button class="tab-btn active" onclick="tabKelas('kls7')">Kelas 7</button>
+        <button class="tab-btn" onclick="tabKelas('kls8')">Kelas 8</button>
+        <button class="tab-btn" onclick="tabKelas('kls9')">Kelas 9 & UN</button>
+    </div>
+
+    <div id="kls7" class="content-section active">
+        <h3 class="section-title">Mata Pelajaran Kelas 7</h3>
+        <div class="grid-buku">
+            <div class="card-buku"><i class="fas fa-square-root-alt mtk"></i><h4>Matematika 7</h4></div>
+            <div class="card-buku"><i class="fas fa-microscope ipa"></i><h4>IPA Terpadu 7</h4></div>
+            <div class="card-buku"><i class="fas fa-atlas ips"></i><h4>IPS Terpadu 7</h4></div>
+            <div class="card-buku"><i class="fas fa-language inggris"></i><h4>B. Inggris 7</h4></div>
+        </div>
+    </div>
+
+    <div id="kls8" class="content-section">
+        <h3 class="section-title">Mata Pelajaran Kelas 8</h3>
+        <div class="grid-buku">
+            <div class="card-buku"><i class="fas fa-square-root-alt mtk"></i><h4>Matematika 8</h4></div>
+            <div class="card-buku"><i class="fas fa-microscope ipa"></i><h4>IPA Terpadu 8</h4></div>
+            <div class="card-buku"><i class="fas fa-atlas ips"></i><h4>IPS Terpadu 8</h4></div>
+            <div class="card-buku"><i class="fas fa-language inggris"></i><h4>B. Inggris 8</h4></div>
+        </div>
+    </div>
+
+    <div id="kls9" class="content-section">
+        <h3 class="section-title">🚀 Fokus UN & Ujian Sekolah</h3>
+        <div class="grid-buku">
+            <div class="card-buku un-special"><i class="fas fa-star" style="color:#f59e0b"></i><h4>Bank Soal MTK UN</h4></div>
+            <div class="card-buku un-special"><i class="fas fa-star" style="color:#3b82f6"></i><h4>Bank Soal IPA UN</h4></div>
+            <div class="card-buku un-special"><i class="fas fa-star" style="color:#ec4899"></i><h4>Bank Soal B.Ing UN</h4></div>
+        </div>
+
+        <h3 class="section-title">✍️ Kuis Latihan Mandiri</h3>
+        <div class="grid-kuis">
+            <div class="card-kuis"><i class="fas fa-calculator mtk"></i><p>Kuis MTK</p><button class="btn-kuis">Mulai</button></div>
+            <div class="card-kuis"><i class="fas fa-flask ipa"></i><p>Kuis IPA</p><button class="btn-kuis">Mulai</button></div>
+            <div class="card-kuis"><i class="fas fa-globe ips"></i><p>Kuis IPS</p><button class="btn-kuis">Mulai</button></div>
+            <div class="card-kuis"><i class="fas fa-comments inggris"></i><p>Kuis B.Ing</p><button class="btn-kuis">Mulai</button></div>
+        </div>
+    </div>
+
+    <script>
+        function tabKelas(id) {
+            // Sembunyikan semua section
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            // Nonaktifkan semua tombol
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            
+            // Tampilkan yang dipilih
+            document.getElementById(id).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
