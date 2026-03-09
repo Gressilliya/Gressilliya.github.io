@@ -1910,6 +1910,69 @@ body {
     animation: pulse-glow 2s infinite;
 }
 
+/* Tombol Floating di Pojok Kanan */
+#floating-saran {
+    position: fixed;
+    bottom: 20px; right: 20px;
+    background: #007bff; color: white;
+    padding: 12px 25px; border-radius: 50px;
+    cursor: pointer; font-weight: 600;
+    box-shadow: 0 5px 15px rgba(0,123,255,0.3);
+    z-index: 999; transition: 0.3s;
+}
+
+/* Chatbox Style */
+#chat-container {
+    position: fixed;
+    bottom: 85px; right: 20px;
+    width: 320px; height: 450px;
+    background: white; border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    display: flex; flex-direction: column;
+    z-index: 1000; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.chat-header {
+    background: #004a99; color: white;
+    padding: 15px; border-radius: 20px 20px 0 0;
+    display: flex; justify-content: space-between;
+}
+
+.chat-body { flex: 1; padding: 15px; background: #f8f9fa; overflow-y: auto; }
+.msg.bot { background: white; padding: 10px; border-radius: 15px; border-bottom-left-radius: 2px; font-size: 0.9rem; margin-bottom: 15px; }
+
+.quick-replies button {
+    display: block; width: 100%; text-align: left;
+    padding: 8px 12px; margin-bottom: 5px;
+    border: 1px solid #007bff; border-radius: 10px;
+    background: transparent; color: #007bff; cursor: pointer;
+}
+
+.chat-footer { padding: 10px; display: flex; gap: 5px; border-top: 1px solid #eee; }
+.chat-footer input { flex: 1; border: none; outline: none; padding: 8px; }
+
+/* Feedback Modal Style */
+#feedback-modal {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5); z-index: 1001;
+    display: flex; align-items: center; justify-content: center;
+}
+
+.feedback-content {
+    background: white; padding: 30px; border-radius: 25px;
+    width: 350px; text-align: center;
+}
+
+.emoji-group { font-size: 2rem; display: flex; justify-content: space-around; margin: 20px 0; }
+.emoji-group span { cursor: pointer; transition: 0.2s; }
+.emoji-group span:hover { transform: scale(1.3); }
+
+.feedback-content textarea { width: 100%; height: 80px; padding: 10px; border-radius: 10px; border: 1px solid #ddd; margin-bottom: 15px; }
+.btn-submit { background: #1e293b; color: white; width: 100%; padding: 12px; border: none; border-radius: 50px; cursor: pointer; }
+
+/* Utility Classes */
+.chat-hide, .modal-hide { display: none !important; }
+
 </style>
 </head>
 
@@ -2051,22 +2114,51 @@ body {
 © Gressilliya Damanik  — Website Digital Library  2026  
 </footer>
 
-<!-- BUTTON SARAN -->
-<div id="saranButton" onclick="toggleSaran()">
-    💬 Saran
+<div id="floating-saran" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i> Saran
 </div>
 
-<!-- BOX SARAN -->
-<div id="saranBox">
-    <h4>Kirim Saran</h4>
+<div id="chat-container" class="chat-hide">
+    <div class="chat-header">
+        <div class="chat-title">
+            <i class="fas fa-robot"></i> <span>Tanya DigiSmart</span>
+        </div>
+        <div class="chat-controls">
+            <i class="fas fa-minus" onclick="toggleChat()"></i>
+            <i class="fas fa-times" onclick="openFeedback()"></i>
+        </div>
+    </div>
+    <div class="chat-body">
+        <div class="msg bot">Halo! Ada yang bisa kami bantu hari ini? 😊</div>
+        <div class="quick-replies">
+            <button>Cara Pinjam Buku</button>
+            <button>Lupa Password</button>
+            <button>Donasi Buku</button>
+        </div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" placeholder="Ketik pesan...">
+        <button><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
 
-    <form action="kirim_saran.php" method="POST">
-        <input type="text" name="nama" placeholder="Nama Anda" required>
-
-        <textarea name="pesan" placeholder="Tulis saran anda..." required></textarea>
-
-        <button type="submit">Kirim</button>
-    </form>
+<div id="feedback-modal" class="modal-hide">
+    <div class="feedback-content">
+        <div class="feedback-header">
+            <h4>Feedback</h4>
+            <i class="fas fa-times" onclick="closeAll()"></i>
+        </div>
+        <p>Bagaimana pengalamanmu menggunakan DigiSmart hari ini?</p>
+        <div class="emoji-group">
+            <span onclick="selectEmoji(this)">😡</span>
+            <span onclick="selectEmoji(this)">😟</span>
+            <span onclick="selectEmoji(this)">😐</span>
+            <span onclick="selectEmoji(this)">😊</span>
+            <span onclick="selectEmoji(this)">🤩</span>
+        </div>
+        <textarea placeholder="Tambahkan komentar..."></textarea>
+        <button class="btn-submit" onclick="submitFeedback()">Kirim Feedback</button>
+    </div>
 </div>
 
 <script>
@@ -2147,5 +2239,29 @@ function toggleSaran() {
     window.addEventListener("scroll", reveal);
 </script>
 
+    <script>
+    function toggleChat() {
+        document.getElementById('chat-container').classList.toggle('chat-hide');
+    }
+
+    function openFeedback() {
+        document.getElementById('chat-container').classList.add('chat-hide');
+        document.getElementById('feedback-modal').classList.remove('modal-hide');
+    }
+
+    function closeAll() {
+        document.getElementById('feedback-modal').classList.add('modal-hide');
+    }
+
+    function submitFeedback() {
+        alert('Terima kasih, Gressilliya! Masukanmu sangat berharga.');
+        closeAll();
+    }
+
+    function selectEmoji(element) {
+        alert("Kamu memilih: " + element.innerText);
+    }
+</script>
+    
 </body>
 </html>
