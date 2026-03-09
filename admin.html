@@ -6,127 +6,76 @@
     <title>Admin DigiSmart | Gressilliya</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-
         body {
-            background: linear-gradient(135deg, #eef2f3 0%, #8e9eab 100%);
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
         }
-
-        /* Tombol Kembali Floating */
+        /* Tombol Kembali */
         .btn-back {
             position: fixed;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
+            top: 25px; left: 25px;
             padding: 10px 20px;
+            background: white;
             border-radius: 50px;
             text-decoration: none;
-            color: #333;
+            color: #007bff;
             font-weight: 600;
-            border: 1px solid rgba(255,255,255,0.3);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: 0.3s;
         }
         .btn-back:hover { background: #007bff; color: white; transform: scale(1.1); }
 
-        /* Kartu Profil Admin Glassmorphism */
-        .admin-card {
-            background: rgba(255, 255, 255, 0.3);
-            backdrop-filter: blur(20px);
-            border-radius: 50px;
-            padding: 50px;
-            width: 85%;
-            max-width: 800px;
-            display: flex;
-            align-items: center;
-            gap: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            box-shadow: 0 25px 45px rgba(0,0,0,0.1);
-            animation: cardAppear 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        /* Card Kreatif */
+        .glass-profile {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            border-radius: 40px;
+            padding: 40px;
+            width: 90%; max-width: 800px;
+            display: flex; align-items: center; gap: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            animation: fadeIn 0.8s ease-out;
         }
-
-        /* Foto dengan Animasi Morphing */
-        .img-container {
-            width: 250px;
-            height: 250px;
+        /* Foto Animasi Blob */
+        .img-box {
+            width: 260px; height: 260px;
             background: #007bff;
             border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: morph 8s ease-in-out infinite;
+            animation: morph 6s ease-in-out infinite alternate;
             overflow: hidden;
-            border: 5px solid white;
+            border: 6px solid white;
             flex-shrink: 0;
         }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .img-container img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Area Teks */
-        .info h2 { font-size: 2.2rem; color: #1a1a1a; margin-bottom: 5px; }
+        /* Tulisan */
+        .info h2 { font-size: 2.2rem; color: #333; }
         .info h2 span { color: #007bff; }
-        .tagline { font-weight: 600; color: #0056b3; display: block; margin-bottom: 15px; }
-        .bio { color: #444; line-height: 1.6; margin-bottom: 25px; }
-
-        /* Tombol Aksi */
-        .btns { display: flex; gap: 15px; }
-        .btns a {
-            padding: 12px 25px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .bio { color: #666; margin: 15px 0 25px; line-height: 1.6; }
+        
+        .socials { display: flex; gap: 15px; }
+        .btn-s {
+            padding: 12px 25px; border-radius: 50px;
+            text-decoration: none; font-weight: 700; transition: 0.3s;
         }
-        .btn-cv { background: #007bff; color: white; }
-        .btn-ig { background: white; color: #e1306c; border: 1px solid #e1306c; }
-        .btns a:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .b-cv { background: #007bff; color: white; }
+        .b-ig { background: #e1306c; color: white; }
+        .btn-s:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
 
-        /* Animasi */
         @keyframes morph {
             0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-            50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-            100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+            100% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
         }
-
-        @keyframes cardAppear {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Responsif HP */
-        @media (max-width: 768px) {
-            .admin-card { flex-direction: column; text-align: center; }
-            .btns { justify-content: center; }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @media (max-width: 768px) { .glass-profile { flex-direction: column; text-align: center; } }
     </style>
 </head>
 <body>
-
     <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
-
-    <div class="admin-card">
-        <div class="img-container">
-            <img src="profile.jpg" alt="Gressilliya">
-        </div>
-        <div class="info">
-            <h2>Admin <span>DigiSmart</span> ✨</h2>
-            <span class="tagline">Gressilliya Damanik - Mhs. Perpustakaan</span>
-            <p class="bio">
-                Halo, <strong>Sobat Digi!</strong> Di sini aku siap jadi partner navigasimu menjelajahi rimba digital. Karena akses informasi adalah kunci masa depan! 🚀
-            </p>
-            <div class="btns">
-                <a href="cv.jpg" class="btn-cv"><i class="fas fa-file-alt"></i> Lihat CV</a>
-                <a href="https://instagram.com/gressilliya" class="btn-ig" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
