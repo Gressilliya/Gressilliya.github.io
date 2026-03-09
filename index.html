@@ -1852,6 +1852,64 @@ body {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* Gaya Umum untuk Item Menu (Pastikan class ini sesuai dengan HTML kamu) */
+.nav-item {
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* --- Gaya Khusus Menu RANKING --- */
+.nav-item.ranking {
+    background: rgba(255, 193, 7, 0.1); /* Kuning transparan */
+    border-radius: 15px;
+    margin: 0 5px;
+}
+
+.nav-item.ranking a {
+    color: #d39e00 !important; /* Warna emas/kuning tua */
+    font-weight: 700;
+}
+
+/* Animasi melompat kecil saat hover di Ranking */
+.nav-item.ranking:hover {
+    transform: translateY(-3px);
+    background: rgba(255, 193, 7, 0.2);
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+}
+
+/* --- Gaya Khusus Menu ADMIN --- */
+.nav-item.admin {
+    background: rgba(40, 167, 69, 0.1); /* Hijau transparan */
+    border-radius: 15px;
+    border: 1px dashed #28a745; /* Garis putus-putus agar terlihat teknis */
+}
+
+.nav-item.admin a {
+    color: #1e7e34 !important;
+    font-weight: 700;
+}
+
+/* Efek bercahaya saat hover di Admin */
+.nav-item.admin:hover {
+    background: #28a745;
+    box-shadow: 0 0 15px rgba(40, 167, 69, 0.5);
+}
+
+.nav-item.admin:hover a {
+    color: white !important;
+}
+
+/* Animasi Denyut (Pulse) untuk menarik perhatian ke Ranking/Admin */
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(255, 193, 7, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 193, 7, 0); }
+}
+
+.nav-item.ranking {
+    animation: pulse-glow 2s infinite;
+}
+
 </style>
 </head>
 
@@ -1869,6 +1927,8 @@ body {
             <li><a href="#beranda">Beranda</a></li>
             <li><a href="#bento">Fitur Literasi</a></li> 
             <li><a href="profil.html">Profil</a></li>
+            <li class="nav-item"><a href="#">Ranking</a></li>
+            <li class="nav-item admin-menu"><a href="#">Admin</a></li>
         </ul>
         
         <div class="login-menu">
