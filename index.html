@@ -1973,6 +1973,30 @@ body {
 /* Utility Classes */
 .chat-hide, .modal-hide { display: none !important; }
 
+#floating-saran {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px; /* Lebar lingkaran */
+    height: 60px; /* Tinggi lingkaran */
+    background: #0056b3; /* Biru gelap sesuai referensi */
+    color: white;
+    border-radius: 50%; /* Membuat jadi bulat sempurna */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    transition: 0.3s;
+    font-size: 24px; /* Ukuran ikon */
+}
+
+#floating-saran:hover {
+    transform: scale(1.1); /* Efek membesar sedikit saat disentuh */
+    background: #007bff;
+}
+
 </style>
 </head>
 
@@ -2115,7 +2139,7 @@ body {
 </footer>
 
 <div id="floating-saran" onclick="toggleChat()">
-    <i class="fas fa-comment-dots"></i> Saran
+    <i class="fas fa-comment-alt"></i>
 </div>
 
 <div id="chat-container" class="chat-hide">
@@ -2261,6 +2285,20 @@ function toggleSaran() {
     function selectEmoji(element) {
         alert("Kamu memilih: " + element.innerText);
     }
+</script>
+
+    <script>
+    function toggleChat() {
+        const chat = document.getElementById('chat-container');
+        chat.classList.toggle('chat-hide');
+    }
+
+    function openFeedback() {
+        document.getElementById('chat-container').classList.add('chat-hide');
+        document.getElementById('feedback-modal').classList.remove('modal-hide');
+    }
+
+    // ... fungsi lainnya tetap sama ...
 </script>
     
 </body>
