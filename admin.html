@@ -136,6 +136,31 @@
             .admin-card { flex-direction: column; text-align: center; }
             .social-links { justify-content: center; }
         }
+
+        /* Gaya untuk Admin yang seragam dengan menu lain */
+.nav-item.admin {
+    background: none; /* Menghapus background hijau transparan */
+    border: none;     /* Menghapus garis putus-putus hijau */
+    box-shadow: none; /* Menghapus efek glow */
+}
+
+.nav-item.admin a {
+    color: #444;      /* Samakan dengan warna teks menu lain */
+    font-weight: 600; /* Samakan ketebalan font */
+}
+
+/* Pastikan efek hover juga sama dengan menu lain */
+.nav-item.admin:hover a {
+    color: #007bff;   /* Sesuaikan dengan warna hover menu kamu */
+    transform: none;  /* Menghapus efek melompat jika ada */
+}
+
+/* Jika kamu menggunakan animasi marker, pastikan tidak ada intervensi dari class admin */
+.nav-item.admin:hover {
+    background: none;
+    box-shadow: none;
+    transform: none;
+}
     </style>
 </head>
 <body>
