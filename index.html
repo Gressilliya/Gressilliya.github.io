@@ -2017,6 +2017,58 @@ body {
     font-size: 24px;
 }
 
+/* Container Dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+/* Isi Menu yang Sembunyi */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+    border-radius: 10px;
+    z-index: 100;
+    margin-top: 10px;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Link di dalam Dropdown */
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-size: 14px;
+    border-bottom: 1px solid #f1f1f1;
+    transition: 0.3s;
+}
+
+/* Efek Hover Submenu */
+.dropdown-content a:hover {
+    background-color: #38bdf8;
+    color: white;
+}
+
+.dropdown-content a i {
+    margin-right: 8px;
+    width: 20px;
+}
+
+/* Munculkan saat kursor menyentuh menu Beranda */
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 </style>
 </head>
 
@@ -2031,7 +2083,18 @@ body {
 
     <div class="nav-right">
         <ul class="menu">
-            <li><a href="#beranda">Beranda</a></li>
+            <li class="dropdown">
+            <a href="#beranda" class="dropbtn">Beranda <i class="fas fa-caret-down"></i></a>
+           <div class="dropdown-content">
+                    <a href="#about"><i class="fas fa-info-circle"></i> About Us</a>
+                    <a href="#visi-misi"><i class="fas fa-bullseye"></i> Visi & Misi</a>
+                    <a href="#profil-sekolah"><i class="fas fa-school"></i> Profil Sekolah</a>
+                    <a href="#prestasi"><i class="fas fa-trophy"></i> Prestasi Siswa</a>
+                    <a href="#fasilitas"><i class="fas fa-swimming-pool"></i> Fasilitas</a>
+                    <a href="#testimoni"><i class="fas fa-user-graduate"></i> Testimoni Alumni</a>
+                </div>
+            </li>
+    
             <li><a href="#bento">Fitur Literasi</a></li> 
             <li><a href="profil.html">Profil</a></li>
             <li class="nav-item"><a href="koleksi.html">Koleksi</a></li>
