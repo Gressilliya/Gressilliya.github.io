@@ -2315,93 +2315,70 @@ body {
     .news-item img { margin: 0 0 10px 0; width: 100%; height: 150px; }
 }
 
-/* 1. PERBAIKAN TATA LETAK UTAMA */
-.community-grid {
-    display: grid !important;
-    grid-template-columns: 1.2fr 0.8fr !important;
-    gap: 30px !important;
-    padding: 40px 5% !important;
-    align-items: start !important;
-}
-
-/* 2. PERBAIKAN KARTU AGENDA (KIRI) - GAK NUMPUK LAGI */
-.event-card-interactive {
-    background: white !important;
+/* 1. WARNA DASAR: Semua Kotak Jadi Biru Seperti Bento */
+.event-card-interactive, 
+.news-card-interactive, 
+.bento-card {
+    background: #1d63d1 !important; /* Biru Bento Kamu */
+    color: white !important; /* Tulisan otomatis putih agar terbaca */
     border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1) !important;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
     overflow: hidden !important;
-    margin-bottom: 25px !important;
-    display: flex !important;
-    flex-direction: column !important; /* Paksa gambar di atas, teks di bawah */
-    box-shadow: 0 10px 20px rgba(0,0,0,0.05) !important;
-    transition: all 0.4s ease-in-out !important;
 }
 
+/* 2. FIX TEKS: Agar tidak Hitam di atas Biru */
+.event-card-interactive h3, 
+.event-card-interactive p,
+.news-card-interactive h4, 
+.news-card-interactive p,
+.bento-card h3, 
+.bento-card p {
+    color: white !important;
+}
+
+/* 3. LAYOUT AGENDA (KIRI) */
+.event-card-interactive {
+    display: flex !important;
+    flex-direction: column !important;
+}
 .event-card-interactive img {
     width: 100% !important;
-    height: 250px !important; /* Ukuran gambar sedang/pas */
+    height: 200px !important;
     object-fit: cover !important;
 }
+.card-content { padding: 20px !important; }
 
-.card-content {
-    padding: 20px !important;
-    background: white !important; /* Pastikan background teks putih */
-}
-
-/* 3. PERBAIKAN BERITA (KANAN) - UKURAN SAMA & RAPI */
+/* 4. LAYOUT BERITA (KANAN) */
 .news-card-interactive {
     display: flex !important;
-    flex-direction: row !important; /* Gambar kiri, teks kanan */
-    align-items: center !important;
-    background: white !important;
+    flex-direction: row !important;
     padding: 15px !important;
-    border-radius: 15px !important;
     margin-bottom: 15px !important;
-    border-left: 5px solid #007bff !important;
-    transition: all 0.4s ease !important;
 }
-
 .news-img-side img {
-    width: 100px !important; /* Ukuran gambar berita seragam */
+    width: 80px !important;
     height: 80px !important;
     border-radius: 10px !important;
     object-fit: cover !important;
     margin-right: 15px !important;
 }
 
-/* 4. ANIMASI HOVER (BERGERAK SAAT DIARAHKAN KURSOR) */
-/* Kartu Agenda & Bento: Melompat ke atas */
-.event-card-interactive:hover, .bento-card:hover {
-    transform: translateY(-12px) scale(1.02) !important;
-    box-shadow: 0 20px 40px rgba(0,123,255,0.2) !important;
+/* 5. ANIMASI HOVER: SEMUA MELOMPAT KE ATAS (GAYA BENTO) */
+.event-card-interactive:hover, 
+.news-card-interactive:hover, 
+.bento-card:hover {
+    transform: translateY(-15px) scale(1.03) !important;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.3) !important;
+    background: #1652ad !important; /* Sedikit lebih gelap saat disentuh */
 }
 
-/* Kartu Berita: Bergeser ke Kiri (Menarik) */
-.news-card-interactive:hover {
-    transform: translateX(-10px) !important;
-    background-color: #f0f7ff !important;
-}
-
-/* 5. FIX BENTO CARD (BIAR ANIMASINYA SAMA) */
-.bento-card {
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
-}
-
-/* 6. ANIMASI MUNCUL SAAT SCROLL (REVEAL) */
-.reveal {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s ease-out;
-}
-
-.reveal.active {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* Mobile Responsive */
+/* 6. RESPONSIVE */
 @media (max-width: 768px) {
     .community-grid { grid-template-columns: 1fr !important; }
     .news-card-interactive { flex-direction: column !important; text-align: center; }
+    .news-img-side img { margin: 0 0 10px 0; }
 }
 
 </style>
