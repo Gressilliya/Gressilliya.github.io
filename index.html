@@ -2381,6 +2381,37 @@ body {
     .news-img-side img { margin: 0 0 10px 0; }
 }
 
+/* Tombol Bulat Melayang */
+    #floating-saran {
+        position: fixed; bottom: 30px; right: 30px;
+        background: #007bff; color: white; width: 60px; height: 60px;
+        border-radius: 50%; display: flex; align-items: center;
+        justify-content: center; font-size: 24px; cursor: pointer;
+        z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    /* Kotak Chatbox - Dibuat Transparan Luarnya */
+    #chat-box-container {
+        position: fixed; bottom: 100px; right: 30px;
+        width: 320px; height: 450px; background: #1e293b;
+        border-radius: 20px; display: none; flex-direction: column;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.4); z-index: 10000;
+        border: 1px solid rgba(255,255,255,0.1); overflow: hidden;
+    }
+
+    .chat-header { background: #007bff; color: white; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+    .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0f172a; color: white; }
+    .msg { padding: 10px; border-radius: 12px; font-size: 13px; max-width: 85%; line-height: 1.4; }
+    .bot-msg { background: #334155; align-self: flex-start; }
+    .user-msg { background: #007bff; align-self: flex-end; }
+
+    .quick-btns { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 5px; }
+    .quick-btns button { background: rgba(0, 123, 255, 0.1); border: 1px solid #007bff; color: #007bff; padding: 5px 10px; border-radius: 20px; font-size: 11px; cursor: pointer; }
+    
+    .chat-footer { padding: 12px; background: #1e293b; display: flex; gap: 8px; }
+    .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 10px; color: white; border-radius: 10px; outline: none; }
+    .chat-footer button { background: #007bff; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
+
 </style>
 
 </style>
@@ -2584,17 +2615,61 @@ body {
     </div>
 </footer>
 
-<iframe src="saran.html" 
-        style="position: fixed; bottom: 0; right: 0; width: 350px; height: 550px; border: none; z-index: 9999; background: transparent;" 
-        allowtransparency="true">
-</iframe>
+<div id="floating-saran" onclick="toggleDigiBot()"><i class="fas fa-comment-dots"></i></div>
+
+<div id="chat-box-container">
+    <div class="chat-header"><span>🤖 DigiSmart Bot</span><i class="fas fa-times" onclick="toggleDigiBot()" style="cursor:pointer"></i></div>
+    <div class="chat-body" id="chatList">
+        <div class="msg bot-msg">Halo! Ada yang bisa saya bantu di DigiSmart Library? 😊</div>
+        <div class="quick-btns">
+            <button onclick="botTanya('Cara Mencari Buku')">Cari Buku</button>
+            <button onclick="botTanya('Jam Kunjungan')">Jam Kunjungan</button>
+            <button onclick="botTanya('Lupa Password')">Lupa Password</button>
+        </div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" id="botInput" placeholder="Tanya admin..." onkeypress="if(event.key==='Enter') botKirim()">
+        <button onclick="botKirim()"><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
 
 <script>
-    // Kode tambahan agar area kosong di sekitar tombol tidak menghalangi klik menu lain
-    const frame = document.getElementById('chatFrame');
-    
-    // Opsional: Jika ingin benar-benar bersih, 
-    // kita bisa atur agar ukuran frame mengecil saat chat ditutup.
+    const botData = {
+        "mencari buku": "Gunakan menu 'Koleksi Digital' atau kotak pencarian di bagian atas.",
+        "jam kunjungan": "Senin-Kamis (08:00-13:30) & Jumat-Sabtu (08:00-12:00).",
+        "lupa password": "Silakan klik 'Lupa Password' di menu Login atau lapor ke Pustakawan.",
+        "admin": "Admin perpustakaan tersedia di meja sirkulasi lantai 1.",
+        "halo": "Halo juga! Mau cari buku apa hari ini?"
+    };
+
+    function toggleDigiBot() {
+        const c = document.getElementById('chat-box-container');
+        c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
+    }
+
+    function botTanya(q) {
+        tambahChat(q, 'user-msg');
+        let r = botData[q.toLowerCase()] || "Maaf, saya tidak mengerti. Coba tanya hal lain.";
+        setTimeout(() => tambahChat(r, 'bot-msg'), 500);
+    }
+
+    function botKirim() {
+        const i = document.getElementById('botInput');
+        if(!i.value.trim()) return;
+        tambahChat(i.value, 'user-msg');
+        let txt = i.value.toLowerCase();
+        let r = "Maaf, saya belum paham. Coba tanya 'jam kunjungan' atau 'admin'.";
+        for(let k in botData) { if(txt.includes(k)) { r = botData[k]; break; } }
+        setTimeout(() => tambahChat(r, 'bot-msg'), 600);
+        i.value = "";
+    }
+
+    function tambahChat(t, s) {
+        const l = document.getElementById('chatList');
+        const d = document.createElement('div');
+        d.className = 'msg ' + s; d.innerText = t;
+        l.appendChild(d); l.scrollTop = l.scrollHeight;
+    }
 </script>
 
 <script>
