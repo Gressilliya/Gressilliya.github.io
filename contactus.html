@@ -16,6 +16,16 @@
             --card-bg: rgba(255, 255, 255, 0.03);
         }
 
+        /* --- TOMBOL KEMBALI --- */
+        .btn-back {
+            position: fixed; top: 25px; left: 25px; z-index: 1000;
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            padding: 12px 20px; border-radius: 15px; text-decoration: none;
+            color: white; font-weight: 600; border: 1px solid rgba(255,255,255,0.1);
+            display: flex; align-items: center; gap: 10px; transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--primary); transform: translateX(-5px); }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body { background-color: var(--bg-dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
 
@@ -234,6 +244,7 @@
                 </div>
 
                 <div class="social-group">
+                    <a href="https://wa.me/6281269812898" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
                     <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
                     <a href="mailto:info@digismart.usu.ac.id" class="social-btn gm"><i class="fas fa-envelope"></i></a>
