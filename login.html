@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Anggota - DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0; padding: 0; box-sizing: border-box;
@@ -12,8 +13,8 @@
         }
 
         body {
-            /* Background menggunakan tema perpustakaan agar senada */
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+            /* Background tetap dengan tema perpustakaan yang estetik */
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
             background-size: cover;
             background-position: center;
@@ -21,18 +22,21 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
-        /* Box Login dengan Efek Kaca (Glassmorphism) */
+        /* Box Login Glassmorphism */
         .login-card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             padding: 40px;
-            border-radius: 20px;
-            width: 400px;
+            border-radius: 25px;
+            width: 100%;
+            max-width: 420px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
-            animation: fadeInDown 0.8s ease; /* Animasi Muncul */
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: fadeInDown 0.8s ease;
+            position: relative;
         }
 
         @keyframes fadeInDown {
@@ -43,14 +47,21 @@
         .login-card h2 {
             color: #fff;
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 10px;
             font-size: 28px;
-            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .login-card p {
+            color: rgba(255,255,255,0.6);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
 
         .input-group {
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .input-group i {
@@ -58,56 +69,80 @@
             left: 15px;
             top: 50%;
             transform: translateY(-50%);
-            color: rgba(255,255,255,0.7);
+            color: #38bdf8;
+            font-size: 1.1rem;
         }
 
         .input-group input {
             width: 100%;
-            padding: 12px 15px 12px 45px;
+            padding: 13px 15px 13px 45px;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 10px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
             color: #fff;
             outline: none;
             transition: 0.3s;
+            font-size: 0.95rem;
         }
 
         .input-group input:focus {
-            background: rgba(255, 255, 255, 0.2);
-            border-color: #007bff;
-            box-shadow: 0 0 10px rgba(0, 123, 255, 0.5);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #38bdf8;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
         }
 
-        /* Tombol Login dengan Animasi Hover */
+        /* Tombol Login */
         .btn-login {
             width: 100%;
-            padding: 12px;
-            background: #007bff;
+            padding: 14px;
+            background: linear-gradient(to right, #38bdf8, #818cf8);
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             color: white;
-            font-weight: bold;
+            font-weight: 600;
             cursor: pointer;
             transition: 0.4s;
             text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-login:hover {
-            background: #0056b3;
-            transform: scale(1.02);
-            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* Animasi Loading */
+        .loader {
+            width: 18px; height: 18px;
+            border: 3px solid #ffffff;
+            border-bottom-color: transparent;
+            border-radius: 50%;
+            display: none;
+            animation: rotation 1s linear infinite;
+        }
+
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .footer-link {
             text-align: center;
-            margin-top: 20px;
-            color: #ddd;
+            margin-top: 25px;
+            color: rgba(255,255,255,0.6);
             font-size: 14px;
         }
 
         .footer-link a {
-            color: #007bff;
+            color: #38bdf8;
             text-decoration: none;
+            font-weight: 600;
         }
     </style>
 </head>
@@ -115,29 +150,65 @@
 
     <div class="login-card">
         <h2>Login Anggota</h2>
-        <form action="#">
+        <p>Gunakan akun DigiSmart untuk akses penuh</p>
+        
+        <form id="loginForm">
             <div class="input-group">
                 <i class="fas fa-user"></i>
-                <input type="text" placeholder="First Name" required>
+                <input type="text" id="firstName" placeholder="First Name" required>
             </div>
             <div class="input-group">
                 <i class="fas fa-user-tag"></i>
-                <input type="text" placeholder="Last Name" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
             </div>
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
-                <input type="email" placeholder="Email Address" required>
+                <input type="email" id="email" placeholder="Email Address" required>
             </div>
             <div class="input-group">
                 <i class="fas fa-phone"></i>
-                <input type="tel" placeholder="No Handphone" required>
+                <input type="tel" id="phone" placeholder="No Handphone" required>
             </div>
-            <button type="submit" class="btn-login">Masuk Perpustakaan</button>
+            
+            <button type="submit" class="btn-login" id="btnLogin">
+                <span>Masuk Perpustakaan</span>
+                <div class="loader" id="loader"></div>
+            </button>
         </form>
+
         <div class="footer-link">
-            Belum punya akun? <a href="daftar.html">Daftar Sekarang</a>
+            Belum punya akun? <a href="#">Daftar Sekarang</a>
         </div>
     </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault(); // Mencegah reload halaman
+            
+            const btn = document.getElementById('btnLogin');
+            const loader = document.getElementById('loader');
+            const btnText = btn.querySelector('span');
+
+            // Tampilkan Loading
+            btnText.innerText = "Memproses...";
+            loader.style.display = "inline-block";
+            btn.style.pointerEvents = "none";
+
+            // Ambil data (opsional untuk disimpan di console)
+            const userData = {
+                nama: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
+                email: document.getElementById('email').value
+            };
+            
+            console.log("Mencoba Login...", userData);
+
+            // Simulasi loading 1.5 detik sebelum masuk ke beranda
+            setTimeout(() => {
+                // ARAHKAN KE HALAMAN UTAMA (Pastikan nama file utama kamu adalah index.html)
+                window.location.href = "index.html"; 
+            }, 1500);
+        });
+    </script>
 
 </body>
 </html>
