@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visi & Misi | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #38bdf8;
+            --secondary: #818cf8;
+            --bg-dark: #0f172a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background: var(--bg-dark); color: white; overflow-x: hidden; }
+
+        /* Tombol Kembali */
+        .btn-back {
+            position: fixed; top: 20px; left: 20px; z-index: 100;
+            background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
+            padding: 10px 20px; border-radius: 12px; text-decoration: none;
+            color: white; border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s; display: flex; align-items: center; gap: 8px;
+        }
+        .btn-back:hover { background: var(--primary); transform: translateX(-5px); }
+
+        .container {
+            min-height: 100vh; display: flex; flex-direction: column;
+            align-items: center; padding: 80px 20px;
+            background: radial-gradient(circle at top right, #1e293b, #0f172a);
+        }
+
+        .header-title {
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 50px;
+            background: linear-gradient(to right, var(--primary), #f472b6);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: fadeIn 1.5s ease;
+        }
+
+        .vision-mission-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px; max-width: 1200px; width: 100%;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px; padding: 40px;
+            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative; overflow: hidden;
+            animation: slideUp 1s ease forwards;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .image-box {
+            width: 100%; height: 200px; border-radius: 20px;
+            margin-bottom: 25px; overflow: hidden;
+            border: 2px solid rgba(56, 189, 248, 0.3);
+        }
+
+        .image-box img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .card:hover img { transform: scale(1.1) rotate(2deg); }
+
+        .card h2 {
+            font-size: 2rem; color: var(--primary); margin-bottom: 15px;
+            display: flex; align-items: center; gap: 10px;
+        }
+
+        .card p { color: #cbd5e1; line-height: 1.8; font-size: 1rem; }
+
+        .misi-list { list-style: none; margin-top: 15px; }
+        .misi-list li {
+            margin-bottom: 12px; padding-left: 30px; position: relative;
+            color: #cbd5e1;
+        }
+        .misi-list li::before {
+            content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
+            position: absolute; left: 0; color: var(--primary);
+        }
+
+        /* Animasi Gerak-Gerak */
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Ornamen Dekorasi */
+        .blob {
+            position: absolute; width: 200px; height: 200px;
+            background: var(--primary); filter: blur(80px);
+            opacity: 0.2; z-index: -1; animation: move 10s infinite alternate;
+        }
+
+        @keyframes move { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+    <div class="container">
+        <div class="blob"></div>
+        <h1 class="header-title">Visi & Misi</h1>
+
+        <div class="vision-mission-grid">
+            <div class="card">
+                <div class="image-box">
+                    <img src="visi.jpeg" alt="Visi DigiSmart">
+                </div>
+                <h2><i class="fas fa-eye"></i> Visi</h2>
+                <p>Menjadi pusat literasi digital terdepan yang inklusif, inovatif, dan mampu menginspirasi generasi cerdas di era teknologi modern.</p>
+            </div>
+
+            <div class="card" style="animation-delay: 0.3s;">
+                <div class="image-box">
+                    <img src="misi.jpeg" alt="Misi DigiSmart">
+                </div>
+                <h2><i class="fas fa-bullseye"></i> Misi</h2>
+                <ul class="misi-list">
+                    <li>Menyediakan akses informasi digital yang luas dan akurat.</li>
+                    <li>Mengembangkan koleksi buku digital yang berkualitas.</li>
+                    <li>Membangun komunitas pembaca yang aktif dan kreatif.</li>
+                    <li>Memberikan layanan teknologi informasi yang ramah pengguna.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
