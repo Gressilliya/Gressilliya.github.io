@@ -16,6 +16,9 @@
             --card-bg: rgba(255, 255, 255, 0.03);
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
+
         /* --- TOMBOL KEMBALI --- */
         .btn-back {
             position: fixed; top: 25px; left: 25px; z-index: 1000;
@@ -26,175 +29,83 @@
         }
         .btn-back:hover { background: var(--primary); transform: translateX(-5px); }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background-color: var(--bg-dark); color: white; overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* --- SECTION 1: HERO --- */
+        /* --- HERO --- */
         .hero-section {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; position: relative;
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             overflow: hidden;
         }
-
         .hero-title {
-            font-size: 4rem;
-            font-weight: 800;
-            text-align: center;
-            z-index: 10;
+            font-size: 4rem; font-weight: 800; text-align: center; z-index: 10;
             background: linear-gradient(to right, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: fadeInDown 1.5s ease;
         }
 
-        .scroll-indicator {
-            position: absolute;
-            bottom: 30px;
-            animation: bounce 2s infinite;
-            font-size: 2rem;
-            color: var(--primary);
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        .floating-icons i {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.1);
-            animation: float linear infinite;
-            z-index: 1;
-        }
-
-        /* --- SECTION 2: CONTACT & FEEDBACK --- */
-        .content-section {
-            padding: 100px 20px;
-            display: flex;
-            justify-content: center;
-        }
-
+        /* --- CONTACT CARD --- */
+        .content-section { padding: 100px 20px; display: flex; justify-content: center; }
         .contact-card {
-            background: var(--card-bg);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 40px;
-            padding: 50px;
-            width: 100%;
-            max-width: 1100px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
+            background: var(--card-bg); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px;
+            padding: 50px; width: 100%; max-width: 1100px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
             box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            opacity: 0;
-            transform: translateY(50px);
-            transition: 1s ease;
+            opacity: 0; transform: translateY(50px); transition: 1s ease;
         }
-
         .contact-card.active { transform: translateY(0); opacity: 1; }
 
-        .info-header h2 { font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
-        .info-header p { margin-bottom: 30px; color: #94a3b8; }
-
+        .info-header h2 { font-size: 2.5rem; color: var(--primary); }
         .contact-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 20px;
-            gap: 15px;
-            padding: 15px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            transition: 0.3s;
+            display: flex; align-items: flex-start; margin-bottom: 20px; gap: 15px;
+            padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 20px;
         }
-        .contact-item:hover { background: rgba(56, 189, 248, 0.1); transform: translateX(10px); }
-        .contact-item i { font-size: 1.2rem; color: var(--accent); margin-top: 5px; }
-        .contact-item strong { color: var(--primary); display: block; margin-bottom: 5px; }
+        .contact-item i { color: var(--accent); font-size: 1.2rem; }
 
-        /* --- FEEDBACK FORM --- */
-        .feedback-area {
-            margin-top: 30px;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 25px;
-            border: 1px solid rgba(56, 189, 248, 0.2);
-        }
-        .feedback-area h3 { margin-bottom: 15px; font-size: 1.1rem; color: var(--primary); }
-        
-        .input-group { margin-bottom: 12px; }
+        /* --- FEEDBACK --- */
+        .feedback-area { margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 25px; }
         .input-group input, .input-group textarea {
-            width: 100%;
-            padding: 12px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: white;
-            outline: none;
-            font-size: 0.9rem;
+            width: 100%; padding: 12px; background: #0f172a; border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; color: white; margin-bottom: 10px; outline: none;
         }
-        .input-group input:focus, .input-group textarea:focus { border-color: var(--primary); }
+        .submit-btn { width: 100%; padding: 12px; background: linear-gradient(to right, var(--primary), var(--secondary)); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; }
 
-        .submit-btn {
-            width: 100%;
-            padding: 12px;
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .submit-btn:hover { transform: scale(1.02); filter: brightness(1.1); }
-
-        /* Success Msg */
-        #success-msg {
-            display: none;
-            text-align: center;
-            padding: 20px;
-            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        #success-msg i { font-size: 3rem; color: #22c55e; margin-bottom: 10px; }
-
-        /* --- MAPS & SOCIAL --- */
-        .map-wrapper { border-radius: 30px; overflow: hidden; border: 4px solid rgba(255, 255, 255, 0.05); height: 100%; min-height: 400px; }
-        
+        /* --- SOCIALS --- */
         .social-group { display: flex; gap: 15px; margin-top: 25px; }
-        .social-btn {
-            width: 50px; height: 50px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px; color: white; text-decoration: none; transition: 0.5s;
-        }
-        .ig { background: linear-gradient(45deg, #f09433, #dc2743, #bc1888); }
-        .fb { background: #1877F2; }
-        .gm { background: #EA4335; }
-        .social-btn:hover { transform: rotate(360deg) scale(1.1); }
+        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; text-decoration: none; transition: 0.5s; }
+        .wa { background: #25D366; } .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); } .fb { background: #1877F2; } .gm { background: #EA4335; }
+
+        /* --- MAPS --- */
+        .map-wrapper { border-radius: 30px; overflow: hidden; height: 100%; min-height: 400px; }
+
+        /* --- CHATBOX CSS --- */
+        #floating-saran { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
+        #chat-box-container { position: fixed; bottom: 100px; right: 30px; width: 320px; height: 450px; background: #1e293b; border-radius: 20px; display: none; flex-direction: column; box-shadow: 0 15px 35px rgba(0,0,0,0.4); z-index: 10000; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
+        .chat-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
+        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0f172a; }
+        .msg { padding: 10px; border-radius: 12px; font-size: 13px; max-width: 85%; }
+        .bot-msg { background: #334155; align-self: flex-start; color: white; }
+        .user-msg { background: var(--primary); align-self: flex-end; color: white; }
+        .chat-footer { padding: 10px; background: #1e293b; display: flex; gap: 8px; }
+        .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 8px; color: white; border-radius: 8px; outline: none; }
+        .chat-footer button { background: var(--primary); border: none; color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
 
         /* Animations */
-        @keyframes float {
-            0% { transform: translateY(110vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 0.5; }
-            90% { opacity: 0.5; }
-            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
-        }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 40% {transform: translateY(-10px);} 60% {transform: translateY(-5px);} }
+        @keyframes float { 0% { transform: translateY(110vh); opacity: 0; } 100% { transform: translateY(-10vh); opacity: 0.5; } }
         @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes popIn { from { opacity: 0; transform: scale(0.5); } to { opacity: 1; transform: scale(1); } }
-
-        @media (max-width: 900px) {
-            .contact-card { grid-template-columns: 1fr; }
-            .hero-title { font-size: 2.5rem; }
-        }
     </style>
 </head>
 <body>
+
+    <a href="index.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+    </a>
 
     <section class="hero-section">
         <div class="floating-icons" id="icon-container"></div>
         <h1 class="hero-title">Let's Connect<br>With DigiSmart</h1>
         <p style="z-index: 10; margin-top: 10px; opacity: 0.7;">Hapus Jarak, Memperluas Wawasan.</p>
-        <div class="scroll-indicator" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+        <div class="scroll-indicator" style="position:absolute; bottom:30px; color:var(--primary); font-size:2rem; cursor:pointer;" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
@@ -211,7 +122,7 @@
                     <i class="fas fa-map-marked-alt"></i>
                     <div>
                         <strong>Lokasi Kami</strong>
-                        Jl. Universitas No.9, Padang Bulan, Kec. Medan Baru, Kota Medan, Sumatera Utara (USU).
+                        Jl. Universitas No.9, Padang Bulan, Kec. Medan Baru, Kota Medan (USU).
                     </div>
                 </div>
 
@@ -227,24 +138,18 @@
                 <div class="feedback-area">
                     <h3>Beri Ulasan Website 💬</h3>
                     <div id="form-content">
-                        <div class="input-group">
-                            <input type="text" id="nama" placeholder="Nama Lengkap" required>
-                        </div>
-                        <div class="input-group">
-                            <textarea id="saran" rows="2" placeholder="Saran atau ulasan kamu..." required></textarea>
-                        </div>
+                        <div class="input-group"><input type="text" id="nama" placeholder="Nama Lengkap"></div>
+                        <div class="input-group"><textarea id="saran" rows="2" placeholder="Saran kamu..."></textarea></div>
                         <button type="button" class="submit-btn" onclick="kirimUlasan()">Kirim Ulasan 🚀</button>
                     </div>
-
-                    <div id="success-msg">
-                        <i class="fas fa-check-circle"></i>
-                        <h3>Terima Kasih!</h3>
-                        <p>Ulasan kamu sudah kami terima.</p>
+                    <div id="success-msg" style="display:none; text-align:center; padding:10px;">
+                        <i class="fas fa-check-circle" style="color:#22c55e; font-size:2rem;"></i>
+                        <p>Terima Kasih! Ulasan kamu sudah kami terima.</p>
                     </div>
                 </div>
 
                 <div class="social-group">
-                    <a href="https://wa.me/6281269812898" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+                    <a href="https://wa.me/628123456789" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
                     <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
                     <a href="mailto:info@digismart.usu.ac.id" class="social-btn gm"><i class="fas fa-envelope"></i></a>
@@ -252,45 +157,85 @@
             </div>
 
             <div class="map-wrapper">
-                <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.110243415056!2d98.65705357423652!3d3.562093750478144!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30312fe073f36097%3A0x6331a9d068962c43!2sUniversitas%20Sumatera%20Utara!5e0!3m2!1sid!2sid!4v1710168000000!5m2!1sid!2sid" 
-                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
-                </iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.1030252814!2d98.6572!3d3.564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzMnNTAuNCJOIDk4wrAzOScyNS45IkU!5e0!3m2!1sid!2sid!4v1625000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
             </div>
         </div>
     </section>
 
+    <div id="floating-saran" onclick="toggleDigiBot()"><i class="fas fa-comment-dots"></i></div>
+    <div id="chat-box-container">
+        <div class="chat-header"><span>🤖 DigiBot</span><i class="fas fa-times" onclick="toggleDigiBot()" style="cursor:pointer"></i></div>
+        <div class="chat-body" id="chatList">
+            <div class="msg bot-msg">Halo! Ada yang bisa saya bantu di DigiSmart Library? 😊</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="botInput" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') botKirim()">
+            <button onclick="botKirim()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
     <script>
-        // Floating Icons Logic
+        // Floating Icons
         const container = document.getElementById('icon-container');
-        const iconTypes = ['fa-book', 'fa-laptop-code', 'fa-brain', 'fa-wifi', 'fa-graduation-cap'];
+        const iconTypes = ['fa-book', 'fa-laptop-code', 'fa-brain'];
         for (let i = 0; i < 15; i++) {
             const icon = document.createElement('i');
             icon.className = `fas ${iconTypes[Math.floor(Math.random() * iconTypes.length)]}`;
-            icon.style.left = `${Math.random() * 100}vw`;
-            icon.style.animationDuration = `${Math.random() * 5 + 5}s`;
-            icon.style.animationDelay = `${Math.random() * 5}s`;
-            icon.style.fontSize = `${Math.random() * 20 + 20}px`;
+            icon.style.left = `${Math.random() * 100}vw`; icon.style.position = 'absolute';
+            icon.style.animation = `float ${Math.random() * 5 + 5}s linear infinite`;
+            icon.style.color = 'rgba(255,255,255,0.1)'; icon.style.fontSize = '20px';
             container.appendChild(icon);
         }
 
-        // Scroll Observer
+        // Observer
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('active');
-            });
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         observer.observe(document.getElementById('card'));
 
-        // Feedback Logic
+        // Feedback
         function kirimUlasan() {
-            const nama = document.getElementById('nama').value;
-            const saran = document.getElementById('saran').value;
-            if(!nama || !saran) return alert("Isi nama dan saran dulu ya!");
-
+            if(!document.getElementById('nama').value || !document.getElementById('saran').value) return alert("Isi semua dulu!");
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-msg').style.display = 'block';
-            console.log("Feedback terkirim dari:", nama);
+        }
+
+        // CHATBOT LOGIC
+        const botData = {
+            "halo": "Halo juga! Ada yang bisa saya bantu di DigiSmart?",
+            "hallo": "Halo! Senang bertemu kamu.",
+            "jam": "Senin-Kamis (08:00-13:30) & Jumat-Sabtu (08:00-12:00).",
+            "buku": "Cari buku di menu 'Koleksi Digital' atau kotak pencarian.",
+            "admin": "Admin ada di meja sirkulasi lantai 1.",
+            "pagi": "Selamat pagi! Semangat belajarnya!"
+        };
+
+        function toggleDigiBot() {
+            const c = document.getElementById('chat-box-container');
+            c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
+        }
+
+        function botKirim() {
+            const i = document.getElementById('botInput');
+            const txt = i.value.trim();
+            if(!txt) return;
+
+            tambahChat(txt, 'user-msg');
+            i.value = "";
+
+            setTimeout(() => {
+                let lowTxt = txt.toLowerCase();
+                let res = "Maaf, saya tidak mengerti. Coba tanya 'jam' atau 'admin'.";
+                for(let k in botData) { if(lowTxt.includes(k)) { res = botData[k]; break; } }
+                tambahChat(res, 'bot-msg');
+            }, 600);
+        }
+
+        function tambahChat(t, s) {
+            const l = document.getElementById('chatList');
+            const d = document.createElement('div');
+            d.className = 'msg ' + s; d.innerText = t;
+            l.appendChild(d); l.scrollTop = l.scrollHeight;
         }
     </script>
 </body>
