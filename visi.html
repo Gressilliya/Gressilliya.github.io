@@ -11,6 +11,7 @@
             --primary: #38bdf8;
             --secondary: #818cf8;
             --bg-dark: #0f172a;
+            --shadow-primary: rgba(56, 189, 248, 0.3);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -28,80 +29,100 @@
 
         .container {
             min-height: 100vh; display: flex; flex-direction: column;
-            align-items: center; padding: 80px 20px;
+            align-items: center; padding: 100px 20px;
             background: radial-gradient(circle at top right, #1e293b, #0f172a);
+            position: relative;
         }
 
         .header-title {
-            font-size: 3.5rem; font-weight: 800; margin-bottom: 50px;
+            font-size: 3.5rem; font-weight: 800; margin-bottom: 60px;
             background: linear-gradient(to right, var(--primary), #f472b6);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             animation: fadeIn 1.5s ease;
+            text-align: center;
+            line-height: 1.2;
         }
 
         .vision-mission-grid {
             display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px; max-width: 1200px; width: 100%;
+            gap: 50px; max-width: 1200px; width: 100%;
         }
 
         .card {
-            background: rgba(255, 255, 255, 0.03);
+            background: rgba(255, 255, 255, 0.02);
             backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px; padding: 40px;
-            transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px; padding: 50px 40px;
+            transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
             position: relative; overflow: hidden;
             animation: slideUp 1s ease forwards;
+            opacity: 0;
+            display: flex; flex-direction: column; align-items: center;
         }
 
         .card:hover {
-            transform: translateY(-15px) scale(1.02);
+            transform: translateY(-10px);
             border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
         }
 
+        /* --- REVISI UKURAN GAMBAR (IMAGE BOX) --- */
         .image-box {
-            width: 100%; height: 200px; border-radius: 20px;
-            margin-bottom: 25px; overflow: hidden;
-            border: 2px solid rgba(56, 189, 248, 0.3);
+            width: 100%; height: 160px; /* Dipersempit agar lebih lanskap */
+            border-radius: 20px; margin-bottom: 30px;
+            overflow: hidden; border: 2px solid rgba(56, 189, 248, 0.2);
+            transition: border-color 0.4s ease;
+            position: relative;
+            background-color: rgba(255, 255, 255, 0.01); /* Sedikit latar agar terlihat bentuk kotaknya */
         }
 
         .image-box img {
-            width: 100%; height: 100%; object-fit: cover;
-            transition: 0.5s;
+            width: 100%; height: 100%;
+            object-fit: contain; /* PENTING: Gambar terlihat semua tanpa terpotong */
+            object-position: center;
+            transition: transform 0.5s ease;
         }
 
-        .card:hover img { transform: scale(1.1) rotate(2deg); }
+        .card:hover .image-box { border-color: var(--primary); }
+        .card:hover img { transform: scale(1.05); }
 
         .card h2 {
-            font-size: 2rem; color: var(--primary); margin-bottom: 15px;
-            display: flex; align-items: center; gap: 10px;
+            font-size: 2rem; color: var(--primary); margin-bottom: 20px;
+            display: flex; align-items: center; gap: 12px;
+            font-weight: 600; text-align: center;
         }
 
-        .card p { color: #cbd5e1; line-height: 1.8; font-size: 1rem; }
+        .card h2 i { font-size: 1.8rem; }
 
-        .misi-list { list-style: none; margin-top: 15px; }
+        .card-content { width: 100%; text-align: left; } /* Merapikan teks agar rata kiri di dalam kartu */
+
+        .card p { color: #cbd5e1; line-height: 1.8; font-size: 1rem; margin-bottom: 0; }
+
+        .misi-list { list-style: none; width: 100%; }
         .misi-list li {
-            margin-bottom: 12px; padding-left: 30px; position: relative;
-            color: #cbd5e1;
+            margin-bottom: 15px; padding-left: 35px; position: relative;
+            color: #cbd5e1; line-height: 1.6; font-size: 0.95rem;
         }
         .misi-list li::before {
             content: '\f00c'; font-family: 'Font Awesome 5 Free'; font-weight: 900;
-            position: absolute; left: 0; color: var(--primary);
+            position: absolute; left: 0; top: 2px;
+            color: var(--primary); font-size: 0.9rem;
         }
 
-        /* Animasi Gerak-Gerak */
+        /* Animasi Gerak-Gerak (Fade dan Slide) */
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Ornamen Dekorasi */
         .blob {
-            position: absolute; width: 200px; height: 200px;
-            background: var(--primary); filter: blur(80px);
-            opacity: 0.2; z-index: -1; animation: move 10s infinite alternate;
+            position: absolute; width: 250px; height: 250px;
+            background: var(--primary); filter: blur(100px);
+            opacity: 0.15; z-index: -1; animation: moveBlob 12s infinite alternate ease-in-out;
         }
+        .blob-1 { top: 10%; left: 15%; }
+        .blob-2 { bottom: 15%; right: 10%; animation-delay: 2s; }
 
-        @keyframes move { from { transform: translate(0,0); } to { transform: translate(100px, 50px); } }
+        @keyframes moveBlob { from { transform: translate(0,0) rotate(0deg); } to { transform: translate(120px, 60px) rotate(15deg); } }
     </style>
 </head>
 <body>
@@ -109,29 +130,34 @@
     <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
 
     <div class="container">
-        <div class="blob"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
         <h1 class="header-title">Visi & Misi</h1>
 
         <div class="vision-mission-grid">
             <div class="card">
                 <div class="image-box">
-                    <img src="visi.jpeg" alt="Visi DigiSmart">
+                    <img src="visi.jpeg" alt="Visi DigiSmart Library">
                 </div>
                 <h2><i class="fas fa-eye"></i> Visi</h2>
-                <p>Menjadi pusat literasi digital terdepan yang inklusif, inovatif, dan mampu menginspirasi generasi cerdas di era teknologi modern.</p>
+                <div class="card-content">
+                    <p>Menjadi pusat literasi digital terdepan yang inklusif, inovatif, dan mampu menginspirasi generasi cerdas di era teknologi modern.</p>
+                </div>
             </div>
 
             <div class="card" style="animation-delay: 0.3s;">
                 <div class="image-box">
-                    <img src="misi.jpeg" alt="Misi DigiSmart">
+                    <img src="misi.jpeg" alt="Misi DigiSmart Library">
                 </div>
                 <h2><i class="fas fa-bullseye"></i> Misi</h2>
-                <ul class="misi-list">
-                    <li>Menyediakan akses informasi digital yang luas dan akurat.</li>
-                    <li>Mengembangkan koleksi buku digital yang berkualitas.</li>
-                    <li>Membangun komunitas pembaca yang aktif dan kreatif.</li>
-                    <li>Memberikan layanan teknologi informasi yang ramah pengguna.</li>
-                </ul>
+                <div class="card-content">
+                    <ul class="misi-list">
+                        <li>Menyediakan akses informasi digital yang luas dan akurat.</li>
+                        <li>Mengembangkan koleksi buku digital yang berkualitas.</li>
+                        <li>Membangun komunitas pembaca yang aktif dan kreatif.</li>
+                        <li>Memberikan layanan teknologi informasi yang ramah pengguna.</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
