@@ -1,0 +1,44 @@
+<div id="floating-saran" onclick="toggleChat()" style="position: fixed; bottom: 30px; right: 30px; background: #38bdf8; color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 1000; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+    <i class="fas fa-comment-alt"></i>
+</div>
+
+<div id="chat-container" class="chat-hide">
+    <div class="chat-header">
+        <div class="chat-title"><i class="fas fa-robot"></i> <span>Tanya DigiSmart</span></div>
+        <div class="chat-controls">
+            <i class="fas fa-minus" onclick="toggleChat()"></i>
+            <i class="fas fa-times" onclick="openFeedback()"></i>
+        </div>
+    </div>
+    <div class="chat-body">
+        <div class="msg bot">Halo! Ada yang bisa kami bantu hari ini? 😊</div>
+        <div class="quick-replies">
+            <button>Cara Pinjam Buku</button>
+            <button>Cara Menonton Video</button>
+            <button>Lupa Password</button>
+        </div>
+    </div>
+    <div class="chat-footer">
+        <input type="text" placeholder="Ketik pesan...">
+        <button><i class="fas fa-paper-plane"></i></button>
+    </div>
+</div>
+
+<div id="feedback-modal" class="modal-hide">
+    <div class="feedback-content">
+        <div class="feedback-header">
+            <h4>Feedback</h4>
+            <i class="fas fa-times" onclick="closeAll()"></i>
+        </div>
+        <p>Bagaimana pengalamanmu menggunakan DigiSmart hari ini?</p>
+        <div class="emoji-group">
+            <span onclick="selectEmoji(this)">😡</span>
+            <span onclick="selectEmoji(this)">😟</span>
+            <span onclick="selectEmoji(this)">😐</span>
+            <span onclick="selectEmoji(this)">😊</span>
+            <span onclick="selectEmoji(this)">🤩</span>
+        </div>
+        <textarea placeholder="Tambahkan komentar..."></textarea>
+        <button class="btn-submit" onclick="submitFeedback()">Kirim Feedback</button>
+    </div>
+</div>
