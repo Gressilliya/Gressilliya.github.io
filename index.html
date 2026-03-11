@@ -2196,6 +2196,36 @@ body {
     color: #64748b;
 }
 
+.updates-section {
+    padding: 50px 5%;
+    background: #f9f9f9; /* Warna beda dikit biar ada pemisah */
+}
+
+.updates-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Membagi dua kolom */
+    gap: 30px;
+}
+
+.news-item, .event-card {
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s; /* Untuk efek hover */
+}
+
+.news-item:hover, .event-card:hover {
+    transform: translateY(-5px); /* Efek melayang saat disentuh */
+    border-left: 5px solid #007bff; /* Garis aksen biru */
+}
+
+/* Responsive buat HP */
+@media (max-width: 768px) {
+    .updates-container { grid-template-columns: 1fr; }
+}
+
 </style>
 
 </style>
@@ -2316,6 +2346,42 @@ body {
     
 </div>
 
+<section id="updates" class="updates-section reveal">
+    <div class="updates-container">
+        <div class="news-column">
+            <h2 class="section-title">Berita Literasi 📰</h2>
+            <div class="news-item">
+                <span class="date">12 Mar 2024</span>
+                <h4>Workshop Cek Fakta di Sekolah</h4>
+                <p>Serunya belajar membedakan hoax bersama tim Hoax Buster...</p>
+            </div>
+            <div class="news-item">
+                <span class="date">10 Mar 2024</span>
+                <h4>Tips Aman Internetan</h4>
+                <p>Jangan asal klik link! Simak tips aman bermedia sosial...</p>
+            </div>
+        </div>
+
+        <div class="event-column">
+            <h2 class="section-title">Acara Mendatang 📅</h2>
+            <div class="event-card active-event">
+                <div class="event-date">15<span>MAR</span></div>
+                <div class="event-info">
+                    <h4>Webinar Literasi Digital</h4>
+                    <p>Via Zoom | 14.00 WIB</p>
+                </div>
+            </div>
+            <div class="event-card">
+                <div class="event-date">20<span>MAR</span></div>
+                <div class="event-info">
+                    <h4>Lomba Game Arcade</h4>
+                    <p>Aula SMP | 09.00 WIB</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    
 </section>
 
 <section class="service-section">
@@ -2583,6 +2649,30 @@ function toggleSaran() {
             searchOverlay.style.display = 'none';
         }
     }
+</script>
+
+<script>
+  // Fungsi untuk menjalankan animasi saat elemen muncul di layar
+  document.addEventListener('DOMContentLoaded', function() {
+    const observerOptions = {
+      threshold: 0.15 // Animasi jalan saat 15% elemen sudah terlihat
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          // Menambahkan class 'active' saat elemen masuk ke layar
+          entry.target.classList.add('active');
+          // Opsional: berhenti mengamati setelah animasi jalan sekali
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    // Pilih semua elemen yang punya class 'reveal'
+    const revealElements = document.querySelectorAll('.reveal');
+    revealElements.forEach(el => observer.observe(el));
+  });
 </script>
     
 </body>
