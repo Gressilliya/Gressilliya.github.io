@@ -218,5 +218,29 @@
             }, 1500);
         });
     </script>
+
+    <script>
+    document.getElementById('registerForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const btn = document.getElementById('btnDaftar');
+        const loader = document.getElementById('loader');
+        const btnText = btn.querySelector('span');
+
+        // 1. Efek Loading
+        btnText.innerText = "Memproses...";
+        loader.style.display = "block";
+        btn.style.pointerEvents = "none";
+
+        // 2. Simulasi Proses Berhasil
+        setTimeout(() => {
+            alert("Selamat! Akun Anda berhasil dibuat.");
+            
+            // 3. DIARAHKAN KE LOGIN SETELAH DAFTAR SELESAI
+            window.location.href = "login.html"; 
+        }, 1500);
+    });
+</script>
+    
 </body>
 </html>
