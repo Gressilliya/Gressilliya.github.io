@@ -2621,54 +2621,40 @@ body {
     </div>
 </footer>
 
-<div id="floating-saran" onclick="toggleChat()">
-    <i class="fas fa-comment-alt"></i>
-</div>
+<div id="saran-placeholder"></div>
 
-<div id="chat-container" class="chat-hide">
-    <div class="chat-header">
-        <div class="chat-title">
-            <i class="fas fa-robot"></i> <span>Tanya DigiSmart</span>
-        </div>
-        <div class="chat-controls">
-            <i class="fas fa-minus" onclick="toggleChat()"></i>
-            <i class="fas fa-times" onclick="openFeedback()"></i>
-        </div>
-    </div>
-    <div class="chat-body">
-        <div class="msg bot">Halo! Ada yang bisa kami bantu hari ini? 😊</div>
-        <div class="quick-replies">
-            <button>Cara Pinjam Buku</button>
-            <button>Cara Menonton Video</button>
-            <button>Cara Mengakses Game dan menu Lainnya?</button>
-            <button>Lupa Password</button>
-            <button>Pertanyaan Lain?</button>
-        </div>
-    </div>
-    <div class="chat-footer">
-        <input type="text" placeholder="Ketik pesan...">
-        <button><i class="fas fa-paper-plane"></i></button>
-    </div>
-</div>
+<script>
+    fetch('saran.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('saran-placeholder').innerHTML = data;
+        });
 
-<div id="feedback-modal" class="modal-hide">
-    <div class="feedback-content">
-        <div class="feedback-header">
-            <h4>Feedback</h4>
-            <i class="fas fa-times" onclick="closeAll()"></i>
-        </div>
-        <p>Bagaimana pengalamanmu menggunakan DigiSmart hari ini?</p>
-        <div class="emoji-group">
-            <span onclick="selectEmoji(this)">😡</span>
-            <span onclick="selectEmoji(this)">😟</span>
-            <span onclick="selectEmoji(this)">😐</span>
-            <span onclick="selectEmoji(this)">😊</span>
-            <span onclick="selectEmoji(this)">🤩</span>
-        </div>
-        <textarea placeholder="Tambahkan komentar..."></textarea>
-        <button class="btn-submit" onclick="submitFeedback()">Kirim Feedback</button>
-    </div>
-</div>
+    // Tambahkan juga fungsi kontrolnya di sini agar tombolnya jalan
+    function toggleChat() {
+        const chat = document.getElementById('chat-container');
+        chat.classList.toggle('chat-hide');
+    }
+
+    function openFeedback() {
+        document.getElementById('chat-container').classList.add('chat-hide');
+        document.getElementById('feedback-modal').classList.remove('modal-hide');
+    }
+
+    function closeAll() {
+        document.getElementById('feedback-modal').classList.add('modal-hide');
+    }
+
+    function selectEmoji(el) {
+        document.querySelectorAll('.emoji-group span').forEach(s => s.style.transform = 'scale(1)');
+        el.style.transform = 'scale(1.5)';
+    }
+
+    function submitFeedback() {
+        alert("Terima kasih! Feedback kamu sudah terkirim ke DigiSmart. 😊");
+        closeAll();
+    }
+</script>
 
 <script>
 function toggleSaran() {
