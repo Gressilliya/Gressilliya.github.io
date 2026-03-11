@@ -2634,12 +2634,17 @@ body {
 </div>
 
 <script>
+    // Database Jawaban (Gunakan huruf kecil semua di kolom kiri)
     const botData = {
         "mencari buku": "Gunakan menu 'Koleksi Digital' atau kotak pencarian di bagian atas.",
         "jam kunjungan": "Senin-Kamis (08:00-13:30) & Jumat-Sabtu (08:00-12:00).",
         "lupa password": "Silakan klik 'Lupa Password' di menu Login atau lapor ke Pustakawan.",
         "admin": "Admin perpustakaan tersedia di meja sirkulasi lantai 1.",
-        "halo": "Halo juga! Mau cari buku apa hari ini?"
+        "halo": "Halo juga! Senang bertemu kamu di DigiSmart Library. Ada yang bisa dibantu?",
+        "hallo": "Halo juga! Ada yang bisa saya bantu hari ini?",
+        "pagi": "Selamat pagi! Semangat literasi ya!",
+        "siapa": "Saya adalah DigiBot, asisten pintar perpustakaan ini.",
+        "pinjam": "Untuk meminjam, pastikan kamu sudah login dan pilih buku yang kamu suka!"
     };
 
     function toggleDigiBot() {
@@ -2647,28 +2652,48 @@ body {
         c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
     }
 
+    // Fungsi untuk tombol cepat
     function botTanya(q) {
         tambahChat(q, 'user-msg');
-        let r = botData[q.toLowerCase()] || "Maaf, saya tidak mengerti. Coba tanya hal lain.";
+        // Cari jawaban langsung
+        let r = botData[q.toLowerCase()] || "Maaf, saya belum mengerti. Coba tanya hal lain.";
         setTimeout(() => tambahChat(r, 'bot-msg'), 500);
     }
 
+    // Fungsi untuk mengetik manual (DIPERBAIKI)
     function botKirim() {
         const i = document.getElementById('botInput');
-        if(!i.value.trim()) return;
-        tambahChat(i.value, 'user-msg');
-        let txt = i.value.toLowerCase();
-        let r = "Maaf, saya belum paham. Coba tanya 'jam kunjungan' atau 'admin'.";
-        for(let k in botData) { if(txt.includes(k)) { r = botData[k]; break; } }
-        setTimeout(() => tambahChat(r, 'bot-msg'), 600);
-        i.value = "";
+        const userText = i.value.trim().toLowerCase(); // Ubah ke huruf kecil semua
+        
+        if(!userText) return;
+
+        tambahChat(i.value, 'user-msg'); // Tampilkan pesan asli user
+        i.value = ""; // Kosongkan input
+
+        setTimeout(() => {
+            let responDitemukan = "Maaf, saya belum paham maksudnya. Coba ketik 'admin', 'jam', atau 'buku'.";
+            
+            // Cek apakah ada kata kunci di dalam kalimat user
+            for (let kunci in botData) {
+                if (userText.includes(kunci)) {
+                    responDitemukan = botData[kunci];
+                    break; 
+                }
+            }
+            
+            tambahChat(responDitemukan, 'bot-msg');
+        }, 600);
     }
 
     function tambahChat(t, s) {
         const l = document.getElementById('chatList');
         const d = document.createElement('div');
-        d.className = 'msg ' + s; d.innerText = t;
-        l.appendChild(d); l.scrollTop = l.scrollHeight;
+        d.className = 'msg ' + s; 
+        d.innerText = t;
+        l.appendChild(d);
+        
+        // Otomatis scroll ke bawah supaya pesan baru kelihatan
+        l.scrollTop = l.scrollHeight;
     }
 </script>
 
