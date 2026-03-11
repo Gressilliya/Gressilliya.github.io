@@ -26,6 +26,17 @@
         .footer { padding: 10px; background: #1e293b; display: flex; gap: 5px; }
         .footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 8px; color: white; border-radius: 5px; outline: none; }
         .footer button { background: #38bdf8; border: none; color: white; padding: 8px; border-radius: 5px; cursor: pointer; }
+
+    /* Tambahkan ini agar background iframe tidak menutupi index */
+    html, body { 
+        background: transparent !important; 
+        overflow: hidden; 
+    }
+    
+    /* Sisanya biarkan tetap sama */
+    #floating-saran { ... }
+    #chat-box { ... }
+
     </style>
 </head>
 <body>
