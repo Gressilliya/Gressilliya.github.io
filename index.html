@@ -2587,35 +2587,65 @@ body {
 <div id="saran-placeholder"></div>
 
 <script>
+    // Memanggil file saran.html
     fetch('saran.html')
         .then(response => response.text())
-        .then(data => {
-            document.getElementById('saran-placeholder').innerHTML = data;
-        });
+        .then(data => { document.getElementById('saran-placeholder').innerHTML = data; });
 
-    // Tambahkan juga fungsi kontrolnya di sini agar tombolnya jalan
     function toggleChat() {
-        const chat = document.getElementById('chat-container');
-        chat.classList.toggle('chat-hide');
+        document.getElementById('chat-container').classList.toggle('chat-hide');
     }
 
-    function openFeedback() {
-        document.getElementById('chat-container').classList.add('chat-hide');
-        document.getElementById('feedback-modal').classList.remove('modal-hide');
+    // Database Jawaban Bot
+    const botResponses = {
+        "cara mencari buku": "Untuk mencari buku, silakan gunakan fitur 'Pusat Literasi' di Beranda atau ketik judul buku di kolom pencarian sistem katalog kami.",
+        "jam kunjungan": "Perpustakaan DigiSmart buka Senin-Kamis (08:00-13:30) dan Jumat-Sabtu (08:00-12:00).",
+        "lupa password": "Jika lupa password, klik 'Lupa Password' di halaman login atau hubungi admin di meja sirkulasi.",
+        "admin": "Admin Perpustakaan DigiSmart adalah Tim Pustakawan USU. Kamu bisa menemui kami di gedung utama.",
+        "cara meminjam": "Cara meminjam: Pilih buku, bawa ke meja sirkulasi, dan tunjukkan kartu anggota digitalmu di aplikasi DigiSmart.",
+        "pagi": "Selamat pagi! Ada yang bisa saya bantu?",
+        "halo": "Halo juga! Mau tanya apa hari ini?"
+    };
+
+    function askBot(question) {
+        addMessage(question, 'user');
+        setTimeout(() => {
+            const response = botResponses[question.toLowerCase()] || "Maaf, saya belum mengerti pertanyaan itu. Bisa hubungi kontak kami di halaman Contact Us?";
+            addMessage(response, 'bot');
+        }, 600);
     }
 
-    function closeAll() {
-        document.getElementById('feedback-modal').classList.add('modal-hide');
+    function sendMessage() {
+        const input = document.getElementById('userInput');
+        const text = input.value.trim();
+        if (text === "") return;
+
+        addMessage(text, 'user');
+        input.value = "";
+
+        setTimeout(() => {
+            // Cari jawaban berdasarkan kata kunci
+            let found = false;
+            for (let key in botResponses) {
+                if (text.toLowerCase().includes(key)) {
+                    addMessage(botResponses[key], 'bot');
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) addMessage("Maaf, saya tidak mengerti. Coba tanya tentang 'admin', 'jam kunjungan', atau 'cara meminjam'.", 'bot');
+        }, 800);
     }
 
-    function selectEmoji(el) {
-        document.querySelectorAll('.emoji-group span').forEach(s => s.style.transform = 'scale(1)');
-        el.style.transform = 'scale(1.5)';
-    }
+    function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
 
-    function submitFeedback() {
-        alert("Terima kasih! Feedback kamu sudah terkirim ke DigiSmart. 😊");
-        closeAll();
+    function addMessage(text, sender) {
+        const chatBody = document.getElementById('chatBody');
+        const msgDiv = document.createElement('div');
+        msgDiv.className = `msg ${sender}`;
+        msgDiv.innerText = text;
+        chatBody.appendChild(msgDiv);
+        chatBody.scrollTop = chatBody.scrollHeight; // Scroll otomatis ke bawah
     }
 </script>
 
