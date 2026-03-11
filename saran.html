@@ -1,72 +1,155 @@
 <!DOCTYPE html>
-<html>
+<html lang="id">
 <head>
+    <meta charset="UTF-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body { margin: 0; font-family: 'Segoe UI', sans-serif; background: transparent; }
+        /* PENTING: Membuat latar belakang file ini tembus pandang */
+        html, body { 
+            margin: 0; 
+            padding: 0; 
+            background: transparent !important; 
+            overflow: hidden; 
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Tombol Bulat Biru */
         #floating-saran {
-            position: fixed; bottom: 20px; right: 20px;
-            background: #38bdf8; color: white; width: 60px; height: 60px; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px; cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            position: fixed; 
+            bottom: 20px; 
+            right: 20px;
+            background: #007bff; 
+            color: white; 
+            width: 60px; 
+            height: 60px; 
+            border-radius: 50%;
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            font-size: 24px; 
+            cursor: pointer; 
+            z-index: 1000;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            transition: 0.3s;
         }
+
+        /* Kotak Chat */
         #chat-box {
-            position: fixed; bottom: 90px; right: 20px;
-            width: 300px; height: 400px; background: #1e293b;
-            border-radius: 15px; display: none; flex-direction: column;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; border: 1px solid #334155;
+            position: fixed; 
+            bottom: 90px; 
+            right: 20px;
+            width: 300px; 
+            height: 400px; 
+            background: #1e293b;
+            border-radius: 15px; 
+            display: none; /* Sembunyi di awal */
+            flex-direction: column;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5); 
+            overflow: hidden; 
+            border: 1px solid rgba(255,255,255,0.1);
+            animation: slideUp 0.3s ease;
         }
-        .header { background: #38bdf8; color: white; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
-        .body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0f172a; color: white; font-size: 13px; }
-        .msg { padding: 8px 12px; border-radius: 10px; max-width: 80%; line-height: 1.4; }
-        .bot { background: #334155; align-self: flex-start; }
-        .user { background: #38bdf8; align-self: flex-end; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header { 
+            background: #007bff; 
+            color: white; 
+            padding: 15px; 
+            display: flex; 
+            justify-content: space-between; 
+            font-weight: bold; 
+        }
+
+        .body { 
+            flex: 1; 
+            padding: 15px; 
+            overflow-y: auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+            background: #0f172a; 
+            color: white; 
+            font-size: 13px; 
+        }
+
+        /* Balon Chat */
+        .msg { padding: 8px 12px; border-radius: 12px; max-width: 85%; line-height: 1.4; }
+        .bot { background: #334155; align-self: flex-start; color: #fff; }
+        .user { background: #007bff; align-self: flex-end; color: #fff; }
+
+        /* Tombol Pertanyaan Cepat */
         .btns { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
-        .btns button { background: transparent; border: 1px solid #38bdf8; color: #38bdf8; padding: 4px 8px; border-radius: 10px; font-size: 11px; cursor: pointer; }
-        .footer { padding: 10px; background: #1e293b; display: flex; gap: 5px; }
-        .footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 8px; color: white; border-radius: 5px; outline: none; }
-        .footer button { background: #38bdf8; border: none; color: white; padding: 8px; border-radius: 5px; cursor: pointer; }
+        .btns button { 
+            background: rgba(0, 123, 255, 0.1); 
+            border: 1px solid #007bff; 
+            color: #007bff; 
+            padding: 5px 10px; 
+            border-radius: 15px; 
+            font-size: 11px; 
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btns button:hover { background: #007bff; color: white; }
 
-    /* Tambahkan ini agar background iframe tidak menutupi index */
-    html, body { 
-        background: transparent !important; 
-        overflow: hidden; 
-    }
-    
-    /* Sisanya biarkan tetap sama */
-    #floating-saran { ... }
-    #chat-box { ... }
-
+        .footer { padding: 10px; background: #1e293b; display: flex; gap: 8px; }
+        .footer input { 
+            flex: 1; 
+            background: #0f172a; 
+            border: 1px solid #334155; 
+            padding: 8px; 
+            color: white; 
+            border-radius: 8px; 
+            outline: none; 
+        }
+        .footer button { 
+            background: #007bff; 
+            border: none; 
+            color: white; 
+            padding: 8px 12px; 
+            border-radius: 8px; 
+            cursor: pointer; 
+        }
     </style>
 </head>
 <body>
 
-<div id="floating-saran" onclick="toggleChat()"><i class="fas fa-comment"></i></div>
+<div id="floating-saran" onclick="toggleChat()">
+    <i class="fas fa-comment-dots"></i>
+</div>
 
-<div id="chat-box" style="display: none;">
-    <div class="header"><span>🤖 DigiBot</span><i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer"></i></div>
+<div id="chat-box">
+    <div class="header">
+        <span>🤖 DigiSmart Bot</span>
+        <i class="fas fa-times" onclick="toggleChat()" style="cursor:pointer"></i>
+    </div>
     <div class="body" id="chatBody">
-        <div class="msg bot">Halo! Ada yang bisa saya bantu?</div>
+        <div class="msg bot">Halo! Saya asisten DigiSmart. Ada yang bisa dibantu? 😊</div>
         <div class="btns">
-            <button onclick="jawab('Cara Mencari Buku')">Cari Buku</button>
-            <button onclick="jawab('Jam Kunjungan')">Jam Kunjungan</button>
-            <button onclick="jawab('Lupa Password')">Lupa Password</button>
+            <button onclick="askBot('Cara Mencari Buku')">Cara Mencari Buku</button>
+            <button onclick="askBot('Jam Kunjungan')">Jam Kunjungan</button>
+            <button onclick="askBot('Lupa Password')">Lupa Password</button>
         </div>
     </div>
     <div class="footer">
-        <input type="text" id="userInput" placeholder="Tanya sesuatu..." onkeypress="if(event.key==='Enter') kirim()">
-        <button onclick="kirim()"><i class="fas fa-paper-plane"></i></button>
+        <input type="text" id="userInput" placeholder="Ketik pesan..." onkeypress="handleKey(event)">
+        <button onclick="sendMessage()"><i class="fas fa-paper-plane"></i></button>
     </div>
 </div>
 
 <script>
-    const data = {
-        "mencari buku": "Gunakan menu 'Koleksi Digital' atau kotak pencarian di atas.",
-        "jam kunjungan": "Senin-Kamis: 08:00-13:30. Jumat-Sabtu: 08:00-12:00.",
-        "lupa password": "Hubungi admin di perpustakaan atau klik 'Lupa Password' di Login.",
-        "admin": "Admin kami ada di meja informasi lantai 1.",
-        "halo": "Halo! Ada yang bisa saya bantu?",
-        "pagi": "Selamat pagi!"
+    // Database Jawaban
+    const responses = {
+        "mencari buku": "Gunakan fitur 'Pusat Literasi' atau ketik judul di pencarian katalog atas.",
+        "jam kunjungan": "Senin-Kamis: 08:00-13:30, Jumat-Sabtu: 08:00-12:00.",
+        "lupa password": "Klik 'Lupa Password' di menu login atau lapor ke petugas perpustakaan.",
+        "admin": "Admin Perpustakaan adalah Tim Pustakawan yang bertugas di meja sirkulasi.",
+        "meminjam": "Pilih buku, lalu klik tombol 'Baca' atau 'Pinjam' jika sudah login.",
+        "halo": "Halo! Senang bertemu kamu di DigiSmart Library.",
+        "pagi": "Selamat pagi! Semangat literasi ya!"
     };
 
     function toggleChat() {
@@ -74,35 +157,43 @@
         box.style.display = (box.style.display === 'none' || box.style.display === '') ? 'flex' : 'none';
     }
 
-    function jawab(tanya) {
-        addMsg(tanya, 'user');
-        let respon = data[tanya.toLowerCase()] || "Maaf, saya kurang paham. Coba tanya 'admin' atau 'jam kunjungan'.";
-        setTimeout(() => addMsg(respon, 'bot'), 500);
+    function askBot(q) {
+        addMsg(q, 'user');
+        const reply = responses[q.toLowerCase()] || "Maaf, saya belum mengerti. Coba tanya tentang 'admin' atau 'jam kunjungan'.";
+        setTimeout(() => addMsg(reply, 'bot'), 500);
     }
 
-    function kirim() {
+    function sendMessage() {
         const inp = document.getElementById('userInput');
-        if(!inp.value.trim()) return;
-        addMsg(inp.value, 'user');
-        
-        let text = inp.value.toLowerCase();
-        let respon = "Maaf, saya tidak mengerti kuncinya. Coba tanya 'admin'.";
-        for(let key in data) {
-            if(text.includes(key)) { respon = data[key]; break; }
-        }
-        
-        setTimeout(() => addMsg(respon, 'bot'), 600);
+        const txt = inp.value.trim();
+        if (!txt) return;
+
+        addMsg(txt, 'user');
         inp.value = "";
+
+        setTimeout(() => {
+            let reply = "Maaf, saya tidak mengerti. Coba gunakan kata kunci seperti 'admin' atau 'buku'.";
+            for (let key in responses) {
+                if (txt.toLowerCase().includes(key)) {
+                    reply = responses[key];
+                    break;
+                }
+            }
+            addMsg(reply, 'bot');
+        }, 700);
     }
 
-    function addMsg(txt, kls) {
+    function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
+
+    function addMsg(text, sender) {
         const b = document.getElementById('chatBody');
         const d = document.createElement('div');
-        d.className = 'msg ' + kls;
-        d.innerText = txt;
+        d.className = 'msg ' + sender;
+        d.innerText = text;
         b.appendChild(d);
         b.scrollTop = b.scrollHeight;
     }
 </script>
+
 </body>
 </html>
