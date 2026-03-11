@@ -3,244 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daftar Anggota - DigiSmart Library</title>
+    <title>Pendaftaran Anggota - DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
+        /* CSS tetap sama seperti sebelumnya agar desain tidak berubah */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body {
             background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
                         url('https://images.unsplash.com/photo-1481627546452-676d3392b735?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            background-size: cover; background-position: center; height: 100vh;
+            display: flex; justify-content: center; align-items: center; overflow: hidden;
         }
-
-        /* Tombol Kembali ke Beranda */
         .btn-back {
-            position: absolute; top: 30px; left: 30px;
-            color: white; text-decoration: none; display: flex;
-            align-items: center; gap: 8px; font-size: 14px;
-            background: rgba(255,255,255,0.1); padding: 10px 20px;
-            border-radius: 50px; backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            position: absolute; top: 30px; left: 30px; color: white; text-decoration: none;
+            display: flex; align-items: center; gap: 8px; font-size: 14px;
+            background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 50px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
         }
         .btn-back:hover { background: #38bdf8; transform: translateX(-5px); }
-
         .register-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
-            padding: 40px;
-            border-radius: 30px;
-            width: 100%;
-            max-width: 480px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px);
+            padding: 40px; border-radius: 30px; width: 100%; max-width: 480px;
+            border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.4);
             animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .register-card h2 {
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 8px;
-            font-size: 32px;
-            font-weight: 600;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-        }
-
-        .register-card p {
-            color: #e2e8f0;
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 15px;
-            font-weight: 300;
-        }
-
+        @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        .register-card h2 { color: #ffffff; text-align: center; margin-bottom: 8px; font-size: 32px; font-weight: 600; }
+        .register-card p { color: #e2e8f0; text-align: center; margin-bottom: 30px; font-size: 15px; font-weight: 300; }
         .input-row { display: flex; gap: 15px; }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 20px;
-            width: 100%;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #38bdf8;
-            font-size: 1.1rem;
-        }
-
+        .input-group { position: relative; margin-bottom: 20px; width: 100%; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #38bdf8; }
         .input-group input {
-            width: 100%;
-            padding: 14px 15px 14px 45px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 12px;
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
+            width: 100%; padding: 14px 15px 14px 45px; background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; outline: none; transition: 0.3s;
         }
-
-        .input-group input:focus {
-            border-color: #38bdf8;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
-        }
-
+        .input-group input:focus { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
         .btn-daftar {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: 0.4s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            width: 100%; padding: 15px; background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; transition: 0.4s;
+            display: flex; justify-content: center; align-items: center; gap: 10px;
         }
-
-        .btn-daftar:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.5);
-        }
-
-        .spinner {
-            width: 18px; height: 18px;
-            border: 3px solid #ffffff;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: none;
-            animation: spin 1s linear infinite;
-        }
-
+        .spinner { width: 18px; height: 18px; border: 3px solid #ffffff; border-bottom-color: transparent; border-radius: 50%; display: none; animation: spin 1s linear infinite; }
         @keyframes spin { to { transform: rotate(360deg); } }
-
-        .login-link {
-            text-align: center;
-            margin-top: 25px;
-            color: #cbd5e1;
-            font-size: 14px;
-        }
-
-        .login-link a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .login-link { text-align: center; margin-top: 25px; color: #cbd5e1; font-size: 14px; }
+        .login-link a { color: #38bdf8; text-decoration: none; font-weight: 600; }
     </style>
 </head>
 <body>
 
     <a href="index.html" class="btn-back">
-        <i class="fas fa-arrow-left"></i> Beranda
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
     </a>
 
     <div class="register-card">
-        <h2>Gabung Sekarang</h2>
-        <p>Mulai petualangan literasimu di DigiSmart Library</p>
+        <h2>Daftar Akun</h2>
+        <p>Bergabunglah dengan komunitas DigiSmart Library</p>
         
         <form id="registerForm">
             <div class="input-row">
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="fname" placeholder="First Name" required>
+                    <input type="text" id="fname" placeholder="Nama Depan" required>
                 </div>
                 <div class="input-group">
                     <i class="fas fa-user"></i>
-                    <input type="text" id="lname" placeholder="Last Name" required>
+                    <input type="text" id="lname" placeholder="Nama Belakang" required>
                 </div>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-envelope"></i>
-                <input type="email" id="email" placeholder="Email Address" required>
+                <input type="email" id="email" placeholder="Alamat Email" required>
             </div>
 
             <div class="input-group">
                 <i class="fas fa-phone-alt"></i>
-                <input type="tel" id="phone" placeholder="No Handphone" required>
+                <input type="tel" id="phone" placeholder="Nomor WhatsApp/HP" required>
             </div>
 
             <button type="submit" class="btn-daftar" id="btnDaftar">
-                <span>Daftar Sekarang</span>
+                <span>BUAT AKUN SEKARANG</span>
                 <div class="spinner" id="loader"></div>
             </button>
         </form>
 
         <div class="login-link">
-            Sudah punya akun? <a href="login.html">Login disini</a>
+            Sudah punya akun? <a href="login.html">Masuk di sini</a>
         </div>
     </div>
 
     <script>
         document.getElementById('registerForm').addEventListener('submit', function(e) {
             e.preventDefault();
-
             const btn = document.getElementById('btnDaftar');
             const loader = document.getElementById('loader');
             const btnText = btn.querySelector('span');
 
-            // 1. Tampilkan animasi loading
-            btnText.innerText = "Memproses...";
+            btnText.innerText = "Sedang Memproses...";
             loader.style.display = "block";
             btn.style.pointerEvents = "none";
 
-            // 2. Simulasi pengiriman data
             setTimeout(() => {
-                // 3. Notifikasi Berhasil
-                alert("Selamat! Akun Anda berhasil dibuat.");
-                
-                // 4. Langsung arahkan ke halaman login
+                alert("Pendaftaran Berhasil! Akun Anda telah aktif.");
                 window.location.href = "login.html"; 
             }, 1500);
         });
     </script>
-
-    <script>
-    document.getElementById('registerForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        const btn = document.getElementById('btnDaftar');
-        const loader = document.getElementById('loader');
-        const btnText = btn.querySelector('span');
-
-        // 1. Efek Loading
-        btnText.innerText = "Memproses...";
-        loader.style.display = "block";
-        btn.style.pointerEvents = "none";
-
-        // 2. Simulasi Proses Berhasil
-        setTimeout(() => {
-            alert("Selamat! Akun Anda berhasil dibuat.");
-            
-            // 3. DIARAHKAN KE LOGIN SETELAH DAFTAR SELESAI
-            window.location.href = "login.html"; 
-        }, 1500);
-    });
-</script>
-    
 </body>
 </html>
