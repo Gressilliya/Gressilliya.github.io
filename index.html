@@ -2584,15 +2584,26 @@ body {
     </div>
 </footer>
 
-<iframe src="saran.html" style="position: fixed; bottom: 0; right: 0; width: 400px; height: 550px; border: none; z-index: 9999; pointer-events: none;" id="chatFrame"></iframe>
+<iframe src="saran.html" 
+        id="chatFrame"
+        style="position: fixed; 
+               bottom: 0; 
+               right: 0; 
+               width: 350px; 
+               height: 550px; 
+               border: none; 
+               z-index: 9999; 
+               background: transparent; 
+               color-scheme: light;" 
+        allowtransparency="true">
+</iframe>
 
 <script>
-    // Agar area di luar tombol chat tidak menghalangi klik di index.html
-    window.addEventListener('blur', function() {
-        // Ini otomatis mengurus interaksi iframe
-    });
-    // Menghilangkan batasan klik agar tombol di dalam iframe bisa diklik
-    document.getElementById('chatFrame').style.pointerEvents = 'auto';
+    // Kode tambahan agar area kosong di sekitar tombol tidak menghalangi klik menu lain
+    const frame = document.getElementById('chatFrame');
+    
+    // Opsional: Jika ingin benar-benar bersih, 
+    // kita bisa atur agar ukuran frame mengecil saat chat ditutup.
 </script>
 
 <script>
