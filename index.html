@@ -2584,69 +2584,15 @@ body {
     </div>
 </footer>
 
-<div id="saran-placeholder"></div>
+<iframe src="saran.html" style="position: fixed; bottom: 0; right: 0; width: 400px; height: 550px; border: none; z-index: 9999; pointer-events: none;" id="chatFrame"></iframe>
 
 <script>
-    // Memanggil file saran.html
-    fetch('saran.html')
-        .then(response => response.text())
-        .then(data => { document.getElementById('saran-placeholder').innerHTML = data; });
-
-    function toggleChat() {
-        document.getElementById('chat-container').classList.toggle('chat-hide');
-    }
-
-    // Database Jawaban Bot
-    const botResponses = {
-        "cara mencari buku": "Untuk mencari buku, silakan gunakan fitur 'Pusat Literasi' di Beranda atau ketik judul buku di kolom pencarian sistem katalog kami.",
-        "jam kunjungan": "Perpustakaan DigiSmart buka Senin-Kamis (08:00-13:30) dan Jumat-Sabtu (08:00-12:00).",
-        "lupa password": "Jika lupa password, klik 'Lupa Password' di halaman login atau hubungi admin di meja sirkulasi.",
-        "admin": "Admin Perpustakaan DigiSmart adalah Tim Pustakawan USU. Kamu bisa menemui kami di gedung utama.",
-        "cara meminjam": "Cara meminjam: Pilih buku, bawa ke meja sirkulasi, dan tunjukkan kartu anggota digitalmu di aplikasi DigiSmart.",
-        "pagi": "Selamat pagi! Ada yang bisa saya bantu?",
-        "halo": "Halo juga! Mau tanya apa hari ini?"
-    };
-
-    function askBot(question) {
-        addMessage(question, 'user');
-        setTimeout(() => {
-            const response = botResponses[question.toLowerCase()] || "Maaf, saya belum mengerti pertanyaan itu. Bisa hubungi kontak kami di halaman Contact Us?";
-            addMessage(response, 'bot');
-        }, 600);
-    }
-
-    function sendMessage() {
-        const input = document.getElementById('userInput');
-        const text = input.value.trim();
-        if (text === "") return;
-
-        addMessage(text, 'user');
-        input.value = "";
-
-        setTimeout(() => {
-            // Cari jawaban berdasarkan kata kunci
-            let found = false;
-            for (let key in botResponses) {
-                if (text.toLowerCase().includes(key)) {
-                    addMessage(botResponses[key], 'bot');
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) addMessage("Maaf, saya tidak mengerti. Coba tanya tentang 'admin', 'jam kunjungan', atau 'cara meminjam'.", 'bot');
-        }, 800);
-    }
-
-    function handleKey(e) { if (e.key === 'Enter') sendMessage(); }
-
-    function addMessage(text, sender) {
-        const chatBody = document.getElementById('chatBody');
-        const msgDiv = document.createElement('div');
-        msgDiv.className = `msg ${sender}`;
-        msgDiv.innerText = text;
-        chatBody.appendChild(msgDiv);
-        chatBody.scrollTop = chatBody.scrollHeight; // Scroll otomatis ke bawah
-    }
+    // Agar area di luar tombol chat tidak menghalangi klik di index.html
+    window.addEventListener('blur', function() {
+        // Ini otomatis mengurus interaksi iframe
+    });
+    // Menghilangkan batasan klik agar tombol di dalam iframe bisa diklik
+    document.getElementById('chatFrame').style.pointerEvents = 'auto';
 </script>
 
 <script>
