@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumni Sukses - DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #0f172a; /* Warna gelap elegan */
+            color: white;
+            line-height: 1.6;
+        }
+
+        /* Tombol Kembali */
+        .btn-back {
+            position: fixed; top: 20px; left: 20px; z-index: 1000;
+            color: white; text-decoration: none; display: flex;
+            align-items: center; gap: 8px; font-size: 14px;
+            background: rgba(56, 189, 248, 0.2); padding: 10px 20px;
+            border-radius: 50px; backdrop-filter: blur(10px);
+            border: 1px solid rgba(56, 189, 248, 0.3); transition: 0.3s;
+        }
+        .btn-back:hover { background: #38bdf8; transform: translateX(-5px); }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+
+        .header-section { text-align: center; margin-bottom: 60px; }
+        .header-section h1 { font-size: 3rem; margin-bottom: 10px; background: linear-gradient(to right, #38bdf8, #818cf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header-section p { color: #cbd5e1; font-size: 1.1rem; }
+
+        /* Grid Alumni */
+        .alumni-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .alumni-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .alumni-card:hover {
+            transform: translateY(-15px);
+            border-color: #38bdf8;
+            box-shadow: 0 20px 40px rgba(56, 189, 248, 0.2);
+        }
+
+        .img-box { width: 100%; height: 300px; overflow: hidden; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; transition: 0.6s; }
+        .alumni-card:hover .img-box img { transform: scale(1.1); }
+
+        .info-box { padding: 25px; text-align: center; }
+        .info-box h4 { font-size: 1.4rem; margin-bottom: 5px; color: #fff; }
+        .status-tag { 
+            display: inline-block; padding: 5px 15px; background: rgba(56, 189, 248, 0.2); 
+            color: #38bdf8; border-radius: 50px; font-size: 0.8rem; font-weight: 600; margin-bottom: 15px;
+        }
+        .quote { color: #94a3b8; font-style: italic; font-size: 0.9rem; position: relative; }
+        .quote::before { content: '"'; font-size: 2rem; color: #38bdf8; opacity: 0.3; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .alumni-card { animation: fadeIn 0.8s ease forwards; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+    </a>
+
+    <div class="container">
+        <div class="header-section">
+            <h1>🎓 Jejak Alumni</h1>
+            <p>Kebanggaan DigiSmart Library yang kini menempuh pendidikan di sekolah unggulan.</p>
+        </div>
+
+        <div class="alumni-grid">
+            <div class="alumni-card">
+                <div class="img-box"><img src="smp.jpg" alt="Kharin Pasaribu"></div>
+                <div class="info-box">
+                    <h4>Kharin Pasaribu</h4>
+                    <span class="status-tag">SMA UNGGUL DEL</span>
+                    <p class="quote">"Berkat akses literasi yang mudah di sekolah, saya bisa mempersiapkan diri lebih matang untuk seleksi masuk sekolah impian."</p>
+                </div>
+            </div>
+
+            <div class="alumni-card">
+                <div class="img-box"><img src="siswa2.jpg" alt="Ahyeon Pricilia"></div>
+                <div class="info-box">
+                    <h4>Ahyeon Pricilia</h4>
+                    <span class="status-tag">SMA PRADITA DIRGANTARA</span>
+                    <p class="quote">"Modul belajar digital sangat membantu saya memahami materi sulit dengan cara yang lebih menyenangkan dan praktis."</p>
+                </div>
+            </div>
+
+            <div class="alumni-card">
+                <div class="img-box"><img src="siswa6.jpg" alt="Wonyoung Silalahi"></div>
+                <div class="info-box">
+                    <h4>Wonyoung Silalahi</h4>
+                    <span class="status-tag">SMAN 8 JAKARTA</span>
+                    <p class="quote">"Pengalaman literasi di sini menumbuhkan rasa percaya diri saya untuk bersaing di tingkat nasional. Terima kasih DigiSmart!"</p>
+                </div>
+            </div>
+
+            <div class="alumni-card">
+                <div class="img-box"><img src="siswa3.jpg" alt="Yuha Aritonang"></div>
+                <div class="info-box">
+                    <h4>Yuha Aritonang</h4>
+                    <span class="status-tag">SMAS DARMA YUDHA</span>
+                    <p class="quote">"Fasilitas yang luar biasa. Perpustakaan digital ini benar-benar jembatan bagi kami untuk meraih cita-cita yang lebih tinggi."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
