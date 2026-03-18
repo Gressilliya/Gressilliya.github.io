@@ -92,9 +92,96 @@
     <button class="tab-btn" onclick="showKelas('k9')">Kelas 9 & UN</button>
 </div>
 
-<div id="k7" class="content-section active">
-    <h3 class="section-title">📚 Mata Pelajaran Utama</h3>
-    <div class="grid-mapel" id="list-k7"></div>
+<section class="koleksi-buku-7">
+    <div class="container">
+        <h2 class="title-section">Koleksi Buku Paket Kelas 7</h2>
+        
+        <div class="book-grid">
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="Bahasainggriskls7.png" alt="Bahasa Inggris">
+                </div>
+                <div class="book-info">
+                    <h3>Bahasa Inggris</h3>
+                    <p>Siswa - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('https://drive.google.com/file/d/1mUGLQHljTqufKUgdsutW6Z7OClU5US0I/view?usp=drive_link')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="Islamkls7.png" alt="Agama Islam">
+                </div>
+                <div class="book-info">
+                    <h3>Pendidikan Agama Islam</h3>
+                    <p>Guru - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_ISLAM')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="Kristenkls7.png" alt="Agama Kristen">
+                </div>
+                <div class="book-info">
+                    <h3>Agama Kristen</h3>
+                    <p>Guru - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KRISTEN')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="Katolikkls7.png" alt="Agama Katolik">
+                </div>
+                <div class="book-info">
+                    <h3>Agama Katolik</h3>
+                    <p>Siswa - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KATOLIK')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="hindukls7.png" alt="Agama Hindu">
+                </div>
+                <div class="book-info">
+                    <h3>Agama Hindu</h3>
+                    <p>Guru - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_HINDU')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="cbkls7.png" alt="Agama Buddha">
+                </div>
+                <div class="book-info">
+                    <h3>Agama Buddha</h3>
+                    <p>Guru - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_BUDDHA')">Baca PDF</button>
+                </div>
+            </div>
+
+            <div class="book-card">
+                <div class="book-cover">
+                    <img src="Khonghucukls7.png" alt="Agama Khonghucu">
+                </div>
+                <div class="book-info">
+                    <h3>Agama Khonghucu</h3>
+                    <p>Guru - Kelas 7</p>
+                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KHONGHUCU')">Baca PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div id="bookModal" class="modal-overlay">
+    <div class="modal-content">
+        <span class="close-btn" onclick="closeBook()">&times; Simpan / Tutup</span>
+        <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+    </div>
 </div>
 
 <div id="k8" class="content-section">
