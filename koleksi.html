@@ -134,10 +134,13 @@
             <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
         </div>
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="cbkls7.png" class="img-buku"></div>
-            <h4>Agama Buddha</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper">
+        <img src="cbkls7.png" alt="Buku Agama Buddha" class="img-buku">
+    </div>
+    <h4>Pendidikan Agama Buddha</h4>
+    <p style="font-size: 0.8rem; color: #666; margin-bottom: 10px;">Kelas 7 SMP</p>
+    <button class="btn-baca" onclick="openPDF('1tp_SJmXv4RwMoqzgS4nzoX9jYRFENkZ4')">Baca Buku</button>
+</div>
         <div class="card-mapel card-buku">
             <div class="cover-wrapper"><img src="Khonghucukls7.png" class="img-buku"></div>
             <h4>Agama Khonghucu</h4>
@@ -263,6 +266,27 @@
         if (event.target == modal) {
             closePDF();
         }
+    }
+</script>
+
+<script>
+    function openPDF(id) {
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+        
+        // Link preview agar PDF tampil di dalam website, bukan download
+        frame.src = `https://drive.google.com/file/d/${id}/preview`;
+        
+        // Menampilkan modal pop-up
+        modal.style.display = 'block';
+    }
+
+    function closePDF() {
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+        
+        modal.style.display = 'none';
+        frame.src = ''; // Mengosongkan frame agar tidak membebani browser
     }
 </script>
     
