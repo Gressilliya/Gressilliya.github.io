@@ -142,7 +142,25 @@
     <div class="cover-wrapper"><img src="pknkls7.png" class="img-buku"></div>
     <h4>Pendidikan Kewarganegaraan</h4>
     <button class="btn-baca" onclick="openPDF('1IofjieXRv7Fo5iVu57e5FO7UQfbN58nh')">Baca Buku</button>
-</div>       
+</div>
+
+        <div class="card-mapel card-buku">
+    <div class="cover-wrapper"><img src="informatikakls7.png" class="img-buku"></div>
+    <h4>Informatika</h4>
+    <button class="btn-baca" onclick="openPDF('1xBDiofEf8-YxlP0izfkbxoaO5Cf1xqfw')">Baca Buku</button>
+</div>
+
+<div class="card-mapel card-buku">
+    <div class="cover-wrapper"><img src="ipskls7.png" class="img-buku"></div>
+    <h4>Ilmu Pengetahuan Sosial (IPS)</h4>
+    <button class="btn-baca" onclick="openPDF('1SlV5PDiR6HC3TN6s-a1Cgts73Ja24ieu')">Baca Buku</button>
+</div>
+
+<div class="card-mapel card-buku">
+    <div class="cover-wrapper"><img src="penjaskls7.png" class="img-buku"></div>
+    <h4>Pendidikan Jasmani, Olahraga, dan Kesehatan</h4>
+    <button class="btn-baca" onclick="openPDF('11bZXm433SCM4l2ca7Htl-6ZlP-GHdY0C')">Baca Buku</button>
+</div>
         
         <div class="card-mapel card-buku">
     <div class="cover-wrapper"><img src="Islamkls7.png" class="img-buku"></div>
@@ -402,6 +420,97 @@ function closePDF() {
     }
 
     // 5. Fitur Tambahan: Menutup modal dengan tombol 'Esc' di keyboard (Biar makin pro!)
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closePDF();
+        }
+    });
+</script>
+
+<script>
+    /**
+     * Fungsi Utama: Membuka PDF dari Google Drive
+     * @param {string} id - ID unik file dari link Google Drive
+     */
+    function openPDF(id) {
+        // 1. Ambil elemen modal dan iframe yang sudah dibuat di HTML
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+
+        // 2. Validasi: Cek apakah ID file sudah diisi atau belum
+        if (!id || id === 'ID_DARI_GDRIVE' || id === 'MASUKKAN_ID_GDRIVE_DISINI') {
+            alert("Maaf Gressilliya, link buku ini belum siap atau ID-nya salah.");
+            return;
+        }
+
+        // 3. Masukkan link preview Google Drive ke dalam iframe
+        // Kita menggunakan format /preview agar PDF tampil di dalam website kita
+        frame.src = `https://drive.google.com/file/d/${id}/preview`;
+
+        // 4. Tampilkan modal pop-up (ubah dari display:none menjadi display:block)
+        modal.style.display = 'block';
+        
+        // Tambahan: Mencegah scroll pada body saat membaca buku
+        document.body.style.overflow = 'hidden';
+    }
+
+    /**
+     * Fungsi: Menutup PDF dan Membersihkan Frame
+     */
+    function closePDF() {
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+
+        // 1. Sembunyikan modal
+        modal.style.display = 'none';
+
+        // 2. PENTING: Kosongkan src iframe agar PDF berhenti loading di latar belakang
+        frame.src = '';
+
+        // 3. Kembalikan fungsi scroll pada body
+        document.body.style.overflow = 'auto';
+    }
+
+    /**
+     * Fungsi: Navigasi Tab (Ganti Kelas 7, 8, dan 9)
+     * @param {string} kelasId - ID section kelas (k7, k8, atau k9)
+     */
+    function showKelas(kelasId) {
+        // 1. Sembunyikan semua konten section kelas
+        document.querySelectorAll('.content-section').forEach(section => {
+            section.classList.remove('active');
+        });
+
+        // 2. Matikan status 'active' pada semua tombol tab
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        // 3. Tampilkan section kelas yang dipilih
+        const selectedSection = document.getElementById(kelasId);
+        if (selectedSection) {
+            selectedSection.classList.add('active');
+        }
+
+        // 4. Beri tanda 'active' (warna biru) pada tombol yang sedang diklik
+        if (event && event.currentTarget) {
+            event.currentTarget.classList.add('active');
+        }
+    }
+
+    /**
+     * Fitur Tambahan (User Experience):
+     */
+     
+    // A. Menutup modal jika pengguna klik di luar area PDF (di area hitam)
+    window.onclick = function(event) {
+        const modal = document.getElementById('pdfModal');
+        if (event.target == modal) {
+            closePDF();
+        }
+    }
+
+    // B. Menutup modal dengan menekan tombol 'Escape' di keyboard
     document.addEventListener('keydown', function(event) {
         if (event.key === "Escape") {
             closePDF();
