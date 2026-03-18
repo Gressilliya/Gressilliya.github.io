@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Matcher | DigiSmart Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #000;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container { width: 100%; max-width: 600px; padding: 20px; }
+
+        /* Gaya Card Utama (Sesuai Gambar Kamu) */
+        .game-card {
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid #00f2ff;
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            position: relative;
+        }
+
+        .icon-box { font-size: 60px; color: #00f2ff; margin-bottom: 20px; }
+        
+        /* Form Input Nama & Kelas */
+        .input-group { margin-bottom: 20px; text-align: left; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #00f2ff; }
+        input, select {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #00f2ff;
+            background: rgba(0,0,0,0.5); color: white; font-size: 16px;
+        }
+
+        /* Tombol Persis Gambar */
+        .btn-action {
+            display: inline-block;
+            padding: 12px 40px;
+            background: linear-gradient(to right, #00d2ff, #9d50bb);
+            color: white; border: none; border-radius: 50px;
+            font-weight: 800; cursor: pointer; text-transform: uppercase;
+            margin-top: 20px; transition: 0.3s;
+        }
+        .btn-action:hover { transform: scale(1.05); box-shadow: 0 0 15px #00d2ff; }
+
+        /* Area Game Matcher */
+        #game-play { display: none; }
+        .match-item {
+            background: rgba(255,255,255,0.05);
+            border: 1px dashed #00f2ff;
+            padding: 15px; margin: 10px 0; border-radius: 12px;
+            cursor: grab; transition: 0.3s;
+        }
+        .drop-zone {
+            background: rgba(0, 242, 255, 0.1);
+            border: 2px solid #00f2ff;
+            min-height: 60px; border-radius: 12px;
+            margin-top: 5px; display: flex; align-items: center; justify-content: center;
+        }
+
+        /* Leaderboard */
+        .rank-list { text-align: left; margin-top: 20px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; }
+        .rank-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+
+        .back-btn { position: fixed; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <a href="game.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+    <div class="container">
+        <div class="game-card" id="auth-screen">
+            <div class="icon-box"><i class="fas fa-puzzle-piece"></i></div>
+            <h2>Source Matcher</h2>
+            <p style="color: #ccc; margin-bottom: 20px;">Daftarkan dirimu sebelum bermain!</p>
+            
+            <div class="input-group">
+                <label>Nama Lengkap</label>
+                <input type="text" id="player-name" placeholder="Masukkan nama...">
+            </div>
+            <div class="input-group">
+                <label>Kelas</label>
+                <select id="player-class">
+                    <option value="7">Kelas 7</option>
+                    <option value="8">Kelas 8</option>
+                    <option value="9">Kelas 9</option>
+                </select>
+            </div>
+            <button class="btn-action" onclick="toGame()">COBA PUZZLE</button>
+
+            <div class="rank-list">
+                <p style="font-weight: 800; margin-bottom: 10px;"><i class="fas fa-trophy"></i> TOP RANKING</p>
+                <div id="leaderboard-content"></div>
+            </div>
+        </div>
+
+        <div class="game-card" id="game-play">
+            <h3 id="current-player-info" style="font-size: 14px; color: #00f2ff; margin-bottom: 10px;"></h3>
+            <p>Tarik berita ke sumber yang benar!</p>
+            
+            <div id="news-container">
+                <div class="match-item" draggable="true" id="news1" ondragstart="drag(event)">"Siswa SMP Menang Olimpiade Internasional"</div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <p style="font-size: 12px; margin-bottom: 5px;">SUMBER: SITUS BERITA RESMI (.GO.ID / .CO.ID)</p>
+                <div class="drop-zone" ondrop="drop(event, 'official')" ondragover="allowDrop(event)">Drop di sini</div>
+                
+                <p style="font-size: 12px; margin-top: 15px; margin-bottom: 5px;">SUMBER: PESAN BERANTAI (WHATSAPP)</p>
+                <div class="drop-zone" ondrop="drop(event, 'hoax')" ondragover="allowDrop(event)">Drop di sini</div>
+            </div>
+            
+            <p style="margin-top: 20px;">Waktu: <span id="timer">30</span>s</p>
+        </div>
+    </div>
+
+    <script>
+        let playerName = "";
+        let playerClass = "";
+        let score = 0;
+        let timeLeft = 30;
+        let timer;
+
+        // Tampilkan Ranking Saat Halaman Dibuka
+        window.onload = updateLeaderboard;
+
+        function toGame() {
+            playerName = document.getElementById('player-name').value;
+            playerClass = document.getElementById('player-class').value;
+
+            if(playerName.trim() === "") {
+                alert("Isi nama dulu, Gressilliya!");
+                return;
+            }
+
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('game-play').style.display = 'block';
+            document.getElementById('current-player-info').innerText = `Player: ${playerName} | Kelas: ${playerClass}`;
+            startTimer();
+        }
+
+        function allowDrop(ev) { ev.preventDefault(); }
+        function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
+
+        function drop(ev, type) {
+            ev.preventDefault();
+            let data = ev.dataTransfer.getData("text");
+            if(type === 'official') {
+                score += 50;
+                alert("BENAR! Sumber resmi terpercaya.");
+            } else {
+                alert("WASPADA! Itu biasanya pesan hoax.");
+            }
+            endGame();
+        }
+
+        function startTimer() {
+            timer = setInterval(() => {
+                timeLeft--;
+                document.getElementById('timer').innerText = timeLeft;
+                if(timeLeft <= 0) endGame();
+            }, 1000);
+        }
+
+        function endGame() {
+            clearInterval(timer);
+            saveScore(playerName, score);
+            alert(`Selesai! Skor ${playerName}: ${score}`);
+            location.reload();
+        }
+
+        function saveScore(name, points) {
+            let ranks = JSON.parse(localStorage.getItem('matcherRanks')) || [];
+            ranks.push({name: name, score: points});
+            ranks.sort((a,b) => b.score - a.score);
+            localStorage.setItem('matcherRanks', JSON.stringify(ranks.slice(0, 5)));
+        }
+
+        function updateLeaderboard() {
+            let ranks = JSON.parse(localStorage.getItem('matcherRanks')) || [];
+            let html = "";
+            ranks.forEach((r, index) => {
+                html += `<div class="rank-item"><span>${index+1}. ${r.name}</span> <span>${r.score} XP</span></div>`;
+            });
+            document.getElementById('leaderboard-content').innerHTML = html || "Belum ada pemain.";
+        }
+    </script>
+</body>
+</html>
