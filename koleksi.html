@@ -109,10 +109,10 @@
     <h3 class="section-title">📖 Buku Paket Digital</h3>
     <div class="grid-mapel">
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="Bahasainggriskls7.png" class="img-buku"></div>
-            <h4>Bahasa Inggris</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper"><img src="Bahasainggriskls7.png" class="img-buku"></div>
+    <h4>Bahasa Inggris</h4>
+    <button class="btn-baca" onclick="openPDF('1mUGLQHljTqufKUgdsutW6Z7OClU5US0I')">Baca Buku</button>
+</div>
         <div class="card-mapel card-buku">
             <div class="cover-wrapper"><img src="Islamkls7.png" class="img-buku"></div>
             <h4>Agama Islam</h4>
@@ -226,5 +226,45 @@
     }
 </script>
 
+<script>
+    // 1. Fungsi untuk Membuka PDF
+    function openPDF(id) {
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+        
+        // Link preview Google Drive
+        frame.src = `https://drive.google.com/file/d/${id}/preview`;
+        
+        // Menampilkan modal (pop-up)
+        modal.style.display = 'block';
+    }
+
+    // 2. Fungsi untuk Menutup PDF
+    function closePDF() {
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+        
+        modal.style.display = 'none';
+        frame.src = ''; // Menghapus isi frame agar tidak berat saat ditutup
+    }
+
+    // 3. Fungsi Tab untuk Ganti Kelas
+    function showKelas(id) {
+        document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        
+        document.getElementById(id).classList.add('active');
+        event.currentTarget.classList.add('active');
+    }
+
+    // 4. Menutup modal jika user klik di area hitam (luar kotak putih)
+    window.onclick = function(event) {
+        const modal = document.getElementById('pdfModal');
+        if (event.target == modal) {
+            closePDF();
+        }
+    }
+</script>
+    
 </body>
 </html>
