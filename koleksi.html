@@ -8,47 +8,63 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #f0f4f8; color: #1e293b; padding-bottom: 50px; }
+        body { background: #f0f4f8; color: #1e293b; padding-bottom: 50px; overflow-x: hidden; }
 
         /* Header Modern */
         .header {
             background: linear-gradient(135deg, #007bff, #00d2ff);
-            padding: 40px 20px; text-align: center; color: white;
+            padding: 60px 20px; text-align: center; color: white;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1); margin-bottom: 30px;
-            border-bottom-left-radius: 30px; border-bottom-right-radius: 30px;
+            border-bottom-left-radius: 40px; border-bottom-right-radius: 40px;
+            position: relative;
         }
         .btn-back {
             position: absolute; top: 20px; left: 20px;
-            color: white; text-decoration: none; font-weight: 600;
+            color: white; text-decoration: none; font-weight: 600; background: rgba(255,255,255,0.2);
+            padding: 8px 15px; border-radius: 50px; backdrop-filter: blur(5px); transition: 0.3s;
         }
+        .btn-back:hover { background: white; color: #007bff; }
 
         /* Tab System */
-        .tabs-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; }
+        .tabs-container { display: flex; justify-content: center; gap: 10px; margin-bottom: 30px; padding: 0 10px; }
         .tab-btn {
             padding: 12px 25px; border: none; background: white;
             color: #007bff; border-radius: 50px; font-weight: 700;
             cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
-        .tab-btn.active { background: #007bff; color: white; transform: scale(1.1); }
+        .tab-btn.active { background: #007bff; color: white; transform: scale(1.1); box-shadow: 0 10px 20px rgba(0,123,255,0.2); }
 
-        /* Grid Layout */
+        /* Content Section */
         .content-section { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: none; animation: slideUp 0.5s ease; }
         .content-section.active { display: block; }
         .section-title { margin: 30px 0 20px; font-size: 1.4rem; font-weight: 800; color: #334155; display: flex; align-items: center; gap: 10px; }
 
-        .grid-mapel { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 20px; }
+        /* Grid Layout */
+        .grid-mapel { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
 
-        /* Card Styling */
+        /* Card Styling (General) */
         .card-mapel {
             background: white; padding: 25px; border-radius: 20px; text-align: center;
             transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); cursor: pointer;
             border: 1px solid #e2e8f0; box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .card-mapel:hover { transform: translateY(-10px) rotate(2deg); border-color: #007bff; box-shadow: 0 15px 30px rgba(0,123,255,0.1); }
-        .card-mapel i { font-size: 2.5rem; margin-bottom: 15px; display: block; }
-        .card-mapel h4 { font-size: 0.95rem; font-weight: 700; }
+        .card-mapel:hover { transform: translateY(-10px) rotate(1deg); border-color: #007bff; box-shadow: 0 15px 30px rgba(0,123,255,0.1); }
+        .card-mapel i { font-size: 2.5rem; margin-bottom: 15px; }
 
-        /* Warna Mapel */
+        /* Card Khusus Buku (Kelas 7) */
+        .card-buku { padding: 15px; }
+        .cover-wrapper { width: 100%; height: 230px; overflow: hidden; border-radius: 15px; margin-bottom: 15px; border: 1px solid #eee; }
+        .img-buku { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .card-buku:hover .img-buku { transform: scale(1.1); }
+        .card-buku h4 { font-size: 0.9rem; margin-bottom: 10px; height: 40px; display: flex; align-items: center; }
+        .btn-baca { 
+            width: 100%; padding: 10px; border: none; border-radius: 12px; 
+            background: #007bff; color: white; font-weight: 700; cursor: pointer; transition: 0.3s;
+        }
+        .btn-baca:hover { background: #0056b3; letter-spacing: 0.5px; }
+
+        /* Warna Icon */
         .c-mtk { color: #f59e0b; } .c-ipa { color: #10b981; } .c-ips { color: #3b82f6; }
         .c-ing { color: #ec4899; } .c-ind { color: #6366f1; } .c-pkn { color: #ef4444; }
         .c-tik { color: #06b6d4; } .c-rel { color: #8b5cf6; }
@@ -61,29 +77,26 @@
             border: none; background: #f59e0b; color: white; font-weight: 700; cursor: pointer;
         }
 
-        /* Modal Agama */
+        /* Modal PDF & Agama */
         .modal {
-            display: none; position: fixed; z-index: 1000; left: 0; top: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px);
         }
         .modal-content {
-            background: white; margin: 10% auto; padding: 30px; border-radius: 25px;
-            width: 90%; max-width: 500px; text-align: center; position: relative;
+            background: white; margin: 2% auto; padding: 20px; border-radius: 25px;
+            width: 90%; height: 90%; position: relative; animation: slideUp 0.4s ease;
         }
-        .close-btn { position: absolute; right: 20px; top: 15px; font-size: 1.5rem; cursor: pointer; }
-        .agama-list { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; }
-        .btn-agama { padding: 15px; border: 1px solid #e2e8f0; border-radius: 15px; background: #f8fafc; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        .btn-agama:hover { background: #8b5cf6; color: white; }
-
-        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .close-btn { position: absolute; right: 20px; top: -45px; color: white; font-size: 1.5rem; cursor: pointer; font-weight: bold; }
+        
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
 <header class="header">
-    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Home</a>
+    <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
     <h1>Pusat <span>Koleksi DigiSmart</span></h1>
-    <p>Materi Lengkap & Latihan Soal untuk Kamu</p>
+    <p>Materi Pembelajaran Kreatif untuk Masa Depanmu</p>
 </header>
 
 <div class="tabs-container">
@@ -92,95 +105,44 @@
     <button class="tab-btn" onclick="showKelas('k9')">Kelas 9 & UN</button>
 </div>
 
-<section class="koleksi-buku-7">
-    <div class="container">
-        <h2 class="title-section">Koleksi Buku Paket Kelas 7</h2>
-        
-        <div class="book-grid">
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="Bahasainggriskls7.png" alt="Bahasa Inggris">
-                </div>
-                <div class="book-info">
-                    <h3>Bahasa Inggris</h3>
-                    <p>Siswa - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('https://drive.google.com/file/d/1mUGLQHljTqufKUgdsutW6Z7OClU5US0I/view?usp=drive_link')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="Islamkls7.png" alt="Agama Islam">
-                </div>
-                <div class="book-info">
-                    <h3>Pendidikan Agama Islam</h3>
-                    <p>Guru - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_ISLAM')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="Kristenkls7.png" alt="Agama Kristen">
-                </div>
-                <div class="book-info">
-                    <h3>Agama Kristen</h3>
-                    <p>Guru - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KRISTEN')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="Katolikkls7.png" alt="Agama Katolik">
-                </div>
-                <div class="book-info">
-                    <h3>Agama Katolik</h3>
-                    <p>Siswa - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KATOLIK')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="hindukls7.png" alt="Agama Hindu">
-                </div>
-                <div class="book-info">
-                    <h3>Agama Hindu</h3>
-                    <p>Guru - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_HINDU')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="cbkls7.png" alt="Agama Buddha">
-                </div>
-                <div class="book-info">
-                    <h3>Agama Buddha</h3>
-                    <p>Guru - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_BUDDHA')">Baca PDF</button>
-                </div>
-            </div>
-
-            <div class="book-card">
-                <div class="book-cover">
-                    <img src="Khonghucukls7.png" alt="Agama Khonghucu">
-                </div>
-                <div class="book-info">
-                    <h3>Agama Khonghucu</h3>
-                    <p>Guru - Kelas 7</p>
-                    <button class="btn-read" onclick="openBook('ISI_ID_FILE_KHONGHUCU')">Baca PDF</button>
-                </div>
-            </div>
+<div id="k7" class="content-section active">
+    <h3 class="section-title">📖 Buku Paket Digital</h3>
+    <div class="grid-mapel">
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="Bahasainggriskls7.png" class="img-buku"></div>
+            <h4>Bahasa Inggris</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
         </div>
-    </div>
-</section>
-
-<div id="bookModal" class="modal-overlay">
-    <div class="modal-content">
-        <span class="close-btn" onclick="closeBook()">&times; Simpan / Tutup</span>
-        <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0"></iframe>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="Islamkls7.png" class="img-buku"></div>
+            <h4>Agama Islam</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="Kristenkls7.png" class="img-buku"></div>
+            <h4>Agama Kristen</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="Katolikkls7.png" class="img-buku"></div>
+            <h4>Agama Katolik</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="hindukls7.png" class="img-buku"></div>
+            <h4>Agama Hindu</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="cbkls7.png" class="img-buku"></div>
+            <h4>Agama Buddha</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="Khonghucukls7.png" class="img-buku"></div>
+            <h4>Agama Khonghucu</h4>
+            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
+        </div>
     </div>
 </div>
 
@@ -197,51 +159,42 @@
         <div class="card-mapel card-un"><i class="fas fa-pen-nib c-ind"></i><h4>Fokus UN: B. Indonesia</h4><button class="btn-kuis-un">Mulai Kuis 📝</button></div>
         <div class="card-mapel card-un"><i class="fas fa-language c-ing"></i><h4>Fokus UN: B. Inggris</h4><button class="btn-kuis-un">Mulai Kuis 📝</button></div>
     </div>
-    
     <h3 class="section-title">📚 Mata Pelajaran Reguler</h3>
     <div class="grid-mapel" id="list-k9"></div>
 </div>
 
-<div id="agamaModal" class="modal">
+<div id="pdfModal" class="modal">
     <div class="modal-content">
-        <span class="close-btn" onclick="closeAgama()">&times;</span>
-        <h3>Pilih Pendidikan Agama</h3>
-        <div class="agama-list">
-            <button class="btn-agama">Islam</button>
-            <button class="btn-agama">Kristen Protestan</button>
-            <button class="btn-agama">Katolik</button>
-            <button class="btn-agama">Hindu</button>
-            <button class="btn-agama">Buddha</button>
-            <button class="btn-agama">Khonghucu</button>
-        </div>
+        <span class="close-btn" onclick="closePDF()">&times; Tutup / Selesai Membaca</span>
+        <iframe id="pdfFrame" src="" width="100%" height="100%" frameborder="0" style="border-radius: 15px;"></iframe>
     </div>
 </div>
 
 <script>
-    const mapels = [
+    const mapelsReguler = [
         { name: 'Matematika', icon: 'fa-square-root-alt', color: 'c-mtk' },
         { name: 'IPA Terpadu', icon: 'fa-microscope', color: 'c-ipa' },
         { name: 'IPS Terpadu', icon: 'fa-atlas', color: 'c-ips' },
         { name: 'B. Inggris', icon: 'fa-comments', color: 'c-ing' },
         { name: 'B. Indonesia', icon: 'fa-pen-fancy', color: 'c-ind' },
-        { name: 'Pendidikan Agama', icon: 'fa-pray', color: 'c-rel', isAgama: true },
+        { name: 'Pendidikan Agama', icon: 'fa-pray', color: 'c-rel' },
         { name: 'PKN', icon: 'fa-balance-scale', color: 'c-pkn' },
-        { name: 'Informatika (TIK)', icon: 'fa-laptop-code', color: 'c-tik' }
+        { name: 'Informatika', icon: 'fa-laptop-code', color: 'c-tik' }
     ];
 
-    function renderMapel(containerId) {
+    function renderReguler(containerId) {
         const container = document.getElementById(containerId);
-        mapels.forEach(m => {
+        mapelsReguler.forEach(m => {
             const card = document.createElement('div');
             card.className = 'card-mapel';
-            if(m.isAgama) card.onclick = openAgama;
             card.innerHTML = `<i class="fas ${m.icon} ${m.color}"></i><h4>${m.name}</h4>`;
             container.appendChild(card);
         });
     }
 
-    // Load semua list
-    ['list-k7', 'list-k8', 'list-k9'].forEach(id => renderMapel(id));
+    // Load list untuk kelas 8 dan 9
+    renderReguler('list-k8');
+    renderReguler('list-k9');
 
     function showKelas(id) {
         document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
@@ -250,9 +203,27 @@
         event.currentTarget.classList.add('active');
     }
 
-    function openAgama() { document.getElementById('agamaModal').style.display = 'block'; }
-    function closeAgama() { document.getElementById('agamaModal').style.display = 'none'; }
-    window.onclick = function(event) { if (event.target == document.getElementById('agamaModal')) closeAgama(); }
+    function openPDF(id) {
+        if(id === 'MASUKKAN_ID_GDRIVE_DISINI') {
+            alert("Gressilliya, jangan lupa isi ID File Google Drive-nya di kode ya!");
+            return;
+        }
+        const modal = document.getElementById('pdfModal');
+        const frame = document.getElementById('pdfFrame');
+        frame.src = `https://drive.google.com/file/d/${id}/preview`;
+        modal.style.display = 'block';
+    }
+
+    function closePDF() {
+        document.getElementById('pdfModal').style.display = 'none';
+        document.getElementById('pdfFrame').src = '';
+    }
+
+    // Tutup modal jika klik di luar area konten
+    window.onclick = function(event) {
+        const modal = document.getElementById('pdfModal');
+        if (event.target == modal) closePDF();
+    }
 </script>
 
 </body>
