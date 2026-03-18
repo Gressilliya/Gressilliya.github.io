@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Observatorium Digital | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: #020617; /* Biru sangat gelap (angkasa) */
+            color: white;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* Animasi Bintang Berkedip (Twinkling Stars) */
+        .stars {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: transparent;
+            z-index: -1;
+            box-shadow: 
+                20vw 10vh 2px #fff, 40vw 30vh 1px #fff, 60vw 20vh 2px #fff,
+                80vw 50vh 1px #fff, 10vw 80vh 2px #fff, 90vw 90vh 1px #fff,
+                30vw 70vh 2px #fff, 50vw 40vh 1px #fff;
+            animation: twinkling 3s infinite alternate;
+        }
+
+        @keyframes twinkling {
+            0% { opacity: 0.3; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            animation: glowText 2s infinite alternate;
+        }
+
+        @keyframes glowText {
+            from { text-shadow: 0 0 10px #3b82f6; }
+            to { text-shadow: 0 0 30px #60a5fa, 0 0 10px #ffffff; }
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #60a5fa;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            transition: 0.3s;
+        }
+        .btn-back:hover { color: white; text-shadow: 0 0 10px #fff; }
+
+        .astro-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Card Astronomi dengan Efek Orbit */
+        .astro-card {
+            background: rgba(30, 41, 59, 0.4);
+            border-radius: 50% 50% 20px 20px; /* Bentuk melengkung atas seperti kubah */
+            padding: 40px 30px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+        }
+
+        .astro-card:hover {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: #60a5fa;
+            transform: translateY(-15px) rotateX(10deg);
+            box-shadow: 0 20px 50px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Ikon Roket/Planet Meluncur */
+        .icon-box {
+            font-size: 4rem;
+            margin-bottom: 25px;
+            color: #3b82f6;
+            display: inline-block;
+            animation: floatingAstro 4s infinite ease-in-out;
+        }
+
+        @keyframes floatingAstro {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+
+        .astro-card h3 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+
+        .astro-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Tombol Galaxy */
+        .btn-baca {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(90deg, #1d4ed8, #3b82f6, #1d4ed8);
+            background-size: 200% auto;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 700;
+            text-transform: uppercase;
+            transition: 0.5s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-baca:hover {
+            background-position: right center;
+            box-shadow: 0 0 20px #3b82f6;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars"></div>
+
+    <div class="header">
+        <a href="index.html" class="btn-back"><i class="fas fa-satellite"></i> RETURN TO BASE</a>
+        <h1>Astro <span>Voyage</span></h1>
+        <p>Menjelajahi batas cakrawala dari meja belajarmu.</p>
+    </div>
+
+    <div class="astro-grid">
+        <div class="astro-card">
+            <div class="icon-box"><i class="fas fa-rocket"></i></div>
+            <h3>Orbit Planet</h3>
+            <p>Mempelajari hukum gravitasi dan cara planet berputar di tata surya.</p>
+            <a href="#" class="btn-baca" onclick="alert('Mission: PDF not found in sector 7.')">LAUNCH READ</a>
+        </div>
+
+        <div class="astro-card">
+            <div class="icon-box" style="animation-delay: 1s;"><i class="fas fa-user-astronaut"></i></div>
+            <h3>Kehidupan Astronot</h3>
+            <p>Bagaimana rasanya makan dan tidur di stasiun luar angkasa internasional (ISS)?</p>
+            <a href="#" class="btn-baca" onclick="alert('Mission: Establishing connection...')">LAUNCH READ</a>
+        </div>
+
+        <div class="astro-card">
+            <div class="icon-box" style="animation-delay: 2s;"><i class="fas fa-meteor"></i></div>
+            <h3>Bahaya Meteor</h3>
+            <p>Mengenal benda-benda langit yang melintasi atmosfer bumi setiap hari.</p>
+            <a href="#" class="btn-baca" onclick="alert('Mission: Data corrupted.')">LAUNCH READ</a>
+        </div>
+    </div>
+
+</body>
+</html>
