@@ -7,88 +7,74 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* CSS UNTUK MENJAGA TAMPILAN PERSIS SEPERTI GAMBAR */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
-            background: #000; /* Hitam pekat sesuai gambar */
+            background: #000;
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            padding: 20px;
         }
 
-        /* Tombol Kembali (Tetap di kiri atas) */
         .btn-back {
             position: fixed; top: 20px; left: 20px;
             color: white; text-decoration: none; font-size: 14px;
             background: rgba(255,255,255,0.1); padding: 8px 15px;
             border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
         }
 
-        /* Card Utama - Mengikuti gaya gambar Arcade Literasi */
         .quiz-card {
-            width: 90%;
+            width: 100%;
             max-width: 500px;
-            background: rgba(15, 23, 42, 0.6);
-            border: 2px solid #00f2ff; /* Border Glow Biru */
+            background: rgba(15, 23, 42, 0.8);
+            border: 2px solid #00f2ff;
             border-radius: 30px;
-            padding: 40px;
+            padding: 30px;
             text-align: center;
             box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
         }
 
-        .icon-box {
-            font-size: 80px;
-            color: #00f2ff;
-            margin-bottom: 20px;
+        .icon-box { font-size: 60px; color: #00f2ff; margin-bottom: 15px; }
+        h2 { font-size: 24px; margin-bottom: 10px; }
+        
+        /* Form Registrasi */
+        .reg-form { margin: 20px 0; text-align: left; }
+        .reg-form label { display: block; margin-bottom: 5px; font-size: 14px; color: #00f2ff; }
+        .reg-form input, .reg-form select {
+            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(0, 242, 255, 0.5);
+            background: rgba(0,0,0,0.3); color: white; margin-bottom: 15px; outline: none;
         }
 
-        h2 { font-size: 24px; margin-bottom: 10px; font-weight: 600; }
-        p.desc { color: #ccc; font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
-
-        /* Gaya Tombol Mulai Kuis - PERSIS SEPERTI GAMBAR */
         .btn-mulai {
-            display: inline-block;
-            padding: 12px 40px;
-            background: linear-gradient(to right, #00d2ff, #9d50bb); /* Biru ke Ungu */
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 16px;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: 0.3s;
+            display: inline-block; padding: 12px 40px;
+            background: linear-gradient(to right, #00d2ff, #9d50bb);
+            color: white; border: none; border-radius: 50px;
+            font-weight: 800; font-size: 16px; cursor: pointer;
+            text-transform: uppercase; transition: 0.3s;
         }
         .btn-mulai:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 210, 255, 0.5); }
 
-        /* Elemen Game Quiz */
-        #quiz-game { display: none; } /* Tersembunyi sampai tombol diklik */
-        
-        .question-box { font-size: 18px; margin-bottom: 20px; font-weight: 600; }
-        
-        .options-container { display: grid; gap: 10px; }
+        /* Game & Ranking Styles */
+        #quiz-game, #result-screen { display: none; }
         .opt-btn {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            color: white;
-            padding: 15px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: 0.3s;
-            text-align: left;
-            font-size: 14px;
+            width: 100%; background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3); color: white;
+            padding: 15px; border-radius: 15px; cursor: pointer;
+            margin-bottom: 10px; transition: 0.3s; text-align: left;
         }
         .opt-btn:hover { background: rgba(0, 242, 255, 0.1); border-color: #00f2ff; }
-        
-        .correct { background: #22c55e !important; border-color: #4ade80 !important; }
-        .wrong { background: #ef4444 !important; border-color: #f87171 !important; }
+        .correct { background: #22c55e !important; }
+        .wrong { background: #ef4444 !important; }
 
-        .score-text { margin-top: 20px; color: #00f2ff; font-weight: 600; }
+        .leaderboard {
+            margin-top: 25px; text-align: left; padding: 15px;
+            background: rgba(255,255,255,0.05); border-radius: 15px;
+        }
+        .rank-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
     </style>
 </head>
 <body>
@@ -96,25 +82,42 @@
     <a href="game.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
 
     <div class="quiz-card" id="start-screen">
-        <div class="icon-box"><i class="fas fa-brain"></i></div>
+        <div class="icon-box"><i class="fas fa-user-edit"></i></div>
         <h2>Digital Quiz</h2>
-        <p class="desc">Uji seberapa jago kamu mengenali keamanan internet dan privasi data.</p>
+        <p style="font-size: 13px; color: #ccc;">Daftarkan dirimu untuk masuk rangking!</p>
+        
+        <div class="reg-form">
+            <label>Nama Lengkap</label>
+            <input type="text" id="user-name" placeholder="Ketik namamu...">
+            <label>Kelas</label>
+            <select id="user-class">
+                <option value="7">Kelas 7</option>
+                <option value="8">Kelas 8</option>
+                <option value="9">Kelas 9</option>
+            </select>
+        </div>
+
         <button class="btn-mulai" onclick="startQuiz()">MULAI KUIS</button>
+
+        <div class="leaderboard">
+            <p style="font-weight: 800; color: #facc15; margin-bottom: 10px;"><i class="fas fa-trophy"></i> PAPAN PERINGKAT</p>
+            <div id="rank-list"></div>
+        </div>
     </div>
 
     <div class="quiz-card" id="quiz-game">
-        <div id="quiz-content">
-            <div class="question-box" id="question">Memuat Pertanyaan...</div>
-            <div class="options-container" id="options"></div>
-            <div class="score-text">Skor: <span id="current-score">0</span></div>
-        </div>
+        <p id="player-tag" style="font-size: 12px; color: #00f2ff; margin-bottom: 10px;"></p>
+        <div class="question-box" id="question" style="font-size: 18px; font-weight: 600; margin-bottom: 20px;"></div>
+        <div id="options"></div>
+        <p style="margin-top: 20px; font-weight: 600;">Skor: <span id="current-score" style="color:#00f2ff">0</span></p>
+    </div>
 
-        <div id="result-screen" style="display:none;">
-            <h2>Misi Selesai!</h2>
-            <p class="desc">Kamu telah menyelesaikan tantangan keamanan digital.</p>
-            <div style="font-size: 40px; color: #facc15; margin: 20px 0;">🏆 <span id="final-score">0</span></div>
-            <button class="btn-mulai" onclick="location.reload()">MAIN LAGI</button>
-        </div>
+    <div class="quiz-card" id="result-screen">
+        <div class="icon-box" style="color: #facc15;"><i class="fas fa-crown"></i></div>
+        <h2>Misi Selesai!</h2>
+        <p id="final-msg" style="margin-bottom: 20px;"></p>
+        <div style="font-size: 40px; font-weight: 800; color: #00f2ff; margin-bottom: 20px;">🏆 <span id="final-score">0</span></div>
+        <button class="btn-mulai" onclick="location.reload()">MAIN LAGI</button>
     </div>
 
     <script>
@@ -127,31 +130,44 @@
 
         let currentQ = 0;
         let score = 0;
+        let userName = "";
+        let userClass = "";
+
+        window.onload = updateLeaderboard;
 
         function startQuiz() {
+            userName = document.getElementById('user-name').value;
+            userClass = document.getElementById('user-class').value;
+
+            if (userName.trim() === "") {
+                alert("Masukkan namamu dulu ya!");
+                return;
+            }
+
             document.getElementById('start-screen').style.display = 'none';
             document.getElementById('quiz-game').style.display = 'block';
+            document.getElementById('player-tag').innerText = `Pemain: ${userName} (Kelas ${userClass})`;
             showQuestion();
         }
 
         function showQuestion() {
             const qObj = quizData[currentQ];
             document.getElementById('question').innerText = qObj.q;
-            const optionsDiv = document.getElementById('options');
-            optionsDiv.innerHTML = '';
+            const optDiv = document.getElementById('options');
+            optDiv.innerHTML = '';
 
-            qObj.a.forEach((opt, index) => {
+            qObj.a.forEach((opt, idx) => {
                 const btn = document.createElement('button');
                 btn.className = 'opt-btn';
                 btn.innerText = opt;
-                btn.onclick = () => checkAnswer(index, btn);
-                optionsDiv.appendChild(btn);
+                btn.onclick = () => checkAnswer(idx, btn);
+                optDiv.appendChild(btn);
             });
         }
 
         function checkAnswer(idx, btn) {
             const btns = document.querySelectorAll('.opt-btn');
-            btns.forEach(b => b.disabled = true); // Kunci tombol agar tidak klik dua kali
+            btns.forEach(b => b.disabled = true);
 
             if(idx === quizData[currentQ].correct) {
                 btn.classList.add('correct');
@@ -173,9 +189,26 @@
         }
 
         function showResult() {
-            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('quiz-game').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             document.getElementById('final-score').innerText = score;
+            document.getElementById('final-msg').innerText = `Hebat, ${userName}! Kamu menyelesaikan tantangan ini.`;
+            saveScore(userName, userClass, score);
+        }
+
+        function saveScore(name, kls, scr) {
+            let ranks = JSON.parse(localStorage.getItem('quizRanks')) || [];
+            ranks.push({name: name, class: kls, score: scr});
+            ranks.sort((a,b) => b.score - a.score);
+            localStorage.setItem('quizRanks', JSON.stringify(ranks.slice(0, 5)));
+        }
+
+        function updateLeaderboard() {
+            let ranks = JSON.parse(localStorage.getItem('quizRanks')) || [];
+            let list = document.getElementById('rank-list');
+            list.innerHTML = ranks.map((r, i) => 
+                `<div class="rank-item"><span>${i+1}. ${r.name} (Kls ${r.class})</span> <span>${r.score} Pts</span></div>`
+            ).join('') || "Belum ada pejuang digital.";
         }
     </script>
 </body>
