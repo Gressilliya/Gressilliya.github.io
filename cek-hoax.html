@@ -6,151 +6,50 @@
     <title>Hoax Buster | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
     <style>
-        :root {
-            --scanner-green: #00ff41;
-            --alert-red: #ff3e3e;
-            --dark-scanner: #0a0a0a;
-        }
-
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-scanner);
-            color: var(--scanner-green);
-            overflow: hidden;
-            height: 100vh;
-        }
-
+        :root { --scanner-green: #00ff41; --alert-red: #ff3e3e; --dark-scanner: #0a0a0a; }
+        body { margin: 0; font-family: 'Poppins', sans-serif; background: var(--dark-scanner); color: var(--scanner-green); overflow: hidden; height: 100vh; }
+        
         .scanner-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
-            background-size: 30px 30px;
-            z-index: -1;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px; z-index: -1;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .header-buster h1 {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 8vw, 3rem);
-            text-shadow: 0 0 15px var(--scanner-green);
-            margin-bottom: 5px;
-        }
-
-        /* Kotak Game Utama */
+        .container { max-width: 800px; margin: 0 auto; padding: 20px; height: 100vh; display: flex; flex-direction: column; justify-content: center; }
         .scanner-box {
-            background: rgba(0, 255, 65, 0.05);
-            border: 2px solid var(--scanner-green);
-            border-radius: 30px;
-            padding: 30px;
-            position: relative;
-            backdrop-filter: blur(10px);
-            box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.2);
-            min-height: 400px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+            background: rgba(0, 255, 65, 0.05); border: 2px solid var(--scanner-green); border-radius: 30px;
+            padding: 30px; position: relative; backdrop-filter: blur(10px); box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.2);
+            min-height: 450px; text-align: center;
+        }
+
+        /* Form Registrasi */
+        .reg-input {
+            width: 100%; padding: 12px; margin: 10px 0; background: rgba(0,0,0,0.5);
+            border: 1px solid var(--scanner-green); color: var(--scanner-green); border-radius: 10px; font-family: 'Orbitron';
         }
 
         .scanner-line {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 4px;
-            background: var(--scanner-green);
-            box-shadow: 0 0 15px var(--scanner-green);
-            animation: scan 3s linear infinite;
-            z-index: 5;
-            display: none; /* Muncul saat game jalan */
+            position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: var(--scanner-green);
+            box-shadow: 0 0 15px var(--scanner-green); animation: scan 3s linear infinite; display: none;
         }
+        @keyframes scan { 0%, 100% { top: 0%; } 50% { top: 100%; } }
 
-        @keyframes scan {
-            0%, 100% { top: 0%; }
-            50% { top: 100%; }
-        }
-
-        /* Tampilan Berita */
         #news-display {
-            background: rgba(0,0,0,0.7);
-            border: 1px solid var(--scanner-green);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            font-family: 'Courier New', monospace;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.1rem;
-            line-height: 1.4;
-        }
-
-        /* Tombol Pilihan */
-        .game-controls {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            margin-top: 20px;
+            background: rgba(0,0,0,0.8); border: 1px solid var(--scanner-green); padding: 20px;
+            border-radius: 15px; margin: 20px 0; min-height: 120px; display: flex; align-items: center; justify-content: center;
         }
 
         .btn-choice {
-            padding: 15px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-            border: 2px solid;
-            font-size: 1rem;
+            padding: 15px; font-family: 'Orbitron'; border-radius: 10px; cursor: pointer; transition: 0.3s; border: 2px solid; width: 100%;
         }
-
         .btn-hoax { color: var(--alert-red); border-color: var(--alert-red); background: rgba(255, 62, 62, 0.1); }
         .btn-fakta { color: var(--scanner-green); border-color: var(--scanner-green); background: rgba(0, 255, 65, 0.1); }
-        
-        .btn-hoax:hover { background: var(--alert-red); color: white; box-shadow: 0 0 20px var(--alert-red); }
-        .btn-fakta:hover { background: var(--scanner-green); color: black; box-shadow: 0 0 20px var(--scanner-green); }
+        .btn-analyze { background: var(--scanner-green); color: black; border: none; padding: 15px 40px; border-radius: 50px; font-family: 'Orbitron'; cursor: pointer; font-weight: bold; }
 
-        .btn-analyze {
-            background: var(--scanner-green);
-            color: black;
-            border: none;
-            padding: 15px 40px;
-            font-family: 'Orbitron', sans-serif;
-            font-weight: bold;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: 0.3s;
-            letter-spacing: 2px;
-        }
-
-        /* Stats Game */
-        .stats {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-family: 'Courier New', monospace;
-            font-weight: bold;
-        }
-
-        .back-btn {
-            position: fixed; top: 20px; left: 20px;
-            color: var(--scanner-green); text-decoration: none;
-            border: 1px solid var(--scanner-green);
-            padding: 8px 15px; border-radius: 10px; z-index: 100;
-        }
-
+        .rank-box { margin-top: 20px; text-align: left; font-size: 0.8rem; border-top: 1px solid var(--scanner-green); padding-top: 10px; }
         #game-ui, #result-ui { display: none; }
+        .back-btn { position: fixed; top: 20px; left: 20px; color: var(--scanner-green); text-decoration: none; border: 1px solid var(--scanner-green); padding: 5px 15px; border-radius: 10px; }
     </style>
 </head>
 <body>
@@ -159,101 +58,129 @@
     <a href="game.html" class="back-btn"><i class="fas fa-terminal"></i> EXIT_LAB</a>
 
     <div class="container">
-        <header class="header-buster">
-            <i class="fas fa-shield-virus" style="font-size: 3rem; margin-bottom: 10px;"></i>
-            <h1>HOAX BUSTER</h1>
-            <p id="sub-title">Sistem Analisis Kebenaran v1.0</p>
-        </header>
-
         <div class="scanner-box">
             <div id="line" class="scanner-line"></div>
-            
+
             <div id="start-ui">
-                <i class="fas fa-fingerprint" style="font-size: 5rem; margin-bottom: 20px; opacity: 0.5;"></i>
-                <p style="margin-bottom: 30px;">Identifikasi berita palsu yang mengancam literasi digital.</p>
-                <button class="btn-analyze" onclick="startGame()">MULAI ANALISIS</button>
+                <h1 style="font-family: 'Orbitron'; margin-bottom: 10px;">IDENTIFIKASI USER</h1>
+                <input type="text" id="p-name" class="reg-input" placeholder="NAMA LENGKAP">
+                <select id="p-class" class="reg-input">
+                    <option value="7">KELAS 7</option>
+                    <option value="8">KELAS 8</option>
+                    <option value="9">KELAS 9</option>
+                </select>
+                <button class="btn-analyze" onclick="initScanner()">MULAI ANALISIS</button>
+                <div class="rank-box">
+                    <p><i class="fas fa-trophy"></i> TOP AGENT:</p>
+                    <div id="leaderboard"></div>
+                </div>
             </div>
 
             <div id="game-ui">
-                <div class="stats">
-                    <span>SKOR: <span id="score">0</span></span>
-                    <span>LEVEL: <span id="level">1/5</span></span>
+                <div style="display:flex; justify-content:space-between; font-family:'Courier New'; margin-bottom:10px;">
+                    <span>SISTEM: ACTIVE</span>
+                    <span>SOAL: <span id="q-num">1</span>/30</span>
                 </div>
-                <div id="news-display">Menganalisis data...</div>
-                <div class="game-controls">
-                    <button class="btn-choice btn-hoax" onclick="checkAnswer('hoax')">HOAX</button>
-                    <button class="btn-choice btn-fakta" onclick="checkAnswer('fakta')">FAKTA</button>
+                <div id="news-display"></div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <button class="btn-choice btn-hoax" onclick="analyze('hoax')">HOAX</button>
+                    <button class="btn-choice btn-fakta" onclick="analyze('fakta')">FAKTA</button>
                 </div>
+                <p style="margin-top:20px;">ACCURACY: <span id="p-score">0</span>%</p>
             </div>
 
             <div id="result-ui">
-                <h2 id="result-title">ANALISIS SELESAI</h2>
-                <div style="font-size: 3rem; margin: 20px 0;" id="final-score">0</div>
-                <p id="result-msg">Teruslah asah logika kritismu!</p>
-                <button class="btn-analyze" style="margin-top: 20px;" onclick="location.reload()">REBOOT SYSTEM</button>
+                <h2 id="res-title">ANALISIS SELESAI</h2>
+                <div style="font-size: 4rem; margin: 20px 0;" id="final-scr">0</div>
+                <p id="res-msg"></p>
+                <button class="btn-analyze" style="margin-top:20px;" onclick="location.reload()">REBOOT SYSTEM</button>
             </div>
         </div>
     </div>
 
     <script>
-        const missionData = [
-            { text: "Ketik 'Amin' di kolom komentar agar HP kamu jadi anti air secara otomatis!", type: "hoax" },
-            { text: "Membaca di tempat redup dapat membuat mata cepat lelah, tapi tidak merusak mata secara permanen.", type: "fakta" },
-            { text: "Pemerintah bagi-bagi kuota 100GB gratis melalui link: bit.ly/kuota-kaget-2026", type: "hoax" },
-            { text: "Password yang aman harus terdiri dari campuran huruf besar, kecil, angka, dan simbol.", type: "fakta" },
-            { text: "Minum air es setelah makan bisa membekukan lemak di perut dan menyebabkan penyakit.", type: "hoax" }
+        const newsBank = [
+            { t: "Ketik 'Amin' agar baterai HP penuh 100% tanpa di-charger.", type: "hoax" },
+            { t: "Kecerdasan buatan (AI) bisa digunakan untuk membuat foto palsu yang terlihat nyata.", type: "fakta" },
+            { t: "Link hadiah 50GB dari WhatsApp grup adalah penipuan untuk mencuri datamu.", type: "fakta" },
+            { t: "Makan mi instan campur nasi bisa bikin perut meledak seketika.", type: "hoax" },
+            { t: "Password yang kuat harus mengandung kombinasi huruf, angka, dan simbol.", type: "fakta" },
+            { t: "NASA menemukan alien di belakang sekolahmu tadi pagi.", type: "hoax" },
+            { t: "Menyebarkan data pribadi orang lain tanpa izin (doxing) adalah tindakan kriminal.", type: "fakta" },
+            { t: "Mengisi daya HP semalaman akan membuat baterai HP langsung terbakar.", type: "hoax" },
+            { t: "Mematikan lampu saat tidur membantu produksi hormon melatonin.", type: "fakta" },
+            { t: "Ibu kota Indonesia saat ini adalah Jakarta, dan akan pindah ke Nusantara.", type: "fakta" },
+            // Tambahkan soal hingga 30 di sini dengan pola yang sama...
         ];
 
-        let currentLevel = 0;
-        let score = 0;
+        // Duplikasi soal untuk simulasi 30 jika bank soal belum penuh
+        while(newsBank.length < 30) { newsBank.push(newsBank[Math.floor(Math.random() * 10)]); }
 
-        function startGame() {
+        let currentQ = 0, score = 0, pName = "", pClass = "";
+
+        window.onload = showRank;
+
+        function initScanner() {
+            pName = document.getElementById('p-name').value;
+            pClass = document.getElementById('p-class').value;
+            if(!pName) return alert("IDENTITAS DIBUTUHKAN!");
+            
             document.getElementById('start-ui').style.display = 'none';
             document.getElementById('game-ui').style.display = 'block';
             document.getElementById('line').style.display = 'block';
-            loadMission();
+            nextQuestion();
         }
 
-        function loadMission() {
-            if (currentLevel < missionData.length) {
-                document.getElementById('level').innerText = `${currentLevel + 1}/${missionData.length}`;
-                document.getElementById('news-display').innerText = missionData[currentLevel].text;
+        function nextQuestion() {
+            if(currentQ < 30) {
+                document.getElementById('q-num').innerText = currentQ + 1;
+                document.getElementById('news-display').innerText = newsBank[currentQ].t;
             } else {
-                showResult();
+                finish();
             }
         }
 
-        function checkAnswer(playerChoice) {
-            const correctChoice = missionData[currentLevel].type;
+        function analyze(choice) {
+            if(choice === newsBank[currentQ].type) {
+                score++;
+                document.body.style.boxShadow = "inset 0 0 50px #00ff41";
+            } else {
+                document.body.style.boxShadow = "inset 0 0 50px #ff3e3e";
+            }
             
-            if (playerChoice === correctChoice) {
-                score += 20;
-                document.getElementById('score').innerText = score;
-                document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 65, 0.2)";
-            } else {
-                document.body.style.boxShadow = "inset 0 0 100px rgba(255, 62, 62, 0.2)";
-            }
-
             setTimeout(() => {
                 document.body.style.boxShadow = "none";
-                currentLevel++;
-                loadMission();
-            }, 500);
+                document.getElementById('p-score').innerText = Math.round((score/(currentQ+1))*100);
+                currentQ++;
+                nextQuestion();
+            }, 300);
         }
 
-        function showResult() {
+        function finish() {
             document.getElementById('game-ui').style.display = 'none';
-            document.getElementById('line').style.display = 'none';
             document.getElementById('result-ui').style.display = 'block';
-            document.getElementById('final-score').innerText = score;
+            document.getElementById('line').style.display = 'none';
+            let finalScore = Math.round((score/30)*100);
+            document.getElementById('final-scr').innerText = finalScore;
+            
+            let msg = finalScore >= 80 ? "AGEN ELIT: Literasimu sangat kuat!" : "PELAJAR: Teruslah belajar membedakan berita!";
+            document.getElementById('res-msg').innerText = msg;
+            
+            saveRank(pName, finalScore);
+        }
 
-            if(score === 100) {
-                document.getElementById('result-msg').innerText = "DETEKTIF ELIT: Logikamu tak tertandingi!";
-            } else if(score >= 60) {
-                document.getElementById('result-msg').innerText = "WASPADA: Kamu cukup teliti, tingkatkan lagi!";
-            } else {
-                document.getElementById('result-msg').innerText = "ZONA BAHAYA: Kamu mudah terjebak hoax!";
-            }
+        function saveRank(n, s) {
+            let ranks = JSON.parse(localStorage.getItem('hb_ranks')) || [];
+            ranks.push({name: n, score: s, class: pClass});
+            ranks.sort((a,b) => b.score - a.score);
+            localStorage.setItem('hb_ranks', JSON.stringify(ranks.slice(0, 5)));
+        }
+
+        function showRank() {
+            let ranks = JSON.parse(localStorage.getItem('hb_ranks')) || [];
+            document.getElementById('leaderboard').innerHTML = ranks.map((r, i) => 
+                `<div>${i+1}. ${r.name} (Kls ${r.class}) - ${r.score}%</div>`
+            ).join('') || "BELUM ADA DATA SCAN.";
         }
     </script>
 </body>
