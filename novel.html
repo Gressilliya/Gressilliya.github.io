@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Novel Estetik | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: #0b1120;
+            color: white;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* Background Cahaya Magis Ungu */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; right: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 70% 30%, rgba(236, 72, 153, 0.15) 0%, transparent 60%);
+            z-index: -1;
+            animation: magicGlow 10s infinite alternate;
+        }
+
+        @keyframes magicGlow {
+            0% { opacity: 0.3; transform: translateY(-20px); }
+            100% { opacity: 0.7; transform: translateY(20px); }
+        }
+
+        .header {
+            text-align: center;
+            padding: 70px 20px;
+            background: linear-gradient(to bottom, rgba(236, 72, 153, 0.1), transparent);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #ec4899;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            animation: fadeInDown 1.2s ease-out;
+            text-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #ec4899;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.4s;
+            border-bottom: 1px solid transparent;
+        }
+        .btn-back:hover { color: white; border-bottom: 1px solid white; transform: scale(1.05); }
+
+        .novel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Card Novel dengan Animasi Halus */
+        .novel-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            transition: all 0.5s ease;
+            position: relative;
+            animation: slideInUp 0.8s ease backwards;
+        }
+
+        /* Animasi Mengambang Lembut */
+        .novel-card {
+            animation: softFloat 5s infinite ease-in-out;
+        }
+
+        @keyframes softFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .novel-card:hover {
+            transform: translateY(-20px) scale(1.03);
+            border-color: #ec4899;
+            box-shadow: 0 15px 40px rgba(236, 72, 153, 0.25);
+            background: rgba(30, 41, 59, 0.9);
+        }
+
+        .icon-box {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #ec4899;
+            animation: heartBeat 2s infinite;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 5px rgba(236, 72, 153, 0.5)); }
+            50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.8)); }
+        }
+
+        .novel-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+
+        .novel-card p {
+            color: #cbd5e1;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        /* Tombol Baca Elegan */
+        .btn-baca {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background: transparent;
+            border: 2px solid #ec4899;
+            color: #ec4899;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.4s;
+        }
+
+        .btn-baca:hover {
+            background: #ec4899;
+            color: white;
+            box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
+        }
+
+        /* Animasi Masuk Halaman */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Perpustakaan</a>
+        <h1>Novel <span>Sanctuary</span></h1>
+        <p>Temukan ketenangan dalam setiap baris cerita impianmu.</p>
+    </div>
+
+    <div class="novel-grid">
+        <div class="novel-card" style="animation-delay: 0.2s;">
+            <div class="icon-box"><i class="fas fa-heart"></i></div>
+            <h3>Persahabatan SMP</h3>
+            <p>Perjalanan 5 sahabat menaklukkan tantangan sekolah baru demi sebuah janji abadi.</p>
+            <a href="#" class="btn-baca" onclick="alert('Buku segera hadir!')">BACA SEKARANG</a>
+        </div>
+
+        <div class="novel-card" style="animation-delay: 0.4s;">
+            <div class="icon-box"><i class="fas fa-moon"></i></div>
+            <h3>Cahaya di Balik Jendela</h3>
+            <p>Misteri seorang gadis yang selalu menulis surat rahasia di bawah sinar bulan.</p>
+            <a href="#" class="btn-baca" onclick="alert('Mohon tunggu ya!')">BACA SEKARANG</a>
+        </div>
+
+        <div class="novel-card" style="animation-delay: 0.6s;">
+            <div class="icon-box"><i class="fas fa-feather-alt"></i></div>
+            <h3>Sayap-Sayap Mimpi</h3>
+            <p>Kisah inspiratif mengejar cita-cita meski ribuan rintangan mencoba menghalangi.</p>
+            <a href="#" class="btn-baca" onclick="alert('Lagi di-upload nih!')">BACA SEKARANG</a>
+        </div>
+    </div>
+
+</body>
+</html>
