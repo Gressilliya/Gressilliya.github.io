@@ -19,10 +19,10 @@
             font-family: 'Poppins', sans-serif;
             background: var(--dark-scanner);
             color: var(--scanner-green);
-            overflow-x: hidden;
+            overflow: hidden;
+            height: 100vh;
         }
 
-        /* Background Grid Matrix */
         .scanner-bg {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -35,60 +35,91 @@
         .container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 100px 20px;
+            padding: 60px 20px;
             text-align: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Header Detektif */
         .header-buster h1 {
             font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 8vw, 3.5rem);
+            font-size: clamp(2rem, 8vw, 3rem);
             text-shadow: 0 0 15px var(--scanner-green);
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
 
-        /* Kotak Input Scanner */
+        /* Kotak Game Utama */
         .scanner-box {
             background: rgba(0, 255, 65, 0.05);
             border: 2px solid var(--scanner-green);
             border-radius: 30px;
-            padding: 40px;
-            margin-top: 40px;
+            padding: 30px;
             position: relative;
             backdrop-filter: blur(10px);
             box-shadow: inset 0 0 20px rgba(0, 255, 65, 0.2);
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        /* Animasi Garis Scanner */
         .scanner-line {
             position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
+            top: 0; left: 0; width: 100%; height: 4px;
             background: var(--scanner-green);
             box-shadow: 0 0 15px var(--scanner-green);
             animation: scan 3s linear infinite;
+            z-index: 5;
+            display: none; /* Muncul saat game jalan */
         }
 
         @keyframes scan {
-            0% { top: 0%; }
+            0%, 100% { top: 0%; }
             50% { top: 100%; }
-            100% { top: 0%; }
         }
 
-        textarea {
-            width: 100%;
-            height: 150px;
-            background: rgba(0,0,0,0.5);
+        /* Tampilan Berita */
+        #news-display {
+            background: rgba(0,0,0,0.7);
             border: 1px solid var(--scanner-green);
+            padding: 20px;
             border-radius: 15px;
-            padding: 15px;
-            color: var(--scanner-green);
+            margin: 20px 0;
             font-family: 'Courier New', monospace;
-            font-size: 1rem;
-            margin-bottom: 20px;
-            resize: none;
-            box-sizing: border-box;
+            min-height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            line-height: 1.4;
         }
+
+        /* Tombol Pilihan */
+        .game-controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .btn-choice {
+            padding: 15px;
+            font-family: 'Orbitron', sans-serif;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid;
+            font-size: 1rem;
+        }
+
+        .btn-hoax { color: var(--alert-red); border-color: var(--alert-red); background: rgba(255, 62, 62, 0.1); }
+        .btn-fakta { color: var(--scanner-green); border-color: var(--scanner-green); background: rgba(0, 255, 65, 0.1); }
+        
+        .btn-hoax:hover { background: var(--alert-red); color: white; box-shadow: 0 0 20px var(--alert-red); }
+        .btn-fakta:hover { background: var(--scanner-green); color: black; box-shadow: 0 0 20px var(--scanner-green); }
 
         .btn-analyze {
             background: var(--scanner-green);
@@ -103,77 +134,127 @@
             letter-spacing: 2px;
         }
 
-        .btn-analyze:hover {
-            box-shadow: 0 0 30px var(--scanner-green);
-            transform: scale(1.05);
-        }
-
-        /* Hasil Deteksi (Hanya Simulasi) */
-        .result-area {
-            margin-top: 30px;
+        /* Stats Game */
+        .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
             font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            text-align: left;
-            border-left: 3px solid var(--scanner-green);
-            padding-left: 15px;
-            display: none; /* Muncul saat diklik */
+            font-weight: bold;
         }
 
         .back-btn {
-            position: fixed;
-            top: 20px; left: 20px;
-            color: var(--scanner-green);
-            text-decoration: none;
+            position: fixed; top: 20px; left: 20px;
+            color: var(--scanner-green); text-decoration: none;
             border: 1px solid var(--scanner-green);
-            padding: 8px 15px;
-            border-radius: 10px;
+            padding: 8px 15px; border-radius: 10px; z-index: 100;
         }
 
-        @media (max-width: 600px) {
-            .scanner-box { padding: 20px; }
-            textarea { height: 120px; }
-        }
+        #game-ui, #result-ui { display: none; }
     </style>
 </head>
 <body>
 
     <div class="scanner-bg"></div>
-    <a href="index.html" class="back-btn"><i class="fas fa-terminal"></i> EXIT_LAB</a>
+    <a href="game.html" class="back-btn"><i class="fas fa-terminal"></i> EXIT_LAB</a>
 
     <div class="container">
         <header class="header-buster">
-            <i class="fas fa-fingerprint" style="font-size: 4rem; margin-bottom: 20px;"></i>
+            <i class="fas fa-shield-virus" style="font-size: 3rem; margin-bottom: 10px;"></i>
             <h1>HOAX BUSTER</h1>
-            <p>Sistem Analisis Kebenaran Informasi v1.0</p>
+            <p id="sub-title">Sistem Analisis Kebenaran v1.0</p>
         </header>
 
         <div class="scanner-box">
-            <div class="scanner-line"></div>
-            <p style="text-align: left; margin-bottom: 10px;">[INPUT_DATA_KE_SINI]</p>
-            <textarea placeholder="Tempelkan link berita atau cuplikan teks yang mencurigakan di sini..."></textarea>
+            <div id="line" class="scanner-line"></div>
             
-            <button class="btn-analyze" onclick="startScan()">MULAI ANALISIS</button>
-
-            <div id="result" class="result-area">
-                <p>> Menghubungkan ke pusat data...</p>
-                <p>> Memeriksa pola kalimat...</p>
-                <p>> Memvalidasi sumber berita...</p>
-                <p style="color: yellow;">> HASIL: Sedang memproses data. Gunakan logika kritis!</p>
+            <div id="start-ui">
+                <i class="fas fa-fingerprint" style="font-size: 5rem; margin-bottom: 20px; opacity: 0.5;"></i>
+                <p style="margin-bottom: 30px;">Identifikasi berita palsu yang mengancam literasi digital.</p>
+                <button class="btn-analyze" onclick="startGame()">MULAI ANALISIS</button>
             </div>
-        </div>
 
-        <div style="margin-top: 40px; font-size: 0.8rem; opacity: 0.6;">
-            <p>Ingat: Kebenaran dimulai dari caramu berpikir kritis. <br> Periksa sumbernya, periksa tanggalnya!</p>
+            <div id="game-ui">
+                <div class="stats">
+                    <span>SKOR: <span id="score">0</span></span>
+                    <span>LEVEL: <span id="level">1/5</span></span>
+                </div>
+                <div id="news-display">Menganalisis data...</div>
+                <div class="game-controls">
+                    <button class="btn-choice btn-hoax" onclick="checkAnswer('hoax')">HOAX</button>
+                    <button class="btn-choice btn-fakta" onclick="checkAnswer('fakta')">FAKTA</button>
+                </div>
+            </div>
+
+            <div id="result-ui">
+                <h2 id="result-title">ANALISIS SELESAI</h2>
+                <div style="font-size: 3rem; margin: 20px 0;" id="final-score">0</div>
+                <p id="result-msg">Teruslah asah logika kritismu!</p>
+                <button class="btn-analyze" style="margin-top: 20px;" onclick="location.reload()">REBOOT SYSTEM</button>
+            </div>
         </div>
     </div>
 
     <script>
-        function startScan() {
-            const result = document.getElementById('result');
-            result.style.display = 'block';
-            alert("Memulai pemindaian data digital...");
+        const missionData = [
+            { text: "Ketik 'Amin' di kolom komentar agar HP kamu jadi anti air secara otomatis!", type: "hoax" },
+            { text: "Membaca di tempat redup dapat membuat mata cepat lelah, tapi tidak merusak mata secara permanen.", type: "fakta" },
+            { text: "Pemerintah bagi-bagi kuota 100GB gratis melalui link: bit.ly/kuota-kaget-2026", type: "hoax" },
+            { text: "Password yang aman harus terdiri dari campuran huruf besar, kecil, angka, dan simbol.", type: "fakta" },
+            { text: "Minum air es setelah makan bisa membekukan lemak di perut dan menyebabkan penyakit.", type: "hoax" }
+        ];
+
+        let currentLevel = 0;
+        let score = 0;
+
+        function startGame() {
+            document.getElementById('start-ui').style.display = 'none';
+            document.getElementById('game-ui').style.display = 'block';
+            document.getElementById('line').style.display = 'block';
+            loadMission();
+        }
+
+        function loadMission() {
+            if (currentLevel < missionData.length) {
+                document.getElementById('level').innerText = `${currentLevel + 1}/${missionData.length}`;
+                document.getElementById('news-display').innerText = missionData[currentLevel].text;
+            } else {
+                showResult();
+            }
+        }
+
+        function checkAnswer(playerChoice) {
+            const correctChoice = missionData[currentLevel].type;
+            
+            if (playerChoice === correctChoice) {
+                score += 20;
+                document.getElementById('score').innerText = score;
+                document.body.style.boxShadow = "inset 0 0 100px rgba(0, 255, 65, 0.2)";
+            } else {
+                document.body.style.boxShadow = "inset 0 0 100px rgba(255, 62, 62, 0.2)";
+            }
+
+            setTimeout(() => {
+                document.body.style.boxShadow = "none";
+                currentLevel++;
+                loadMission();
+            }, 500);
+        }
+
+        function showResult() {
+            document.getElementById('game-ui').style.display = 'none';
+            document.getElementById('line').style.display = 'none';
+            document.getElementById('result-ui').style.display = 'block';
+            document.getElementById('final-score').innerText = score;
+
+            if(score === 100) {
+                document.getElementById('result-msg').innerText = "DETEKTIF ELIT: Logikamu tak tertandingi!";
+            } else if(score >= 60) {
+                document.getElementById('result-msg').innerText = "WASPADA: Kamu cukup teliti, tingkatkan lagi!";
+            } else {
+                document.getElementById('result-msg').innerText = "ZONA BAHAYA: Kamu mudah terjebak hoax!";
+            }
         }
     </script>
-
 </body>
 </html>
