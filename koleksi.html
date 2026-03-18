@@ -114,25 +114,25 @@
     <button class="btn-baca" onclick="openPDF('1mUGLQHljTqufKUgdsutW6Z7OClU5US0I')">Baca Buku</button>
 </div>
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="Islamkls7.png" class="img-buku"></div>
-            <h4>Agama Islam</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper"><img src="Islamkls7.png" class="img-buku"></div>
+    <h4>Pendidikan Agama Islam</h4>
+    <button class="btn-baca" onclick="openPDF('1v-CzpD3921nm9AM1izvR3OjEX1X-wLwU')">Baca Buku</button>
+</div>
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="Kristenkls7.png" class="img-buku"></div>
-            <h4>Agama Kristen</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper"><img src="Kristenkls7.png" class="img-buku"></div>
+    <h4>Agama Kristen Protestan</h4>
+    <button class="btn-baca" onclick="openPDF('1q7qMVb0DAQij0_N-En1X6RWHcRZ442NF')">Baca Buku</button>
+</div>
+       <div class="card-mapel card-buku">
+    <div class="cover-wrapper"><img src="Katolikkls7.png" class="img-buku"></div>
+    <h4>Pendidikan Agama Katolik</h4>
+    <button class="btn-baca" onclick="openPDF('1NhDco4CyDwUFQ_-LQPlRU0yw-fTmwuhG')">Baca Buku</button>
+</div>
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="Katolikkls7.png" class="img-buku"></div>
-            <h4>Agama Katolik</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
-        <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="hindukls7.png" class="img-buku"></div>
-            <h4>Agama Hindu</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper"><img src="hindukls7.png" class="img-buku"></div>
+    <h4>Pendidikan Agama Hindu</h4>
+    <button class="btn-baca" onclick="openPDF('1DsGL7mW2-vOXt5fFqV4hJ1ltjsNI3l5L')">Baca Buku</button>
+</div>
         <div class="card-mapel card-buku">
     <div class="cover-wrapper">
         <img src="cbkls7.png" alt="Buku Agama Buddha" class="img-buku">
@@ -142,10 +142,10 @@
     <button class="btn-baca" onclick="openPDF('1tp_SJmXv4RwMoqzgS4nzoX9jYRFENkZ4')">Baca Buku</button>
 </div>
         <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="Khonghucukls7.png" class="img-buku"></div>
-            <h4>Agama Khonghucu</h4>
-            <button class="btn-baca" onclick="openPDF('MASUKKAN_ID_GDRIVE_DISINI')">Baca Buku</button>
-        </div>
+    <div class="cover-wrapper"><img src="Khonghucukls7.png" class="img-buku"></div>
+    <h4>Pendidikan Agama Khonghucu</h4>
+    <button class="btn-baca" onclick="openPDF('1_NpDng0B9Kt9UWYBsjrCqKOd9MMIcwor')">Baca Buku</button>
+</div>
     </div>
 </div>
 
@@ -288,6 +288,21 @@
         modal.style.display = 'none';
         frame.src = ''; // Mengosongkan frame agar tidak membebani browser
     }
+</script>
+
+<script>
+function openPDF(id) {
+    const modal = document.getElementById('pdfModal');
+    const frame = document.getElementById('pdfFrame');
+    // Menggunakan /preview agar PDF tampil cantik di dalam website
+    frame.src = `https://drive.google.com/file/d/${id}/preview`;
+    modal.style.display = 'block';
+}
+
+function closePDF() {
+    document.getElementById('pdfModal').style.display = 'none';
+    document.getElementById('pdfFrame').src = '';
+}
 </script>
     
 </body>
