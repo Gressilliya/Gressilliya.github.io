@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Quiz | DigiSmart Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        /* CSS UNTUK MENJAGA TAMPILAN PERSIS SEPERTI GAMBAR */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #000; /* Hitam pekat sesuai gambar */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Tombol Kembali (Tetap di kiri atas) */
+        .btn-back {
+            position: fixed; top: 20px; left: 20px;
+            color: white; text-decoration: none; font-size: 14px;
+            background: rgba(255,255,255,0.1); padding: 8px 15px;
+            border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* Card Utama - Mengikuti gaya gambar Arcade Literasi */
+        .quiz-card {
+            width: 90%;
+            max-width: 500px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid #00f2ff; /* Border Glow Biru */
+            border-radius: 30px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+        }
+
+        .icon-box {
+            font-size: 80px;
+            color: #00f2ff;
+            margin-bottom: 20px;
+        }
+
+        h2 { font-size: 24px; margin-bottom: 10px; font-weight: 600; }
+        p.desc { color: #ccc; font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
+
+        /* Gaya Tombol Mulai Kuis - PERSIS SEPERTI GAMBAR */
+        .btn-mulai {
+            display: inline-block;
+            padding: 12px 40px;
+            background: linear-gradient(to right, #00d2ff, #9d50bb); /* Biru ke Ungu */
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn-mulai:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 210, 255, 0.5); }
+
+        /* Elemen Game Quiz */
+        #quiz-game { display: none; } /* Tersembunyi sampai tombol diklik */
+        
+        .question-box { font-size: 18px; margin-bottom: 20px; font-weight: 600; }
+        
+        .options-container { display: grid; gap: 10px; }
+        .opt-btn {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(0, 242, 255, 0.3);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-align: left;
+            font-size: 14px;
+        }
+        .opt-btn:hover { background: rgba(0, 242, 255, 0.1); border-color: #00f2ff; }
+        
+        .correct { background: #22c55e !important; border-color: #4ade80 !important; }
+        .wrong { background: #ef4444 !important; border-color: #f87171 !important; }
+
+        .score-text { margin-top: 20px; color: #00f2ff; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <a href="game.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+    <div class="quiz-card" id="start-screen">
+        <div class="icon-box"><i class="fas fa-brain"></i></div>
+        <h2>Digital Quiz</h2>
+        <p class="desc">Uji seberapa jago kamu mengenali keamanan internet dan privasi data.</p>
+        <button class="btn-mulai" onclick="startQuiz()">MULAI KUIS</button>
+    </div>
+
+    <div class="quiz-card" id="quiz-game">
+        <div id="quiz-content">
+            <div class="question-box" id="question">Memuat Pertanyaan...</div>
+            <div class="options-container" id="options"></div>
+            <div class="score-text">Skor: <span id="current-score">0</span></div>
+        </div>
+
+        <div id="result-screen" style="display:none;">
+            <h2>Misi Selesai!</h2>
+            <p class="desc">Kamu telah menyelesaikan tantangan keamanan digital.</p>
+            <div style="font-size: 40px; color: #facc15; margin: 20px 0;">🏆 <span id="final-score">0</span></div>
+            <button class="btn-mulai" onclick="location.reload()">MAIN LAGI</button>
+        </div>
+    </div>
+
+    <script>
+        const quizData = [
+            { q: "Apa yang harus dibuat agar password akun game kamu tidak mudah di-hack?", a: ["Nama sendiri", "Tanggal lahir", "Gabungan huruf, angka, & simbol", "123456"], correct: 2 },
+            { q: "Jika ada link asing di WhatsApp menjanjikan kuota gratis, tindakan terbaik adalah...", a: ["Klik langsung", "Hapus dan abaikan", "Bagikan ke grup kelas", "Coba di HP teman"], correct: 1 },
+            { q: "Apa itu 'Cyberbullying'?", a: ["Lomba lari digital", "Menyakiti orang lain lewat internet", "Belanja online berlebihan", "Bermain game sampai pagi"], correct: 1 },
+            { q: "Data mana yang TIDAK boleh dibagikan secara bebas di media sosial?", a: ["Warna kesukaan", "Hobi", "Alamat rumah & NIK", "Judul film favorit"], correct: 2 }
+        ];
+
+        let currentQ = 0;
+        let score = 0;
+
+        function startQuiz() {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-game').style.display = 'block';
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const qObj = quizData[currentQ];
+            document.getElementById('question').innerText = qObj.q;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+
+            qObj.a.forEach((opt, index) => {
+                const btn = document.createElement('button');
+                btn.className = 'opt-btn';
+                btn.innerText = opt;
+                btn.onclick = () => checkAnswer(index, btn);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+        function checkAnswer(idx, btn) {
+            const btns = document.querySelectorAll('.opt-btn');
+            btns.forEach(b => b.disabled = true); // Kunci tombol agar tidak klik dua kali
+
+            if(idx === quizData[currentQ].correct) {
+                btn.classList.add('correct');
+                score += 25;
+                document.getElementById('current-score').innerText = score;
+            } else {
+                btn.classList.add('wrong');
+                btns[quizData[currentQ].correct].classList.add('correct');
+            }
+
+            setTimeout(() => {
+                currentQ++;
+                if(currentQ < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 1500);
+        }
+
+        function showResult() {
+            document.getElementById('quiz-content').style.display = 'none';
+            document.getElementById('result-screen').style.display = 'block';
+            document.getElementById('final-score').innerText = score;
+        }
+    </script>
+</body>
+</html>
