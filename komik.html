@@ -3,33 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Koleksi Komik | DigiSmart Library</title>
-    <link rel="stylesheet" href="style.css"> <style>
-        body { background-color: #0b1120; color: white; padding: 40px; }
-        .back-link { color: #00d2ff; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 20px; }
-        .grid-koleksi { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    <title>Koleksi Komik Seru | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background: #0b1120;
+            color: white;
+            overflow-x: hidden;
+            padding-bottom: 50px;
+        }
+
+        /* Background Animasi Bulatan Cahaya */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: pulseBg 8s infinite alternate;
+        }
+
+        @keyframes pulseBg {
+            0% { transform: scale(1); opacity: 0.5; }
+            100% { transform: scale(1.5); opacity: 0.8; }
+        }
+
+        /* Header dengan Animasi */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, rgba(245, 158, 11, 0.2), transparent);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: bounceIn 1s ease-out;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn-back {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #f59e0b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+        .btn-back:hover { transform: translateX(-10px); color: white; }
+
+        /* Grid Komik */
+        .comic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Card Komik dengan Animasi Floating */
+        .comic-card {
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 30px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid rgba(245, 158, 11, 0.3);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: floating 4s infinite ease-in-out;
+            position: relative;
+        }
+
+        /* Memberikan delay animasi yang berbeda tiap kartu agar gerakannya tidak barengan */
+        .comic-card:nth-child(2) { animation-delay: 1s; }
+        .comic-card:nth-child(3) { animation-delay: 2s; }
+
+        @keyframes floating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .comic-card:hover {
+            transform: scale(1.05) rotate(2deg);
+            border-color: #f59e0b;
+            box-shadow: 0 20px 40px rgba(245, 158, 11, 0.3);
+            animation-play-state: paused; /* Berhenti melayang saat disentuh mouse */
+        }
+
+        .icon-box {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            color: #f59e0b;
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.8));
+        }
+
+        .comic-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .comic-card p {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+        }
+
+        /* Tombol Baca */
+        .btn-baca {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: #f59e0b;
+            color: #0b1120;
+            text-decoration: none;
+            border-radius: 15px;
+            font-weight: 800;
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 5px 15px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-baca:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(255, 255, 255, 0.4);
+        }
+
+        /* Animasi Muncul */
+        @keyframes bounceIn {
+            0% { opacity: 0; transform: scale(0.3); }
+            50% { opacity: 1; transform: scale(1.05); }
+            70% { transform: scale(0.9); }
+            100% { transform: scale(1); }
+        }
+
+        /* Badge "Coming Soon" */
+        .badge {
+            position: absolute;
+            top: 20px; right: 20px;
+            background: red;
+            color: white;
+            font-size: 0.7rem;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-weight: bold;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="back-link">← Kembali ke Pojok Baca</a>
-    <h1>📚 Koleksi Komik Digital</h1>
-    <p>Pilih komik favoritmu untuk mulai petualangan!</p>
-    <hr style="margin: 20px 0; opacity: 0.2;">
+    <div class="header">
+        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Pojok Baca</a>
+        <h1>Comic <span>Zone</span></h1>
+        <p>Warnai harimu dengan cerita bergambar yang seru!</p>
+    </div>
 
-    <div class="grid-koleksi">
-        <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="komik1.png" class="img-buku"></div>
-            <h4>Si Jagoan IT: Episode 1</h4>
-            <button class="btn-baca" onclick="openPDF('ID_GDRIVE_KOMIK_1')">Baca Sekarang</button>
+    <div class="comic-grid">
+        <div class="comic-card">
+            <span class="badge">BARU!</span>
+            <div class="icon-box"><i class="fas fa-mask"></i></div>
+            <h3>Si Jagoan IT</h3>
+            <p>Petualangan seru seorang hacker cilik yang membasmi hoax di sekolah.</p>
+            <a href="#" class="btn-baca" onclick="alert('PDF Sedang disiapkan!')">Baca Komik</a>
         </div>
 
-        <div class="card-mapel card-buku">
-            <div class="cover-wrapper"><img src="komik2.png" class="img-buku"></div>
-            <h4>Petualangan di Server</h4>
-            <button class="btn-baca" onclick="openPDF('ID_GDRIVE_KOMIK_2')">Baca Sekarang</button>
+        <div class="comic-card">
+            <div class="icon-box"><i class="fas fa-bolt"></i></div>
+            <h3>Pahlawan Literasi</h3>
+            <p>Kisah tim DigiSmart Library menyelamatkan buku-buku yang hilang.</p>
+            <a href="#" class="btn-baca" onclick="alert('Segera hadir ya!')">Baca Komik</a>
+        </div>
+
+        <div class="comic-card">
+            <div class="icon-box"><i class="fas fa-ghost"></i></div>
+            <h3>Misteri Perpustakaan</h3>
+            <p>Menjelajahi lorong rahasia di perpustakaan tua sekolah.</p>
+            <a href="#" class="btn-baca" onclick="alert('Sabar ya, lagi di-upload!')">Baca Komik</a>
         </div>
     </div>
 
-    </body>
+</body>
 </html>
