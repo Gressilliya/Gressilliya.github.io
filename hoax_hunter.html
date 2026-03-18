@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hoax Hunter - DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #0f172a;
+            color: white;
+            overflow: hidden;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Game */
+        .game-header {
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .stats { display: flex; gap: 20px; font-weight: 600; font-size: 1.2rem; }
+        .score-val { color: #38bdf8; }
+        .level-val { color: #facc15; }
+
+        /* Area Permainan */
+        #game-canvas {
+            flex-grow: 1;
+            position: relative;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            cursor: crosshair;
+        }
+
+        /* Objek Berita (Gelembung) */
+        .bubble {
+            position: absolute;
+            width: 150px;
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: transform 0.2s;
+            animation: float linear;
+        }
+
+        .bubble.hoax {
+            background: linear-gradient(135deg, #ef4444 0%, #991b1b 100%);
+            border: 2px solid #fca5a5;
+        }
+
+        .bubble.fact {
+            background: linear-gradient(135deg, #22c55e 0%, #166534 100%);
+            border: 2px solid #86efac;
+        }
+
+        /* Bidikan (Crosshair Animasi) */
+        .explosion {
+            position: absolute;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            background: white;
+            animation: explode 0.3s ease-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(0.5); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        /* Overlay Level & GameOver */
+        #overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.9);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            text-align: center;
+        }
+
+        .btn-start {
+            margin-top: 20px;
+            padding: 15px 40px;
+            background: #38bdf8;
+            border: none;
+            border-radius: 50px;
+            color: white;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-start:hover { transform: scale(1.1); background: #facc15; color: #0f172a; }
+
+        .btn-back {
+            position: fixed; top: 20px; left: 20px;
+            color: white; text-decoration: none; font-size: 0.9rem;
+            background: rgba(255,255,255,0.1); padding: 10px 20px;
+            border-radius: 50px; z-index: 200;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="game.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+
+    <div class="game-header">
+        <div class="logo">🏹 <strong>Hoax Hunter</strong></div>
+        <div class="stats">
+            <div>SKOR: <span id="score" class="score-val">0</span></div>
+            <div>LEVEL: <span id="level" class="level-val">1</span></div>
+            <div>NYAWA: <span id="lives" style="color: #ef4444;">❤❤❤</span></div>
+        </div>
+    </div>
+
+    <div id="game-canvas">
+        <div id="overlay">
+            <h1 id="overlay-title">LEVEL 1</h1>
+            <p id="overlay-desc">Tembak semua berita HOAX (Merah).<br>Jangan tembak FAKTA (Hijau)!</p>
+            <button class="btn-start" onclick="startGame()">MULAI BERBURU</button>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('game-canvas');
+        const scoreEl = document.getElementById('score');
+        const levelEl = document.getElementById('level');
+        const livesEl = document.getElementById('lives');
+        const overlay = document.getElementById('overlay');
+        
+        let score = 0;
+        let level = 1;
+        let lives = 3;
+        let gameActive = false;
+        let spawnInterval;
+
+        const content = [
+            { type: 'hoax', text: 'Makan coklat bikin terbang!' },
+            { type: 'fact', text: 'Bumi berputar pada porosnya.' },
+            { type: 'hoax', text: 'Besok libur nasional mendadak.' },
+            { type: 'fact', text: 'Siswa SMP butuh tidur 8 jam.' },
+            { type: 'hoax', text: 'Ketik AMIN agar HP tahan air.' },
+            { type: 'fact', text: 'Membaca buku menambah kosa kata.' },
+            { type: 'hoax', text: 'Hadiah gratis dari link WA mencurigakan.' },
+            { type: 'fact', text: 'Hoax menyebar lebih cepat dari fakta.' }
+        ];
+
+        function startGame() {
+            overlay.style.display = 'none';
+            gameActive = true;
+            score = 0;
+            level = 1;
+            lives = 3;
+            updateStats();
+            nextLevel();
+        }
+
+        function nextLevel() {
+            if(level > 10) {
+                endGame("SELAMAT! KAMU HUNTER SEJATI", "Kamu berhasil mencapai Level 10.");
+                return;
+            }
+            
+            clearInterval(spawnInterval);
+            let speed = Math.max(2000, 5000 - (level * 400)); // Semakin tinggi level, semakin cepat spawn
+            
+            spawnInterval = setInterval(() => {
+                if(gameActive) createBubble();
+            }, speed);
+        }
+
+        function createBubble() {
+            const bubble = document.createElement('div');
+            const data = content[Math.floor(Math.random() * content.length)];
+            
+            bubble.className = `bubble ${data.type}`;
+            bubble.innerText = data.text;
+            
+            // Posisi acak
+            const startX = Math.random() * (canvas.offsetWidth - 150);
+            bubble.style.left = startX + 'px';
+            bubble.style.bottom = '-100px';
+            
+            // Durasi terbang (Makin tinggi level makin kencang)
+            const duration = Math.max(3, 8 - (level * 0.5));
+            bubble.style.animationDuration = duration + 's';
+            
+            bubble.onclick = (e) => {
+                if(!gameActive) return;
+                
+                createExplosion(e.pageX, e.pageY);
+                
+                if(data.type === 'hoax') {
+                    score += 10;
+                    if(score % 50 === 0) {
+                        level++;
+                        showLevelUp();
+                    }
+                } else {
+                    lives--;
+                    canvas.style.background = 'rgba(239, 68, 68, 0.2)';
+                    setTimeout(() => canvas.style.background = 'transparent', 200);
+                }
+                
+                updateStats();
+                bubble.remove();
+                if(lives <= 0) endGame("GAME OVER", "Jangan mudah percaya berita merah!");
+            };
+
+            canvas.appendChild(bubble);
+
+            // Jika bubble sampai atas dan itu Hoax, nyawa berkurang (karena lolos)
+            bubble.addEventListener('animationend', () => {
+                if(bubble.parentElement && data.type === 'hoax') {
+                    lives--;
+                    updateStats();
+                    if(lives <= 0) endGame("GAME OVER", "Hoax berhasil menembus pertahananmu!");
+                }
+                bubble.remove();
+            });
+        }
+
+        function createExplosion(x, y) {
+            const exp = document.createElement('div');
+            exp.className = 'explosion';
+            exp.style.left = (x - 25) + 'px';
+            exp.style.top = (y - 25) + 'px';
+            document.body.appendChild(exp);
+            setTimeout(() => exp.remove(), 300);
+        }
+
+        function updateStats() {
+            scoreEl.innerText = score;
+            levelEl.innerText = level;
+            livesEl.innerText = "❤".repeat(lives);
+        }
+
+        function showLevelUp() {
+            const notice = document.createElement('div');
+            notice.style.position = 'absolute';
+            notice.style.top = '50%';
+            notice.style.left = '50%';
+            notice.style.transform = 'translate(-50%, -50%)';
+            notice.style.fontSize = '3rem';
+            notice.style.fontWeight = '800';
+            notice.style.color = '#facc15';
+            notice.innerText = "LEVEL UP!";
+            canvas.appendChild(notice);
+            setTimeout(() => notice.remove(), 1000);
+            nextLevel();
+        }
+
+        function endGame(title, desc) {
+            gameActive = false;
+            clearInterval(spawnInterval);
+            document.querySelectorAll('.bubble').forEach(b => b.remove());
+            
+            document.getElementById('overlay-title').innerText = title;
+            document.getElementById('overlay-desc').innerHTML = desc + `<br>Skor Akhir: ${score}`;
+            overlay.style.display = 'flex';
+        }
+    </script>
+</body>
+</html>
