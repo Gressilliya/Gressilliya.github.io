@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Komik | DigiSmart Library</title>
+    <link rel="stylesheet" href="style.css"> <style>
+        body { background-color: #0b1120; color: white; padding: 40px; }
+        .back-link { color: #00d2ff; text-decoration: none; font-weight: bold; display: inline-block; margin-bottom: 20px; }
+        .grid-koleksi { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-link">← Kembali ke Pojok Baca</a>
+    <h1>📚 Koleksi Komik Digital</h1>
+    <p>Pilih komik favoritmu untuk mulai petualangan!</p>
+    <hr style="margin: 20px 0; opacity: 0.2;">
+
+    <div class="grid-koleksi">
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="komik1.png" class="img-buku"></div>
+            <h4>Si Jagoan IT: Episode 1</h4>
+            <button class="btn-baca" onclick="openPDF('ID_GDRIVE_KOMIK_1')">Baca Sekarang</button>
+        </div>
+
+        <div class="card-mapel card-buku">
+            <div class="cover-wrapper"><img src="komik2.png" class="img-buku"></div>
+            <h4>Petualangan di Server</h4>
+            <button class="btn-baca" onclick="openPDF('ID_GDRIVE_KOMIK_2')">Baca Sekarang</button>
+        </div>
+    </div>
+
+    </body>
+</html>
