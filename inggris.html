@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Quest | DigiSmart Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #facc15;
+            --deep-blue: #1e3a8a;
+            --accent-cyan: #22d3ee;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        
+        body {
+            background: #0f172a;
+            background-image: radial-gradient(circle at top right, #1e1b4b, #0f172a);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        /* Navigasi */
+        .nav-back {
+            position: fixed; top: 20px; left: 20px;
+            text-decoration: none; color: white; background: rgba(255,255,255,0.1);
+            padding: 10px 20px; border-radius: 50px; border: 1px solid var(--accent-cyan);
+            font-size: 14px; transition: 0.3s; z-index: 100;
+        }
+        .nav-back:hover { background: var(--accent-cyan); color: #0f172a; box-shadow: 0 0 15px var(--accent-cyan); }
+
+        /* Main Card */
+        .quest-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(34, 211, 238, 0.3);
+            border-radius: 30px;
+            padding: 40px;
+            width: 90%; max-width: 650px;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        h2 { font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 2px; color: var(--accent-cyan); }
+
+        /* Form Styling */
+        input, select {
+            width: 100%; padding: 15px; margin: 15px 0; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.2); background: rgba(15, 23, 42, 0.6);
+            color: white; font-size: 16px; transition: 0.3s;
+        }
+        input:focus { border-color: var(--accent-cyan); outline: none; box-shadow: 0 0 10px rgba(34, 211, 238, 0.3); }
+
+        .btn-quest {
+            width: 100%; padding: 16px; border-radius: 50px; border: none;
+            background: linear-gradient(135deg, #06b6d4, #3b82f6);
+            color: white; font-weight: 700; text-transform: uppercase;
+            cursor: pointer; transition: 0.4s; letter-spacing: 1px;
+        }
+        .btn-quest:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(59, 130, 246, 0.4); }
+
+        /* Game Interface */
+        #briefing, #game-container { display: none; }
+        
+        .timer-bar { width: 100%; height: 6px; background: #334155; border-radius: 3px; margin: 20px 0; overflow: hidden; }
+        #timer-fill { width: 100%; height: 100%; background: var(--gold); transition: linear; }
+
+        .question-text { font-size: 20px; margin: 25px 0; line-height: 1.5; min-height: 80px; }
+
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .opt-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            padding: 18px; border-radius: 15px; color: white; cursor: pointer;
+            font-weight: 500; transition: 0.2s;
+        }
+        .opt-btn:hover { background: rgba(34, 211, 238, 0.2); border-color: var(--accent-cyan); }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="nav-back"><i class="fas fa-chevron-left"></i> ARCADE LITERASI</a>
+
+    <div class="quest-card" id="auth-screen">
+        <div style="font-size: 50px; color: var(--gold); margin-bottom: 15px;"><i class="fas fa-atlas"></i></div>
+        <h2>ENGLISH QUEST</h2>
+        <p style="font-size: 14px; color: #94a3b8; margin-bottom: 30px;">Tingkatkan level bahasa Inggrismu dan jadilah juara!</p>
+        
+        <input type="text" id="p-name" placeholder="Full Name">
+        <select id="p-class">
+            <option value="7">Grade 7 (Beginner Explorer)</option>
+            <option value="8">Grade 8 (Intermediate Navigator)</option>
+            <option value="9">Grade 9 (Advanced Scholar)</option>
+        </select>
+        <button class="btn-quest" onclick="showBriefing()">Prepare for Quest</button>
+    </div>
+
+    <div class="quest-card" id="briefing">
+        <h2>QUEST MISSION</h2>
+        <div style="text-align: left; background: rgba(0,0,0,0.2); padding: 20px; border-radius: 15px; margin: 20px 0; font-size: 14px;">
+            <p><i class="fas fa-check-circle" style="color: var(--accent-cyan);"></i> You have <strong>15 Questions</strong> to solve.</p>
+            <p><i class="fas fa-check-circle" style="color: var(--accent-cyan);"></i> Read each question carefully.</p>
+            <p><i class="fas fa-check-circle" style="color: var(--accent-cyan);"></i> Every correct answer gives you <strong>+10 XP</strong>.</p>
+            <p><i class="fas fa-check-circle" style="color: var(--accent-cyan);"></i> Don't let the time run out!</p>
+        </div>
+        <button class="btn-quest" onclick="startQuest()">I'm Ready!</button>
+    </div>
+
+    <div class="quest-card" id="game-container">
+        <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--accent-cyan);">
+            <span id="player-tag"></span>
+            <span id="score-tag">XP: 0</span>
+        </div>
+        <div class="timer-bar"><div id="timer-fill"></div></div>
+        <div style="font-size: 12px; color: #94a3b8;">Quest <span id="q-num">1</span> of 15</div>
+        
+        <div class="question-text" id="q-text">Loading question...</div>
+        
+        <div class="options-grid" id="options"></div>
+    </div>
+
+    <script>
+        const questData = {
+            "7": [
+                { q: "What is the greeting in the morning?", a: ["Good Morning", "Good Afternoon", "Good Night", "Good Evening"], c: "Good Morning" },
+                { q: "Translate 'Buku' into English...", a: ["Book", "Pencil", "Bag", "Ruler"], c: "Book" },
+                { q: "I ... a student of SMP Negeri 41 Medan.", a: ["am", "is", "are", "be"], c: "am" },
+                { q: "My father ... a doctor.", a: ["is", "am", "are", "do"], c: "is" },
+                { q: "How do you say 'Terima Kasih' in English?", a: ["Thank you", "Sorry", "Please", "Hello"], c: "Thank you" },
+                { q: "They ... playing football.", a: ["are", "is", "am", "was"], c: "are" },
+                { q: "A: 'How are you?' | B: '...'", a: ["I am fine", "I am busy", "Goodbye", "Nice to meet you"], c: "I am fine" },
+                { q: "What is the color of an apple?", a: ["Red", "Blue", "Yellow", "Purple"], c: "Red" },
+                { q: "The plural form of 'Child' is...", a: ["Children", "Childs", "Childrens", "Childes"], c: "Children" },
+                { q: "We ... in the library now.", a: ["are", "is", "am", "have"], c: "are" },
+                { q: "She ... breakfast at 6 AM.", a: ["eats", "eat", "eating", "eaten"], c: "eats" },
+                { q: "Which one is a fruit?", a: ["Banana", "Spinach", "Carrot", "Potato"], c: "Banana" },
+                { q: "A: '... is your name?' | B: 'My name is Gressilliya'", a: ["What", "Where", "Who", "How"], c: "What" },
+                { q: "Ten plus five is ...", a: ["Fifteen", "Fifty", "Five", "Twelve"], c: "Fifteen" },
+                { q: "Where do you go to borrow books?", a: ["Library", "Canteen", "Office", "Field"], c: "Library" }
+            ],
+            "8": [
+                { q: "He ... English every day.", a: ["studies", "study", "studying", "studied"], c: "studies" },
+                { q: "We ... to Jakarta last year.", a: ["went", "go", "gone", "going"], c: "went" },
+                { q: "Which one is an expression of 'Invitation'?", a: ["Would you like to come?", "I'm sorry", "Thank you", "I am happy"], c: "Would you like to come?" },
+                { q: "The elephant is ... than the cat.", a: ["bigger", "smaller", "tallest", "biggest"], c: "bigger" },
+                { q: "I have been living here ... 2020.", a: ["since", "for", "during", "at"], c: "since" },
+                { q: "She can ... a beautiful song.", a: ["sing", "sings", "singing", "sang"], c: "sing" },
+                { q: "A: 'Can I help you?' | B: '...'", a: ["Yes, please", "No, I am", "Goodbye", "You're welcome"], c: "Yes, please" },
+                { q: "You ... smoke in the hospital.", a: ["must not", "must", "can", "should"], c: "must not" },
+                { q: "What is the generic structure of Narrative Text?", a: ["Orientation", "Identification", "Description", "Thesis"], c: "Orientation" },
+                { q: "I ... my homework yesterday.", a: ["did", "do", "done", "doing"], c: "did" },
+                { q: "My mother is cooking in the ...", a: ["kitchen", "bedroom", "bathroom", "garage"], c: "kitchen" },
+                { q: "There ... many students in the park.", a: ["are", "is", "am", "was"], c: "are" },
+                { q: "The sun ... in the east.", a: ["rises", "rise", "rising", "rose"], c: "rises" },
+                { q: "He is the ... student in the class.", a: ["smartest", "smarter", "smart", "as smart as"], c: "smartest" },
+                { q: "A: 'Have you seen the movie?' | B: 'Yes, I ...'", a: ["have", "has", "do", "did"], c: "have" }
+            ],
+            "9": [
+                { q: "The bridge ... built in 1990. (Passive Voice)", a: ["was", "is", "were", "been"], c: "was" },
+                { q: "If I ... a lottery, I would travel around the world.", a: ["won", "win", "wins", "winning"], c: "won" },
+                { q: "Which one is a 'Report Text' about?", a: ["General Facts", "Fable Story", "Personal Experience", "Recipe"], c: "General Facts" },
+                { q: "He is the man ... stole my bag.", a: ["who", "which", "whom", "whose"], c: "who" },
+                { q: "She has ... the assignment. (Present Perfect)", a: ["finished", "finish", "finishing", "finishes"], c: "finished" },
+                { q: "The synonym of 'huge' is ...", a: ["enormous", "tiny", "small", "thin"], c: "enormous" },
+                { q: "Wait a minute, I ... my clothes. (Present Continuous)", a: ["am washing", "wash", "washed", "was washing"], c: "am washing" },
+                { q: "A: 'I'm so tired' | B: 'You ... take a rest.'", a: ["should", "must not", "might", "could"], c: "should" },
+                { q: "The cake ... eaten by my brother.", a: ["was", "is", "did", "were"], c: "was" },
+                { q: "Don't forget ... the door.", a: ["to lock", "locking", "locked", "lock"], c: "to lock" },
+                { q: "He has been working here ... five hours.", a: ["for", "since", "during", "at"], c: "for" },
+                { q: "Which word is an 'Adverb'?", a: ["Quickly", "Quick", "Quicker", "Quicks"], c: "Quickly" },
+                { q: "They ... go to the beach tomorrow.", a: ["will", "did", "was", "were"], c: "will" },
+                { q: "The 'Resolution' part is found in ...", a: ["Narrative Text", "Report Text", "Procedure Text", "Descriptive"], c: "Narrative Text" },
+                { q: "I wish I ... more time.", a: ["had", "have", "has", "having"], c: "had" }
+            ]
+        };
+
+        let pName, pClass, currentQ = 0, score = 0, pool = [];
+
+        function showBriefing() {
+            pName = document.getElementById('p-name').value;
+            pClass = document.getElementById('p-class').value;
+            if(!pName) return alert("Please enter your name!");
+            document.getElementById('auth-screen').style.display = 'none';
+            document.getElementById('briefing').style.display = 'block';
+        }
+
+        function startQuest() {
+            pool = [...questData[pClass]].sort(() => Math.random() - 0.5);
+            document.getElementById('briefing').style.display = 'none';
+            document.getElementById('game-container').style.display = 'block';
+            document.getElementById('player-tag').innerText = "EXPLORER: " + pName.toUpperCase();
+            nextQ();
+        }
+
+        function nextQ() {
+            if(currentQ < 15) {
+                let q = pool[currentQ];
+                document.getElementById('q-num').innerText = currentQ + 1;
+                document.getElementById('q-text').innerText = q.q;
+                let opts = q.a.sort(() => Math.random() - 0.5).map(o => 
+                    `<button class="opt-btn" onclick="checkAnswer('${o}')">${o}</button>`
+                ).join('');
+                document.getElementById('options').innerHTML = opts;
+                document.getElementById('timer-fill').style.width = "100%";
+            } else {
+                endQuest();
+            }
+        }
+
+        function checkAnswer(ans) {
+            if(ans === pool[currentQ].c) {
+                score += 10;
+                document.getElementById('score-tag').innerText = "XP: " + score;
+            }
+            currentQ++;
+            nextQ();
+        }
+
+        function endQuest() {
+            alert("QUEST COMPLETED!\nScore: " + score + " XP");
+            saveScore(pName, score, pClass);
+            location.reload();
+        }
+
+        function saveScore(n, s, c) {
+            let ranks = JSON.parse(localStorage.getItem('english_ranks')) || [];
+            ranks.push({name: n, score: s, grade: c, date: new Date().toLocaleDateString()});
+            ranks.sort((a,b) => b.score - a.score);
+            localStorage.setItem('english_ranks', JSON.stringify(ranks.slice(0, 10)));
+        }
+    </script>
+</body>
+</html>
