@@ -3,180 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ranking Literasi | DigiSmart Library</title>
+    <title>Papan Peringkat | DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* Dasar Tampilan */
+        :root {
+            --gold: #ffd700;
+            --silver: #e2e8f0;
+            --bronze: #cd7f32;
+            --primary-blue: #3b82f6;
+            --dark-blue: #0f172a;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); /* Gradasi Biru Gelap Profesional */
+            background: radial-gradient(circle at top, #1e293b, #0f172a);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 40px 20px;
+            padding: 60px 20px;
+            color: white;
         }
 
-        /* Tombol Kembali ke Beranda */
+        /* Tombol Kembali */
         .btn-home {
             position: fixed;
             top: 25px;
             left: 25px;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 50px;
             text-decoration: none;
             color: white;
             font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: 0.3s;
-            z-index: 100;
-        }
-        .btn-home:hover { background: white; color: #1e3c72; transform: scale(1.1); }
-
-        /* Container Ranking Section */
-        .ranking-container {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(25px);
+            font-size: 14px;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
-            width: 100%;
-            max-width: 700px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
-            animation: fadeInPage 0.8s ease-out;
+            transition: 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .btn-home:hover { 
+            background: white; 
+            color: var(--dark-blue); 
+            transform: translateX(-5px); 
         }
 
-        .ranking-title { font-size: 2.2rem; font-weight: 800; color: white; margin-bottom: 5px; }
-        .ranking-subtitle { color: #ffeb3b; font-weight: 600; margin-bottom: 35px; letter-spacing: 1px; }
+        /* Container Utama */
+        .ranking-container {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 35px;
+            width: 100%;
+            max-width: 600px;
+            padding: 50px 30px;
+            text-align: center;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.5);
+            animation: fadeInPage 1s ease-out;
+        }
 
-        /* List Papan Peringkat */
-        .leaderboard { display: flex; flex-direction: column; gap: 15px; margin-bottom: 30px; }
+        .header-box { margin-bottom: 40px; }
+        .ranking-title { 
+            font-family: 'Montserrat'; 
+            font-size: 2.2rem; 
+            font-weight: 800; 
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+        }
+        .ranking-subtitle { 
+            color: var(--primary-blue); 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+        }
+
+        /* Leaderboard Style */
+        .leaderboard { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            margin-bottom: 40px; 
+        }
 
         .rank-item {
             display: flex;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px 25px;
+            background: rgba(255, 255, 255, 0.03);
+            padding: 18px 25px;
             border-radius: 20px;
-            border-left: 8px solid transparent;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             opacity: 0;
-            transform: translateX(-30px);
-            animation: slideIn 0.5s forwards;
+            transform: translateY(20px);
+            animation: slideIn 0.6s forwards;
         }
 
         .rank-item:hover {
-            background: rgba(255, 255, 255, 0.2);
-            transform: scale(1.03);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.02) translateY(-2px);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Warna Khusus Medali */
-        .gold { border-left-color: #ffd700; background: rgba(255, 215, 0, 0.1); }
-        .silver { border-left-color: #c0c0c0; }
-        .bronze { border-left-color: #cd7f32; }
+        /* Khusus Top 3 */
+        .rank-item.gold { border-bottom: 3px solid var(--gold); background: rgba(255, 215, 0, 0.05); }
+        .rank-item.silver { border-bottom: 3px solid var(--silver); }
+        .rank-item.bronze { border-bottom: 3px solid var(--bronze); }
 
-        .rank-number { width: 40px; font-size: 1.5rem; font-weight: 800; color: white; }
-        .rank-info { flex-grow: 1; text-align: left; padding-left: 10px; }
-        .player-name { display: block; font-size: 1.1rem; font-weight: 700; color: white; }
-        .player-points { font-size: 0.85rem; color: #cbd5e1; }
-        .rank-badge { font-size: 1.8rem; }
+        .rank-number { 
+            width: 45px; 
+            font-family: 'Montserrat'; 
+            font-size: 1.4rem; 
+            font-weight: 800; 
+            color: rgba(255,255,255,0.5); 
+        }
+        
+        .gold .rank-number { color: var(--gold); }
 
-        /* Tombol Main */
+        .rank-info { flex-grow: 1; text-align: left; padding-left: 15px; }
+        .player-name { display: block; font-size: 1.1rem; font-weight: 600; color: white; }
+        .player-points { font-size: 0.85rem; color: #94a3b8; }
+
+        .rank-badge { font-size: 1.5rem; filter: drop-shadow(0 0 10px rgba(255,255,255,0.2)); }
+
+        /* Button Action */
         .btn-play {
-            background: #ffeb3b;
-            color: #1e3c72;
+            background: var(--primary-blue);
+            color: white;
             border: none;
-            padding: 15px 35px;
-            border-radius: 50px;
+            padding: 18px 45px;
+            border-radius: 100px;
+            font-family: 'Montserrat';
             font-weight: 800;
             font-size: 1rem;
             cursor: pointer;
-            box-shadow: 0 10px 20px rgba(255, 235, 59, 0.2);
+            box-shadow: 0 15px 30px rgba(59, 130, 246, 0.3);
             transition: 0.3s;
-            animation: pulse 2s infinite;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        .btn-play:hover { background: white; transform: scale(1.1); }
-
-        /* Animasi */
-        @keyframes fadeInPage { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
         
-        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 20px rgba(255, 235, 59, 0.2); }
-            50% { transform: scale(1.05); box-shadow: 0 15px 30px rgba(255, 235, 59, 0.4); }
+        .btn-play:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 20px 40px rgba(59, 130, 246, 0.5);
+            background: #2563eb;
         }
 
-        /* Delay Animasi Tiap Item */
+        /* Animations */
+        @keyframes fadeInPage { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        @keyframes slideIn { to { opacity: 1; transform: translateY(0); } }
+
+        /* Delay Tiap Baris */
         .rank-item:nth-child(1) { animation-delay: 0.2s; }
-        .rank-item:nth-child(2) { animation-delay: 0.4s; }
-        .rank-item:nth-child(3) { animation-delay: 0.6s; }
-        .rank-item:nth-child(4) { animation-delay: 0.8s; }
-        .rank-item:nth-child(5) { animation-delay: 1s; }
+        .rank-item:nth-child(2) { animation-delay: 0.3s; }
+        .rank-item:nth-child(3) { animation-delay: 0.4s; }
+        .rank-item:nth-child(4) { animation-delay: 0.5s; }
+        .rank-item:nth-child(5) { animation-delay: 0.6s; }
+
+        @media (max-width: 500px) {
+            .ranking-title { font-size: 1.6rem; }
+            .btn-home { padding: 10px 18px; font-size: 12px; }
+        }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="btn-home"><i class="fas fa-arrow-left"></i> Home</a>
+    <a href="index.html" class="btn-home">
+        <i class="fas fa-arrow-left"></i> KEMBALI
+    </a>
 
     <section class="ranking-container">
-        <h2 class="ranking-title">🔥 Ranking Game Literasi</h2>
-        <p class="ranking-subtitle">🏆 Top Player Minggu Ini</p>
+        <div class="header-box">
+            <h2 class="ranking-title">Papan Peringkat</h2>
+            <p class="ranking-subtitle">Minggu Ini • Gen-Z Literasi</p>
+        </div>
         
         <div class="leaderboard">
             <div class="rank-item gold">
-                <div class="rank-number">1</div>
+                <div class="rank-number">01</div>
                 <div class="rank-info">
                     <span class="player-name">Andi Saputra</span>
-                    <span class="player-points">1200 poin</span>
+                    <span class="player-points">1200 XP • Sang Juara</span>
                 </div>
                 <div class="rank-badge">🥇</div>
             </div>
 
             <div class="rank-item silver">
-                <div class="rank-number">2</div>
+                <div class="rank-number">02</div>
                 <div class="rank-info">
                     <span class="player-name">Siti Fatimah</span>
-                    <span class="player-points">1100 poin</span>
+                    <span class="player-points">1100 XP • Pro Reader</span>
                 </div>
                 <div class="rank-badge">🥈</div>
             </div>
 
             <div class="rank-item bronze">
-                <div class="rank-number">3</div>
+                <div class="rank-number">03</div>
                 <div class="rank-info">
                     <span class="player-name">Budi Pratama</span>
-                    <span class="player-points">1000 poin</span>
+                    <span class="player-points">1000 XP • Book Worm</span>
                 </div>
                 <div class="rank-badge">🥉</div>
             </div>
 
             <div class="rank-item">
-                <div class="rank-number">4</div>
+                <div class="rank-number">04</div>
                 <div class="rank-info">
                     <span class="player-name">Rian Hidayat</span>
-                    <span class="player-points">850 poin</span>
+                    <span class="player-points">850 XP</span>
                 </div>
-                <div class="rank-badge">✨</div>
+                <div class="rank-badge">⚡</div>
             </div>
 
             <div class="rank-item">
-                <div class="rank-number">5</div>
+                <div class="rank-number">05</div>
                 <div class="rank-info">
                     <span class="player-name">Dina Amelia</span>
-                    <span class="player-points">700 poin</span>
+                    <span class="player-points">700 XP</span>
                 </div>
                 <div class="rank-badge">📚</div>
             </div>
         </div>
         
-        <button class="btn-play">Main Sekarang & Kejar Skor! 🚀</button>
+        <button class="btn-play" onclick="location.href='game.html'">
+            Main & Kejar Skor! <i class="fas fa-rocket" style="margin-left: 10px;"></i>
+        </button>
     </section>
 
 </body>
