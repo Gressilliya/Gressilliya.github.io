@@ -3,26 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kabar Terbaru | DigiSmart Library</title>
+    <title>Event | DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary-blue: #007bff;
-            --secondary-blue: #eef2ff;
-            --text-main: #1e293b;
-            --text-muted: #64748b;
+            --accent-orange: #e67e22;
+            --text-dark: #2d3436;
+            --bg-gray: #f4f7f6;
             --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-        body { 
-            background-color: #f1f5f9; 
-            color: var(--text-main);
-            padding: 80px 20px 40px;
-        }
+        body { background-color: var(--bg-gray); color: var(--text-dark); padding: 80px 20px 50px; }
 
         /* Tombol Kembali ke Beranda */
         .back-home {
@@ -42,126 +37,106 @@
             gap: 10px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             transition: all 0.3s ease;
-            border: 1px solid var(--secondary-blue);
+            border: 1px solid #edf2f7;
         }
 
         .back-home:hover {
             background: var(--primary-blue);
-            color: white;
+            color: var(--white);
             transform: translateX(5px);
             box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
         }
 
-        .news-container {
-            max-width: 1000px;
-            margin: 0 auto;
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .header-title { text-align: center; margin-bottom: 50px; }
+        .header-title h1 { font-family: 'Montserrat'; font-size: 2.2rem; color: #1e272e; }
+        .header-title .underline { width: 70px; height: 5px; background: var(--primary-blue); margin: 10px auto; border-radius: 10px; }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
         }
 
-        .news-header {
-            text-align: center;
-            margin-bottom: 50px;
-            animation: fadeInDown 0.8s ease;
-        }
-
-        .news-header h2 {
-            font-family: 'Montserrat';
-            font-size: 2.2rem;
-            color: var(--text-main);
-        }
-
-        .news-header .line {
-            width: 60px;
-            height: 4px;
-            background: var(--primary-blue);
-            margin: 15px auto;
-            border-radius: 10px;
-        }
-
-        .news-wrapper {
+        /* Card Styling */
+        .card-interactive {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            border: 1px solid #edf2f7;
             display: flex;
             flex-direction: column;
-            gap: 25px;
         }
 
-        /* News Item Card */
-        .news-item {
-            background: var(--white);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-            border: 1px solid rgba(255,255,255,0.8);
-            animation: fadeInUp 0.6s ease forwards;
-            opacity: 0;
+        .card-interactive:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.12);
         }
 
-        .news-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 123, 255, 0.15);
-            border-color: var(--primary-blue);
-        }
-
-        .news-item img {
-            width: 35%;
-            height: 220px;
+        .card-interactive img {
+            width: 100%;
+            height: 230px;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.5s ease;
         }
 
-        .news-item:hover img {
-            transform: scale(1.08);
+        .card-interactive:hover img {
+            transform: scale(1.05);
         }
 
-        .news-text {
-            padding: 30px;
-            width: 65%;
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
         }
 
-        .news-badge {
-            display: inline-block;
-            background: var(--secondary-blue);
-            color: var(--primary-blue);
-            padding: 4px 12px;
-            border-radius: 8px;
-            font-size: 11px;
+        .status-tag {
+            font-size: 13px;
             font-weight: 700;
             margin-bottom: 10px;
+            display: block;
             text-transform: uppercase;
         }
 
-        .news-text h4 {
+        .card-body h3 {
             font-family: 'Montserrat';
-            font-size: 1.25rem;
-            margin-bottom: 12px;
-            color: var(--text-main);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #1e272e;
+            line-height: 1.3;
         }
 
-        .news-text p {
+        .card-body p {
             font-size: 14px;
-            color: var(--text-muted);
+            color: #636e72;
             line-height: 1.6;
+            margin-bottom: 20px;
         }
 
-        /* Keyframes */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(40px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-detail {
+            display: inline-block;
+            padding: 10px 22px;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 14px;
+            transition: 0.3s;
         }
 
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .btn-detail:hover {
+            background: #0056b3;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);
         }
 
-        /* Responsive Mobile */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .back-home { position: relative; top: 0; left: 0; margin-bottom: 30px; display: inline-flex; }
             body { padding-top: 40px; }
-            .news-item { flex-direction: column; }
-            .news-item img { width: 100%; height: 200px; }
-            .news-text { width: 100%; padding: 25px; }
+            .event-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -171,47 +146,61 @@
         <i class="fas fa-arrow-left"></i> Kembali ke Beranda
     </a>
 
-    <div class="news-container">
-        <div class="news-header">
-            <h2>📰 Kabar Terbaru</h2>
-            <div class="line"></div>
+    <div class="container">
+        <div class="header-title">
+            <h1>PROGRAM & EVENT TERKINI</h1>
+            <div class="underline"></div>
         </div>
 
-        <div class="news-wrapper">
-            
-            <div class="news-item" style="animation-delay: 0.1s;">
-                <img src="prestasi.jpg" alt="Prestasi Siswa">
-                <div class="news-text">
-                    <span class="news-badge">Prestasi</span>
-                    <h4>Prestasi Gemilang Nasional 2024</h4>
-                    <p>Siswa-siswi SMP Negeri berhasil memborong penghargaan bergengsi dalam kompetisi tingkat nasional tahun ini. Kebanggaan luar biasa!</p>
+        <div class="event-grid">
+
+            <div class="card-interactive">
+                <img src="wajib.jpeg" alt="Wajib Membaca">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#007bff;">Tiap Jumat Pagi</span>
+                    <h3>Gerakan Literasi 15 Menit</h3>
+                    <p>Mari tumbuhkan minat baca! Satu buku sejuta ilmu, dimulai dari langkah kecil setiap hari Jumat di sekolah.</p>
+                    <a href="#" class="btn-detail">Lihat Selengkapnya</a>
                 </div>
             </div>
 
-            <div class="news-item" style="animation-delay: 0.2s;">
-                <img src="gambar2.jpg" alt="Pekan Literasi">
-                <div class="news-text">
-                    <span class="news-badge">Literasi</span>
-                    <h4>📚 Pekan Literasi Sekolah 2026</h4>
-                    <p>Sekolah menyelenggarakan lomba menulis cerpen, cerdas baca, hingga bengkel komik untuk meningkatkan kreativitas dan budaya literasi siswa.</p>
+            <div class="card-interactive">
+                <img src="DigitalStorytelling.png" alt="Storytelling">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#9b59b6;">Kreativitas Digital</span>
+                    <h3>Digital Storytelling Marathon</h3>
+                    <p>Buat konten edukatif dari buku favoritmu dan bagikan inspirasi ke seluruh siswa SMP Sumatera Utara.</p>
+                    <a href="#" class="btn-detail">Daftar Sekarang</a>
                 </div>
             </div>
 
-            <div class="news-item" style="animation-delay: 0.3s;">
-                <img src="guru.jpeg" alt="Guru Bersatu">
-                <div class="news-text">
-                    <span class="news-badge">Kolaborasi</span>
-                    <h4>Sinergi Guru & Mahasiswa</h4>
-                    <p>Kolaborasi hebat penerapan modul literasi demi sekolah bebas kesenjangan informasi bersama mahasiswa Universitas Sumatera Utara.</p>
+            <div class="card-interactive">
+                <img src="cybermath.jpg" alt="Cyber Math">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#e74c3c;">Turnamen Logika</span>
+                    <h3>Cyber-Math League</h3>
+                    <p>Jadilah yang terbaik dalam ranking Math Logic dan buktikan ketangkasanmu berpikir cepat.</p>
+                    <a href="#" class="btn-detail">Mainkan Game</a>
                 </div>
             </div>
 
-            <div class="news-item" style="animation-delay: 0.4s;">
-                <img src="wajib.jpeg" alt="Selesai">
-                <div class="news-text">
-                    <span class="news-badge">Misi Digital</span>
-                    <h4>Misi Digital Sukses Besar!</h4>
-                    <p>Seluruh siswa antusias mengikuti pelatihan hingga selesai. Sekarang semua jadi makin pintar IT dan siap menghadapi masa depan!</p>
+            <div class="card-interactive">
+                <img src="CyberBullying.jpg" alt="Cyber Bullying">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#1abc9c;">Etika Digital</span>
+                    <h3>Kindness Click: Be a Digital Hero</h3>
+                    <p>Pahami etika berkomunikasi di media sosial dan jadilah pelopor anti-bullying di lingkunganmu.</p>
+                    <a href="#" class="btn-detail">Pelajari Materi</a>
+                </div>
+            </div>
+
+            <div class="card-interactive">
+                <img src="CreativeVibes.jpg" alt="Creative Vibes">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#f1c40f;">Content Creator</span>
+                    <h3>Creative Vibes: Level Up Content</h3>
+                    <p>Tingkatkan skill desain dan kreativitasmu untuk membuat konten belajar yang seru dan estetik.</p>
+                    <a href="#" class="btn-detail">Ikut Workshop</a>
                 </div>
             </div>
 
