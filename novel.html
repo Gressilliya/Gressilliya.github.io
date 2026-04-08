@@ -31,14 +31,51 @@
             100% { opacity: 0.7; transform: translateY(20px); }
         }
 
+        /* Navigasi Melayang (Floating Nav) */
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .nav-link {
+            color: #ec4899;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.4s;
+            padding: 5px 15px;
+            border-radius: 20px;
+        }
+
+        .nav-link:hover {
+            background: rgba(236, 72, 153, 0.2);
+            color: white;
+            transform: translateY(-2px);
+        }
+
         .header {
             text-align: center;
-            padding: 70px 20px;
+            padding: 120px 20px 60px; /* Padding atas ditambah karena ada nav melayang */
             background: linear-gradient(to bottom, rgba(236, 72, 153, 0.1), transparent);
         }
 
         .header h1 {
-            font-size: 3rem;
+            font-size: 3.5rem;
             font-weight: 900;
             color: #ec4899;
             text-transform: uppercase;
@@ -47,16 +84,7 @@
             text-shadow: 0 0 25px rgba(236, 72, 153, 0.6);
         }
 
-        .btn-back {
-            display: inline-block;
-            margin-bottom: 25px;
-            color: #ec4899;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.4s;
-            border-bottom: 1px solid transparent;
-        }
-        .btn-back:hover { color: white; border-bottom: 1px solid white; transform: scale(1.05); }
+        .header h1 span { color: white; }
 
         .novel-grid {
             display: grid;
@@ -67,7 +95,7 @@
             padding: 20px;
         }
 
-        /* Card Novel dengan Animasi Halus */
+        /* Card Novel */
         .novel-card {
             background: rgba(30, 41, 59, 0.6);
             backdrop-filter: blur(10px);
@@ -77,11 +105,6 @@
             border: 1px solid rgba(236, 72, 153, 0.2);
             transition: all 0.5s ease;
             position: relative;
-            animation: slideInUp 0.8s ease backwards;
-        }
-
-        /* Animasi Mengambang Lembut */
-        .novel-card {
             animation: softFloat 5s infinite ease-in-out;
         }
 
@@ -109,20 +132,9 @@
             50% { transform: scale(1.1); filter: drop-shadow(0 0 15px rgba(236, 72, 153, 0.8)); }
         }
 
-        .novel-card h3 {
-            font-size: 1.6rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
+        .novel-card h3 { font-size: 1.6rem; margin-bottom: 12px; color: #fff; }
+        .novel-card p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; margin-bottom: 30px; }
 
-        .novel-card p {
-            color: #cbd5e1;
-            font-size: 0.95rem;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
-
-        /* Tombol Baca Elegan */
         .btn-baca {
             display: block;
             width: 100%;
@@ -144,22 +156,25 @@
             box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
         }
 
-        /* Animasi Masuk Halaman */
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translate(-50%, -30px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
         }
     </style>
 </head>
 <body>
 
+    <nav class="top-nav">
+        <a href="javascript:history.back()" class="nav-link">
+            <i class="fas fa-chevron-left"></i> Kembali
+        </a>
+        <div style="width: 1px; background: rgba(236, 72, 153, 0.3); height: 20px; align-self: center;"></div>
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+    </nav>
+
     <div class="header">
-        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Perpustakaan</a>
         <h1>Novel <span>Sanctuary</span></h1>
         <p>Temukan ketenangan dalam setiap baris cerita impianmu.</p>
     </div>
