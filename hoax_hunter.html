@@ -5,168 +5,272 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hoax Hunter | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --neon-cyan: #00f2ff;
+            --neon-red: #ff0055;
+            --neon-green: #00ff88;
+        }
+
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
-        body { background: #000; color: white; overflow: hidden; height: 100vh; }
-
-        /* Layar Registrasi & Peringkat */
-        .overlay-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); display: flex; justify-content: center;
-            align-items: center; z-index: 100; padding: 20px;
-        }
-        .card {
-            background: rgba(15, 23, 42, 0.9); border: 2px solid #00f2ff;
-            border-radius: 30px; padding: 30px; width: 100%; max-width: 450px;
-            text-align: center; box-shadow: 0 0 20px rgba(0, 242, 255, 0.3);
-        }
-        input, select {
-            width: 100%; padding: 12px; margin: 10px 0; border-radius: 10px;
-            border: 1px solid #00f2ff; background: #000; color: white;
-        }
-        .btn-start {
-            background: linear-gradient(to right, #00d2ff, #9d50bb);
-            color: white; border: none; padding: 12px 40px; border-radius: 50px;
-            font-weight: 800; cursor: pointer; text-transform: uppercase; margin-top: 15px;
+        
+        body { 
+            background: #020617; 
+            color: white; 
+            overflow: hidden; 
+            height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(0, 242, 255, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 85, 0.05) 0%, transparent 50%);
         }
 
-        /* Area Game */
-        #game-canvas { position: relative; width: 100%; height: 100vh; cursor: crosshair; display: none; }
-        .bubble {
-            position: absolute; width: 140px; padding: 15px; border-radius: 20px;
-            font-size: 13px; font-weight: 600; text-align: center; cursor: pointer;
-            animation: floatUp linear forwards; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-        }
-        .hoax { background: linear-gradient(135deg, #ef4444, #991b1b); border: 2px solid #fca5a5; }
-        .fakta { background: linear-gradient(135deg, #22c55e, #166534); border: 2px solid #86efac; }
-
-        @keyframes floatUp { from { bottom: -100px; } to { bottom: 110%; } }
-
+        /* Navbar Atas */
         .game-header {
-            position: absolute; top: 0; width: 100%; padding: 20px;
-            display: flex; justify-content: space-between; background: rgba(0,0,0,0.5);
+            position: fixed; top: 0; width: 100%; padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--neon-cyan); z-index: 50;
+            font-family: 'Orbitron', sans-serif; font-size: 0.8rem;
         }
-        .leaderboard { margin-top: 20px; text-align: left; font-size: 14px; }
-        .rank-item { display: flex; justify-content: space-between; border-bottom: 1px solid #333; padding: 5px 0; }
+
+        .btn-back {
+            position: fixed; bottom: 20px; left: 20px;
+            color: var(--neon-cyan); text-decoration: none;
+            background: rgba(0,0,0,0.5); padding: 10px 20px;
+            border-radius: 10px; border: 1px solid var(--neon-cyan);
+            z-index: 100; transition: 0.3s;
+        }
+        .btn-back:hover { background: var(--neon-cyan); color: black; box-shadow: 0 0 20px var(--neon-cyan); }
+
+        /* Layar Overlay (Start, Briefing, Result) */
+        .overlay {
+            position: fixed; inset: 0; background: rgba(2, 6, 23, 0.95);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 1000; padding: 20px;
+        }
+
+        .card {
+            background: #0f172a; border: 3px solid var(--neon-cyan);
+            border-radius: 25px; padding: 40px; width: 100%; max-width: 500px;
+            text-align: center; box-shadow: 0 0 40px rgba(0, 242, 255, 0.2);
+            animation: slideUp 0.5s ease-out;
+        }
+
+        @keyframes slideUp { from { opacity:0; transform: translateY(30px); } to { opacity:1; transform: translateY(0); } }
+
+        input, select {
+            width: 100%; padding: 15px; margin: 10px 0; border-radius: 12px;
+            border: 1px solid var(--neon-cyan); background: rgba(0,0,0,0.5); color: white;
+            outline: none; font-size: 1rem;
+        }
+
+        .btn-main {
+            background: linear-gradient(90deg, var(--neon-cyan), #9d50bb);
+            color: white; border: none; padding: 15px 40px; border-radius: 50px;
+            font-weight: 800; font-family: 'Orbitron'; cursor: pointer;
+            text-transform: uppercase; margin-top: 20px; transition: 0.3s;
+        }
+        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--neon-cyan); }
+
+        /* Gelembung Game */
+        #game-area { position: relative; width: 100%; height: 100vh; display: none; }
+
+        .bubble {
+            position: absolute; width: 160px; min-height: 80px; padding: 15px;
+            border-radius: 25px; font-size: 0.75rem; font-weight: 600;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; cursor: pointer; user-select: none;
+            animation: floatUp linear forwards; transition: transform 0.1s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            backdrop-filter: blur(5px);
+        }
+        .bubble:active { transform: scale(0.9); }
+        
+        .type-hoax { 
+            background: rgba(255, 0, 85, 0.2); border: 2px solid var(--neon-red);
+            color: #ff99bb; text-shadow: 0 0 5px var(--neon-red);
+        }
+        .type-fakta { 
+            background: rgba(0, 255, 136, 0.2); border: 2px solid var(--neon-green);
+            color: #99ffcc; text-shadow: 0 0 5px var(--neon-green);
+        }
+
+        @keyframes floatUp { from { bottom: -120px; } to { bottom: 110%; } }
+
+        /* Efek Meledak */
+        .pop { animation: explode 0.3s forwards; }
+        @keyframes explode { to { transform: scale(1.5); opacity: 0; } }
+
+        .leaderboard-mini { margin-top: 25px; text-align: left; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 15px; }
+        .rank-item { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; border-bottom: 1px solid #1e293b; }
     </style>
 </head>
 <body>
 
-    <div id="auth-screen" class="overlay-screen">
+    <a href="game.html" class="btn-back"><i class="fas fa-arrow-left"></i> ARCADE LITERASI</a>
+
+    <div id="auth-screen" class="overlay">
         <div class="card">
-            <i class="fas fa-user-shield" style="font-size: 50px; color: #00f2ff; margin-bottom: 15px;"></i>
-            <h2>Hoax Hunter Registration</h2>
-            <input type="text" id="p-name" placeholder="Nama Lengkap">
+            <i class="fas fa-crosshairs" style="font-size: 50px; color: var(--neon-cyan); margin-bottom: 15px;"></i>
+            <h2 style="font-family:'Orbitron';">HOAX HUNTER</h2>
+            <p style="font-size: 13px; color: #94a3b8; margin-bottom: 20px;">Eliminasi berita palsu sebelum sistem lumpuh!</p>
+            <input type="text" id="p-name" placeholder="MASUKKAN NAMA AGENT">
             <select id="p-class">
-                <option value="7">Kelas 7</option>
-                <option value="8">Kelas 8</option>
-                <option value="9">Kelas 9</option>
+                <option value="7">KELAS 7 (NORMAL MODE)</option>
+                <option value="8">KELAS 8 (HARD MODE)</option>
+                <option value="9">KELAS 9 (NIGHTMARE MODE)</option>
             </select>
-            <button class="btn-start" onclick="initGame()">MASUK LEVEL 1</button>
-            <div class="leaderboard">
-                <p>🏆 TOP RANKING:</p>
+            <button class="btn-main" onclick="showBriefing()">INITIALIZE</button>
+            <div class="leaderboard-mini">
+                <p style="color: #facc15; font-size: 11px; font-weight: bold; margin-bottom: 10px;">🏆 GLOBAL TOP AGENT:</p>
                 <div id="rank-display"></div>
             </div>
         </div>
     </div>
 
-    <div id="game-canvas">
+    <div id="briefing-screen" class="overlay" style="display: none;">
+        <div class="card">
+            <h2 style="font-family:'Orbitron'; color: var(--neon-red);">MISSIOIN BRIEF</h2>
+            <div style="text-align: left; font-size: 13px; color: #cbd5e1; margin: 20px 0; line-height: 1.6;">
+                <p>Halo <strong id="agent-name" style="color: var(--neon-cyan);"></strong>,</p>
+                <p>Sistem kita diserang oleh gelembung informasi berbahaya. Tugasmu:</p>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li>Klik/Tembak gelembung berwarna <strong style="color: var(--neon-red);">MERAH (HOAX)</strong>.</li>
+                    <li>Jangan tembak gelembung <strong style="color: var(--neon-green);">HIJAU (FAKTA)</strong>.</li>
+                    <li>Jika Hoax lolos ke atas, nyawamu berkurang!</li>
+                </ul>
+            </div>
+            <button class="btn-main" onclick="startGame()">MULAI PERBURUAN</button>
+        </div>
+    </div>
+
+    <div id="game-area">
         <div class="game-header">
-            <div>PLAYER: <span id="display-name" style="color:#00f2ff"></span></div>
-            <div>SKOR: <span id="score" style="color:#facc15">0</span></div>
-            <div>LEVEL: <span id="level" style="color:#00f2ff">1</span></div>
-            <div>NYAWA: <span id="lives" style="color:#ef4444">❤❤❤</span></div>
+            <div>AGENT: <span id="disp-name" style="color: var(--neon-cyan);"></span></div>
+            <div>SKOR: <span id="disp-score" style="color: #facc15;">0</span></div>
+            <div>NYAWA: <span id="disp-lives" style="color: var(--neon-red);">❤❤❤</span></div>
         </div>
     </div>
 
     <script>
-        let name, grade, score = 0, level = 1, lives = 3, gameActive = false, interval;
-        const newsData = [
-            { t: "Ketik 'P' agar baterai HP penuh otomatis!", type: "hoax" },
-            { t: "Ibu kota Indonesia adalah Nusantara.", type: "fakta" },
-            { t: "Hadiah 100jt dari link WhatsApp mencurigakan.", type: "hoax" },
-            { t: "Membaca buku meningkatkan kecerdasan.", type: "fakta" },
-            { t: "Makan cokelat bisa bikin kamu bisa terbang.", type: "hoax" }
-        ];
+        const newsLib = {
+            "7": [
+                { t: "Makan batu bisa bikin badan jadi kuat.", type: "hoax" },
+                { t: "Kucing adalah hewan karnivora.", type: "fakta" },
+                { t: "Link gratis kuota 500GB dari grup WA.", type: "hoax" },
+                { t: "Matahari terbit dari arah timur.", type: "fakta" },
+                { t: "Ketik 'Amin' agar uang masuk ke saku.", type: "hoax" }
+            ],
+            "8": [
+                { t: "Deepfake adalah AI pemalsu wajah.", type: "fakta" },
+                { t: "Bawang merah bisa serap radiasi nuklir.", type: "hoax" },
+                { t: "Phishing adalah pencurian data pribadi.", type: "fakta" },
+                { t: "Sinyal 5G bisa mengontrol otak manusia.", type: "hoax" },
+                { t: "Two Factor Authentication bikin akun aman.", type: "fakta" }
+            ],
+            "9": [
+                { t: "Filter Bubble membatasi sudut pandang kita.", type: "fakta" },
+                { t: "Incognito bikin IP kita tidak terlacak ISP.", type: "hoax" },
+                { t: "Metadata foto bisa simpan lokasi GPS.", type: "fakta" },
+                { t: "HTTPS menjamin web bebas dari penipuan.", type: "hoax" },
+                { t: "Doxing adalah penyebaran data pribadi.", type: "fakta" }
+            ]
+        };
 
-        window.onload = showRank;
+        let pName, pClass, score = 0, lives = 3, gameRunning = false, spawnInterval;
 
-        function initGame() {
-            name = document.getElementById('p-name').value;
-            grade = document.getElementById('p-class').value;
-            if(!name) return alert("Masukkan namamu!");
+        window.onload = updateLeaderboard;
+
+        function showBriefing() {
+            pName = document.getElementById('p-name').value.toUpperCase();
+            pClass = document.getElementById('p-class').value;
+            if(!pName) return alert("AGENT NAME REQUIRED!");
             
             document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('game-canvas').style.display = 'block';
-            document.getElementById('display-name').innerText = `${name} (${grade})`;
-            gameActive = true;
-            runLevel();
+            document.getElementById('briefing-screen').style.display = 'flex';
+            document.getElementById('agent-name').innerText = pName;
         }
 
-        function runLevel() {
-            if(level > 10) return end("MISI SELESAI!", "Kamu Pelindung Informasi!");
-            let speed = Math.max(1500, 4000 - (level * 300));
-            interval = setInterval(() => { if(gameActive) createBubble(); }, speed);
+        function startGame() {
+            document.getElementById('briefing-screen').style.display = 'none';
+            document.getElementById('game-area').style.display = 'block';
+            document.getElementById('disp-name').innerText = pName;
+            gameRunning = true;
+            
+            // Atur kecepatan berdasarkan kelas
+            let spawnSpeed = pClass == "7" ? 2000 : (pClass == "8" ? 1500 : 1000);
+            spawnInterval = setInterval(createBubble, spawnSpeed);
         }
 
         function createBubble() {
+            if(!gameRunning) return;
+
             const b = document.createElement('div');
-            const data = newsData[Math.floor(Math.random() * newsData.length)];
-            b.className = `bubble ${data.type}`;
-            b.innerText = data.text || data.t;
-            b.style.left = Math.random() * (window.innerWidth - 150) + "px";
+            const pool = newsLib[pClass];
+            const data = pool[Math.floor(Math.random() * pool.length)];
             
-            let duration = Math.max(2, 6 - (level * 0.4));
+            b.className = `bubble type-${data.type}`;
+            b.innerText = data.t;
+            b.style.left = Math.random() * (window.innerWidth - 180) + "px";
+            
+            // Durasi naik gelembung (Semakin kelas tinggi semakin cepat)
+            let duration = pClass == "7" ? 7 : (pClass == "8" ? 5 : 3.5);
             b.style.animationDuration = duration + "s";
 
             b.onclick = () => {
                 if(data.type === 'hoax') {
                     score += 10;
-                    if(score % 50 === 0) { level++; clearInterval(interval); runLevel(); }
+                    b.classList.add('pop');
                 } else {
                     lives--;
+                    b.style.background = "red";
                 }
                 updateUI();
-                b.remove();
-                if(lives <= 0) end("GAME OVER", "Hati-hati dengan berita palsu!");
+                setTimeout(() => b.remove(), 200);
+                checkGameOver();
             };
 
+            // Jika gelembung sampai ke atas tanpa diklik
             b.onanimationend = () => {
-                if(data.type === 'hoax' && b.parentElement) { lives--; updateUI(); }
+                if(data.type === 'hoax' && b.parentElement) {
+                    lives--;
+                    updateUI();
+                }
                 b.remove();
-                if(lives <= 0) end("GAME OVER", "Terlalu banyak Hoax lolos!");
+                checkGameOver();
             };
 
-            document.getElementById('game-canvas').appendChild(b);
+            document.getElementById('game-area').appendChild(b);
         }
 
         function updateUI() {
-            document.getElementById('score').innerText = score;
-            document.getElementById('level').innerText = level;
-            document.getElementById('lives').innerText = "❤".repeat(lives);
+            document.getElementById('disp-score').innerText = score;
+            document.getElementById('disp-lives').innerText = "❤".repeat(Math.max(0, lives));
         }
 
-        function end(title, msg) {
-            gameActive = false;
-            clearInterval(interval);
-            saveRank(name, score);
-            alert(`${title}\n${msg}\nSkor Akhir: ${score}`);
-            location.reload();
+        function checkGameOver() {
+            if(lives <= 0 && gameRunning) {
+                gameRunning = false;
+                clearInterval(spawnInterval);
+                saveScore();
+                alert(`MISSION FAILED!\nSkor Akhir Agent ${pName}: ${score}\nTetap waspada terhadap Hoax!`);
+                location.reload();
+            }
         }
 
-        function saveRank(n, s) {
+        function saveScore() {
             let ranks = JSON.parse(localStorage.getItem('hh_ranks')) || [];
-            ranks.push({name: n, score: s});
+            ranks.push({name: pName, score: score, class: pClass});
             ranks.sort((a,b) => b.score - a.score);
-            localStorage.setItem('hh_ranks', JSON.stringify(ranks.slice(0, 5)));
+            localStorage.setItem('hh_ranks', JSON.stringify(ranks.slice(0, 10)));
         }
 
-        function showRank() {
+        function updateLeaderboard() {
             let ranks = JSON.parse(localStorage.getItem('hh_ranks')) || [];
-            document.getElementById('rank-display').innerHTML = ranks.map((r, i) => 
-                `<div class="rank-item"><span>${i+1}. ${r.name}</span><span>${r.score} PTS</span></div>`
-            ).join('') || "Belum ada pejuang.";
+            document.getElementById('rank-display').innerHTML = ranks.slice(0, 3).map((r, i) => 
+                `<div class="rank-item"><span>${i+1}. ${r.name} (Kls ${r.class})</span> <span>${r.score} PTS</span></div>`
+            ).join('') || "NO DATA FOUND.";
         }
     </script>
 </body>
