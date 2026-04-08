@@ -2697,6 +2697,45 @@ body {
 .footer-btn:hover          { opacity: 0.88; transform: scale(1.02); }
 .footer-btn.primary        { background: linear-gradient(135deg, #1565C0, #42A5F5); color: #fff; border-color: transparent; }
 .footer-btn.secondary      { background: #fff; color: #1565C0; }
+
+/* ===== HAMBURGER BUTTON REVISED ===== */
+.hamburger-btn {
+    position: relative;
+    background: transparent; /* Bersih tanpa background abu-abu */
+    border: 2px solid #1565C0;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    transition: all 0.3s ease;
+    /* Menghilangkan margin otomatis jika ada agar tidak lari ke tengah */
+    margin: 0; 
+}
+
+.hamburger-btn:hover {
+    background: rgba(21, 101, 192, 0.1);
+    transform: translateY(-2px);
+}
+
+.ham-line {
+    width: 20px;
+    height: 2px;
+    background: #1565C0; /* Warna biru sesuai logo */
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Memastikan tanda merah (dot) tidak muncul kembali */
+.ham-ping, .notification-dot, [class*="dot"] {
+    display: none !important;
+}
+
+/* Animasi saat diklik (Menjadi X) */
+.hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+.hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
     
 </style>
 </head>
@@ -2710,12 +2749,13 @@ body {
         <span class="logo-text">DigiSmart Library</span>
     </div>
 
-<button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
-  <span class="ham-line"></span>
-  <span class="ham-line"></span>
-  <span class="ham-line"></span>
-  <div class="ham-ping"></div>
-</button>
+<div class="nav-right" style="display: flex; align-items: center; gap: 15px;">
+    
+    <button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        <span class="ham-line"></span>
+        </button>
 
 <!-- ===== OVERLAY (taruh sebelum </body>) ===== -->
 <div class="mega-overlay" id="megaOverlay" onclick="closeHamburger()"></div>
