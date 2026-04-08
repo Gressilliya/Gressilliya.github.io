@@ -5,153 +5,234 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Digital Quiz | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&family=Orbitron:wght@400;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
-            background: #000;
+            background: #020617;
+            background-image: radial-gradient(circle at center, #1e293b 0%, #020617 100%);
             color: white;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 20px;
+            overflow: hidden;
         }
 
         .btn-back {
             position: fixed; top: 20px; left: 20px;
-            color: white; text-decoration: none; font-size: 14px;
-            background: rgba(255,255,255,0.1); padding: 8px 15px;
-            border-radius: 50px; border: 1px solid rgba(255,255,255,0.2);
-            z-index: 100;
+            color: #00f2ff; text-decoration: none; font-size: 12px;
+            background: rgba(0, 242, 255, 0.1); padding: 10px 20px;
+            border-radius: 50px; border: 1px solid rgba(0, 242, 255, 0.3);
+            z-index: 100; font-family: 'Orbitron', sans-serif;
+            transition: 0.3s;
         }
+        .btn-back:hover { background: #00f2ff; color: #000; }
 
         .quiz-card {
             width: 100%;
-            max-width: 500px;
-            background: rgba(15, 23, 42, 0.8);
+            max-width: 550px;
+            background: rgba(15, 23, 42, 0.9);
             border: 2px solid #00f2ff;
             border-radius: 30px;
-            padding: 30px;
+            padding: 40px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.15);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.8s ease-out;
         }
 
-        .icon-box { font-size: 60px; color: #00f2ff; margin-bottom: 15px; }
-        h2 { font-size: 24px; margin-bottom: 10px; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .icon-box { font-size: 50px; color: #00f2ff; margin-bottom: 20px; filter: drop-shadow(0 0 10px #00f2ff); }
+        h2 { font-family: 'Orbitron', sans-serif; font-size: 22px; margin-bottom: 15px; letter-spacing: 2px; color: #00f2ff; }
         
-        /* Form Registrasi */
-        .reg-form { margin: 20px 0; text-align: left; }
-        .reg-form label { display: block; margin-bottom: 5px; font-size: 14px; color: #00f2ff; }
+        /* Input & Select */
+        .reg-form { margin: 25px 0; text-align: left; }
+        .reg-form label { display: block; margin-bottom: 8px; font-size: 12px; color: #94a3b8; font-weight: 600; }
         .reg-form input, .reg-form select {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid rgba(0, 242, 255, 0.5);
-            background: rgba(0,0,0,0.3); color: white; margin-bottom: 15px; outline: none;
+            width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.2);
+            background: rgba(0,0,0,0.4); color: white; margin-bottom: 20px; outline: none; transition: 0.3s;
+        }
+        .reg-form input:focus { border-color: #00f2ff; box-shadow: 0 0 10px rgba(0, 242, 255, 0.2); }
+
+        .btn-action {
+            width: 100%; padding: 15px;
+            background: linear-gradient(135deg, #00d2ff, #9d50bb);
+            color: white; border: none; border-radius: 15px;
+            font-weight: 800; font-family: 'Orbitron', sans-serif; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+        .btn-action:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0, 210, 255, 0.4); }
+
+        /* Game UI */
+        #briefing-screen, #quiz-game, #result-screen { display: none; }
+        
+        .briefing-text {
+            text-align: left; background: rgba(255,255,255,0.05);
+            padding: 20px; border-radius: 15px; border-left: 4px solid #00f2ff;
+            font-size: 14px; line-height: 1.6; margin-bottom: 25px;
         }
 
-        .btn-mulai {
-            display: inline-block; padding: 12px 40px;
-            background: linear-gradient(to right, #00d2ff, #9d50bb);
-            color: white; border: none; border-radius: 50px;
-            font-weight: 800; font-size: 16px; cursor: pointer;
-            text-transform: uppercase; transition: 0.3s;
-        }
-        .btn-mulai:hover { transform: scale(1.05); box-shadow: 0 0 15px rgba(0, 210, 255, 0.5); }
-
-        /* Game & Ranking Styles */
-        #quiz-game, #result-screen { display: none; }
         .opt-btn {
-            width: 100%; background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(0, 242, 255, 0.3); color: white;
-            padding: 15px; border-radius: 15px; cursor: pointer;
-            margin-bottom: 10px; transition: 0.3s; text-align: left;
+            width: 100%; background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(0, 242, 255, 0.1); color: #cbd5e1;
+            padding: 18px; border-radius: 15px; cursor: pointer;
+            margin-bottom: 12px; transition: 0.2s; text-align: left; font-size: 14px;
         }
-        .opt-btn:hover { background: rgba(0, 242, 255, 0.1); border-color: #00f2ff; }
-        .correct { background: #22c55e !important; }
-        .wrong { background: #ef4444 !important; }
+        .opt-btn:hover { background: rgba(0, 242, 255, 0.15); border-color: #00f2ff; color: white; }
+        .correct { background: #059669 !important; border-color: #10b981 !important; color: white; }
+        .wrong { background: #dc2626 !important; border-color: #ef4444 !important; color: white; }
 
-        .leaderboard {
-            margin-top: 25px; text-align: left; padding: 15px;
-            background: rgba(255,255,255,0.05); border-radius: 15px;
+        .leaderboard { margin-top: 30px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+        .rank-item { 
+            display: flex; justify-content: space-between; padding: 10px; 
+            background: rgba(255,255,255,0.02); margin-bottom: 5px; border-radius: 8px;
+            font-size: 12px;
         }
-        .rank-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); font-size: 13px; }
     </style>
 </head>
 <body>
 
-    <a href="game.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali</a>
+    <a href="game.html" class="btn-back"><i class="fas fa-gamepad"></i> ARCADE LITERASI</a>
 
     <div class="quiz-card" id="start-screen">
-        <div class="icon-box"><i class="fas fa-user-edit"></i></div>
-        <h2>Digital Quiz</h2>
-        <p style="font-size: 13px; color: #ccc;">Daftarkan dirimu untuk masuk rangking!</p>
+        <div class="icon-box"><i class="fas fa-id-badge"></i></div>
+        <h2>DIGITAL QUIZ</h2>
+        <p style="font-size: 13px; color: #94a3b8;">Verifikasi identitas untuk masuk ke Server Pusat.</p>
         
         <div class="reg-form">
-            <label>Nama Lengkap</label>
-            <input type="text" id="user-name" placeholder="Ketik namamu...">
-            <label>Kelas</label>
+            <label>NAMA AGENT</label>
+            <input type="text" id="user-name" placeholder="Masukkan nama kode...">
+            <label>LEVEL KESULITAN (KELAS)</label>
             <select id="user-class">
-                <option value="7">Kelas 7</option>
-                <option value="8">Kelas 8</option>
-                <option value="9">Kelas 9</option>
+                <option value="7">Kelas 7 (Beginner)</option>
+                <option value="8">Kelas 8 (Intermediate)</option>
+                <option value="9">Kelas 9 (Advanced)</option>
             </select>
         </div>
-
-        <button class="btn-mulai" onclick="startQuiz()">MULAI KUIS</button>
+        <button class="btn-action" onclick="showBriefing()">INITIALIZE</button>
 
         <div class="leaderboard">
-            <p style="font-weight: 800; color: #facc15; margin-bottom: 10px;"><i class="fas fa-trophy"></i> PAPAN PERINGKAT</p>
+            <p style="font-weight: 800; color: #facc15; font-size: 12px; margin-bottom: 10px; font-family: 'Orbitron';">
+                <i class="fas fa-trophy"></i> TOP AGENT DIGITAL
+            </p>
             <div id="rank-list"></div>
         </div>
     </div>
 
+    <div class="quiz-card" id="briefing-screen">
+        <div class="icon-box"><i class="fas fa-terminal"></i></div>
+        <h2>MISSION BRIEF</h2>
+        <div class="briefing-text">
+            <p>Selamat datang, Agent <strong id="b-name" style="color:#00f2ff"></strong>.</p>
+            <p>Kamu akan menghadapi 10 tantangan digital sesuai level kelasmu. Misi ini bertujuan untuk menguji ketajamanmu dalam informasi.</p>
+            <br>
+            <ul style="list-style: none;">
+                <li><i class="fas fa-check-circle" style="color:#00f2ff"></i> Jawablah dengan cepat dan tepat.</li>
+                <li><i class="fas fa-check-circle" style="color:#00f2ff"></i> Setiap jawaban benar bernilai 10 poin.</li>
+                <li><i class="fas fa-check-circle" style="color:#00f2ff"></i> Skor akan masuk ke papan peringkat utama.</li>
+            </ul>
+        </div>
+        <button class="btn-action" onclick="startQuiz()">LUNCURKAN MISI</button>
+    </div>
+
     <div class="quiz-card" id="quiz-game">
-        <p id="player-tag" style="font-size: 12px; color: #00f2ff; margin-bottom: 10px;"></p>
-        <div class="question-box" id="question" style="font-size: 18px; font-weight: 600; margin-bottom: 20px;"></div>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <span id="player-tag" style="font-size: 11px; color: #00f2ff; font-family: 'Orbitron';"></span>
+            <span style="font-size: 11px; background: #00f2ff; color: #000; padding: 2px 8px; border-radius: 4px; font-weight: bold;">
+                <span id="q-number">1</span>/10
+            </span>
+        </div>
+        <div id="question" style="font-size: 16px; font-weight: 600; margin-bottom: 25px; line-height: 1.5;"></div>
         <div id="options"></div>
-        <p style="margin-top: 20px; font-weight: 600;">Skor: <span id="current-score" style="color:#00f2ff">0</span></p>
+        <div style="margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+            <span style="font-size: 12px; color: #94a3b8;">CURRENT SCORE: </span>
+            <span id="current-score" style="color:#00f2ff; font-family: 'Orbitron'; font-weight: bold;">0</span>
+        </div>
     </div>
 
     <div class="quiz-card" id="result-screen">
-        <div class="icon-box" style="color: #facc15;"><i class="fas fa-crown"></i></div>
-        <h2>Misi Selesai!</h2>
-        <p id="final-msg" style="margin-bottom: 20px;"></p>
-        <div style="font-size: 40px; font-weight: 800; color: #00f2ff; margin-bottom: 20px;">🏆 <span id="final-score">0</span></div>
-        <button class="btn-mulai" onclick="location.reload()">MAIN LAGI</button>
+        <div class="icon-box" style="color: #facc15;"><i class="fas fa-award"></i></div>
+        <h2>MISSION COMPLETED</h2>
+        <p id="final-msg" style="font-size: 14px; color: #94a3b8; margin-bottom: 25px;"></p>
+        <div style="background: rgba(0, 242, 255, 0.1); padding: 20px; border-radius: 20px; border: 1px solid #00f2ff; margin-bottom: 30px;">
+            <p style="font-size: 12px; color: #00f2ff; font-family: 'Orbitron';">FINAL SCORE</p>
+            <div style="font-size: 50px; font-weight: 800; color: white;" id="final-score">0</div>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <button class="btn-action" style="background: #334155;" onclick="location.reload()">COBA LAGI</button>
+            <button class="btn-action" onclick="window.location.href='ranking.html'">RANKING</button>
+        </div>
     </div>
 
     <script>
-        const quizData = [
-            { q: "Apa yang harus dibuat agar password akun game kamu tidak mudah di-hack?", a: ["Nama sendiri", "Tanggal lahir", "Gabungan huruf, angka, & simbol", "123456"], correct: 2 },
-            { q: "Jika ada link asing di WhatsApp menjanjikan kuota gratis, tindakan terbaik adalah...", a: ["Klik langsung", "Hapus dan abaikan", "Bagikan ke grup kelas", "Coba di HP teman"], correct: 1 },
-            { q: "Apa itu 'Cyberbullying'?", a: ["Lomba lari digital", "Menyakiti orang lain lewat internet", "Belanja online berlebihan", "Bermain game sampai pagi"], correct: 1 },
-            { q: "Data mana yang TIDAK boleh dibagikan secara bebas di media sosial?", a: ["Warna kesukaan", "Hobi", "Alamat rumah & NIK", "Judul film favorit"], correct: 2 }
-        ];
+        const questBank = {
+            "7": [
+                { q: "Apa langkah utama agar akun media sosial tidak mudah dibobol?", a: ["Pakai nama ibu", "Gunakan tanggal lahir", "Kombinasi huruf, angka, & simbol", "Tidak pakai password"], c: 2 },
+                { q: "Jika melihat komentar jahat di postingan teman, sikap yang benar adalah...", a: ["Ikut menghina", "Lapor (Report) & jangan balas", "Diamkan saja", "Beritahu semua orang"], c: 1 },
+                { q: "Manakah yang merupakan data pribadi rahasia?", a: ["Hobi", "Warna baju", "Alamat rumah & NIK", "Judul buku favorit"], c: 2 },
+                { q: "Apa itu jejak digital?", a: ["Bekas jari di layar HP", "Catatan aktivitas kita di internet", "Foto yang dicetak", "Kecepatan internet"], c: 1 },
+                { q: "Apa yang harus dilakukan saat menerima link hadiah kuota gratis?", a: ["Langsung klik", "Hapus dan abaikan", "Kirim ke grup sekolah", "Klik pakai HP orang lain"], c: 1 },
+                { q: "Etika berkomunikasi di grup WhatsApp adalah...", a: ["Spam stiker", "Bicara sopan", "Gunakan huruf kapital semua", "Marah jika tidak dibalas"], c: 1 },
+                { q: "Mengapa kita tidak boleh sembarang menerima permintaan pertemanan?", a: ["Biar sombong", "Mencegah akun palsu/jahat", "Biar followers sedikit", "Tidak ada alasan"], c: 1 },
+                { q: "Apa kegunaan mode 'Incognito'?", a: ["Menghapus virus", "Browsing tanpa simpan riwayat", "Mempercepat internet", "Melihat foto rahasia"], c: 1 },
+                { q: "Cyberbullying adalah tindakan...", a: ["Lari maraton digital", "Menyakiti orang lewat internet", "Belajar online", "Main game bareng"], c: 1 },
+                { q: "Sikap saat berita hoax masuk ke grup keluarga?", a: ["Ikut sebar", "Klarifikasi dengan sopan", "Keluar dari grup", "Tersenyum"], c: 1 }
+            ],
+            "8": [
+                { q: "Apa risiko utama jika kita menggunakan Wi-Fi publik untuk transaksi bank?", a: ["Kuota habis", "Pencurian data (Sniffing)", "Baterai drop", "Koneksi lambat"], c: 1 },
+                { q: "Seseorang yang berpura-pura menjadi institusi resmi untuk mencuri data disebut...", a: ["Phishing", "Shopping", "Gaming", "Chatting"], c: 0 },
+                { q: "Manakah perilaku yang mencerminkan literasi informasi?", a: ["Percaya semua berita", "Cek sumber sebelum share", "Baca judul saja", "Share berita emosional"], c: 1 },
+                { q: "Apa itu 'Copyright'?", a: ["Hak untuk menyalin", "Hak cipta karya seseorang", "Nama perusahaan", "Jenis font"], c: 1 },
+                { q: "Tindakan mengambil karya orang lain tanpa izin disebut...", a: ["Kolaborasi", "Plagiarisme", "Inovasi", "Apresiasi"], c: 1 },
+                { q: "Apa fungsi fitur Two-Factor Authentication (2FA)?", a: ["Bikin dua akun", "Keamanan ganda saat login", "Mempercepat login", "Menghapus akun"], c: 1 },
+                { q: "Mengapa hoaks sering menggunakan judul yang provokatif?", a: ["Biar keren", "Memancing emosi & klik", "Biar edukatif", "Biar cepat viral"], c: 1 },
+                { q: "Apa dampak negatif terlalu lama menatap layar (Screen Time)?", a: ["Mata sehat", "Gangguan tidur & fokus", "Tambah pintar", "Kenyang"], c: 1 },
+                { q: "Bagaimana cara membedakan akun asli dan akun palsu publik figur?", a: ["Lihat jumlah postingan", "Cek centang biru (Verified)", "Lihat fotonya", "Lihat komentarnya"], c: 1 },
+                { q: "Apa itu 'Digital Citizen'?", a: ["Warga negara asing", "Warga yang beretika di dunia digital", "Orang yang jualan HP", "Pemain game profesional"], c: 1 }
+            ],
+            "9": [
+                { q: "Apa itu 'Filter Bubble' dalam algoritma media sosial?", a: ["Sabun cuci HP", "Konten yang hanya sesuai minat kita", "Iklan yang mengganggu", "Mode hemat data"], c: 1 },
+                { q: "Kesenjangan digital tingkat kedua berfokus pada...", a: ["Akses perangkat", "Kemampuan/Skill penggunaan", "Harga kuota", "Merek smartphone"], c: 1 },
+                { q: "Bagaimana cara kerja 'Deepfake'?", a: ["Mengedit teks", "Memalsukan wajah/suara dengan AI", "Menghapus background", "Memperjelas foto"], c: 1 },
+                { q: "Apa bahaya dari 'Oversharing' di internet?", a: ["Banyak teman", "Target tindak kejahatan/stalking", "Terkenal", "Baterai boros"], c: 1 },
+                { q: "Manakah yang termasuk kejahatan siber serius?", a: ["Lupa password", "Ransomware (Sandera Data)", "Main game kalah", "Tidak punya kuota"], c: 1 },
+                { q: "Apa peran literasi media dalam demokrasi?", a: ["Biar bisa debat", "Mencegah manipulasi informasi", "Biar bisa kampanye", "Mencari musuh"], c: 1 },
+                { q: "Bagaimana cara mengidentifikasi situs web palsu?", a: ["Warnanya gelap", "Cek URL (Contoh: .co.id vs .xyz)", "Lihat gambarnya", "Tanya teman"], c: 1 },
+                { q: "Apa itu 'Netiket'?", a: ["Tiket internet", "Etika dalam berinternet", "Nama aplikasi", "Peraturan sekolah"], c: 1 },
+                { q: "Mengapa data pribadi dianggap sebagai 'New Oil'?", a: ["Bisa dibakar", "Sangat berharga bagi iklan & riset", "Bikin mesin jalan", "Harganya murah"], c: 1 },
+                { q: "Sikap kritis terhadap algoritma berarti...", a: ["Benci teknologi", "Paham bahwa konten sudah dipilah", "Menghapus semua akun", "Hanya nonton TV"], c: 1 }
+            ]
+        };
 
-        let currentQ = 0;
-        let score = 0;
-        let userName = "";
-        let userClass = "";
+        let currentQ = 0, score = 0, userName = "", userClass = "", quizData = [];
 
         window.onload = updateLeaderboard;
 
-        function startQuiz() {
+        function showBriefing() {
             userName = document.getElementById('user-name').value;
             userClass = document.getElementById('user-class').value;
-
-            if (userName.trim() === "") {
-                alert("Masukkan namamu dulu ya!");
-                return;
-            }
-
+            if (userName.trim() === "") return alert("IDENTITAS DIBUTUHKAN!");
+            
             document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('briefing-screen').style.display = 'block';
+            document.getElementById('b-name').innerText = userName;
+        }
+
+        function startQuiz() {
+            quizData = questBank[userClass];
+            document.getElementById('briefing-screen').style.display = 'none';
             document.getElementById('quiz-game').style.display = 'block';
-            document.getElementById('player-tag').innerText = `Pemain: ${userName} (Kelas ${userClass})`;
+            document.getElementById('player-tag').innerText = `AGENT: ${userName} | LVL: ${userClass}`;
             showQuestion();
         }
 
         function showQuestion() {
             const qObj = quizData[currentQ];
+            document.getElementById('q-number').innerText = currentQ + 1;
             document.getElementById('question').innerText = qObj.q;
             const optDiv = document.getElementById('options');
             optDiv.innerHTML = '';
@@ -169,46 +250,42 @@
             const btns = document.querySelectorAll('.opt-btn');
             btns.forEach(b => b.disabled = true);
 
-            if(idx === quizData[currentQ].correct) {
+            if(idx === quizData[currentQ].c) {
                 btn.classList.add('correct');
-                score += 25;
+                score += 10;
                 document.getElementById('current-score').innerText = score;
             } else {
                 btn.classList.add('wrong');
-                btns[quizData[currentQ].correct].classList.add('correct');
+                btns[quizData[currentQ].c].classList.add('correct');
             }
 
             setTimeout(() => {
                 currentQ++;
-                if(currentQ < quizData.length) {
-                    showQuestion();
-                } else {
-                    showResult();
-                }
-            }, 1500);
+                if(currentQ < 10) showQuestion();
+                else showResult();
+            }, 1200);
         }
 
         function showResult() {
             document.getElementById('quiz-game').style.display = 'none';
             document.getElementById('result-screen').style.display = 'block';
             document.getElementById('final-score').innerText = score;
-            document.getElementById('final-msg').innerText = `Hebat, ${userName}! Kamu menyelesaikan tantangan ini.`;
+            document.getElementById('final-msg').innerText = `Selamat Agent ${userName}, misi level ${userClass} selesai. Jejak digitalmu telah terekam.`;
             saveScore(userName, userClass, score);
         }
 
         function saveScore(name, kls, scr) {
             let ranks = JSON.parse(localStorage.getItem('quizRanks')) || [];
-            ranks.push({name: name, class: kls, score: scr});
+            ranks.push({name: name, class: kls, score: scr, date: new Date().toLocaleDateString()});
             ranks.sort((a,b) => b.score - a.score);
             localStorage.setItem('quizRanks', JSON.stringify(ranks.slice(0, 5)));
         }
 
         function updateLeaderboard() {
             let ranks = JSON.parse(localStorage.getItem('quizRanks')) || [];
-            let list = document.getElementById('rank-list');
-            list.innerHTML = ranks.map((r, i) => 
-                `<div class="rank-item"><span>${i+1}. ${r.name} (Kls ${r.class})</span> <span>${r.score} Pts</span></div>`
-            ).join('') || "Belum ada pejuang digital.";
+            document.getElementById('rank-list').innerHTML = ranks.map((r, i) => 
+                `<div class="rank-item"><span>${i+1}. ${r.name} (Kls ${r.class})</span> <span>${r.score} PTS</span></div>`
+            ).join('') || "BELUM ADA DATA AGENT.";
         }
     </script>
 </body>
