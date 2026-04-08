@@ -2751,15 +2751,18 @@ body {
     </ul>
 </div>
 
-   <button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
+<button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
   <span class="ham-line"></span>
   <span class="ham-line"></span>
   <span class="ham-line"></span>
+  <div class="ham-line"></div>
 </button>
 
+<!-- ===== OVERLAY (taruh sebelum </body>) ===== -->
 <div class="mega-overlay" id="megaOverlay" onclick="closeHamburger()"></div>
+
+<!-- ===== MEGA MENU PANEL (taruh sebelum </body>) ===== -->
 <div class="mega-menu" id="megaMenu">
-   </div>
 
   <div class="menu-header">
     <div class="menu-header-logo">
@@ -3384,40 +3387,5 @@ document.addEventListener('keydown', function(e) {
 
 <script src="hamburger.js"></script>
 
-<script>
-  function toggleHamburger() {
-    const btn = document.getElementById('hamBtn');
-    const menu = document.getElementById('megaMenu');
-    const overlay = document.getElementById('megaOverlay');
-
-    // Menambah atau menghapus class 'open' saat tombol diklik
-    btn.classList.toggle('open');
-    menu.classList.toggle('open');
-    overlay.classList.toggle('open');
-
-    // Mencegah layar utama di-scroll saat menu terbuka
-    if (menu.classList.contains('open')) {
-      document.body.style.overflow = 'hidden';
-    } else {
-      document.body.style.overflow = '';
-    }
-  }
-
-  function closeHamburger() {
-    // Memastikan semua elemen kembali ke kondisi tertutup
-    document.getElementById('hamBtn').classList.remove('open');
-    document.getElementById('megaMenu').classList.remove('open');
-    document.getElementById('megaOverlay').classList.remove('open');
-    document.body.style.overflow = '';
-  }
-
-  // Menutup menu secara otomatis jika menekan tombol 'Escape' di keyboard
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeHamburger();
-    }
-  });
-</script>
-    
 </body>
 </html>
