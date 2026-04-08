@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        /* Reset & Base */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
@@ -14,9 +15,60 @@
             color: white;
             padding: 40px 20px;
             min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .header { text-align: center; margin-bottom: 50px; }
+        /* --- NAVIGASI MELAYANG (BARU) --- */
+        .top-nav {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(15px);
+            padding: 10px 25px;
+            border-radius: 50px;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: 0.3s;
+        }
+
+        .nav-link {
+            color: #2dd4bf;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.4s;
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+
+        .nav-link:hover {
+            background: rgba(45, 212, 191, 0.1);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .nav-divider {
+            width: 1px;
+            background: rgba(45, 212, 191, 0.3);
+            height: 20px;
+            align-self: center;
+        }
+
+        /* --- HEADER --- */
+        .header { 
+            text-align: center; 
+            margin-bottom: 50px; 
+            padding-top: 60px; /* Jarak agar tidak tertutup Nav */
+        }
+        
         .header h1 { 
             font-size: 2.5rem; 
             font-weight: 800; 
@@ -24,12 +76,15 @@
             text-transform: uppercase;
             letter-spacing: 2px;
         }
+        
         .header p { color: #94a3b8; margin-top: 10px; }
 
+        /* --- SEARCH --- */
         .search-container {
             max-width: 600px;
             margin: 0 auto 50px;
         }
+        
         .search-bar {
             width: 100%;
             padding: 15px 25px;
@@ -38,8 +93,15 @@
             border-radius: 50px;
             color: white;
             outline: none;
+            transition: 0.3s;
         }
 
+        .search-bar:focus {
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        /* --- GRID & CARDS --- */
         .book-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -93,7 +155,6 @@
         .book-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
         .book-card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px; }
 
-        /* Style tombol agar tetap konsisten dengan gambar */
         .btn-baca {
             display: inline-block;
             padding: 10px 25px;
@@ -115,6 +176,16 @@
     </style>
 </head>
 <body>
+
+    <nav class="top-nav">
+        <a href="javascript:history.back()" class="nav-link">
+            <i class="fas fa-chevron-left"></i> Kembali
+        </a>
+        <div class="nav-divider"></div>
+        <a href="index.html" class="nav-link">
+            <i class="fas fa-home"></i> Beranda
+        </a>
+    </nav>
 
     <div class="header">
         <h1>Pojok Baca Digital</h1>
