@@ -5,195 +5,270 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Source Matcher | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         
         body {
             background: #000;
+            background-image: linear-gradient(45deg, #020617 0%, #0f172a 100%);
             color: white;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow-x: hidden;
+            overflow: hidden;
         }
 
-        .container { width: 100%; max-width: 600px; padding: 20px; }
+        .back-btn {
+            position: fixed; top: 20px; left: 20px;
+            color: #00f2ff; text-decoration: none; font-size: 14px;
+            background: rgba(0, 242, 255, 0.1); padding: 8px 20px;
+            border-radius: 50px; border: 1px solid #00f2ff; z-index: 100;
+        }
 
-        /* Gaya Card Utama (Sesuai Gambar Kamu) */
         .game-card {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(15, 23, 42, 0.9);
             border: 2px solid #00f2ff;
             border-radius: 30px;
             padding: 40px;
+            width: 100%;
+            max-width: 600px;
             text-align: center;
-            box-shadow: 0 0 20px rgba(0, 242, 255, 0.2);
-            position: relative;
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
+            backdrop-filter: blur(10px);
+            animation: fadeIn 0.5s ease-out;
         }
 
-        .icon-box { font-size: 60px; color: #00f2ff; margin-bottom: 20px; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+
+        .icon-box { font-size: 60px; color: #00f2ff; margin-bottom: 20px; filter: drop-shadow(0 0 10px #00f2ff); }
+        h2 { font-family: 'Orbitron', sans-serif; letter-spacing: 2px; color: #00f2ff; margin-bottom: 10px; }
         
-        /* Form Input Nama & Kelas */
+        /* Form Styling */
         .input-group { margin-bottom: 20px; text-align: left; }
-        .input-group label { display: block; margin-bottom: 8px; font-size: 14px; color: #00f2ff; }
+        .input-group label { display: block; margin-bottom: 8px; font-size: 12px; color: #94a3b8; font-weight: 600; }
         input, select {
-            width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #00f2ff;
-            background: rgba(0,0,0,0.5); color: white; font-size: 16px;
+            width: 100%; padding: 14px; border-radius: 12px; border: 1px solid rgba(0, 242, 255, 0.3);
+            background: rgba(0,0,0,0.4); color: white; font-size: 16px; outline: none;
         }
 
-        /* Tombol Persis Gambar */
         .btn-action {
-            display: inline-block;
-            padding: 12px 40px;
-            background: linear-gradient(to right, #00d2ff, #9d50bb);
+            width: 100%; padding: 15px;
+            background: linear-gradient(90deg, #00d2ff, #9d50bb);
             color: white; border: none; border-radius: 50px;
-            font-weight: 800; cursor: pointer; text-transform: uppercase;
-            margin-top: 20px; transition: 0.3s;
+            font-weight: 800; font-family: 'Orbitron'; cursor: pointer;
+            text-transform: uppercase; transition: 0.3s;
         }
-        .btn-action:hover { transform: scale(1.05); box-shadow: 0 0 15px #00d2ff; }
+        .btn-action:hover { transform: translateY(-3px); box-shadow: 0 5px 20px rgba(0, 210, 255, 0.5); }
 
-        /* Area Game Matcher */
-        #game-play { display: none; }
-        .match-item {
-            background: rgba(255,255,255,0.05);
-            border: 1px dashed #00f2ff;
-            padding: 15px; margin: 10px 0; border-radius: 12px;
-            cursor: grab; transition: 0.3s;
+        /* Game Mechanics */
+        #briefing-screen, #game-play { display: none; }
+        
+        .news-box {
+            background: #1e293b; border: 2px dashed #00f2ff;
+            padding: 25px; margin: 20px 0; border-radius: 20px;
+            cursor: grab; font-weight: 600; font-size: 15px;
+            animation: pulse 2s infinite;
         }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 242, 255, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); } }
+
+        .zones-container { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 30px; }
         .drop-zone {
-            background: rgba(0, 242, 255, 0.1);
-            border: 2px solid #00f2ff;
-            min-height: 60px; border-radius: 12px;
-            margin-top: 5px; display: flex; align-items: center; justify-content: center;
+            background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1);
+            padding: 30px 10px; border-radius: 20px; font-size: 12px;
+            transition: 0.3s; display: flex; flex-direction: column; align-items: center; gap: 10px;
         }
+        .drop-zone i { font-size: 30px; }
+        .drop-zone.valid { border-color: #00f2ff; background: rgba(0, 242, 255, 0.1); }
 
-        /* Leaderboard */
-        .rank-list { text-align: left; margin-top: 20px; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 15px; }
-        .rank-item { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .progress-bar { width: 100%; height: 8px; background: #334155; border-radius: 10px; margin: 15px 0; overflow: hidden; }
+        #progress-fill { width: 0%; height: 100%; background: #00f2ff; transition: 0.5s; }
 
-        .back-btn { position: fixed; top: 20px; left: 20px; color: white; text-decoration: none; font-size: 14px; }
+        .rank-list { text-align: left; margin-top: 25px; border-top: 1px solid #1e293b; padding-top: 20px; }
+        .rank-item { display: flex; justify-content: space-between; padding: 8px; font-size: 13px; background: rgba(255,255,255,0.03); margin-bottom: 5px; border-radius: 8px; }
     </style>
 </head>
 <body>
 
-    <a href="game.html" class="back-btn"><i class="fas fa-arrow-left"></i> Kembali</a>
+    <a href="game.html" class="back-btn"><i class="fas fa-arrow-left"></i> ARCADE LITERASI</a>
 
-    <div class="container">
-        <div class="game-card" id="auth-screen">
-            <div class="icon-box"><i class="fas fa-puzzle-piece"></i></div>
-            <h2>Source Matcher</h2>
-            <p style="color: #ccc; margin-bottom: 20px;">Daftarkan dirimu sebelum bermain!</p>
-            
-            <div class="input-group">
-                <label>Nama Lengkap</label>
-                <input type="text" id="player-name" placeholder="Masukkan nama...">
-            </div>
-            <div class="input-group">
-                <label>Kelas</label>
-                <select id="player-class">
-                    <option value="7">Kelas 7</option>
-                    <option value="8">Kelas 8</option>
-                    <option value="9">Kelas 9</option>
-                </select>
-            </div>
-            <button class="btn-action" onclick="toGame()">COBA PUZZLE</button>
-
-            <div class="rank-list">
-                <p style="font-weight: 800; margin-bottom: 10px;"><i class="fas fa-trophy"></i> TOP RANKING</p>
-                <div id="leaderboard-content"></div>
-            </div>
+    <div class="game-card" id="auth-screen">
+        <div class="icon-box"><i class="fas fa-search-nodes"></i></div>
+        <h2>SOURCE MATCHER</h2>
+        <p style="font-size: 13px; color: #94a3b8; margin-bottom: 25px;">Hubungkan informasi ke sumber yang tepat!</p>
+        
+        <div class="input-group">
+            <label>NAMA ANALIS</label>
+            <input type="text" id="player-name" placeholder="Nama lengkapmu...">
         </div>
+        <div class="input-group">
+            <label>LEVEL KESULITAN</label>
+            <select id="player-class">
+                <option value="7">Kelas 7 (Verifikasi Dasar)</option>
+                <option value="8">Kelas 8 (Analisis Media)</option>
+                <option value="9">Kelas 9 (Investigasi Domain)</option>
+            </select>
+        </div>
+        <button class="btn-action" onclick="showBriefing()">MULAI ANALISIS</button>
 
-        <div class="game-card" id="game-play">
-            <h3 id="current-player-info" style="font-size: 14px; color: #00f2ff; margin-bottom: 10px;"></h3>
-            <p>Tarik berita ke sumber yang benar!</p>
-            
-            <div id="news-container">
-                <div class="match-item" draggable="true" id="news1" ondragstart="drag(event)">"Siswa SMP Menang Olimpiade Internasional"</div>
-            </div>
-
-            <div style="margin-top: 20px;">
-                <p style="font-size: 12px; margin-bottom: 5px;">SUMBER: SITUS BERITA RESMI (.GO.ID / .CO.ID)</p>
-                <div class="drop-zone" ondrop="drop(event, 'official')" ondragover="allowDrop(event)">Drop di sini</div>
-                
-                <p style="font-size: 12px; margin-top: 15px; margin-bottom: 5px;">SUMBER: PESAN BERANTAI (WHATSAPP)</p>
-                <div class="drop-zone" ondrop="drop(event, 'hoax')" ondragover="allowDrop(event)">Drop di sini</div>
-            </div>
-            
-            <p style="margin-top: 20px;">Waktu: <span id="timer">30</span>s</p>
+        <div class="rank-list">
+            <p style="font-weight: bold; color: #facc15; font-size: 12px; margin-bottom: 10px; font-family: 'Orbitron';">
+                <i class="fas fa-shield-halved"></i> ELITE ANALYSTS
+            </p>
+            <div id="leaderboard-content"></div>
         </div>
     </div>
 
-    <script>
-        let playerName = "";
-        let playerClass = "";
-        let score = 0;
-        let timeLeft = 30;
-        let timer;
+    <div class="game-card" id="briefing-screen">
+        <div class="icon-box"><i class="fas fa-file-contract"></i></div>
+        <h2>MISI SUMBER</h2>
+        <div style="text-align: left; font-size: 14px; line-height: 1.6; margin: 20px 0; background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
+            <p>1. Di tengah layar akan muncul sebuah <strong>Potongan Informasi</strong>.</p>
+            <p>2. <strong>Tarik (Drag)</strong> kotak informasi tersebut ke salah satu zona sumber di bawah.</p>
+            <p>3. Pilih <strong>VALID</strong> jika informasi berasal dari lembaga resmi/terpercaya.</p>
+            <p>4. Pilih <strong>UNTRUSTED</strong> jika informasi meragukan/pesan gelap.</p>
+        </div>
+        <button class="btn-action" onclick="startGame()">KONFIRMASI</button>
+    </div>
 
-        // Tampilkan Ranking Saat Halaman Dibuka
+    <div class="game-card" id="game-play">
+        <div style="display: flex; justify-content: space-between; font-size: 11px; font-family: 'Orbitron'; color: #00f2ff;">
+            <span id="display-id">AGENT: ---</span>
+            <span id="display-score">SCORE: 0</span>
+        </div>
+        <div class="progress-bar"><div id="progress-fill"></div></div>
+        
+        <div id="news-item" class="news-box" draggable="true" ondragstart="drag(event)">
+            Memuat Data...
+        </div>
+
+        <div class="zones-container">
+            <div class="drop-zone" id="zone-valid" ondrop="drop(event, 'valid')" ondragover="allowDrop(event)">
+                <i class="fas fa-check-circle" style="color: #22c55e;"></i>
+                <strong>VALID SOURCE</strong>
+            </div>
+            <div class="drop-zone" id="zone-fake" ondrop="drop(event, 'fake')" ondragover="allowDrop(event)">
+                <i class="fas fa-times-circle" style="color: #ef4444;"></i>
+                <strong>UNTRUSTED</strong>
+            </div>
+        </div>
+        <p style="margin-top: 20px; font-size: 12px; color: #94a3b8;">Tantangan: <span id="q-count">1</span>/10</p>
+    </div>
+
+    <script>
+        const database = {
+            "7": [
+                { t: "Pengumuman libur sekolah di situs resmi Kemendikbud.go.id", s: "valid" },
+                { t: "Pesan WhatsApp: 'Bagi-bagi kuota gratis 100GB klik link ini'", s: "fake" },
+                { t: "Berita di Kompas.com tentang prestasi atlet Indonesia", s: "valid" },
+                { t: "Broadcast grup keluarga: 'Jangan makan apel malam hari, mengandung racun!'", s: "fake" },
+                { t: "Website resmi Pemerintah Kota Medan mengenai jadwal vaksinasi", s: "valid" },
+                { t: "Video TikTok tanpa sumber: 'Bumi akan gelap selama 3 hari besok'", s: "fake" },
+                { t: "Jurnal perpustakaan sekolah tentang cara meminjam buku", s: "valid" },
+                { t: "Iklan pop-up: 'Selamat! Anda pemenang iPhone 15, masukkan NIK anda'", s: "fake" },
+                { t: "Surat Edaran resmi bertanda tangan Kepala Sekolah", s: "valid" },
+                { t: "Status Facebook: 'Ketik P agar baterai HP kamu penuh otomatis'", s: "fake" }
+            ],
+            "8": [
+                { t: "Artikel opini blog pribadi tanpa data pendukung", s: "fake" },
+                { t: "Siaran Pers resmi dari Organisasi Kesehatan Dunia (WHO)", s: "valid" },
+                { t: "Berita utama di MetroTV mengenai kondisi ekonomi terkini", s: "valid" },
+                { t: "Postingan influencer: 'Obat ini bisa sembuhkan segala penyakit dalam 1 jam'", s: "fake" },
+                { t: "Laporan tahunan statistik kunjungan perpustakaan daerah", s: "valid" },
+                { t: "Thread Twitter: 'Konspirasi rahasia di balik pembuatan gedung sekolah'", s: "fake" },
+                { t: "Data resmi Badan Pusat Statistik (BPS) Indonesia", s: "valid" },
+                { t: "Tautan dari bit.ly/hadiah-dana-gratis-2026", s: "fake" },
+                { t: "Wawancara pakar teknologi di majalah sains terkemuka", s: "valid" },
+                { t: "Komentar anonim di YouTube tentang cara hack akun bank", s: "fake" }
+            ],
+            "9": [
+                { t: "Situs pemerintah dengan domain akhiran .go.id", s: "valid" },
+                { t: "Situs berita dengan domain aneh seperti .news-update.xyz", s: "fake" },
+                { t: "Verifikasi akun melalui email resmi @perpusnas.go.id", s: "valid" },
+                { t: "Email dari 'Google Support' tapi alamat pengirimnya gmail.com", s: "fake" },
+                { t: "Dokumen kebijakan privasi di aplikasi resmi yang terverifikasi", s: "valid" },
+                { t: "Situs belanja yang meminta password email untuk diskon", s: "fake" },
+                { t: "Klarifikasi hoaks di situs resmi Kominfo (cekhoaks.id)", s: "valid" },
+                { t: "File PDF 'Rahasia Sukses' dari pengirim tak dikenal di Telegram", s: "fake" },
+                { t: "Pengumuman beasiswa di website resmi universitas (.ac.id)", s: "valid" },
+                { t: "Situs yang meniru tampilan bank BCA tapi URL-nya bca-checker.com", s: "fake" }
+            ]
+        };
+
+        let pName, pClass, score = 0, currentQ = 0, quizData = [];
+
         window.onload = updateLeaderboard;
 
-        function toGame() {
-            playerName = document.getElementById('player-name').value;
-            playerClass = document.getElementById('player-class').value;
-
-            if(playerName.trim() === "") {
-                alert("Isi nama dulu, Gressilliya!");
-                return;
-            }
-
+        function showBriefing() {
+            pName = document.getElementById('player-name').value;
+            pClass = document.getElementById('player-class').value;
+            if(!pName) return alert("IDENTITAS ANALIS DIBUTUHKAN!");
+            
             document.getElementById('auth-screen').style.display = 'none';
-            document.getElementById('game-play').style.display = 'block';
-            document.getElementById('current-player-info').innerText = `Player: ${playerName} | Kelas: ${playerClass}`;
-            startTimer();
+            document.getElementById('briefing-screen').style.display = 'block';
         }
 
-        function allowDrop(ev) { ev.preventDefault(); }
+        function startGame() {
+            quizData = [...database[pClass]].sort(() => Math.random() - 0.5);
+            document.getElementById('briefing-screen').style.display = 'none';
+            document.getElementById('game-play').style.display = 'block';
+            document.getElementById('display-id').innerText = `ANALYST: ${pName}`;
+            nextQuestion();
+        }
+
+        function nextQuestion() {
+            if(currentQ < 10) {
+                document.getElementById('q-count').innerText = currentQ + 1;
+                document.getElementById('news-item').innerText = quizData[currentQ].t;
+                document.getElementById('progress-fill').style.width = (currentQ * 10) + "%";
+            } else {
+                finishGame();
+            }
+        }
+
+        function allowDrop(ev) { 
+            ev.preventDefault(); 
+            ev.currentTarget.classList.add('valid');
+        }
+
         function drag(ev) { ev.dataTransfer.setData("text", ev.target.id); }
 
-        function drop(ev, type) {
+        function drop(ev, choice) {
             ev.preventDefault();
-            let data = ev.dataTransfer.getData("text");
-            if(type === 'official') {
-                score += 50;
-                alert("BENAR! Sumber resmi terpercaya.");
-            } else {
-                alert("WASPADA! Itu biasanya pesan hoax.");
+            document.querySelectorAll('.drop-zone').forEach(z => z.classList.remove('valid'));
+            
+            if(choice === quizData[currentQ].s) {
+                score += 10;
+                document.getElementById('display-score').innerText = `SCORE: ${score}`;
             }
-            endGame();
+            
+            currentQ++;
+            nextQuestion();
         }
 
-        function startTimer() {
-            timer = setInterval(() => {
-                timeLeft--;
-                document.getElementById('timer').innerText = timeLeft;
-                if(timeLeft <= 0) endGame();
-            }, 1000);
+        function finishGame() {
+            document.getElementById('game-play').innerHTML = `
+                <div class="icon-box"><i class="fas fa-flag-checkered"></i></div>
+                <h2>ANALISIS SELESAI</h2>
+                <p>Skor Akhir: <strong>${score} / 100</strong></p>
+                <button class="btn-action" style="margin-top:20px" onclick="location.reload()">MAIN LAGI</button>
+            `;
+            saveRank(pName, score, pClass);
         }
 
-        function endGame() {
-            clearInterval(timer);
-            saveScore(playerName, score);
-            alert(`Selesai! Skor ${playerName}: ${score}`);
-            location.reload();
-        }
-
-        function saveScore(name, points) {
+        function saveRank(n, s, k) {
             let ranks = JSON.parse(localStorage.getItem('matcherRanks')) || [];
-            ranks.push({name: name, score: points});
+            ranks.push({name: n, score: s, class: k});
             ranks.sort((a,b) => b.score - a.score);
             localStorage.setItem('matcherRanks', JSON.stringify(ranks.slice(0, 5)));
         }
 
         function updateLeaderboard() {
             let ranks = JSON.parse(localStorage.getItem('matcherRanks')) || [];
-            let html = "";
-            ranks.forEach((r, index) => {
-                html += `<div class="rank-item"><span>${index+1}. ${r.name}</span> <span>${r.score} XP</span></div>`;
-            });
-            document.getElementById('leaderboard-content').innerHTML = html || "Belum ada pemain.";
+            document.getElementById('leaderboard-content').innerHTML = ranks.map((r, i) => 
+                `<div class="rank-item"><span>${i+1}. ${r.name} (Kls ${r.class})</span> <span>${r.score} XP</span></div>`
+            ).join('') || "BELUM ADA ANALIS.";
         }
     </script>
 </body>
