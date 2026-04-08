@@ -2853,6 +2853,41 @@ body {
     .social-box { justify-content: center; }
     .jam-operasional { border-left: none; border-top: 4px solid #1565C0; }
 }
+
+/* Container Navigasi Kanan */
+.nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Memaksa semua elemen ke ujung kanan */
+    gap: 12px; /* Jarak antar elemen dibuat rapat (sebelumnya mungkin 20px+) */
+    margin-left: auto; /* Memastikan grup ini mengambil sisa ruang di kiri dan menempel ke kanan */
+}
+
+/* Memperkecil Ukuran Tombol Hamburger */
+.hamburger-btn {
+    transform: scale(0.85); /* Membuat tombol sedikit lebih kecil agar elegan */
+    padding: 6px 8px;
+    margin: 0;
+}
+
+/* Memperkecil Ukuran Tombol Login */
+.btn-login {
+    padding: 6px 16px !important; /* Padding lebih tipis */
+    font-size: 13px !important; /* Font lebih kecil */
+    border-radius: 6px !important;
+}
+
+/* Memperkecil Search Icon */
+.search-container i {
+    font-size: 14px;
+    color: #1565C0;
+}
+
+/* Pengaturan Switch Mode Terang */
+.mode-switch {
+    transform: scale(0.8); /* Memperkecil switch mode agar proporsional */
+    margin-left: 5px;
+}
     
 </style>
 </head>
