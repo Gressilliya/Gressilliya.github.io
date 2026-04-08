@@ -2727,9 +2727,16 @@ body {
     transition: 0.3s;
 }
 
-/* Memastikan tanda merah (dot) tidak muncul kembali */
-.ham-ping, .notification-dot, [class*="dot"] {
+/* Pastikan HANYA ini yang ada untuk menyembunyikan titik merah hamburger lama */
+.ham-ping {
     display: none !important;
+}
+
+/* Tambahkan ini untuk memastikan ikon Bot terlihat jelas */
+#floating-saran i {
+    display: inline-block !important; /* Memaksa ikon muncul */
+    color: white !important;
+    font-size: 24px;
 }
 
 /* Animasi saat diklik (Menjadi X) */
@@ -3085,7 +3092,24 @@ body {
     </div>
 </footer>
 
-<div id="floating-saran" onclick="toggleDigiBot()"><i class="fas fa-comment-dots"></i></div>
+<div id="floating-saran" onclick="toggleDigiBot()" style="
+    position: fixed; 
+    bottom: 25px; 
+    right: 25px; 
+    width: 60px; 
+    height: 60px; 
+    background: #1565C0; 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    z-index: 9999; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+    
+    <i class="fas fa-comment-dots"></i>
+</div>
 
 <div id="chat-box-container">
     <div class="chat-header"><span>🤖 DigiSmart Bot</span><i class="fas fa-times" onclick="toggleDigiBot()" style="cursor:pointer"></i></div>
