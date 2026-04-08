@@ -2455,232 +2455,246 @@ body {
 
 /* ===== HAMBURGER BUTTON ===== */
 .hamburger-btn {
-  background: transparent;
-  border: 1.5px solid rgba(255,255,255,0.3);
-  border-radius: 8px;
-  padding: 7px 9px;
+  position: relative;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.55);
+  border-radius: 12px;
+  padding: 8px 10px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  margin-left: 10px;
-  transition: border-color 0.2s;
+  gap: 4.5px;
+  transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+  outline: none;
 }
-
 .hamburger-btn:hover {
-  border-color: rgba(255,255,255,0.7);
+  background: rgba(255, 255, 255, 0.32);
+  border-color: rgba(255, 255, 255, 0.9);
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.18);
 }
+.hamburger-btn:active { transform: scale(0.96); }
 
 .ham-line {
-  width: 20px;
-  height: 2px;
-  background: white;
-  border-radius: 2px;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  transform-origin: center;
+  width: 22px;
+  height: 2.5px;
+  background: #fff;
+  border-radius: 3px;
   display: block;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.25s ease,
+              width 0.3s ease;
+  transform-origin: center;
 }
+.hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-.hamburger-btn.open .ham-line:nth-child(1) {
-  transform: translateY(6px) rotate(45deg);
+/* Ping dot notif */
+.ham-ping {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #FF5252;
+  border: 2px solid #1565C0;
+  animation: ping-pulse 1.5s infinite;
 }
-
-.hamburger-btn.open .ham-line:nth-child(2) {
-  opacity: 0;
-  transform: scaleX(0);
+@keyframes ping-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50%       { transform: scale(1.3); opacity: 0.7; }
 }
+.hamburger-btn.open .ham-ping { display: none; }
 
-.hamburger-btn.open .ham-line:nth-child(3) {
-  transform: translateY(-6px) rotate(-45deg);
-}
-
-/* ===== OVERLAY (latar belakang gelap) ===== */
+/* ===== OVERLAY ===== */
 .mega-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.4);
-  z-index: 100;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 200;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s;
+  backdrop-filter: blur(2px);
 }
-
 .mega-overlay.open {
   opacity: 1;
   pointer-events: all;
 }
 
-/* ===== PANEL MEGA MENU ===== */
+/* ===== MEGA MENU PANEL ===== */
 .mega-menu {
   position: fixed;
   top: 0;
   right: 0;
-  width: min(520px, 100vw);
+  width: min(480px, 100vw);
   height: 100vh;
-  background: #fff;
-  z-index: 101;
+  background: #F8FBFF;
+  z-index: 201;
   transform: translateX(100%);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.38s cubic-bezier(0.4, 0, 0.2, 1);
   overflow-y: auto;
-  box-shadow: -4px 0 32px rgba(0,0,0,0.15);
+  box-shadow: -6px 0 40px rgba(21, 101, 192, 0.22);
   display: flex;
   flex-direction: column;
 }
+.mega-menu.open { transform: translateX(0); }
 
-.mega-menu.open {
-  transform: translateX(0);
-}
-
-/* ===== HEADER MENU ===== */
-.mega-menu .menu-header {
+/* ===== HEADER ===== */
+.menu-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid #eee;
+  padding: 18px 22px 14px;
+  background: linear-gradient(135deg, #1565C0, #42A5F5);
   flex-shrink: 0;
 }
-
-.menu-header-title {
-  font-size: 15px;
-  font-weight: 600;
-}
-
-.close-btn {
-  width: 32px;
-  height: 32px;
-  border: 1px solid #ddd;
-  border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-  font-size: 18px;
+.menu-header-logo { display: flex; align-items: center; gap: 10px; }
+.menu-header-logo .logo-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.22);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.15s;
+  font-size: 18px;
 }
+.menu-header-title { color: #fff; font-size: 15px; font-weight: 700; }
+.menu-header-sub   { color: rgba(255, 255, 255, 0.75); font-size: 11px; margin-top: 1px; }
 
+.close-btn {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.22);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  font-size: 16px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s, transform 0.25s;
+}
 .close-btn:hover {
-  background: #f5f5f5;
+  background: rgba(255, 255, 255, 0.35);
+  transform: rotate(90deg);
 }
 
-/* ===== ISI / BODY MENU ===== */
-.mega-menu .menu-body {
-  padding: 20px 24px 32px;
-  flex: 1;
-}
-
-.menu-section {
-  margin-bottom: 24px;
-}
+/* ===== BODY ===== */
+.menu-body { padding: 18px 20px 24px; flex: 1; }
+.menu-section { margin-bottom: 20px; }
 
 .section-label {
   font-size: 10px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-weight: 700;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #888;
+  color: #1565C0;
   margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid #eee;
+  padding-bottom: 7px;
+  border-bottom: 2px solid #BBDEFB;
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
-
-.section-divider {
-  height: 1px;
-  background: #eee;
-  margin: 4px 0 20px;
+.section-label .sl-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #1976D2;
+  display: inline-block;
 }
+.section-divider { height: 1px; background: #E3F2FD; margin: 4px 0 16px; }
 
-/* ===== GRID 2 KOLOM ===== */
+/* ===== GRID ===== */
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 6px;
+  gap: 7px;
 }
 
-/* ===== TIAP ITEM MENU ===== */
+/* ===== MENU ITEMS ===== */
 .menu-item {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 10px 12px;
-  border-radius: 8px;
+  padding: 10px 11px;
+  border-radius: 11px;
   text-decoration: none;
-  color: #222;
-  font-size: 13.5px;
-  transition: background 0.15s, border-color 0.15s;
-  border: 1px solid transparent;
+  color: #1A237E;
+  font-size: 13px;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+  border: 1.5px solid transparent;
+  background: #fff;
 }
-
 .menu-item:hover {
-  background: #f5f5f5;
-  border-color: #ddd;
+  background: #E3F2FD;
+  border-color: #90CAF9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(21, 101, 192, 0.13);
 }
+.menu-item:active { transform: translateY(0); }
 
-.menu-item.accent-item:hover {
-  background: #E1F5EE;
-  color: #0F6E56;
-  border-color: #9FE1CB;
-}
+.menu-item.accent-item             { background: #EEF9F2; color: #1B5E20; }
+.menu-item.accent-item:hover       { background: #C8E6C9; border-color: #66BB6A; box-shadow: 0 4px 12px rgba(76, 175, 80, 0.18); }
 
-.menu-item .item-icon {
-  width: 30px;
-  height: 30px;
-  border-radius: 8px;
-  background: #f0f0f0;
+.item-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  font-size: 14px;
+  font-size: 15px;
+  background: #BBDEFB;
+}
+.menu-item.accent-item .item-icon  { background: #A5D6A7; }
+
+.item-name { font-size: 12.5px; font-weight: 700; display: block; line-height: 1.3; color: inherit; }
+.item-desc { font-size: 10.5px; color: #5C6BC0; display: block; line-height: 1.3; }
+.menu-item.accent-item .item-desc  { color: #388E3C; }
+
+/* ===== STAGGER ANIMATION ===== */
+.mega-menu.open .menu-item {
+  animation: fadeSlideIn 0.3s ease both;
+}
+.menu-item:nth-child(1) { animation-delay: 0.05s; }
+.menu-item:nth-child(2) { animation-delay: 0.10s; }
+.menu-item:nth-child(3) { animation-delay: 0.15s; }
+.menu-item:nth-child(4) { animation-delay: 0.20s; }
+.menu-item:nth-child(5) { animation-delay: 0.25s; }
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
-.menu-item .item-name {
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 1.3;
-  display: block;
-}
-
-.menu-item .item-desc {
-  font-size: 11px;
-  color: #888;
-  line-height: 1.3;
-  display: block;
-}
-
-/* ===== FOOTER MENU ===== */
-.mega-menu .menu-footer {
-  padding: 16px 24px;
-  border-top: 1px solid #eee;
+/* ===== FOOTER ===== */
+.menu-footer {
+  padding: 14px 20px;
+  border-top: 1px solid #BBDEFB;
   flex-shrink: 0;
   display: flex;
   gap: 8px;
+  background: #fff;
 }
-
 .footer-btn {
   flex: 1;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 11px;
+  border-radius: 10px;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
   cursor: pointer;
-  border: 1.5px solid #1D9E75;
+  border: 2px solid #1565C0;
+  transition: transform 0.15s, opacity 0.15s;
 }
-
-.footer-btn.primary {
-  background: #1D9E75;
-  color: white;
-}
-
-.footer-btn.secondary {
-  background: transparent;
-  color: #1D9E75;
-}
-
-.footer-btn:hover {
-  opacity: 0.85;
-}
+.footer-btn:hover          { opacity: 0.88; transform: scale(1.02); }
+.footer-btn.primary        { background: linear-gradient(135deg, #1565C0, #42A5F5); color: #fff; border-color: transparent; }
+.footer-btn.secondary      { background: #fff; color: #1565C0; }
     
 </style>
 </head>
@@ -2735,225 +2749,143 @@ body {
     </ul>
 </div>
 
-    <!-- ============================================
-     BAGIAN 1: Tombol Hamburger
-     Taruh di dalam .nav-right, setelah tombol Login
-     ============================================ -->
+   <!-- Taruh di dalam .nav-right, setelah tombol Login -->
 <button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
   <span class="ham-line"></span>
   <span class="ham-line"></span>
   <span class="ham-line"></span>
+  <div class="ham-ping"></div>
 </button>
 
-
-<!-- ============================================
-     BAGIAN 2: Overlay (latar gelap)
-     Taruh sebelum </body>
-     ============================================ -->
+<!-- ===== OVERLAY (taruh sebelum </body>) ===== -->
 <div class="mega-overlay" id="megaOverlay" onclick="closeHamburger()"></div>
 
-
-<!-- ============================================
-     BAGIAN 3: Panel Mega Menu
-     Taruh sebelum </body>, setelah overlay
-     ============================================ -->
+<!-- ===== MEGA MENU PANEL (taruh sebelum </body>) ===== -->
 <div class="mega-menu" id="megaMenu">
 
-  <!-- Header -->
   <div class="menu-header">
-    <span class="menu-header-title">DigiSmart Library</span>
-    <button class="close-btn" onclick="closeHamburger()">&#x2715;</button>
+    <div class="menu-header-logo">
+      <div class="logo-icon">📚</div>
+      <div>
+        <div class="menu-header-title">DigiSmart Library</div>
+        <div class="menu-header-sub">Halo, Selamat Datang! 👋</div>
+      </div>
+    </div>
+    <button class="close-btn" onclick="closeHamburger()">✕</button>
   </div>
 
-  <!-- Isi Menu -->
   <div class="menu-body">
 
-    <!-- SEKSI: BERANDA -->
+    <!-- BERANDA -->
     <div class="menu-section">
-      <div class="section-label">Beranda</div>
+      <div class="section-label"><span class="sl-dot"></span>Beranda</div>
       <div class="menu-grid">
-
         <a href="about.html" class="menu-item accent-item">
-          <div class="item-icon"><i class="fas fa-info-circle"></i></div>
-          <div>
-            <span class="item-name">About Us</span>
-            <span class="item-desc">Tentang kami</span>
-          </div>
+          <div class="item-icon">ℹ️</div>
+          <div><span class="item-name">About Us</span><span class="item-desc">Tentang kami</span></div>
         </a>
-
         <a href="visi.html" class="menu-item accent-item">
-          <div class="item-icon"><i class="fas fa-bullseye"></i></div>
-          <div>
-            <span class="item-name">Visi & Misi</span>
-            <span class="item-desc">Tujuan kami</span>
-          </div>
+          <div class="item-icon">🎯</div>
+          <div><span class="item-name">Visi & Misi</span><span class="item-desc">Tujuan kami</span></div>
         </a>
-
         <a href="prestasi.html" class="menu-item accent-item">
-          <div class="item-icon"><i class="fas fa-trophy"></i></div>
-          <div>
-            <span class="item-name">Prestasi Siswa</span>
-            <span class="item-desc">Capaian terbaik</span>
-          </div>
+          <div class="item-icon">🏆</div>
+          <div><span class="item-name">Prestasi Siswa</span><span class="item-desc">Capaian terbaik</span></div>
         </a>
-
         <a href="#fasilitas" class="menu-item accent-item">
-          <div class="item-icon"><i class="fas fa-swimming-pool"></i></div>
-          <div>
-            <span class="item-name">Fasilitas</span>
-            <span class="item-desc">Sarana & prasarana</span>
-          </div>
+          <div class="item-icon">🏫</div>
+          <div><span class="item-name">Fasilitas</span><span class="item-desc">Sarana sekolah</span></div>
         </a>
-
         <a href="alumni.html" class="menu-item accent-item" style="grid-column: 1 / -1;">
-          <div class="item-icon"><i class="fas fa-user-graduate"></i></div>
-          <div>
-            <span class="item-name">Testimoni Alumni</span>
-            <span class="item-desc">Cerita sukses alumni</span>
-          </div>
+          <div class="item-icon">🎓</div>
+          <div><span class="item-name">Testimoni Alumni</span><span class="item-desc">Cerita sukses alumni</span></div>
         </a>
-
       </div>
     </div>
-    <!-- akhir seksi beranda -->
 
     <div class="section-divider"></div>
 
-    <!-- SEKSI: FITUR LITERASI -->
+    <!-- FITUR LITERASI -->
     <div class="menu-section">
-      <div class="section-label">Fitur Literasi</div>
+      <div class="section-label"><span class="sl-dot"></span>Fitur Literasi</div>
       <div class="menu-grid">
-
         <a href="game.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-gamepad"></i></div>
-          <div>
-            <span class="item-name">Arcade Literasi</span>
-            <span class="item-desc">Main & belajar</span>
-          </div>
+          <div class="item-icon">🎮</div>
+          <div><span class="item-name">Arcade Literasi</span><span class="item-desc">Main & belajar</span></div>
         </a>
-
         <a href="media.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-book-reader"></i></div>
-          <div>
-            <span class="item-name">Media Belajar</span>
-            <span class="item-desc">Sumber belajar</span>
-          </div>
+          <div class="item-icon">📖</div>
+          <div><span class="item-name">Media Belajar</span><span class="item-desc">Sumber belajar</span></div>
         </a>
-
         <a href="cek-hoax.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-search-dollar"></i></div>
-          <div>
-            <span class="item-name">Cek Hoax</span>
-            <span class="item-desc">Verifikasi berita</span>
-          </div>
+          <div class="item-icon">🔍</div>
+          <div><span class="item-name">Cek Hoax</span><span class="item-desc">Verifikasi berita</span></div>
         </a>
-
         <a href="matematika.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-calculator"></i></div>
-          <div>
-            <span class="item-name">Math Logic</span>
-            <span class="item-desc">Logika & hitung</span>
-          </div>
+          <div class="item-icon">🧮</div>
+          <div><span class="item-name">Math Logic</span><span class="item-desc">Logika & hitung</span></div>
         </a>
-
         <a href="inggris.html" class="menu-item" style="grid-column: 1 / -1;">
-          <div class="item-icon"><i class="fas fa-language"></i></div>
-          <div>
-            <span class="item-name">English Quest</span>
-            <span class="item-desc">Belajar bahasa Inggris</span>
-          </div>
+          <div class="item-icon">🌍</div>
+          <div><span class="item-name">English Quest</span><span class="item-desc">Belajar bahasa Inggris</span></div>
         </a>
-
       </div>
     </div>
-    <!-- akhir seksi fitur literasi -->
 
     <div class="section-divider"></div>
 
-    <!-- SEKSI: JELAJAHI -->
+    <!-- JELAJAHI -->
     <div class="menu-section">
-      <div class="section-label">Jelajahi</div>
+      <div class="section-label"><span class="sl-dot"></span>Jelajahi</div>
       <div class="menu-grid">
-
         <a href="profil.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-user"></i></div>
-          <div>
-            <span class="item-name">Profil</span>
-            <span class="item-desc">Halaman profil</span>
-          </div>
+          <div class="item-icon">👤</div>
+          <div><span class="item-name">Profil</span><span class="item-desc">Halaman profil</span></div>
         </a>
-
         <a href="koleksi.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-book"></i></div>
-          <div>
-            <span class="item-name">Koleksi</span>
-            <span class="item-desc">Buku & media</span>
-          </div>
+          <div class="item-icon">📚</div>
+          <div><span class="item-name">Koleksi</span><span class="item-desc">Buku & media</span></div>
         </a>
-
         <a href="ranking.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-chart-bar"></i></div>
-          <div>
-            <span class="item-name">Ranking</span>
-            <span class="item-desc">Papan peringkat</span>
-          </div>
+          <div class="item-icon">📊</div>
+          <div><span class="item-name">Ranking</span><span class="item-desc">Papan peringkat</span></div>
         </a>
-
         <a href="admin.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-cog"></i></div>
-          <div>
-            <span class="item-name">Admin</span>
-            <span class="item-desc">Panel admin</span>
-          </div>
+          <div class="item-icon">⚙️</div>
+          <div><span class="item-name">Admin</span><span class="item-desc">Panel admin</span></div>
         </a>
-
       </div>
     </div>
-    <!-- akhir seksi jelajahi -->
 
     <div class="section-divider"></div>
 
-    <!-- SEKSI: NEWS & EVENTS + CONTACT -->
+    <!-- NEWS & EVENTS -->
     <div class="menu-section">
-      <div class="section-label">News & Events</div>
+      <div class="section-label"><span class="sl-dot"></span>News & Events</div>
       <div class="menu-grid">
-
         <a href="events.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-calendar-check"></i></div>
-          <div>
-            <span class="item-name">Events</span>
-            <span class="item-desc">Acara terkini</span>
-          </div>
+          <div class="item-icon">📅</div>
+          <div><span class="item-name">Events</span><span class="item-desc">Acara terkini</span></div>
         </a>
-
         <a href="news.html" class="menu-item">
-          <div class="item-icon"><i class="fas fa-newspaper"></i></div>
-          <div>
-            <span class="item-name">News</span>
-            <span class="item-desc">Berita terbaru</span>
-          </div>
+          <div class="item-icon">📰</div>
+          <div><span class="item-name">News</span><span class="item-desc">Berita terbaru</span></div>
         </a>
-
         <a href="contactus.html" class="menu-item" style="grid-column: 1 / -1;">
-          <div class="item-icon"><i class="fas fa-envelope"></i></div>
-          <div>
-            <span class="item-name">Contact Us</span>
-            <span class="item-desc">Hubungi kami</span>
-          </div>
+          <div class="item-icon">✉️</div>
+          <div><span class="item-name">Contact Us</span><span class="item-desc">Hubungi kami</span></div>
         </a>
-
       </div>
     </div>
-    <!-- akhir seksi news & events -->
 
-  </div>
-  <!-- akhir menu-body -->
+  </div><!-- end .menu-body -->
 
-  <!-- Footer -->
   <div class="menu-footer">
-    <button class="footer-btn secondary" onclick="closeHamburger()">Tutup</button>
-    <button class="footer-btn primary" onclick="window.location.href='login.html'">Login</button>
+    <button class="footer-btn secondary" onclick="closeHamburger()">✕ Tutup</button>
+    <button class="footer-btn primary" onclick="window.location.href='login.html'">🔐 Login</button>
   </div>
+
+</div><!-- end .mega-menu -->
 
 </div>
 <!-- akhir mega-menu -->
@@ -3435,26 +3367,21 @@ document.querySelectorAll('.reveal, .bento-section, .community-section').forEach
 </script>
 
     <script>
-  // Buka / tutup menu saat tombol hamburger diklik
-  function toggleHamburger() {
-    document.getElementById('hamBtn').classList.toggle('open');
-    document.getElementById('megaMenu').classList.toggle('open');
-    document.getElementById('megaOverlay').classList.toggle('open');
-  }
+function toggleHamburger() {
+  document.getElementById('hamBtn').classList.toggle('open');
+  document.getElementById('megaMenu').classList.toggle('open');
+  document.getElementById('megaOverlay').classList.toggle('open');
+}
 
-  // Tutup menu
-  function closeHamburger() {
-    document.getElementById('hamBtn').classList.remove('open');
-    document.getElementById('megaMenu').classList.remove('open');
-    document.getElementById('megaOverlay').classList.remove('open');
-  }
+function closeHamburger() {
+  document.getElementById('hamBtn').classList.remove('open');
+  document.getElementById('megaMenu').classList.remove('open');
+  document.getElementById('megaOverlay').classList.remove('open');
+}
 
-  // Tutup menu saat tekan tombol Escape di keyboard
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      closeHamburger();
-    }
-  });
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeHamburger();
+});
 </script>
 
 </body>
