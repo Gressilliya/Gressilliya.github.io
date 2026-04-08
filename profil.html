@@ -22,6 +22,7 @@
             background: var(--dark-bg);
             color: white;
             overflow-x: hidden;
+            padding-top: 40px;
         }
 
         /* --- Animasi Background Partikel --- */
@@ -32,46 +33,59 @@
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
         }
 
-        /* --- Navbar Futuristik --- */
-        nav {
-            background: rgba(15, 23, 42, 0.9);
-            backdrop-filter: blur(15px);
-            padding: 20px 5%;
+        /* --- Tombol Kembali Sci-Fi --- */
+        .btn-back-sci {
             position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(44, 123, 229, 0.3);
-        }
-
-        .nav-container {
+            top: 25px;
+            left: 25px;
+            z-index: 2000;
             display: flex;
-            justify-content: space-between;
             align-items: center;
-        }
-
-        .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-weight: 900;
-            font-size: 1.5rem;
-            color: var(--sci-teal);
-            text-shadow: 0 0 10px rgba(45, 212, 191, 0.5);
-        }
-
-        nav ul { display: flex; list-style: none; gap: 20px; }
-        nav ul li a {
+            gap: 12px;
+            padding: 12px 25px;
+            background: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--sci-blue);
+            border-radius: 50px;
             color: white;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: 0.3s;
-            padding: 8px 15px;
-            border-radius: 8px;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            transition: 0.4s;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
         }
 
-        nav ul li a:hover, nav ul li a.active {
+        .btn-back-sci i {
+            font-size: 1rem;
+            color: var(--sci-teal);
+            transition: 0.4s;
+        }
+
+        .btn-back-sci:hover {
             background: var(--sci-blue);
-            box-shadow: 0 0 15px var(--sci-blue);
+            color: white;
+            box-shadow: 0 0 20px var(--sci-blue), 0 0 40px rgba(44, 123, 229, 0.4);
+            transform: scale(1.05);
+            border-color: var(--sci-teal);
+        }
+
+        .btn-back-sci:hover i {
+            transform: translateX(-5px);
+            color: white;
+        }
+
+        .btn-back-sci::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .btn-back-sci:hover::before {
+            left: 100%;
         }
 
         /* --- Header & Moving Text --- */
@@ -165,11 +179,21 @@
             font-size: 0.8rem;
             color: #94a3b8;
         }
+
+        @media (max-width: 600px) {
+            .btn-back-sci span { display: none; }
+            .btn-back-sci { padding: 12px; border-radius: 50%; }
+        }
     </style>
 </head>
 <body>
 
     <div class="bg-animate"></div>
+
+    <a href="index.html" class="btn-back-sci">
+        <i class="fas fa-arrow-left"></i>
+        <span>KEMBALI KE BERANDA</span>
+    </a>
 
     <main class="sci-container">
         <header style="text-align: center; margin-bottom: 60px;">
