@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Event | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,11 +12,40 @@
             --accent-orange: #e67e22;
             --text-dark: #2d3436;
             --bg-gray: #f4f7f6;
+            --white: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-        body { background-color: var(--bg-gray); color: var(--text-dark); padding: 50px 20px; }
+        body { background-color: var(--bg-gray); color: var(--text-dark); padding: 80px 20px 50px; }
+
+        /* Tombol Kembali ke Beranda */
+        .back-home {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            text-decoration: none;
+            background: var(--white);
+            color: var(--primary-blue);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #edf2f7;
+        }
+
+        .back-home:hover {
+            background: var(--primary-blue);
+            color: var(--white);
+            transform: translateX(5px);
+            box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+        }
 
         .container { max-width: 1200px; margin: 0 auto; }
 
@@ -48,7 +78,7 @@
 
         .card-interactive img {
             width: 100%;
-            height: 230px; /* Ukuran pas agar gambar jelas & tidak pecah */
+            height: 230px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
@@ -104,72 +134,78 @@
 
         /* Responsive adjustments */
         @media (max-width: 768px) {
+            .back-home { position: relative; top: 0; left: 0; margin-bottom: 30px; display: inline-flex; }
+            body { padding-top: 40px; }
             .event-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <div class="header-title">
-        <h1>PROGRAM & EVENT TERKINI</h1>
-        <div class="underline"></div>
+    <a href="index.html" class="back-home">
+        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
+    </a>
+
+    <div class="container">
+        <div class="header-title">
+            <h1>PROGRAM & EVENT TERKINI</h1>
+            <div class="underline"></div>
+        </div>
+
+        <div class="event-grid">
+
+            <div class="card-interactive">
+                <img src="wajib.jpeg" alt="Wajib Membaca">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#007bff;">Tiap Jumat Pagi</span>
+                    <h3>Gerakan Literasi 15 Menit</h3>
+                    <p>Mari tumbuhkan minat baca! Satu buku sejuta ilmu, dimulai dari langkah kecil setiap hari Jumat di sekolah.</p>
+                    <a href="#" class="btn-detail">Lihat Selengkapnya</a>
+                </div>
+            </div>
+
+            <div class="card-interactive">
+                <img src="DigitalStorytelling.png" alt="Storytelling">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#9b59b6;">Kreativitas Digital</span>
+                    <h3>Digital Storytelling Marathon</h3>
+                    <p>Buat konten edukatif dari buku favoritmu dan bagikan inspirasi ke seluruh siswa SMP Sumatera Utara.</p>
+                    <a href="#" class="btn-detail">Daftar Sekarang</a>
+                </div>
+            </div>
+
+            <div class="card-interactive">
+                <img src="cybermath.jpg" alt="Cyber Math">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#e74c3c;">Turnamen Logika</span>
+                    <h3>Cyber-Math League</h3>
+                    <p>Jadilah yang terbaik dalam ranking Math Logic dan buktikan ketangkasanmu berpikir cepat.</p>
+                    <a href="#" class="btn-detail">Mainkan Game</a>
+                </div>
+            </div>
+
+            <div class="card-interactive">
+                <img src="CyberBullying.jpg" alt="Cyber Bullying">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#1abc9c;">Etika Digital</span>
+                    <h3>Kindness Click: Be a Digital Hero</h3>
+                    <p>Pahami etika berkomunikasi di media sosial dan jadilah pelopor anti-bullying di lingkunganmu.</p>
+                    <a href="#" class="btn-detail">Pelajari Materi</a>
+                </div>
+            </div>
+
+            <div class="card-interactive">
+                <img src="CreativeVibes.jpg" alt="Creative Vibes">
+                <div class="card-body">
+                    <span class="status-tag" style="color:#f1c40f;">Content Creator</span>
+                    <h3>Creative Vibes: Level Up Content</h3>
+                    <p>Tingkatkan skill desain dan kreativitasmu untuk membuat konten belajar yang seru dan estetik.</p>
+                    <a href="#" class="btn-detail">Ikut Workshop</a>
+                </div>
+            </div>
+
+        </div>
     </div>
-
-    <div class="event-grid">
-
-        <div class="card-interactive">
-            <img src="wajib.jpeg" alt="Wajib Membaca">
-            <div class="card-body">
-                <span class="status-tag" style="color:#007bff;">Tiap Jumat Pagi</span>
-                <h3>Gerakan Literasi 15 Menit</h3>
-                <p>Mari tumbuhkan minat baca! Satu buku sejuta ilmu, dimulai dari langkah kecil setiap hari Jumat di sekolah.</p>
-                <a href="#" class="btn-detail">Lihat Selengkapnya</a>
-            </div>
-        </div>
-
-        <div class="card-interactive">
-            <img src="DigitalStorytelling.png" alt="Storytelling">
-            <div class="card-body">
-                <span class="status-tag" style="color:#9b59b6;">Kreativitas Digital</span>
-                <h3>Digital Storytelling Marathon</h3>
-                <p>Buat konten edukatif dari buku favoritmu dan bagikan inspirasi ke seluruh siswa SMP Sumatera Utara.</p>
-                <a href="#" class="btn-detail">Daftar Sekarang</a>
-            </div>
-        </div>
-
-        <div class="card-interactive">
-            <img src="cybermath.jpg" alt="Cyber Math">
-            <div class="card-body">
-                <span class="status-tag" style="color:#e74c3c;">Turnamen Logika</span>
-                <h3>Cyber-Math League</h3>
-                <p>Jadilah yang terbaik dalam ranking Math Logic dan buktikan ketangkasanmu berpikir cepat.</p>
-                <a href="#" class="btn-detail">Mainkan Game</a>
-            </div>
-        </div>
-
-        <div class="card-interactive">
-            <img src="CyberBullying.jpg" alt="Cyber Bullying">
-            <div class="card-body">
-                <span class="status-tag" style="color:#1abc9c;">Etika Digital</span>
-                <h3>Kindness Click: Be a Digital Hero</h3>
-                <p>Pahami etika berkomunikasi di media sosial dan jadilah pelopor anti-bullying di lingkunganmu.</p>
-                <a href="#" class="btn-detail">Pelajari Materi</a>
-            </div>
-        </div>
-
-        <div class="card-interactive">
-            <img src="CreativeVibes.jpg" alt="Creative Vibes">
-            <div class="card-body">
-                <span class="status-tag" style="color:#f1c40f;">Content Creator</span>
-                <h3>Creative Vibes: Level Up Content</h3>
-                <p>Tingkatkan skill desain dan kreativitasmu untuk membuat konten belajar yang seru dan estetik.</p>
-                <a href="#" class="btn-detail">Ikut Workshop</a>
-            </div>
-        </div>
-
-    </div>
-</div>
 
 </body>
 </html>
