@@ -2412,80 +2412,67 @@ body {
     .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 10px; color: white; border-radius: 10px; outline: none; }
     .chat-footer button { background: #007bff; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
 
-    /* Styling Tombol Hamburger agar terlihat jelas */
-.hamburger-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-    cursor: pointer;
-    padding: 10px;
-    z-index: 1005;
-    margin-left: 10px;
-}
-
-.h-bar {
-    width: 25px;
-    height: 3px;
-    background-color: #2dd4bf; /* Warna kontras */
-    border-radius: 5px;
-}
-
-/* Sidebar Styling */
-.nav-sidebar-baru {
-    position: fixed;
-    top: 0;
-    right: -100%; /* Sembunyi */
-    width: 280px;
-    height: 100vh;
-    background: #0f172a; /* Warna gelap */
-    z-index: 9999;
-    transition: 0.4s ease-in-out;
-    padding: 30px;
-    box-shadow: -5px 0 20px rgba(0,0,0,0.5);
-    border-left: 1px solid #2c7be5;
-}
-
-.nav-sidebar-baru.muncul {
-    right: 0; /* Tampil */
-}
-
-.sidebar-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-    padding-bottom: 15px;
-}
-
-.btn-tutup {
-    font-size: 2rem;
-    color: #ff4757;
-    cursor: pointer;
-}
-
+    /* Styling Menu Utama di Sidebar */
 .list-menu-sidebar {
     list-style: none;
     padding: 0;
 }
 
 .list-menu-sidebar li {
-    margin: 15px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .list-menu-sidebar li a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
     color: white;
     text-decoration: none;
-    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
+    font-family: 'Poppins', sans-serif;
     transition: 0.3s;
 }
 
-.list-menu-sidebar li a:hover {
-    color: #2dd4bf;
-    padding-left: 10px;
+/* Styling Sub-menu (Accordion) */
+.submenu-items {
+    list-style: none;
+    padding-left: 20px;
+    max-height: 0; /* Sembunyi */
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    background: rgba(255, 255, 255, 0.03);
 }
-    
+
+/* Saat Sub-menu Aktif */
+.has-submenu.active .submenu-items {
+    max-height: 500px; /* Munculkan */
+    padding-bottom: 10px;
+}
+
+.submenu-items li a {
+    font-size: 0.9rem;
+    padding: 10px 0;
+    color: #cbd5e1;
+}
+
+.submenu-items li a i {
+    width: 20px;
+    color: #2dd4bf;
+    font-size: 0.8rem;
+}
+
+/* Animasi Icon Panah */
+.icon-arrow {
+    font-size: 0.8rem;
+    transition: 0.3s;
+}
+
+.has-submenu.active .icon-arrow {
+    transform: rotate(180deg);
+    color: #2dd4bf;
+}
+
 </style>
 </head>
 
@@ -2520,28 +2507,28 @@ body {
             <li class="nav-item"><a href="contactus.html">Contact Us</a></li>
         </ul>
 
-        <div class="hamburger-wrapper" id="btnBukaMenu">
-    <div class="h-bar"></div>
-    <div class="h-bar"></div>
-    <div class="h-bar"></div>
-</div>
+        <ul class="list-menu-sidebar">
+    <li class="has-submenu">
+        <a href="javascript:void(0)" class="submenu-toggle">
+            Beranda <i class="fas fa-chevron-down icon-arrow"></i>
+        </a>
+        <ul class="submenu-items">
+            <li><a href="index.html#about"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="index.html#visi"><i class="fas fa-bullseye"></i> Visi & Misi</a></li>
+            <li><a href="index.html#prestasi"><i class="fas fa-trophy"></i> Prestasi Siswa</a></li>
+            <li><a href="index.html#fasilitas"><i class="fas fa-school"></i> Fasilitas</a></li>
+            <li><a href="index.html#testimoni"><i class="fas fa-user-graduate"></i> Testimoni Alumni</a></li>
+        </ul>
+    </li>
 
-<div class="nav-sidebar-baru" id="panelSidebar">
-    <div class="sidebar-top">
-        <span style="font-family: 'Orbitron'; color: #2dd4bf;">NAVIGASI</span>
-        <div class="btn-tutup" id="btnTutupMenu">&times;</div>
-    </div>
-    <ul class="list-menu-sidebar">
-        <li><a href="index.html">Beranda</a></li>
-        <li><a href="fitur.html">Fitur Literasi</a></li>
-        <li><a href="profil.html">Profil</a></li>
-        <li><a href="koleksi.html">Koleksi</a></li>
-        <li><a href="ranking.html">Ranking</a></li>
-        <li><a href="event.html">Event</a></li>
-        <li><a href="admin.html">Admin</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-    </ul>
-</div>
+    <li><a href="fitur.html">Fitur Literasi</a></li>
+    <li><a href="profil.html">Profil</a></li>
+    <li><a href="koleksi.html">Koleksi</a></li>
+    <li><a href="ranking.html">Ranking</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="admin.html">Admin</a></li>
+    <li><a href="contact.html">Contact Us</a></li>
+</ul>
         
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
@@ -3006,6 +2993,59 @@ document.querySelectorAll('.reveal, .bento-section, .community-section').forEach
             }
         });
     }
+</script>
+
+    <script>
+    // Tunggu sampai seluruh dokumen selesai dimuat
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        // 1. Deklarasi Elemen
+        const tombolBuka = document.getElementById('btnBukaMenu');
+        const tombolTutup = document.getElementById('btnTutupMenu');
+        const panelMenu = document.getElementById('panelSidebar');
+        const submenuToggles = document.querySelectorAll('.submenu-toggle');
+
+        // 2. Logika Buka & Tutup Sidebar Utama
+        if (tombolBuka && panelMenu && tombolTutup) {
+            // Fungsi Membuka Sidebar
+            tombolBuka.onclick = function() {
+                panelMenu.classList.add('muncul');
+            };
+
+            // Fungsi Menutup Sidebar
+            tombolTutup.onclick = function() {
+                panelMenu.classList.remove('muncul');
+            };
+
+            // Menutup sidebar jika pengguna mengklik area di luar sidebar (Overlay effect)
+            document.addEventListener('click', function(event) {
+                if (!panelMenu.contains(event.target) && !tombolBuka.contains(event.target)) {
+                    panelMenu.classList.remove('muncul');
+                }
+            });
+        }
+
+        // 3. Logika Accordion untuk Sub-Menu (Beranda, dll)
+        submenuToggles.forEach(toggle => {
+            toggle.addEventListener('click', function(e) {
+                // Mencegah link berpindah halaman saat kita hanya ingin membuka dropdown
+                e.preventDefault();
+                
+                const parentLi = this.parentElement;
+
+                // Toggle class 'active' pada <li> yang memiliki sub-menu
+                parentLi.classList.toggle('active');
+
+                // Opsional: Tutup sub-menu lain jika ada yang terbuka (agar lebih rapi)
+                document.querySelectorAll('.has-submenu').forEach(item => {
+                    if (item !== parentLi) {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+    });
 </script>
 
 </body>
