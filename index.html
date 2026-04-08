@@ -2412,7 +2412,97 @@ body {
     .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 10px; color: white; border-radius: 10px; outline: none; }
     .chat-footer button { background: #007bff; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
 
-</style>
+/* Styling Tombol Hamburger */
+.hamburger-menu {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2001;
+    margin-left: 15px;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--sci-teal); /* Sesuaikan dengan warna tema kamu */
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+/* Sidebar Styling */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    right: -100%; /* Sembunyi di kanan */
+    width: 300px;
+    height: 100vh;
+    background: rgba(15, 23, 42, 0.95); /* Warna dark-bg kamu */
+    backdrop-filter: blur(15px);
+    z-index: 3000;
+    transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+    padding: 40px;
+    border-left: 1px solid rgba(45, 212, 191, 0.3);
+    box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+}
+
+.sidebar-overlay.active {
+    right: 0;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+}
+
+.close-btn {
+    font-size: 2rem;
+    color: var(--sci-teal);
+    cursor: pointer;
+}
+
+/* Link di dalam Sidebar */
+.nav-links-mobile {
+    list-style: none;
+    padding: 0;
+}
+
+.nav-links-mobile li {
+    margin: 25px 0;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: 0.4s;
+}
+
+.sidebar-overlay.active .nav-links-mobile li {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.nav-links-mobile li a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Orbitron', sans-serif;
+    letter-spacing: 1px;
+    transition: 0.3s;
+}
+
+.nav-links-mobile li a:hover {
+    color: var(--sci-teal);
+    text-shadow: 0 0 10px var(--sci-teal);
+}
+
+/* Animasi delay untuk tiap link */
+.nav-links-mobile li:nth-child(1) { transition-delay: 0.1s; }
+.nav-links-mobile li:nth-child(2) { transition-delay: 0.2s; }
+.nav-links-mobile li:nth-child(3) { transition-delay: 0.3s; }
+.nav-links-mobile li:nth-child(4) { transition-delay: 0.4s; }
+.nav-links-mobile li:nth-child(5) { transition-delay: 0.5s; }
+.nav-links-mobile li:nth-child(6) { transition-delay: 0.6s; }
+.nav-links-mobile li:nth-child(7) { transition-delay: 0.7s; }
+.nav-links-mobile li:nth-child(8) { transition-delay: 0.8s; }
 
 </style>
 </head>
@@ -2447,6 +2537,28 @@ body {
             <li class="nav-item"><a href="admin.html">Admin</a></li>
             <li class="nav-item"><a href="contactus.html">Contact Us</a></li>
         </ul>
+
+        <div class="hamburger-menu" id="hamburgerToggle">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+</div>
+
+<div class="sidebar-overlay" id="sidebarMenu">
+    <div class="sidebar-header">
+        <div class="close-btn" id="closeMenu">&times;</div>
+    </div>
+    <ul class="nav-links-mobile">
+        <li><a href="index.html">Beranda</a></li>
+        <li><a href="fitur.html">Fitur Literasi</a></li>
+        <li><a href="profil.html">Profil</a></li>
+        <li><a href="koleksi.html">Koleksi</a></li>
+        <li><a href="ranking.html">Ranking</a></li>
+        <li><a href="event.html">Event</a></li>
+        <li><a href="admin.html">Admin</a></li>
+        <li><a href="contact.html">Contact Us</a></li>
+    </ul>
+</div>
         
         <div class="login-menu">
             <button class="login-btn">Login ▾</button>
@@ -2886,6 +2998,29 @@ document.querySelectorAll('.reveal, .bento-section, .community-section').forEach
     el.classList.add('reveal');
     observer.observe(el);
 });
+</script>
+
+    <script>
+    const hamburger = document.getElementById('hamburgerToggle');
+    const sidebar = document.getElementById('sidebarMenu');
+    const closeBtn = document.getElementById('closeMenu');
+
+    // Membuka Sidebar
+    hamburger.addEventListener('click', () => {
+        sidebar.classList.add('active');
+    });
+
+    // Menutup Sidebar
+    closeBtn.addEventListener('click', () => {
+        sidebar.classList.remove('active');
+    });
+
+    // Menutup sidebar jika mengklik di luar menu
+    document.addEventListener('click', (e) => {
+        if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+            sidebar.classList.remove('active');
+        }
+    });
 </script>
     
 </body>
