@@ -2412,6 +2412,46 @@ body {
     .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 10px; color: white; border-radius: 10px; outline: none; }
     .chat-footer button { background: #007bff; border: none; color: white; padding: 10px; border-radius: 10px; cursor: pointer; }
 
+    /* Pastikan Grid menyesuaikan jumlah kartu */
+.video-grid {
+    display: grid;
+    /* Membuat 3 kolom jika layar lebar, dan otomatis menyesuaikan di layar kecil */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Styling kartu agar sama dengan gambar sebelumnya */
+.bento-card {
+    background: #1a73e8; /* Warna biru sesuai gambar kamu */
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    color: white;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 350px;
+}
+
+.bento-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Tombol tetap putih sesuai gambar */
+.btn-card {
+    background: white;
+    color: #1a73e8;
+    padding: 12px 25px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 20px;
+    display: inline-block;
+}
     
 </style>
 </head>
@@ -2520,31 +2560,42 @@ body {
     <p class="subtitle">Fitur utama untuk membantu siswa SMP melawan kesenjangan digital.</p>
 
     <div class="video-grid">
-    <div class="bento-card">
-        <h3>Arcade Literasi 🎮</h3>
-        <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru!</p>
-        <a href="game.html" class="btn-card">MULAI MAIN ⚡</a>
-    </div>
+        <div class="bento-card">
+            <h3>Arcade Literasi 🎮</h3>
+            <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru!</p>
+            <a href="game.html" class="btn-card">MULAI MAIN ⚡</a>
+        </div>
 
-    <div class="bento-card">
-        <h3>Pojok Baca 📖</h3>
-        <p>Koleksi buku digital pilihan untuk pelajar SMP agar makin pinter.</p>
-        <a href="perpustakaan.html" class="btn-card">BACA SEKARANG 📚</a>
-    </div>
-    
-    <div class="bento-card">
-        <h3>Media Belajar 🎥</h3>
-        <p>Video tutorial singkat cara riset tugas sekolah dengan benar.</p>
-        <a href="media.html" class="btn-card">TONTON VIDEO 📺</a>
-    </div>
+        <div class="bento-card">
+            <h3>Pojok Baca 📖</h3>
+            <p>Koleksi buku digital pilihan untuk pelajar SMP agar makin pinter.</p>
+            <a href="perpustakaan.html" class="btn-card">BACA SEKARANG 📚</a>
+        </div>
+        
+        <div class="bento-card">
+            <h3>Media Belajar 🎥</h3>
+            <p>Video tutorial singkat cara riset tugas sekolah dengan benar.</p>
+            <a href="media.html" class="btn-card">TONTON VIDEO 📺</a>
+        </div>
 
-    <div class="bento-card">
-        <h3>Hoax Buster 🕵️‍♂️</h3>
-        <p>Alat cek fakta sederhana untuk membedakan berita asli dan palsu.</p>
-        <a href="cek-hoax.html" class="btn-card">CEK BERITA 🔍</a>
-    </div>
+        <div class="bento-card">
+            <h3>Hoax Buster 🕵️‍♂️</h3>
+            <p>Alat cek fakta sederhana untuk membedakan berita asli dan palsu.</p>
+            <a href="cek-hoax.html" class="btn-card">CEK BERITA 🔍</a>
+        </div>
 
-</div>
+        <div class="bento-card math-card">
+            <h3>Math Logic 🔢</h3>
+            <p>Asah logika dan kecepatan berhitungmu dengan tantangan angka.</p>
+            <a href="math-game.html" class="btn-card">HITUNG SEKARANG 🧮</a>
+        </div>
+
+        <div class="bento-card english-card">
+            <h3>English Quest 🌍</h3>
+            <p>Perluas kosakata dan kemampuan bahasa Inggrismu lewat petualangan.</p>
+            <a href="english-game.html" class="btn-card">START QUEST 💬</a>
+        </div>
+    </div>
 </section>
     
 </div>
