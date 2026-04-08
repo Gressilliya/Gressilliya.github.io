@@ -2455,11 +2455,11 @@ body {
     display: inline-block;
 }
 
-/* ===== HAMBURGER BUTTON ===== */
+/* ===== HAMBURGER BUTTON — FIXED (BIRU SOLID) ===== */
 .hamburger-btn {
   position: relative;
-  background: rgba(255, 255, 255, 0.18);
-  border: 2px solid rgba(255, 255, 255, 0.55);
+  background: #1565C0;           /* ← ganti dari rgba putih ke biru solid */
+  border: 2px solid #1565C0;     /* ← border biru solid */
   border-radius: 12px;
   padding: 8px 10px;
   cursor: pointer;
@@ -2468,6 +2468,14 @@ body {
   gap: 4.5px;
   transition: background 0.2s, border-color 0.2s, transform 0.15s, box-shadow 0.2s;
   outline: none;
+}
+.hamburger-btn:hover {
+  background: #0D47A1;           /* ← hover: biru lebih gelap */
+  border-color: #0D47A1;
+  transform: scale(1.08);
+  box-shadow: 0 0 0 4px rgba(21, 101, 192, 0.22);
+}
+.hamburger-btn:active { transform: scale(0.96); }
 }
 .hamburger-btn:hover {
   background: rgba(255, 255, 255, 0.32);
