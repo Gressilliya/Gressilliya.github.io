@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events & Competitions | DigiSmart Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #007bff;
+            --neon-cyan: #00d2ff;
+            --dark-bg: #f8fafc;
+            --card-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        body {
+            background-color: var(--dark-bg);
+            color: #334155;
+            line-height: 1.6;
+        }
+
+        /* Header Section */
+        header {
+            background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+            border-bottom-left-radius: 50px;
+            border-bottom-right-radius: 50px;
+        }
+
+        header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        header p { opacity: 0.9; font-weight: 300; }
+
+        /* Container & Grid */
+        .container {
+            max-width: 1200px;
+            margin: -40px auto 60px;
+            padding: 0 20px;
+        }
+
+        .event-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        /* Event Card Styling */
+        .event-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .event-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .event-image {
+            width: 100%;
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .event-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .event-card:hover .event-image img { transform: scale(1.1); }
+
+        .event-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 210, 255, 0.9);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+        }
+
+        .event-content { padding: 25px; flex-grow: 1; }
+
+        .event-content h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .event-content p {
+            font-size: 14px;
+            color: #64748b;
+            margin-bottom: 20px;
+        }
+
+        .btn-join {
+            display: inline-block;
+            width: 100%;
+            padding: 12px;
+            text-align: center;
+            background: var(--primary-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-join:hover {
+            background: #1d4ed8;
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .event-card { animation: fadeInUp 0.6s ease forwards; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EVENT & CHALLENGE</h1>
+        <p>Jadilah Pahlawan Literasi Digital di DigiSmart Library!</p>
+    </header>
+
+    <div class="container">
+        <div class="event-grid">
+            
+            <div class="event-card" style="animation-delay: 0.1s;">
+                <div class="event-image">
+                    <img src="lombamembaca.jpg" alt="Fact Check Challenge">
+                    <span class="event-badge">Weekly Challenge</span>
+                </div>
+                <div class="event-content">
+                    <h3>The Fact-Check Challenge</h3>
+                    <p>Uji kemampuanmu mendeteksi hoaks! Gunakan fitur <strong>Hoax Buster</strong> untuk membedakan fakta dan opini dari berita viral minggu ini.</p>
+                    <button class="btn-join">Ikuti Tantangan</button>
+                </div>
+            </div>
+
+            <div class="event-card" style="animation-delay: 0.2s;">
+                <div class="event-image">
+                    <img src="DigitalStorytelling.png" alt="Storytelling Marathon">
+                    <span class="event-badge">Monthly Marathon</span>
+                </div>
+                <div class="event-content">
+                    <h3>Digital Storytelling Marathon</h3>
+                    <p>Ubah koleksi buku di <strong>Pojok Baca</strong> menjadi video edukasi 60 detik yang menarik. Jadilah inspirasi bagi teman sejawat!</p>
+                    <button class="btn-join">Mulai Berkreasi</button>
+                </div>
+            </div>
+
+            <div class="event-card" style="animation-delay: 0.3s;">
+                <div class="event-image">
+                    <img src="cybermath.jpg" alt="Cyber-Math League">
+                    <span class="event-badge">Tournament</span>
+                </div>
+                <div class="event-content">
+                    <h3>Cyber-Math League</h3>
+                    <p>Turnamen logika terbesar! Buktikan ketangkasanmu dalam <strong>Math Logic</strong> dan rebut gelar eksklusif "Grandmaster Logic".</p>
+                    <button class="btn-join">Masuk Arena</button>
+                </div>
+            </div>
+
+            <div class="event-card" style="animation-delay: 0.4s;">
+                <div class="event-image">
+                    <img src="CyberBullying.jpg" alt="Kindness Click">
+                    <span class="event-badge">Social Mission</span>
+                </div>
+                <div class="event-content">
+                    <h3>Kindness Click</h3>
+                    <p>Pelajari cara berinteraksi secara sehat di dunia maya. Karena satu klik kebaikan bisa menyelamatkan hari seseorang.</p>
+                    <button class="btn-join">Jadi Hero Digital</button>
+                </div>
+            </div>
+
+            <div class="event-card" style="animation-delay: 0.5s;">
+                <div class="event-image">
+                    <img src="CreativeVibes.jpg" alt="Creative Vibes">
+                    <span class="event-badge">Workshop</span>
+                </div>
+                <div class="event-content">
+                    <h3>Creative Vibes</h3>
+                    <p>Level up kontenmu! Pelajari teknik desain dan komunikasi visual agar pesan edukasimu tampil makin estetik dan keren.</p>
+                    <button class="btn-join">Pelajari Skill</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
