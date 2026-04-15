@@ -2888,6 +2888,28 @@ body {
     transform: scale(0.8); /* Memperkecil switch mode agar proporsional */
     margin-left: 5px;
 }
+
+.fab-toggle {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  cursor: pointer;
+  z-index: 9999;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.35);
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+.fab-toggle:hover {
+  transform: scale(1.1);
+}
     
 </style>
 </head>
@@ -3238,7 +3260,7 @@ body {
                 <p><i class="fas fa-envelope"></i> perpus@digismart.sch.id</p>
             </div>
             <div class="social-box">
-                <<a href="https://wa.me/628123456789" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
+                <a href="https://wa.me/628123456789" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
                     <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
                     <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
                     <a href="mailto:info@digismart.usu.ac.id" class="social-btn gm"><i class="fas fa-envelope"></i></a>
@@ -3285,6 +3307,13 @@ body {
         <button onclick="botKirim()"><i class="fas fa-paper-plane"></i></button>
     </div>
 </div>
+
+<div class="fab-toggle" id="fabToggle" onclick="toggleMode()" title="Ganti Mode">
+  <span id="fabIcon">🌙</span>
+</div>
+
+</body>
+</html>
 
 <script>
     // Database Jawaban (Gunakan huruf kecil semua di kolom kiri)
@@ -3568,6 +3597,29 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script src="hamburger.js"></script>
+
+<script>
+  function toggleMode() {
+    const body = document.body;
+    const icon = document.getElementById('fabIcon');
+    const isTerang = body.classList.toggle('mode-terang');
+
+    icon.textContent = isTerang ? '☀️' : '🌙';
+    localStorage.setItem('mode', isTerang ? 'terang' : 'gelap');
+  }
+
+  // Load mode saat halaman dibuka
+  document.addEventListener('DOMContentLoaded', function () {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'terang') {
+      document.body.classList.add('mode-terang');
+      document.getElementById('fabIcon').textContent = '☀️';
+    }
+  });
+</script>
+
+</body>
+</html>
 
 </body>
 </html>
