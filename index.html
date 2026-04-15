@@ -2910,6 +2910,76 @@ body {
 .fab-toggle:hover {
   transform: scale(1.1);
 }
+
+/* ========== DEFAULT MODE GELAP ========== */
+body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* ========== MODE TERANG ========== */
+body.mode-terang {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
+/* Navbar */
+body.mode-terang nav,
+body.mode-terang .navbar,
+body.mode-terang header {
+  background-color: #ffffff !important;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.1) !important;
+}
+
+/* Hero Section */
+body.mode-terang .hero,
+body.mode-terang .hero-section {
+  background-color: #e2e8f0 !important;
+  color: #0f172a !important;
+}
+
+/* Card / Section */
+body.mode-terang .card,
+body.mode-terang section,
+body.mode-terang .section,
+body.mode-terang .content-box {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Text */
+body.mode-terang h1,
+body.mode-terang h2,
+body.mode-terang h3,
+body.mode-terang h4,
+body.mode-terang p,
+body.mode-terang a,
+body.mode-terang span,
+body.mode-terang li {
+  color: #0f172a !important;
+}
+
+/* Footer */
+body.mode-terang .main-footer,
+body.mode-terang footer {
+  background-color: #1e3a5f !important;
+  color: #ffffff !important;
+}
+
+body.mode-terang footer h3,
+body.mode-terang footer h4,
+body.mode-terang footer p,
+body.mode-terang footer a,
+body.mode-terang footer span,
+body.mode-terang footer li {
+  color: #ffffff !important;
+}
+
+/* FAB tombol mode */
+body.mode-terang .fab-toggle {
+  background: #f59e0b !important;
+}
     
 </style>
 </head>
@@ -3607,8 +3677,24 @@ document.addEventListener('keydown', function(e) {
   });
 </script>
 
-</body>
-</html>
+<script>
+  function toggleMode() {
+    const body = document.body;
+    const icon = document.getElementById('fabIcon');
+    const isTerang = body.classList.toggle('mode-terang');
 
+    icon.textContent = isTerang ? '☀️' : '🌙';
+    localStorage.setItem('mode', isTerang ? 'terang' : 'gelap');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'terang') {
+      document.body.classList.add('mode-terang');
+      document.getElementById('fabIcon').textContent = '☀️';
+    }
+  });
+</script>
+    
 </body>
 </html>
