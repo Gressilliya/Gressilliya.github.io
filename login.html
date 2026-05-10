@@ -7,208 +7,177 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body {
-            /* Background tetap dengan tema perpustakaan yang estetik */
-            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.8)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
                         url('https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
+            background-size: cover; background-position: center;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
         }
-
-        /* Box Login Glassmorphism */
         .login-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            padding: 40px;
-            border-radius: 25px;
-            width: 100%;
-            max-width: 420px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-            animation: fadeInDown 0.8s ease;
-            position: relative;
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(20px);
+            padding: 40px; border-radius: 25px; width: 100%; max-width: 420px;
+            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            animation: fadeInDown 0.8s ease; position: relative; margin: 20px;
         }
-
         @keyframes fadeInDown {
             from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+        .logo-area { text-align: center; margin-bottom: 24px; }
+        .logo-area img { width: 54px; height: 54px; border-radius: 50%; border: 2px solid #38bdf8; margin-bottom: 10px; }
+        .login-card h2 { color: #fff; text-align: center; margin-bottom: 6px; font-size: 26px; font-weight: 600; }
+        .login-card p  { color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 28px; font-size: 13px; }
 
-        .login-card h2 {
-            color: #fff;
-            text-align: center;
-            margin-bottom: 10px;
-            font-size: 28px;
-            font-weight: 600;
-        }
-
-        .login-card p {
-            color: rgba(255,255,255,0.6);
-            text-align: center;
-            margin-bottom: 30px;
-            font-size: 14px;
-        }
-
-        .input-group {
-            position: relative;
-            margin-bottom: 18px;
-        }
-
-        .input-group i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #38bdf8;
-            font-size: 1.1rem;
-        }
-
+        .input-group { position: relative; margin-bottom: 16px; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #38bdf8; font-size: 1rem; }
         .input-group input {
-            width: 100%;
-            padding: 13px 15px 13px 45px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            color: #fff;
-            outline: none;
-            transition: 0.3s;
-            font-size: 0.95rem;
+            width: 100%; padding: 13px 15px 13px 45px;
+            background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 12px; color: #fff; outline: none; font-size: 0.95rem; transition: 0.3s;
         }
+        .input-group input::placeholder { color: rgba(255,255,255,0.45); }
+        .input-group input:focus { background: rgba(255,255,255,0.15); border-color: #38bdf8; box-shadow: 0 0 12px rgba(56,189,248,0.3); }
 
-        .input-group input:focus {
-            background: rgba(255, 255, 255, 0.15);
-            border-color: #38bdf8;
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        /* Pesan error/sukses */
+        .alert {
+            display: none; padding: 10px 14px; border-radius: 10px;
+            font-size: 13px; margin-bottom: 14px; text-align: center;
         }
+        .alert.error   { background: rgba(239,68,68,0.25); border: 1px solid rgba(239,68,68,0.5); color: #fca5a5; display: block; }
+        .alert.success { background: rgba(34,197,94,0.2);  border: 1px solid rgba(34,197,94,0.4);  color: #86efac; display: block; }
 
-        /* Tombol Login */
         .btn-login {
-            width: 100%;
-            padding: 14px;
+            width: 100%; padding: 14px;
             background: linear-gradient(to right, #38bdf8, #818cf8);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.4s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-top: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 10px;
+            border: none; border-radius: 12px; color: white; font-weight: 600;
+            cursor: pointer; transition: 0.4s; letter-spacing: 1px; margin-top: 6px;
+            display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px;
         }
+        .btn-login:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56,189,248,0.4); }
+        .btn-login:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-        .btn-login:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(56, 189, 248, 0.4);
-            filter: brightness(1.1);
-        }
-
-        /* Animasi Loading */
         .loader {
-            width: 18px; height: 18px;
-            border: 3px solid #ffffff;
-            border-bottom-color: transparent;
-            border-radius: 50%;
-            display: none;
-            animation: rotation 1s linear infinite;
+            width: 18px; height: 18px; border: 3px solid #fff;
+            border-bottom-color: transparent; border-radius: 50%;
+            display: none; animation: spin 1s linear infinite;
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
 
-        @keyframes rotation {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        .footer-link { text-align: center; margin-top: 22px; color: rgba(255,255,255,0.55); font-size: 13px; }
+        .footer-link a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+        .footer-link a:hover { text-decoration: underline; }
 
-        .footer-link {
-            text-align: center;
-            margin-top: 25px;
-            color: rgba(255,255,255,0.6);
-            font-size: 14px;
+        .btn-back {
+            position: absolute; top: 20px; left: 20px; color: white; text-decoration: none;
+            display: flex; align-items: center; gap: 6px; font-size: 13px;
+            background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 50px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
         }
-
-        .footer-link a {
-            color: #38bdf8;
-            text-decoration: none;
-            font-weight: 600;
-        }
+        .btn-back:hover { background: #38bdf8; }
     </style>
 </head>
 <body>
 
-    <div class="login-card">
-        <h2>Login Anggota</h2>
-        <p>Gunakan akun DigiSmart untuk akses penuh</p>
-        
-        <form id="loginForm">
-            <div class="input-group">
-                <i class="fas fa-user"></i>
-                <input type="text" id="firstName" placeholder="First Name" required>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-user-tag"></i>
-                <input type="text" id="lastName" placeholder="Last Name" required>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" placeholder="Email Address" required>
-            </div>
-            <div class="input-group">
-                <i class="fas fa-phone"></i>
-                <input type="tel" id="phone" placeholder="No Handphone" required>
-            </div>
-            
-            <button type="submit" class="btn-login" id="btnLogin">
-                <span>Masuk Perpustakaan</span>
-                <div class="loader" id="loader"></div>
-            </button>
-        </form>
+<a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Beranda</a>
 
-        <div class="login-link">
-    Belum punya akun? <a href="daftar.html">Daftar Sekarang</a>
-</div>
+<div class="login-card">
+    <div class="logo-area">
+        <img src="logo.jpg" alt="Logo DigiSmart" onerror="this.style.display='none'">
     </div>
+    <h2>Login Anggota</h2>
+    <p>Masukkan data yang kamu daftarkan</p>
 
-    <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
-            
-            const btn = document.getElementById('btnLogin');
-            const loader = document.getElementById('loader');
-            const btnText = btn.querySelector('span');
+    <div class="alert" id="alertBox"></div>
 
-            // Tampilkan Loading
-            btnText.innerText = "Memproses...";
-            loader.style.display = "inline-block";
-            btn.style.pointerEvents = "none";
+    <form id="loginForm" novalidate>
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="loginEmail" placeholder="Alamat Email" required autocomplete="email">
+        </div>
+        <div class="input-group">
+            <i class="fas fa-lock"></i>
+            <input type="password" id="loginPhone" placeholder="No. WhatsApp (sebagai kata sandi)" required autocomplete="current-password">
+        </div>
+        <button type="submit" class="btn-login" id="btnLogin">
+            <span id="btnText">Masuk Perpustakaan</span>
+            <div class="loader" id="loader"></div>
+        </button>
+    </form>
 
-            // Ambil data (opsional untuk disimpan di console)
-            const userData = {
-                nama: document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
-                email: document.getElementById('email').value
-            };
-            
-            console.log("Mencoba Login...", userData);
+    <div class="footer-link">Belum punya akun? <a href="daftar.html">Daftar Sekarang</a></div>
+</div>
 
-            // Simulasi loading 1.5 detik sebelum masuk ke beranda
-            setTimeout(() => {
-                // ARAHKAN KE HALAMAN UTAMA (Pastikan nama file utama kamu adalah index.html)
-                window.location.href = "index.html"; 
-            }, 1500);
-        });
-    </script>
+<script>
+// ===== HELPER =====
+function getUsers() {
+    try { return JSON.parse(localStorage.getItem('digi_users') || '[]'); } catch { return []; }
+}
+function setSession(user) {
+    // Simpan sesi tanpa menyimpan no.hp di session (lebih aman)
+    const sessionData = { nama: user.nama, email: user.email, kelas: user.kelas, loggedIn: true };
+    localStorage.setItem('digi_session', JSON.stringify(sessionData));
+}
+function showAlert(msg, type) {
+    const el = document.getElementById('alertBox');
+    el.textContent = msg;
+    el.className = 'alert ' + type;
+}
+
+// ===== CEK SUDAH LOGIN, REDIRECT LANGSUNG =====
+(function() {
+    try {
+        const s = JSON.parse(localStorage.getItem('digi_session'));
+        if (s && s.loggedIn) { window.location.href = 'index.html'; }
+    } catch {}
+})();
+
+// ===== PROSES LOGIN =====
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+    const phone = document.getElementById('loginPhone').value.trim();
+
+    if (!email || !phone) {
+        showAlert('Isi semua kolom terlebih dahulu.', 'error');
+        return;
+    }
+
+    const btn    = document.getElementById('btnLogin');
+    const loader = document.getElementById('loader');
+    const btnTxt = document.getElementById('btnText');
+
+    btnTxt.textContent = 'Memeriksa...';
+    loader.style.display = 'inline-block';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        const users = getUsers();
+
+        // Cari user dengan email DAN nomor hp yang cocok
+        const found = users.find(u =>
+            u.email.toLowerCase() === email &&
+            u.phone === phone
+        );
+
+        if (!found) {
+            showAlert('Email atau nomor HP tidak ditemukan. Coba daftar dulu jika belum punya akun.', 'error');
+            btnTxt.textContent = 'Masuk Perpustakaan';
+            loader.style.display = 'none';
+            btn.disabled = false;
+            return;
+        }
+
+        // Login berhasil
+        setSession(found);
+        showAlert('Login berhasil! Mengalihkan...', 'success');
+
+        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+
+    }, 900);
+});
+</script>
 
 </body>
 </html>
