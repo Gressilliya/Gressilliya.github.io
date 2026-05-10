@@ -7,108 +7,230 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS tetap sama seperti sebelumnya agar desain tidak berubah */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
         body {
-            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)), 
+            background: linear-gradient(rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.88)),
                         url('https://images.unsplash.com/photo-1481627546452-676d3392b735?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover; background-position: center; height: 100vh;
-            display: flex; justify-content: center; align-items: center; overflow: hidden;
+            background-size: cover; background-position: center;
+            min-height: 100vh; display: flex; justify-content: center; align-items: center;
         }
         .btn-back {
-            position: absolute; top: 30px; left: 30px; color: white; text-decoration: none;
-            display: flex; align-items: center; gap: 8px; font-size: 14px;
-            background: rgba(255,255,255,0.1); padding: 10px 20px; border-radius: 50px;
-            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); transition: 0.3s;
+            position: fixed; top: 20px; left: 20px; color: white; text-decoration: none;
+            display: flex; align-items: center; gap: 8px; font-size: 13px;
+            background: rgba(255,255,255,0.1); padding: 9px 18px; border-radius: 50px;
+            backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.15); transition: 0.3s; z-index: 10;
         }
-        .btn-back:hover { background: #38bdf8; transform: translateX(-5px); }
+        .btn-back:hover { background: #38bdf8; }
+
         .register-card {
-            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(25px);
-            padding: 40px; border-radius: 30px; width: 100%; max-width: 480px;
-            border: 1px solid rgba(255, 255, 255, 0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.4);
-            animation: slideUp 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: rgba(255,255,255,0.1); backdrop-filter: blur(25px);
+            padding: 40px; border-radius: 28px; width: 100%; max-width: 500px;
+            border: 1px solid rgba(255,255,255,0.2); box-shadow: 0 25px 50px rgba(0,0,0,0.45);
+            animation: slideUp 0.8s cubic-bezier(0.175,0.885,0.32,1.275); margin: 80px 20px 30px;
         }
         @keyframes slideUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
-        .register-card h2 { color: #ffffff; text-align: center; margin-bottom: 8px; font-size: 32px; font-weight: 600; }
-        .register-card p { color: #e2e8f0; text-align: center; margin-bottom: 30px; font-size: 15px; font-weight: 300; }
-        .input-row { display: flex; gap: 15px; }
-        .input-group { position: relative; margin-bottom: 20px; width: 100%; }
-        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #38bdf8; }
-        .input-group input {
-            width: 100%; padding: 14px 15px 14px 45px; background: rgba(15, 23, 42, 0.6);
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 12px; color: #fff; outline: none; transition: 0.3s;
+
+        .register-card h2 { color: #fff; text-align: center; margin-bottom: 6px; font-size: 28px; font-weight: 600; }
+        .register-card > p { color: rgba(255,255,255,0.6); text-align: center; margin-bottom: 28px; font-size: 13px; }
+
+        .input-row { display: flex; gap: 14px; }
+        .input-group { position: relative; margin-bottom: 16px; flex: 1; }
+        .input-group i { position: absolute; left: 14px; top: 50%; transform: translateY(-50%); color: #38bdf8; font-size: 0.95rem; }
+        .input-group input, .input-group select {
+            width: 100%; padding: 13px 14px 13px 42px;
+            background: rgba(15,23,42,0.55); border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px; color: #fff; outline: none; transition: 0.3s; font-size: 0.93rem;
+            -webkit-appearance: none;
         }
-        .input-group input:focus { border-color: #38bdf8; box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
+        .input-group select option { background: #1e293b; color: #fff; }
+        .input-group input::placeholder { color: rgba(255,255,255,0.4); }
+        .input-group input:focus, .input-group select:focus {
+            border-color: #38bdf8; box-shadow: 0 0 12px rgba(56,189,248,0.3);
+            background: rgba(255,255,255,0.1);
+        }
+
+        .alert {
+            display: none; padding: 10px 14px; border-radius: 10px;
+            font-size: 13px; margin-bottom: 14px; text-align: center;
+        }
+        .alert.error   { background: rgba(239,68,68,0.25); border: 1px solid rgba(239,68,68,0.5); color: #fca5a5; display: block; }
+        .alert.success { background: rgba(34,197,94,0.2);  border: 1px solid rgba(34,197,94,0.4);  color: #86efac; display: block; }
+
         .btn-daftar {
-            width: 100%; padding: 15px; background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
-            border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; transition: 0.4s;
-            display: flex; justify-content: center; align-items: center; gap: 10px;
+            width: 100%; padding: 14px;
+            background: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+            border: none; border-radius: 12px; color: white; font-weight: 600;
+            cursor: pointer; transition: 0.4s; letter-spacing: 1px;
+            display: flex; justify-content: center; align-items: center; gap: 10px; font-size: 15px;
         }
-        .spinner { width: 18px; height: 18px; border: 3px solid #ffffff; border-bottom-color: transparent; border-radius: 50%; display: none; animation: spin 1s linear infinite; }
+        .btn-daftar:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(56,189,248,0.35); }
+        .btn-daftar:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+        .spinner {
+            width: 18px; height: 18px; border: 3px solid #fff;
+            border-bottom-color: transparent; border-radius: 50%;
+            display: none; animation: spin 1s linear infinite;
+        }
         @keyframes spin { to { transform: rotate(360deg); } }
-        .login-link { text-align: center; margin-top: 25px; color: #cbd5e1; font-size: 14px; }
+
+        .login-link { text-align: center; margin-top: 22px; color: rgba(255,255,255,0.55); font-size: 13px; }
         .login-link a { color: #38bdf8; text-decoration: none; font-weight: 600; }
+        .login-link a:hover { text-decoration: underline; }
+
+        .info-note {
+            background: rgba(56,189,248,0.12); border: 1px solid rgba(56,189,248,0.3);
+            border-radius: 10px; padding: 10px 14px; font-size: 12px;
+            color: rgba(255,255,255,0.7); margin-bottom: 18px; line-height: 1.6;
+        }
+        .info-note i { color: #38bdf8; margin-right: 4px; }
     </style>
 </head>
 <body>
 
-    <a href="index.html" class="btn-back">
-        <i class="fas fa-arrow-left"></i> Kembali ke Beranda
-    </a>
+<a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Kembali ke Beranda</a>
 
-    <div class="register-card">
-        <h2>Daftar Akun</h2>
-        <p>Bergabunglah dengan komunitas DigiSmart Library</p>
-        
-        <form id="registerForm">
-            <div class="input-row">
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="fname" placeholder="Nama Depan" required>
-                </div>
-                <div class="input-group">
-                    <i class="fas fa-user"></i>
-                    <input type="text" id="lname" placeholder="Nama Belakang" required>
-                </div>
-            </div>
+<div class="register-card">
+    <h2>Daftar Akun</h2>
+    <p>Bergabunglah dengan komunitas DigiSmart Library</p>
 
-            <div class="input-group">
-                <i class="fas fa-envelope"></i>
-                <input type="email" id="email" placeholder="Alamat Email" required>
-            </div>
-
-            <div class="input-group">
-                <i class="fas fa-phone-alt"></i>
-                <input type="tel" id="phone" placeholder="Nomor WhatsApp/HP" required>
-            </div>
-
-            <button type="submit" class="btn-daftar" id="btnDaftar">
-                <span>BUAT AKUN SEKARANG</span>
-                <div class="spinner" id="loader"></div>
-            </button>
-        </form>
-
-        <div class="login-link">
-            Sudah punya akun? <a href="login.html">Masuk di sini</a>
-        </div>
+    <div class="info-note">
+        <i class="fas fa-info-circle"></i>
+        <strong>No. HP</strong> akan digunakan sebagai <strong>kata sandi</strong> saat login. Ingat baik-baik!
     </div>
 
-    <script>
-        document.getElementById('registerForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('btnDaftar');
-            const loader = document.getElementById('loader');
-            const btnText = btn.querySelector('span');
+    <div class="alert" id="alertBox"></div>
 
-            btnText.innerText = "Sedang Memproses...";
-            loader.style.display = "block";
-            btn.style.pointerEvents = "none";
+    <form id="registerForm" novalidate>
+        <div class="input-row">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="fname" placeholder="Nama Depan" required>
+            </div>
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" id="lname" placeholder="Nama Belakang" required>
+            </div>
+        </div>
 
-            setTimeout(() => {
-                alert("Pendaftaran Berhasil! Akun Anda telah aktif.");
-                window.location.href = "login.html"; 
-            }, 1500);
-        });
-    </script>
+        <div class="input-group">
+            <i class="fas fa-school"></i>
+            <select id="kelas" required>
+                <option value="">-- Pilih Kelas --</option>
+                <option>VII A</option>
+                <option>VII B</option>
+                <option>VII C</option>
+                <option>VIII A</option>
+                <option>VIII B</option>
+                <option>VIII C</option>
+                <option>IX A</option>
+                <option>IX B</option>
+                <option>IX C</option>
+                <option>Guru / Staf</option>
+            </select>
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-envelope"></i>
+            <input type="email" id="email" placeholder="Alamat Email" required autocomplete="email">
+        </div>
+
+        <div class="input-group">
+            <i class="fas fa-phone-alt"></i>
+            <input type="tel" id="phone" placeholder="No. WhatsApp (ini jadi kata sandi)" required autocomplete="tel">
+        </div>
+
+        <button type="submit" class="btn-daftar" id="btnDaftar">
+            <span id="btnText">Buat Akun Sekarang</span>
+            <div class="spinner" id="loader"></div>
+        </button>
+    </form>
+
+    <div class="login-link">Sudah punya akun? <a href="login.html">Masuk di sini</a></div>
+</div>
+
+<script>
+// ===== HELPER =====
+function getUsers() {
+    try { return JSON.parse(localStorage.getItem('digi_users') || '[]'); } catch { return []; }
+}
+function saveUsers(users) {
+    localStorage.setItem('digi_users', JSON.stringify(users));
+}
+function showAlert(msg, type) {
+    const el = document.getElementById('alertBox');
+    el.textContent = msg;
+    el.className = 'alert ' + type;
+}
+
+// ===== PROSES DAFTAR =====
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const fname = document.getElementById('fname').value.trim();
+    const lname = document.getElementById('lname').value.trim();
+    const kelas = document.getElementById('kelas').value;
+    const email = document.getElementById('email').value.trim().toLowerCase();
+    const phone = document.getElementById('phone').value.trim();
+
+    // Validasi semua kolom wajib
+    if (!fname || !lname || !kelas || !email || !phone) {
+        showAlert('Semua kolom wajib diisi.', 'error');
+        return;
+    }
+
+    // Validasi format email sederhana
+    if (!email.includes('@') || !email.includes('.')) {
+        showAlert('Format email tidak valid.', 'error');
+        return;
+    }
+
+    // Validasi nomor HP minimal 10 digit
+    const phoneDigits = phone.replace(/\D/g, '');
+    if (phoneDigits.length < 10) {
+        showAlert('Nomor HP minimal 10 digit.', 'error');
+        return;
+    }
+
+    const btn    = document.getElementById('btnDaftar');
+    const loader = document.getElementById('loader');
+    const btnTxt = document.getElementById('btnText');
+
+    btnTxt.textContent = 'Mendaftarkan...';
+    loader.style.display = 'inline-block';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        const users = getUsers();
+
+        // Cek apakah email sudah terdaftar
+        const sudahAda = users.find(u => u.email.toLowerCase() === email);
+        if (sudahAda) {
+            showAlert('Email ini sudah terdaftar. Silakan login atau gunakan email lain.', 'error');
+            btnTxt.textContent = 'Buat Akun Sekarang';
+            loader.style.display = 'none';
+            btn.disabled = false;
+            return;
+        }
+
+        // Simpan user baru
+        const userBaru = {
+            nama : fname + ' ' + lname,
+            kelas: kelas,
+            email: email,
+            phone: phone,           // nomor HP = kata sandi
+            tanggalDaftar: new Date().toLocaleDateString('id-ID')
+        };
+
+        users.push(userBaru);
+        saveUsers(users);
+
+        showAlert('Pendaftaran berhasil! Kamu akan diarahkan ke halaman login...', 'success');
+
+        setTimeout(() => { window.location.href = 'login.html'; }, 1800);
+
+    }, 1000);
+});
+</script>
+
 </body>
 </html>
