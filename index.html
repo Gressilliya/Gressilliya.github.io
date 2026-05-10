@@ -2911,6 +2911,140 @@ body {
   transform: scale(1.1);
 }
 
+/* ===== WELCOME BANNER ===== */
+.welcome-banner {
+    display: none; /* disembunyikan dulu, muncul lewat JS */
+    position: fixed;
+    top: 85px;
+    right: 20px;
+    z-index: 9998;
+    animation: slideInRight 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(60px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+.welcome-inner {
+    background: white;
+    border-radius: 18px;
+    padding: 16px 20px;
+    box-shadow: 0 10px 35px rgba(21, 101, 192, 0.25);
+    border-left: 5px solid #1565C0;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 280px;
+    max-width: 340px;
+    position: relative;
+}
+
+.welcome-avatar {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1565C0, #42A5F5);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 17px;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.welcome-text-wrap {
+    flex: 1;
+}
+
+.welcome-label {
+    font-size: 11px;
+    color: #888;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 3px;
+}
+
+/* Pembeda: Member Lama vs Member Baru */
+.welcome-label.returning {
+    color: #1565C0;
+}
+
+.welcome-label.new-member {
+    color: #16a34a; /* hijau untuk member baru */
+}
+
+.welcome-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 2px;
+}
+
+.welcome-kelas {
+    font-size: 12px;
+    color: #64748b;
+}
+
+/* Badge di pojok atas */
+.welcome-badge {
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.3px;
+}
+
+.welcome-badge.returning {
+    background: #e6f1fb;
+    color: #1565C0;
+}
+
+.welcome-badge.new-member {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+/* Tombol tutup banner */
+.welcome-close {
+    position: absolute;
+    top: 8px;
+    right: 10px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 14px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 2px 5px;
+    border-radius: 50%;
+    transition: 0.2s;
+}
+
+.welcome-close:hover {
+    background: #f1f5f9;
+    color: #333;
+}
+
+/* Responsive HP */
+@media (max-width: 480px) {
+    .welcome-banner {
+        top: auto;
+        bottom: 100px;
+        right: 10px;
+        left: 10px;
+    }
+    .welcome-inner {
+        min-width: unset;
+        max-width: 100%;
+    }
+}
+
 </style>
 </head>
 
@@ -3627,6 +3761,88 @@ document.addEventListener('keydown', function(e) {
 </script>
 
 <script src="auth-check.js"></script>
+
+<!-- ===================================================
+     WELCOME BANNER — taruh sebelum </body> di index.html
+     =================================================== -->
+
+<!-- HTML Banner -->
+<div class="welcome-banner" id="welcomeBanner">
+    <div class="welcome-inner">
+        <button class="welcome-close" onclick="tutupBanner()" title="Tutup">✕</button>
+        <div class="welcome-avatar" id="wAvatar">?</div>
+        <div class="welcome-text-wrap">
+            <div class="welcome-label" id="wLabel">Selamat datang</div>
+            <div class="welcome-name"  id="wName">—</div>
+            <div class="welcome-kelas" id="wKelas">—</div>
+        </div>
+        <div class="welcome-badge" id="wBadge"></div>
+    </div>
+</div>
+
+<!-- JS Banner -->
+<script>
+(function () {
+    var session;
+    try { session = JSON.parse(localStorage.getItem('digi_session')); } catch (e) { session = null; }
+
+    if (!session || !session.loggedIn) return; // belum login, banner tidak muncul
+
+    var banner  = document.getElementById('welcomeBanner');
+    var avatar  = document.getElementById('wAvatar');
+    var label   = document.getElementById('wLabel');
+    var nameEl  = document.getElementById('wName');
+    var kelasEl = document.getElementById('wKelas');
+    var badge   = document.getElementById('wBadge');
+
+    // Nama & inisial
+    var namaLengkap = session.nama || 'Member';
+    var namaDepan   = namaLengkap.split(' ')[0];
+    var inisial     = namaLengkap.split(' ')
+                        .map(function(w){ return w[0]; })
+                        .slice(0, 2).join('').toUpperCase();
+
+    // Cek apakah member baru atau lama
+    // Cara kerja: kita simpan flag "sudahPernahMasuk" di localStorage
+    var flagKey     = 'digi_visited_' + session.email.replace(/[^a-z0-9]/gi, '');
+    var sudahPernah = localStorage.getItem(flagKey);
+
+    if (!sudahPernah) {
+        // === MEMBER BARU: baru pertama kali login ===
+        label.textContent = '🎉 Hei, Selamat Bergabung!';
+        label.className   = 'welcome-label new-member';
+        nameEl.textContent  = namaDepan + '!';
+        kelasEl.textContent = 'Kelas ' + (session.kelas || '-') + ' · Member Baru';
+        badge.textContent   = '✨ Member Baru';
+        badge.className     = 'welcome-badge new-member';
+
+        // Tandai bahwa user ini sudah pernah masuk
+        localStorage.setItem(flagKey, '1');
+
+    } else {
+        // === MEMBER LAMA: sudah pernah login sebelumnya ===
+        label.textContent = '👋 Selamat Datang Kembali,';
+        label.className   = 'welcome-label returning';
+        nameEl.textContent  = namaDepan + '!';
+        kelasEl.textContent = 'Kelas ' + (session.kelas || '-');
+        badge.textContent   = '⭐ Member Aktif';
+        badge.className     = 'welcome-badge returning';
+    }
+
+    avatar.textContent = inisial;
+    banner.style.display = 'block';
+
+    // Auto-hilang setelah 6 detik
+    setTimeout(function () { tutupBanner(); }, 6000);
+})();
+
+function tutupBanner() {
+    var banner = document.getElementById('welcomeBanner');
+    if (!banner) return;
+    banner.style.animation = 'slideInRight 0.4s reverse ease-in';
+    setTimeout(function () { banner.style.display = 'none'; }, 380);
+}
+</script>
     
 </body>
 </html>
