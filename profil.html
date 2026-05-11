@@ -3,249 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile Sekolah - DigiSmart Library</title>
+    <title>Profil Saya - DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --sci-blue: #2c7be5;
-            --sci-purple: #a855f7;
-            --sci-teal: #2dd4bf;
-            --dark-bg: #0f172a;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
-            color: white;
-            overflow-x: hidden;
-            padding-top: 40px;
+            background: #f0f4ff;
+            min-height: 100vh;
+            padding-bottom: 60px;
         }
 
-        /* --- Animasi Background Partikel --- */
-        .bg-animate {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-        }
-
-        /* --- Tombol Kembali Sci-Fi --- */
-        .btn-back-sci {
-            position: fixed;
-            top: 25px;
-            left: 25px;
-            z-index: 2000;
+        /* ---- TOP BAR ---- */
+        .topbar {
+            background: linear-gradient(135deg, #0d2f6e, #1565C0);
+            padding: 18px 30px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 12px 25px;
-            background: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--sci-blue);
-            border-radius: 50px;
-            color: white;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            font-size: 0.75rem;
-            letter-spacing: 2px;
-            transition: 0.4s;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(21,101,192,0.4);
+        }
+        .topbar-left { display: flex; align-items: center; gap: 12px; }
+        .topbar-logo { font-size: 20px; font-weight: 700; color: white; }
+        .topbar-logo span { color: #38bdf8; }
+        .btn-beranda {
+            background: white; color: #1565C0; border: none;
+            padding: 8px 18px; border-radius: 20px; font-size: 13px;
+            font-weight: 600; cursor: pointer; text-decoration: none;
+            display: flex; align-items: center; gap: 6px; transition: 0.3s;
+        }
+        .btn-beranda:hover { background: #e6f1fb; transform: translateY(-1px); }
+
+        /* ---- HERO PROFILE ---- */
+        .hero-profile {
+            background: linear-gradient(135deg, #0d2f6e 0%, #1565C0 60%, #38bdf8 100%);
+            padding: 50px 30px 80px;
+            text-align: center;
+            position: relative;
             overflow: hidden;
-            backdrop-filter: blur(10px);
         }
-
-        .btn-back-sci i {
-            font-size: 1rem;
-            color: var(--sci-teal);
-            transition: 0.4s;
-        }
-
-        .btn-back-sci:hover {
-            background: var(--sci-blue);
-            color: white;
-            box-shadow: 0 0 20px var(--sci-blue), 0 0 40px rgba(44, 123, 229, 0.4);
-            transform: scale(1.05);
-            border-color: var(--sci-teal);
-        }
-
-        .btn-back-sci:hover i {
-            transform: translateX(-5px);
-            color: white;
-        }
-
-        .btn-back-sci::before {
+        .hero-profile::before {
             content: '';
             position: absolute;
-            top: 0; left: -100%;
-            width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-back-sci:hover::before {
-            left: 100%;
-        }
-
-        /* --- Header & Moving Text --- */
-        .sci-container { padding: 120px 8% 50px; }
-
-        .moving-gradient-text {
-            font-family: 'Orbitron', sans-serif;
-            font-size: clamp(2rem, 5vw, 3.5rem);
-            font-weight: 800;
-            background: linear-gradient(270deg, var(--sci-blue), var(--sci-purple), var(--sci-teal));
-            background-size: 600% 600%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            animation: gradientMove 6s ease infinite;
-            text-align: center;
-        }
-
-        @keyframes gradientMove {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        /* --- Animasi Frame Foto --- */
-        .photo-lab-frame {
-            position: relative;
-            padding: 15px;
+            width: 300px; height: 300px;
             background: rgba(255,255,255,0.05);
-            border: 2px solid var(--sci-blue);
-            border-radius: 30px;
-            box-shadow: 0 0 30px rgba(44, 123, 229, 0.3);
-            animation: float 4s ease-in-out infinite;
+            border-radius: 50%;
+            top: -80px; right: -60px;
         }
-
-        .photo-lab-frame img {
-            width: 100%;
-            max-width: 500px;
-            border-radius: 20px;
-            filter: grayscale(20%) contrast(110%);
+        .hero-profile::after {
+            content: '';
+            position: absolute;
+            width: 200px; height: 200px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            bottom: -50px; left: -40px;
         }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-20px) scale(1.02); }
-        }
-
-        /* --- Kartu Visi Misi & Fitur --- */
-        .mission-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 50px;
-        }
-
-        .mission-card {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(44, 123, 229, 0.2);
-            border-radius: 25px;
-            padding: 30px;
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        .profile-avatar-wrap {
             position: relative;
-            overflow: hidden;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--sci-teal);
-            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
-        }
-
-        .icon-bounce {
-            font-size: 40px;
-            color: var(--sci-teal);
-            margin-bottom: 20px;
             display: inline-block;
-            animation: bounce 2s infinite;
+            margin-bottom: 16px;
+        }
+        .profile-avatar {
+            width: 90px; height: 90px;
+            border-radius: 50%;
+            background: white;
+            color: #1565C0;
+            font-size: 32px; font-weight: 700;
+            display: flex; align-items: center; justify-content: center;
+            border: 4px solid rgba(255,255,255,0.6);
+            margin: 0 auto;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+        }
+        .online-dot {
+            position: absolute;
+            bottom: 4px; right: 4px;
+            width: 18px; height: 18px;
+            background: #22c55e;
+            border-radius: 50%;
+            border: 3px solid white;
+        }
+        .hero-name { font-size: 24px; font-weight: 700; color: white; margin-bottom: 4px; }
+        .hero-kelas {
+            font-size: 13px; color: rgba(255,255,255,0.8);
+            background: rgba(255,255,255,0.15);
+            display: inline-block; padding: 4px 14px; border-radius: 20px;
+            margin-bottom: 8px;
+        }
+        .hero-tanggal { font-size: 12px; color: rgba(255,255,255,0.6); }
+
+        /* Badge member lama/baru */
+        .member-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 5px 14px; border-radius: 20px; font-size: 12px; font-weight: 600;
+            margin-top: 10px;
+        }
+        .member-badge.lama  { background: rgba(234,179,8,0.25); color: #fef08a; border: 1px solid rgba(234,179,8,0.4); }
+        .member-badge.baru  { background: rgba(34,197,94,0.2);  color: #86efac; border: 1px solid rgba(34,197,94,0.4); }
+
+        /* ---- CONTENT AREA ---- */
+        .content-wrap {
+            max-width: 700px;
+            margin: -40px auto 0;
+            padding: 0 16px;
+            position: relative;
+            z-index: 10;
         }
 
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+        /* ---- KARTU ---- */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 24px;
+            margin-bottom: 18px;
+            box-shadow: 0 4px 20px rgba(21,101,192,0.08);
+            border: 1px solid #e8f0fe;
+            animation: fadeUp 0.5s ease both;
         }
-
-        /* --- Footer Info --- */
-        footer {
-            text-align: center;
-            padding: 40px;
-            margin-top: 50px;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            font-size: 0.8rem;
-            color: #94a3b8;
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
+        .card:nth-child(2) { animation-delay: 0.1s; }
+        .card:nth-child(3) { animation-delay: 0.2s; }
+        .card:nth-child(4) { animation-delay: 0.3s; }
 
-        @media (max-width: 600px) {
-            .btn-back-sci span { display: none; }
-            .btn-back-sci { padding: 12px; border-radius: 50%; }
+        .card-title {
+            font-size: 15px; font-weight: 700; color: #0d2f6e;
+            margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid #e8f0fe;
+        }
+        .card-title i { color: #1565C0; }
+
+        /* ---- DATA ANGGOTA ---- */
+        .data-row {
+            display: flex; align-items: flex-start; gap: 14px;
+            padding: 12px 0; border-bottom: 1px solid #f1f5f9;
+        }
+        .data-row:last-child { border-bottom: none; padding-bottom: 0; }
+        .data-icon {
+            width: 36px; height: 36px; border-radius: 10px;
+            background: #e6f1fb; color: #1565C0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 14px; flex-shrink: 0;
+        }
+        .data-label { font-size: 11px; color: #94a3b8; font-weight: 600; text-transform: uppercase; margin-bottom: 2px; }
+        .data-value { font-size: 14px; color: #1e293b; font-weight: 500; word-break: break-all; }
+
+        /* ---- FORM TAMBAH INFO ---- */
+        .form-group { margin-bottom: 14px; }
+        .form-group label { display: block; font-size: 12px; font-weight: 600; color: #64748b; margin-bottom: 6px; text-transform: uppercase; }
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%; padding: 11px 14px;
+            border: 1.5px solid #e2e8f0; border-radius: 12px;
+            font-size: 14px; color: #1e293b; background: #f8fafc;
+            outline: none; transition: 0.3s; font-family: 'Poppins', sans-serif;
+        }
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: #1565C0;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(21,101,192,0.1);
+        }
+        .form-group textarea { resize: vertical; min-height: 80px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .btn-submit {
+            width: 100%; padding: 13px;
+            background: linear-gradient(135deg, #1565C0, #38bdf8);
+            color: white; border: none; border-radius: 12px;
+            font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            margin-top: 4px;
+        }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(21,101,192,0.3); }
+
+        /* Alert dalam kartu */
+        .inline-alert {
+            display: none; padding: 10px 14px; border-radius: 10px;
+            font-size: 13px; margin-bottom: 14px;
+        }
+        .inline-alert.success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534; display: block; }
+        .inline-alert.error   { background: #fef2f2; border: 1px solid #fecaca; color: #991b1b; display: block; }
+
+        /* ---- INFO TAMBAHAN (setelah diisi) ---- */
+        .extra-info { display: none; }
+        .extra-info-row {
+            display: flex; align-items: center; gap: 12px;
+            padding: 10px 0; border-bottom: 1px solid #f1f5f9;
+        }
+        .extra-info-row:last-child { border-bottom: none; }
+        .extra-label { font-size: 12px; color: #94a3b8; width: 120px; flex-shrink: 0; }
+        .extra-value { font-size: 14px; color: #1e293b; font-weight: 500; }
+
+        /* ---- STATS MEMBER ---- */
+        .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+        .stat-box {
+            background: #f0f4ff; border-radius: 14px; padding: 16px;
+            text-align: center; border: 1px solid #dbeafe;
+        }
+        .stat-num { font-size: 22px; font-weight: 700; color: #1565C0; }
+        .stat-lbl { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+        /* ---- TOMBOL KELUAR ---- */
+        .btn-logout {
+            width: 100%; padding: 13px;
+            background: none; border: 2px solid #fee2e2;
+            color: #ef4444; border-radius: 12px;
+            font-size: 14px; font-weight: 600; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .btn-logout:hover { background: #fef2f2; }
+
+        /* ---- TOMBOL MENUJU BERANDA (bawah) ---- */
+        .btn-home-bottom {
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            background: linear-gradient(135deg, #0d2f6e, #1565C0);
+            color: white; text-decoration: none;
+            padding: 16px; border-radius: 16px; font-weight: 700; font-size: 15px;
+            transition: 0.3s; box-shadow: 0 6px 20px rgba(21,101,192,0.3);
+        }
+        .btn-home-bottom:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(21,101,192,0.4); }
+
+        @media (max-width: 480px) {
+            .form-row { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: repeat(3,1fr); }
+            .hero-profile { padding: 40px 20px 70px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="bg-animate"></div>
-
-    <a href="index.html" class="btn-back-sci">
-        <i class="fas fa-arrow-left"></i>
-        <span>KEMBALI KE BERANDA</span>
+<!-- TOP BAR -->
+<div class="topbar">
+    <div class="topbar-left">
+        <span class="topbar-logo">Digi<span>Smart</span></span>
+    </div>
+    <a href="index.html" class="btn-beranda">
+        <i class="fas fa-home"></i> Beranda
     </a>
+</div>
 
-    <main class="sci-container">
-        <header style="text-align: center; margin-bottom: 60px;">
-            <h1 class="moving-gradient-text">Profile Sekolah</h1>
-            <p style="font-size: 1.1rem; color: #94a3b8; letter-spacing: 1px;">Eksplorasi Literasi di Era Masa Depan</p>
-        </header>
+<!-- HERO -->
+<div class="hero-profile">
+    <div class="profile-avatar-wrap">
+        <div class="profile-avatar" id="heroAvatar">?</div>
+        <div class="online-dot"></div>
+    </div>
+    <div class="hero-name" id="heroName">—</div>
+    <div class="hero-kelas" id="heroKelas">—</div>
+    <div class="hero-tanggal" id="heroTanggal"></div>
+    <div><span class="member-badge" id="heroBadge"></span></div>
+</div>
 
-        <section style="display: flex; flex-wrap: wrap; gap: 40px; align-items: center; justify-content: center;">
-            <div class="photo-lab-frame">
-                <img src="foto-sekolah.jpg" alt="Lab Sekolah Kami">
-                <div style="position: absolute; top: -20px; right: -20px; background: var(--sci-blue); width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 20px var(--sci-blue);">
-                    <i class="fas fa-microscope" style="font-size: 1.5rem;"></i>
-                </div>
-            </div>
+<!-- KONTEN -->
+<div class="content-wrap">
 
-            <div style="flex: 1; min-width: 320px;">
-                <div class="mission-card">
-                    <h2 style="color: var(--sci-teal); margin-bottom: 15px; font-family: 'Orbitron';">Filosofi Lab Literasi</h2>
-                    <p style="line-height: 1.8; color: #cbd5e1;">Sekolah kami bertransformasi menjadi <b>Lab Inovasi Digital</b>. Melalui DigiSmart Library, kami tidak hanya mengajak siswa membaca, tapi bereksperimen dengan informasi.</p>
-                    <p style="margin-top: 15px; font-style: italic; color: var(--sci-blue);">"Di mana setiap klik adalah penemuan baru."</p>
-                </div>
-            </div>
-        </section>
+    <!-- KARTU 1: DATA ANGGOTA DARI PENDAFTARAN -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-id-card"></i> Data Anggota</div>
 
-        <div class="mission-grid">
-            <div class="mission-card">
-                <i class="fas fa-atom icon-bounce"></i>
-                <h3 style="font-family: 'Orbitron'; margin-bottom: 10px;">Visi Orbit</h3>
-                <p>Menjadi pusat orbit pendidikan digital yang mencetak generasi dengan kecerdasan kognitif setajam laser dan karakter sekuat atom.</p>
-            </div>
-
-            <div class="mission-card">
-                <i class="fas fa-vial icon-bounce" style="animation-delay: 0.5s;"></i>
-                <h3 style="font-family: 'Orbitron'; margin-bottom: 10px;">Misi Reaksi</h3>
-                <ul style="list-style: none; padding: 0; line-height: 1.8;">
-                    <li><i class="fas fa-check-circle" style="color: var(--sci-teal);"></i> Integrasi Tekno-Literasi</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--sci-teal);"></i> Filter Anti-Hoax Digital</li>
-                    <li><i class="fas fa-check-circle" style="color: var(--sci-teal);"></i> Lingkungan Lab Futuristik</li>
-                </ul>
-            </div>
-
-            <div class="mission-card">
-                <i class="fas fa-dna icon-bounce" style="animation-delay: 1s;"></i>
-                <h3 style="font-family: 'Orbitron'; margin-bottom: 10px;">Budaya DNA</h3>
-                <p>D-igital, N-alar, A-ktif. Menanamkan kode etik digital dan semangat eksplorasi di setiap sel pembelajaran siswa.</p>
+        <div class="data-row">
+            <div class="data-icon"><i class="fas fa-user"></i></div>
+            <div>
+                <div class="data-label">Nama Lengkap</div>
+                <div class="data-value" id="dNama">—</div>
             </div>
         </div>
-    </main>
+        <div class="data-row">
+            <div class="data-icon"><i class="fas fa-school"></i></div>
+            <div>
+                <div class="data-label">Kelas</div>
+                <div class="data-value" id="dKelas">—</div>
+            </div>
+        </div>
+        <div class="data-row">
+            <div class="data-icon"><i class="fas fa-envelope"></i></div>
+            <div>
+                <div class="data-label">Email</div>
+                <div class="data-value" id="dEmail">—</div>
+            </div>
+        </div>
+        <div class="data-row">
+            <div class="data-icon"><i class="fab fa-whatsapp"></i></div>
+            <div>
+                <div class="data-label">No. WhatsApp</div>
+                <div class="data-value" id="dWa">—</div>
+            </div>
+        </div>
+        <div class="data-row">
+            <div class="data-icon"><i class="fas fa-calendar-alt"></i></div>
+            <div>
+                <div class="data-label">Tanggal Daftar</div>
+                <div class="data-value" id="dTanggal">—</div>
+            </div>
+        </div>
+    </div>
 
-    <footer>
-        <p>&copy; 2026 DigiSmart Library | Created with <i class="fas fa-heart" style="color: var(--sci-purple);"></i> by Gressilliya Damanik</p>
-    </footer>
+    <!-- KARTU 2: STATISTIK -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-chart-bar"></i> Statistik Kamu</div>
+        <div class="stats-grid">
+            <div class="stat-box">
+                <div class="stat-num" id="statSkor">0</div>
+                <div class="stat-lbl">Skor Game</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num" id="statRank">#—</div>
+                <div class="stat-lbl">Ranking</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-num" id="statBuku">0</div>
+                <div class="stat-lbl">Buku Dibaca</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- KARTU 3: TAMBAH INFO (bisa diisi sendiri) -->
+    <div class="card">
+        <div class="card-title"><i class="fas fa-edit"></i> Lengkapi Profil</div>
+
+        <!-- Tampil jika sudah pernah isi -->
+        <div class="extra-info" id="extraInfoDisplay">
+            <div class="extra-info-row">
+                <span class="extra-label"><i class="fas fa-birthday-cake" style="color:#1565C0;margin-right:6px"></i>Tgl Lahir</span>
+                <span class="extra-value" id="eTanggalLahir">—</span>
+            </div>
+            <div class="extra-info-row">
+                <span class="extra-label"><i class="fas fa-venus-mars" style="color:#1565C0;margin-right:6px"></i>Jenis Kelamin</span>
+                <span class="extra-value" id="eJK">—</span>
+            </div>
+            <div class="extra-info-row">
+                <span class="extra-label"><i class="fas fa-map-marker-alt" style="color:#1565C0;margin-right:6px"></i>Alamat</span>
+                <span class="extra-value" id="eAlamat">—</span>
+            </div>
+            <div class="extra-info-row">
+                <span class="extra-label"><i class="fas fa-heart" style="color:#1565C0;margin-right:6px"></i>Hobi</span>
+                <span class="extra-value" id="eHobi">—</span>
+            </div>
+            <div class="extra-info-row">
+                <span class="extra-label"><i class="fas fa-bullseye" style="color:#1565C0;margin-right:6px"></i>Cita-cita</span>
+                <span class="extra-value" id="eCita">—</span>
+            </div>
+            <button class="btn-submit" style="margin-top:16px;" onclick="editExtraInfo()">
+                <i class="fas fa-pen"></i> Edit Info
+            </button>
+        </div>
+
+        <!-- Form isi / edit -->
+        <div id="extraInfoForm">
+            <div class="inline-alert" id="formAlert"></div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Tanggal Lahir</label>
+                    <input type="date" id="fTanggalLahir">
+                </div>
+                <div class="form-group">
+                    <label>Jenis Kelamin</label>
+                    <select id="fJK">
+                        <option value="">-- Pilih --</option>
+                        <option>Laki-laki</option>
+                        <option>Perempuan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Alamat Rumah</label>
+                <input type="text" id="fAlamat" placeholder="Contoh: Jl. Mawar No.5, Medan">
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label>Hobi</label>
+                    <input type="text" id="fHobi" placeholder="Contoh: Membaca, Coding">
+                </div>
+                <div class="form-group">
+                    <label>Cita-cita</label>
+                    <input type="text" id="fCita" placeholder="Contoh: Dokter, Engineer">
+                </div>
+            </div>
+            <button class="btn-submit" onclick="simpanExtraInfo()">
+                <i class="fas fa-save"></i> Simpan Informasi
+            </button>
+        </div>
+    </div>
+
+    <!-- TOMBOL LOGOUT -->
+    <div class="card" style="padding:16px;">
+        <button class="btn-logout" onclick="doLogout()">
+            <i class="fas fa-sign-out-alt"></i> Keluar dari Akun
+        </button>
+    </div>
+
+    <!-- TOMBOL MENUJU BERANDA -->
+    <a href="index.html" class="btn-home-bottom">
+        <i class="fas fa-home"></i> Kembali ke Beranda DigiSmart
+    </a>
+
+</div>
+
+<script>
+// ===== PROTEKSI: hanya member yang bisa akses =====
+var session;
+try { session = JSON.parse(localStorage.getItem('digi_session')); } catch(e) { session = null; }
+
+if (!session || !session.loggedIn) {
+    alert('Kamu harus login dulu!');
+    window.location.href = 'login.html';
+}
+
+// ===== AMBIL DATA LENGKAP USER DARI digi_users =====
+var users = [];
+try { users = JSON.parse(localStorage.getItem('digi_users') || '[]'); } catch(e) {}
+
+var userData = users.find(function(u){
+    return u.email && session && u.email.toLowerCase() === session.email.toLowerCase();
+}) || {};
+
+// ===== ISI HERO =====
+var namaLengkap = userData.nama || session.nama || 'Member';
+var namaDepan   = namaLengkap.split(' ')[0];
+var inisial     = namaLengkap.split(' ').map(function(w){ return w[0]; }).slice(0,2).join('').toUpperCase();
+var kelas       = userData.kelas || session.kelas || '-';
+
+document.getElementById('heroAvatar').textContent = inisial;
+document.getElementById('heroName').textContent   = namaLengkap;
+document.getElementById('heroKelas').textContent  = 'Kelas ' + kelas;
+
+var flagKey     = 'digi_visited_' + (session.email || '').replace(/[^a-z0-9]/gi,'');
+var sudahPernah = localStorage.getItem(flagKey);
+
+var badge = document.getElementById('heroBadge');
+if (sudahPernah) {
+    badge.textContent = '⭐ Member Aktif';
+    badge.className   = 'member-badge lama';
+} else {
+    badge.textContent = '✨ Member Baru';
+    badge.className   = 'member-badge baru';
+    localStorage.setItem(flagKey, '1');
+}
+
+if (userData.tanggalDaftar) {
+    document.getElementById('heroTanggal').textContent = 'Bergabung sejak ' + userData.tanggalDaftar;
+}
+
+// ===== ISI DATA ANGGOTA =====
+document.getElementById('dNama').textContent    = userData.nama   || '-';
+document.getElementById('dKelas').textContent   = userData.kelas  || '-';
+document.getElementById('dEmail').textContent   = userData.email  || '-';
+document.getElementById('dWa').textContent      = userData.phone  || '-';
+document.getElementById('dTanggal').textContent = userData.tanggalDaftar || '-';
+
+// ===== ISI STATISTIK =====
+var ranking = [];
+try { ranking = JSON.parse(localStorage.getItem('digi_ranking') || '[]'); } catch(e) {}
+
+var myRank = ranking.findIndex(function(r){
+    return r.email && session.email && r.email.toLowerCase() === session.email.toLowerCase();
+});
+var myData = myRank >= 0 ? ranking[myRank] : null;
+
+document.getElementById('statSkor').textContent = myData ? myData.skor : 0;
+document.getElementById('statRank').textContent = myRank >= 0 ? '#' + (myRank + 1) : '#—';
+
+var buku = localStorage.getItem('digi_buku_' + (session.email||'').replace(/[^a-z0-9]/gi,'')) || 0;
+document.getElementById('statBuku').textContent = buku;
+
+// ===== LOAD EXTRA INFO (jika sudah pernah isi) =====
+var extraKey  = 'digi_extra_' + (session.email||'').replace(/[^a-z0-9]/gi,'');
+var extraData = {};
+try { extraData = JSON.parse(localStorage.getItem(extraKey) || '{}'); } catch(e) {}
+
+function tampilExtraInfo() {
+    if (extraData && extraData.tanggalLahir) {
+        document.getElementById('eTanggalLahir').textContent = extraData.tanggalLahir || '-';
+        document.getElementById('eJK').textContent           = extraData.jk           || '-';
+        document.getElementById('eAlamat').textContent       = extraData.alamat        || '-';
+        document.getElementById('eHobi').textContent         = extraData.hobi          || '-';
+        document.getElementById('eCita').textContent         = extraData.cita          || '-';
+
+        document.getElementById('extraInfoDisplay').style.display = 'block';
+        document.getElementById('extraInfoForm').style.display    = 'none';
+    } else {
+        document.getElementById('extraInfoDisplay').style.display = 'none';
+        document.getElementById('extraInfoForm').style.display    = 'block';
+    }
+}
+tampilExtraInfo();
+
+// Isi ulang form saat edit
+function editExtraInfo() {
+    document.getElementById('fTanggalLahir').value = extraData.tanggalLahir || '';
+    document.getElementById('fJK').value           = extraData.jk           || '';
+    document.getElementById('fAlamat').value       = extraData.alamat        || '';
+    document.getElementById('fHobi').value         = extraData.hobi          || '';
+    document.getElementById('fCita').value         = extraData.cita          || '';
+    document.getElementById('extraInfoDisplay').style.display = 'none';
+    document.getElementById('extraInfoForm').style.display    = 'block';
+}
+
+// ===== SIMPAN EXTRA INFO =====
+function simpanExtraInfo() {
+    var tgl    = document.getElementById('fTanggalLahir').value;
+    var jk     = document.getElementById('fJK').value;
+    var alamat = document.getElementById('fAlamat').value.trim();
+    var hobi   = document.getElementById('fHobi').value.trim();
+    var cita   = document.getElementById('fCita').value.trim();
+
+    if (!tgl && !jk && !alamat && !hobi && !cita) {
+        var al = document.getElementById('formAlert');
+        al.textContent = 'Isi minimal satu kolom sebelum menyimpan.';
+        al.className   = 'inline-alert error';
+        return;
+    }
+
+    extraData = { tanggalLahir: tgl, jk: jk, alamat: alamat, hobi: hobi, cita: cita };
+    localStorage.setItem(extraKey, JSON.stringify(extraData));
+
+    var al = document.getElementById('formAlert');
+    al.textContent = 'Informasi berhasil disimpan!';
+    al.className   = 'inline-alert success';
+
+    setTimeout(function(){
+        tampilExtraInfo();
+        al.className = 'inline-alert';
+    }, 1200);
+}
+
+// ===== LOGOUT =====
+function doLogout() {
+    if (confirm('Yakin mau keluar dari akun?')) {
+        localStorage.removeItem('digi_session');
+        window.location.href = 'index.html';
+    }
+}
+</script>
 
 </body>
 </html>
