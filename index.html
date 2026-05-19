@@ -871,26 +871,260 @@ input:checked + .slider:before { transform: translateX(30px); }
 .slider.round { border-radius: 34px; }
 .slider.round:before { border-radius: 50%; }
 
-/* --- ATURAN MODE GELAP --- */
-[data-theme="dark"] {
-    background-color: #121212 !important;
-    color: #ffffff !important;
+/* ===== DARK / LIGHT MODE SYSTEM ===== */
+body.mode-gelap {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
 }
 
-[data-theme="dark"] body {
-    background: #1a1a1a !important;
+/* NAVBAR */
+body.mode-gelap nav {
+    background: #1e293b !important;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.4) !important;
+}
+body.mode-gelap .logo-text {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .menu a,
+body.mode-gelap .nav-links a {
+    color: #cbd5e1 !important;
+}
+body.mode-gelap .menu a:hover,
+body.mode-gelap .nav-links a:hover {
+    color: #60a5fa !important;
+}
+body.mode-gelap .login-btn {
+    background: #1d4ed8 !important;
 }
 
-/* Biar kotak fitur tetap putih/terang tapi teksnya menyesuaikan */
-[data-theme="dark"] .bento-card:not(.item-big) {
-    background: #252525 !important;
-    border: 1px solid #444 !important;
+/* HERO SECTION */
+body.mode-gelap .overlay {
+    background: linear-gradient(
+        rgba(5,10,25,0.88),
+        rgba(15,23,42,0.88)
+    ) !important;
 }
 
-[data-theme="dark"] .about-text p {
-    color: #ddd !important;
+/* BENTO / KARTU FITUR — tetap biru, tidak berubah */
+body.mode-gelap .bento-card {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5) !important;
 }
 
+/* SECTION BACKGROUND */
+body.mode-gelap .bento-section {
+    background: #0f172a !important;
+}
+body.mode-gelap .section-title {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .subtitle {
+    color: #94a3b8 !important;
+}
+
+/* ABOUT / PROFIL SECTION */
+body.mode-gelap .about {
+    background: #1e293b !important;
+}
+body.mode-gelap .about-container {
+    background: rgba(30, 41, 59, 0.9) !important;
+    border-color: #334155 !important;
+}
+body.mode-gelap .about-text p {
+    color: #cbd5e1 !important;
+}
+body.mode-gelap .stat-item {
+    background: #1e3a5f !important;
+    border-color: #3b82f6 !important;
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .stat-item:hover {
+    background: #2c7be5 !important;
+    color: white !important;
+}
+
+/* SERVICE / JAM SECTION */
+body.mode-gelap .service-section {
+    background: #0f172a !important;
+}
+body.mode-gelap .glass-card-container {
+    background: rgba(30,41,59,0.85) !important;
+    border-color: rgba(59,130,246,0.3) !important;
+}
+body.mode-gelap .hour-box {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .hour-box:hover {
+    border-color: #3b82f6 !important;
+}
+body.mode-gelap .text-info span {
+    color: #94a3b8 !important;
+}
+body.mode-gelap .text-info strong {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .status-indicator {
+    background: #1e3a5f !important;
+    color: #93c5fd !important;
+}
+
+/* COMMUNITY / AGENDA & BERITA */
+body.mode-gelap .community-grid {
+    background: #0f172a !important;
+}
+body.mode-gelap .community-grid h2 {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .card-interactive {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+body.mode-gelap .card-body {
+    background: #1e293b !important;
+}
+body.mode-gelap .card-body h3,
+body.mode-gelap .card-body h4 {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .card-body p {
+    color: #94a3b8 !important;
+}
+body.mode-gelap .news-item {
+    background: #1e293b !important;
+    border-left-color: #3b82f6 !important;
+}
+body.mode-gelap .news-item:hover {
+    background: #1e3a5f !important;
+}
+body.mode-gelap .news-text h4 {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .news-text p {
+    color: #94a3b8 !important;
+}
+
+/* MEGA MENU */
+body.mode-gelap .mega-menu {
+    background: #1e293b !important;
+}
+body.mode-gelap .menu-item {
+    background: #0f172a !important;
+    color: #e2e8f0 !important;
+    border-color: #334155 !important;
+}
+body.mode-gelap .menu-item:hover {
+    background: #1e3a5f !important;
+    border-color: #3b82f6 !important;
+}
+body.mode-gelap .item-name {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .item-desc {
+    color: #94a3b8 !important;
+}
+body.mode-gelap .menu-item.accent-item {
+    background: #14532d !important;
+    color: #bbf7d0 !important;
+}
+body.mode-gelap .menu-item.accent-item .item-desc {
+    color: #86efac !important;
+}
+body.mode-gelap .section-label {
+    color: #93c5fd !important;
+    border-color: #1e3a5f !important;
+}
+body.mode-gelap .section-divider {
+    background: #334155 !important;
+}
+body.mode-gelap .menu-body {
+    background: #1e293b !important;
+}
+body.mode-gelap .menu-footer {
+    background: #0f172a !important;
+    border-color: #334155 !important;
+}
+body.mode-gelap .footer-btn.secondary {
+    background: #1e293b !important;
+    color: #93c5fd !important;
+    border-color: #3b82f6 !important;
+}
+
+/* MEGA OVERLAY */
+body.mode-gelap .mega-overlay {
+    background: rgba(0,0,0,0.65) !important;
+}
+
+/* SEARCH OVERLAY */
+body.mode-gelap .dropdown-login {
+    background: #1e293b !important;
+}
+body.mode-gelap .dropdown-login a {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .dropdown-login a:hover {
+    background: #0f172a !important;
+}
+
+/* CHATBOX */
+body.mode-gelap #chat-box-container {
+    background: #1e293b !important;
+    border-color: #334155 !important;
+}
+
+/* FOOTER — sudah gelap, sedikit sesuaikan saja */
+body.mode-gelap .main-footer {
+    background: #060d1a !important;
+}
+
+/* FAB TOGGLE BUTTON */
+body.mode-gelap .fab-toggle {
+    background: #1d4ed8 !important;
+}
+
+/* RANKING */
+body.mode-gelap .ranking-container {
+    background: rgba(30,41,59,0.85) !important;
+}
+body.mode-gelap .ranking-title {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .ranking-subtitle {
+    color: #94a3b8 !important;
+}
+body.mode-gelap .rank-item {
+    background: #1e293b !important;
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .player-name {
+    color: #e2e8f0 !important;
+}
+
+/* GRADIEN ANIMASI BODY — nonaktifkan saat gelap */
+body.mode-gelap {
+    animation: none !important;
+    background: #0f172a !important;
+}
+
+/* HAMBURGER LINES di mode gelap */
+body.mode-gelap .ham-line {
+    background: #93c5fd !important;
+}
+body.mode-gelap .hamburger-btn {
+    border-color: #3b82f6 !important;
+}
+
+/* WELCOME BANNER */
+body.mode-gelap .welcome-inner {
+    background: #1e293b !important;
+    border-color: #3b82f6 !important;
+}
+body.mode-gelap .welcome-name {
+    color: #e2e8f0 !important;
+}
+body.mode-gelap .welcome-kelas {
+    color: #94a3b8 !important;
+}
 .hours-card {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(10px);
@@ -3845,6 +4079,25 @@ function tutupBanner() {
 </script>
 
 <script src="game-score.js"></script>
+
+<script>
+  function toggleMode() {
+    const body = document.body;
+    const icon = document.getElementById('fabIcon');
+    const isDark = body.classList.toggle('mode-gelap');
+
+    icon.textContent = isDark ? '☀️' : '🌙';
+    localStorage.setItem('mode', isDark ? 'gelap' : 'terang');
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const savedMode = localStorage.getItem('mode');
+    if (savedMode === 'gelap') {
+      document.body.classList.add('mode-gelap');
+      document.getElementById('fabIcon').textContent = '☀️';
+    }
+  });
+</script>
     
 </body>
 </html>
