@@ -3359,6 +3359,201 @@ body {
 }
 .access-24 { color: #34d399 !important; font-weight: 700; }
 
+/* ===== DIGIBOT AI ===== */
+#digibot-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 60px;
+    height: 60px;
+    background: #1565C0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(21,101,192,0.5);
+    font-size: 24px;
+    color: white;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+#digibot-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 28px rgba(21,101,192,0.7);
+}
+.digibot-wave {
+    position: absolute;
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    border: 2px solid rgba(66,165,245,0.5);
+    animation: dgWave 2s infinite;
+}
+@keyframes dgWave {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(1.9); opacity: 0; }
+}
+
+#digibot-box {
+    display: none;
+    position: fixed;
+    bottom: 98px;
+    right: 25px;
+    width: 340px;
+    max-height: 500px;
+    background: #0f172a;
+    border-radius: 20px;
+    border: 1px solid rgba(66,165,245,0.2);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9998;
+    animation: dgSlideUp 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes dgSlideUp {
+    from { opacity: 0; transform: translateY(20px) scale(0.95); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.digibot-header {
+    background: linear-gradient(135deg, #1565C0, #1976D2);
+    padding: 14px 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.digibot-avatar {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+}
+.digibot-header-info { flex: 1; }
+.digibot-name { color: #fff; font-size: 13px; font-weight: 700; }
+.digibot-status { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.digibot-dot {
+    width: 7px; height: 7px;
+    background: #34d399; border-radius: 50%;
+    animation: dgPulse 2s infinite;
+}
+@keyframes dgPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.digibot-status span { color: rgba(255,255,255,0.75); font-size: 11px; }
+.digibot-close {
+    background: rgba(255,255,255,0.15);
+    border: none; color: white;
+    width: 28px; height: 28px;
+    border-radius: 50%; cursor: pointer;
+    font-size: 13px; transition: 0.2s;
+}
+.digibot-close:hover { background: rgba(255,255,255,0.3); }
+
+.digibot-body {
+    flex: 1;
+    padding: 14px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-height: 200px;
+    max-height: 260px;
+    background: #0f172a;
+}
+.digibot-body::-webkit-scrollbar { width: 4px; }
+.digibot-body::-webkit-scrollbar-thumb { background: #334155; border-radius: 4px; }
+
+.dg-msg { display: flex; gap: 8px; align-items: flex-end; max-width: 92%; }
+.dg-msg.bot { align-self: flex-start; }
+.dg-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.dg-avatar {
+    width: 28px; height: 28px;
+    border-radius: 50%; background: #1565C0;
+    display: flex; align-items: center;
+    justify-content: center; font-size: 13px; flex-shrink: 0;
+}
+.dg-bubble {
+    padding: 9px 13px;
+    border-radius: 16px;
+    font-size: 13px; line-height: 1.5;
+}
+.dg-msg.bot .dg-bubble {
+    background: #1e293b; color: #e2e8f0;
+    border-bottom-left-radius: 4px;
+}
+.dg-msg.user .dg-bubble {
+    background: #1565C0; color: white;
+    border-bottom-right-radius: 4px;
+}
+
+.dg-typing {
+    background: #1e293b;
+    border-radius: 16px;
+    border-bottom-left-radius: 4px;
+    padding: 10px 14px;
+    display: flex; gap: 4px; align-items: center;
+}
+.dg-dot-t {
+    width: 7px; height: 7px;
+    border-radius: 50%; background: #42A5F5;
+    animation: dgTyping 1.2s infinite;
+}
+.dg-dot-t:nth-child(2) { animation-delay: 0.2s; }
+.dg-dot-t:nth-child(3) { animation-delay: 0.4s; }
+@keyframes dgTyping {
+    0%,80%,100%{transform:translateY(0)}
+    40%{transform:translateY(-6px)}
+}
+
+.digibot-chips {
+    display: flex; flex-wrap: wrap;
+    gap: 6px; padding: 8px 12px 4px;
+    background: #0f172a;
+}
+.dg-chip {
+    background: rgba(21,101,192,0.15);
+    border: 1px solid rgba(66,165,245,0.3);
+    color: #93c5fd; font-size: 11px;
+    padding: 5px 10px; border-radius: 20px;
+    cursor: pointer; transition: 0.2s;
+    font-family: 'Poppins', sans-serif;
+}
+.dg-chip:hover { background: #1565C0; color: white; border-color: #1565C0; }
+
+.digibot-footer {
+    padding: 10px 12px;
+    display: flex; gap: 8px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    background: #0f172a;
+}
+.dg-input {
+    flex: 1;
+    background: #1e293b;
+    border: 1px solid rgba(66,165,245,0.2);
+    border-radius: 12px;
+    padding: 9px 13px;
+    color: #e2e8f0; font-size: 13px; outline: none;
+    font-family: 'Poppins', sans-serif;
+    transition: border-color 0.2s;
+}
+.dg-input::placeholder { color: #475569; }
+.dg-input:focus { border-color: #42A5F5; }
+.dg-send {
+    width: 38px; height: 38px;
+    background: #1565C0; border: none;
+    border-radius: 12px; color: white;
+    cursor: pointer; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+    transition: 0.2s; flex-shrink: 0;
+}
+.dg-send:hover { background: #1976D2; transform: scale(1.05); }
+.dg-send:disabled { background: #334155; cursor: not-allowed; transform: none; }
+.digibot-powered {
+    text-align: center; padding: 6px;
+    color: #334155; font-size: 10px;
+    background: #080e1a;
+}
+.digibot-powered span { color: #42A5F5; font-weight: 700; }
+
 </style>
 </head>
 
@@ -3775,22 +3970,52 @@ body {
     <i class="fas fa-comment-dots"></i>
 </div>
 
-<div id="chat-box-container">
-    <div class="chat-header"><span>🤖 DigiSmart Bot</span><i class="fas fa-times" onclick="toggleDigiBot()" style="cursor:pointer"></i></div>
-    <div class="chat-body" id="chatList">
-        <div class="msg bot-msg">Halo! Ada yang bisa saya bantu di DigiSmart Library? 😊</div>
-        <div class="quick-btns">
-            <button onclick="botTanya('Cara Mencari Buku')">Cari Buku</button>
-            <button onclick="botTanya('Jam Kunjungan')">Jam Kunjungan</button>
-            <button onclick="botTanya('Lupa Password')">Lupa Password</button>
-        </div>
-    </div>
-    <div class="chat-footer">
-        <input type="text" id="botInput" placeholder="Tanya admin..." onkeypress="if(event.key==='Enter') botKirim()">
-        <button onclick="botKirim()"><i class="fas fa-paper-plane"></i></button>
-    </div>
+<!-- ===== DIGIBOT AI FLOATING BUTTON ===== -->
+<div id="digibot-fab" onclick="toggleDigiBot()" title="Tanya DigiBot">
+  <div class="digibot-wave"></div>
+  <i class="fas fa-robot"></i>
 </div>
 
+<!-- ===== DIGIBOT AI CHATBOX ===== -->
+<div id="digibot-box">
+
+  <div class="digibot-header">
+    <div class="digibot-avatar">🤖</div>
+    <div class="digibot-header-info">
+      <div class="digibot-name">DigiBot — Asisten DigiSmart</div>
+      <div class="digibot-status">
+        <span class="digibot-dot"></span>
+        <span>Online & siap membantu</span>
+      </div>
+    </div>
+    <button class="digibot-close" onclick="toggleDigiBot()">✕</button>
+  </div>
+
+  <div class="digibot-body" id="digibotBody">
+    <div class="dg-msg bot">
+      <div class="dg-avatar">🤖</div>
+      <div class="dg-bubble">Halo! Saya <b>DigiBot</b>, asisten AI DigiSmart Library. Tanya aku apapun tentang website ini ya! 😊</div>
+    </div>
+  </div>
+
+  <div class="digibot-chips" id="digibotChips">
+    <button class="dg-chip" onclick="dgSendChip(this,'Cara pakai Arcade Literasi?')">🎮 Arcade</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Gimana cara cek hoax?')">🔍 Cek Hoax</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Jam buka perpustakaan?')">🕐 Jam Buka</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Cara daftar akun baru?')">📝 Daftar</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Ada fitur apa saja di website ini?')">✨ Fitur</button>
+  </div>
+
+  <div class="digibot-footer">
+    <input type="text" id="digibotInput" class="dg-input" placeholder="Tanya apapun tentang DigiSmart..."
+      onkeydown="if(event.key==='Enter') dgKirim()">
+    <button class="dg-send" id="dgSendBtn" onclick="dgKirim()">
+      <i class="fas fa-paper-plane"></i>
+    </button>
+  </div>
+  <div class="digibot-powered">Powered by <span>Claude AI</span> · DigiSmart Library</div>
+
+</div>
 <div class="fab-toggle" id="fabToggle" onclick="toggleMode()" title="Ganti Mode">
   <span id="fabIcon">🌙</span>
 </div>
@@ -4223,6 +4448,109 @@ function tutupBanner() {
       document.getElementById('fabIcon').textContent = '☀️';
     }
   });
+</script>
+
+<script>
+const DG_SYSTEM = `Kamu adalah DigiBot, asisten AI cerdas dan ramah milik DigiSmart Library — website perpustakaan digital untuk siswa SMP. Kamu seperti Siri tapi khusus untuk website ini!
+
+Informasi DigiSmart Library:
+- Fitur: Arcade Literasi (game lawan hoaks), Pojok Baca (buku digital), Media Belajar (video tutorial), Hoax Buster (cek fakta), Math Logic (matematika), English Quest (bahasa Inggris)
+- Jam: Senin-Kamis 08:00-13:30, Jumat-Sabtu 08:00-12:00, Minggu digital 24/7
+- Daftar akun: klik Login → Daftar Anggota di navbar
+- Ranking siswa: menu Ranking di navbar
+- Kontak: perpus@digismart.sch.id | WA: +62 812-3456-789
+- Alamat: Jl. TM Pahlawan Seribu, Tangerang 15322
+- Pembuat: Gressilliya Damanik, proyek DigiPath
+
+Gaya menjawab:
+- Bahasa Indonesia santai dan semangat seperti teman sebaya
+- Pakai emoji secukupnya agar hidup
+- Jawaban singkat dan jelas (maks 3-4 kalimat)
+- Panggil pengguna "kamu"
+- Kalau ada di luar topik website, tetap bantu tapi ingatkan kamu asisten DigiSmart`;
+
+let dgMessages = [];
+let dgLoading = false;
+
+function toggleDigiBot() {
+    const box = document.getElementById('digibot-box');
+    const isOpen = box.style.display === 'flex';
+    box.style.display = isOpen ? 'none' : 'flex';
+}
+
+function dgAddMsg(role, text) {
+    const body = document.getElementById('digibotBody');
+    const wrap = document.createElement('div');
+    wrap.className = 'dg-msg ' + role;
+    if (role === 'bot') {
+        wrap.innerHTML = `<div class="dg-avatar">🤖</div><div class="dg-bubble">${text}</div>`;
+    } else {
+        wrap.innerHTML = `<div class="dg-bubble">${text}</div><div class="dg-avatar" style="background:#334155">👤</div>`;
+    }
+    body.appendChild(wrap);
+    body.scrollTop = body.scrollHeight;
+}
+
+function dgShowTyping() {
+    const body = document.getElementById('digibotBody');
+    const t = document.createElement('div');
+    t.className = 'dg-msg bot'; t.id = 'dgTyping';
+    t.innerHTML = `<div class="dg-avatar">🤖</div><div class="dg-typing"><div class="dg-dot-t"></div><div class="dg-dot-t"></div><div class="dg-dot-t"></div></div>`;
+    body.appendChild(t);
+    body.scrollTop = body.scrollHeight;
+}
+
+function dgRemoveTyping() {
+    const t = document.getElementById('dgTyping');
+    if (t) t.remove();
+}
+
+function dgSendChip(el, text) {
+    el.parentElement.style.display = 'none';
+    dgDoSend(text);
+}
+
+function dgKirim() {
+    const input = document.getElementById('digibotInput');
+    const text = input.value.trim();
+    if (!text || dgLoading) return;
+    input.value = '';
+    dgDoSend(text);
+}
+
+async function dgDoSend(text) {
+    if (dgLoading) return;
+    dgLoading = true;
+    document.getElementById('dgSendBtn').disabled = true;
+
+    dgAddMsg('user', text);
+    dgMessages.push({ role: 'user', content: text });
+    dgShowTyping();
+
+    try {
+        const res = await fetch('https://api.anthropic.com/v1/messages', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                model: 'claude-sonnet-4-20250514',
+                max_tokens: 300,
+                system: DG_SYSTEM,
+                messages: dgMessages
+            })
+        });
+        const data = await res.json();
+        dgRemoveTyping();
+        const reply = data.content?.[0]?.text || 'Maaf, aku lagi bermasalah. Coba lagi ya! 😅';
+        dgMessages.push({ role: 'assistant', content: reply });
+        dgAddMsg('bot', reply.replace(/\n/g, '<br>'));
+    } catch(e) {
+        dgRemoveTyping();
+        dgAddMsg('bot', 'Ups, koneksi bermasalah! Coba lagi sebentar ya. 😅');
+    }
+
+    dgLoading = false;
+    document.getElementById('dgSendBtn').disabled = false;
+}
 </script>
     
 </body>
