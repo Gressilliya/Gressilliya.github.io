@@ -3279,6 +3279,86 @@ body {
     }
 }
 
+/* ===== FOOTER BARU ===== */
+.footer-top-banner {
+    background: linear-gradient(90deg, #1565C0, #1976D2, #0d47a1);
+    padding: 12px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+.ftr-top-text { color: #fff; font-size: 13px; font-weight: 600; }
+.ftr-badges { display: flex; gap: 8px; }
+.ftr-badge {
+    font-size: 11px; padding: 4px 12px;
+    border-radius: 20px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.12); color: #fff;
+}
+.ftr-badge.green { background: rgba(34,197,94,0.2); border-color: #22c55e; color: #86efac; }
+.ftr-badge.yellow { background: rgba(250,204,21,0.2); border-color: #facc15; color: #fef08a; }
+.ftr-badge.pink { background: rgba(236,72,153,0.2); border-color: #ec4899; color: #f9a8d4; }
+
+.ftr-brand-icon {
+    width: 52px; height: 52px;
+    background: #1565C0; border-radius: 14px;
+    display: flex; align-items: center;
+    justify-content: center; font-size: 24px;
+    margin-bottom: 14px;
+}
+
+.ftr-stats {
+    display: flex; gap: 10px; margin-bottom: 22px;
+}
+.ftr-stat {
+    background: rgba(21,101,192,0.15);
+    border: 1px solid rgba(66,165,245,0.25);
+    border-radius: 12px; padding: 10px 14px;
+    text-align: center; flex: 1;
+}
+.ftr-stat-num { color: #42A5F5; font-size: 18px; font-weight: 800; display: block; }
+.ftr-stat-lbl { color: #64748b; font-size: 10px; font-weight: 600; text-transform: uppercase; }
+
+.ftr-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #1565C0; display: inline-block;
+    margin-right: 8px; flex-shrink: 0;
+    vertical-align: middle;
+}
+
+.ftr-contact-item {
+    display: flex; align-items: flex-start;
+    gap: 10px; margin-bottom: 14px;
+}
+.ftr-contact-icon {
+    width: 34px; height: 34px;
+    background: rgba(21,101,192,0.2);
+    border-radius: 8px;
+    display: flex; align-items: center;
+    justify-content: center; flex-shrink: 0; font-size: 16px;
+}
+.ftr-contact-text { font-size: 13px; color: #8892b0; line-height: 1.5; }
+.ftr-contact-label {
+    color: #93c5fd; font-size: 11px;
+    font-weight: 700; text-transform: uppercase;
+    display: block; margin-bottom: 2px;
+}
+
+.ftr-bottom-badges {
+    display: flex; gap: 10px;
+    flex-wrap: wrap; justify-content: center;
+    margin-top: 8px;
+}
+.ftr-bottom-badges span {
+    background: rgba(21,101,192,0.12);
+    border: 1px solid rgba(66,165,245,0.2);
+    color: #64748b; font-size: 11px;
+    padding: 3px 12px; border-radius: 20px;
+}
+.access-24 { color: #34d399 !important; font-weight: 700; }
+
 </style>
 </head>
 
@@ -3582,52 +3662,108 @@ body {
 </section>
     
 <footer class="main-footer">
-    <div class="footer-container">
-        <div class="footer-column info-col">
-            <h3 class="footer-title">DigiSmart Library</h3>
-            <p class="footer-tagline">Solusi literasi digital modern untuk generasi cerdas masa kini.</p>
-            <div class="jam-operasional">
-                <p class="op-header"><strong><i class="fas fa-clock"></i> Jam Operasional:</strong></p>
-                <div class="time-list">
-                    <p>Senin - Kamis: <span>08:00 - 13:30 WIB</span></p>
-                    <p>Jumat - Sabtu: <span>08:00 - 12:00 WIB</span></p>
-                    <p class="access-24">Minggu: <span>Akses Digital 24/7</span></p>
-                </div>
-            </div>
-        </div>
 
-        <div class="footer-column links-col">
-            <h4>Quick Links</h4>
-            <ul class="footer-links">
-                <li><a href="index.html">Beranda</a></li>
-                <li><a href="game.html">Fitur Literasi</a></li>
-                <li><a href="koleksi.html">Koleksi</a></li>
-                <li><a href="ranking.html">Rangking</a></li>
-                <li><a href="admin.html">Admin</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="news.html">News</a></li>
-                <li><a href="contactus.html">Contact Us</a></li>
-            </ul>
-        </div>
+  <!-- BANNER ATAS -->
+  <div class="footer-top-banner">
+    <span class="ftr-top-text">📚 DigiSmart Library — Platform Literasi Digital #1 untuk SMP</span>
+    <div class="ftr-badges">
+      <span class="ftr-badge green">✅ Gratis</span>
+      <span class="ftr-badge yellow">⭐ Terpercaya</span>
+      <span class="ftr-badge pink">💡 Inovatif</span>
+    </div>
+  </div>
 
-        <div class="footer-column contact-col">
-            <h4>Hubungi Kami</h4>
-            <div class="contact-info">
-                <p><i class="fas fa-map-marker-alt"></i> Jl. TM Pahlawan Seribu, Tangerang 15322</p>
-                <p><i class="fas fa-envelope"></i> perpus@digismart.sch.id</p>
-            </div>
-            <div class="social-box">
-                <a href="https://wa.me/628123456789" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
-                    <a href="mailto:info@digismart.usu.ac.id" class="social-btn gm"><i class="fas fa-envelope"></i></a>
-            </div>
+  <div class="footer-container">
+
+    <!-- KOLOM 1: BRAND -->
+    <div class="footer-column info-col">
+      <div class="ftr-brand-icon">📚</div>
+      <h3 class="footer-title">DigiSmart Library</h3>
+      <p class="footer-tagline">Solusi literasi digital modern untuk generasi cerdas masa kini. Belajar jadi lebih seru!</p>
+
+      <div class="ftr-stats">
+        <div class="ftr-stat">
+          <span class="ftr-stat-num">6+</span>
+          <span class="ftr-stat-lbl">Fitur</span>
         </div>
+        <div class="ftr-stat">
+          <span class="ftr-stat-num">100%</span>
+          <span class="ftr-stat-lbl">Gratis</span>
+        </div>
+        <div class="ftr-stat">
+          <span class="ftr-stat-num">24/7</span>
+          <span class="ftr-stat-lbl">Online</span>
+        </div>
+      </div>
+
+      <div class="jam-operasional">
+        <p class="op-header">🕐 <strong>Jam Operasional</strong></p>
+        <div class="time-list">
+          <p>Senin – Kamis: <span>08:00 – 13:30 WIB</span></p>
+          <p>Jumat – Sabtu: <span>08:00 – 12:00 WIB</span></p>
+          <p>Minggu: <span class="access-24">Akses Digital 24/7 ✨</span></p>
+        </div>
+      </div>
     </div>
-    
-    <div class="footer-bottom">
-        <p>&copy; 2026 Gressilliya Damanik — Website Digital Library. All Rights Reserved.</p>
+
+    <!-- KOLOM 2: QUICK LINKS -->
+    <div class="footer-column links-col">
+      <h4>🔗 Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html"><span class="ftr-dot"></span>Beranda</a></li>
+        <li><a href="game.html"><span class="ftr-dot"></span>Fitur Literasi</a></li>
+        <li><a href="koleksi.html"><span class="ftr-dot"></span>Koleksi Buku</a></li>
+        <li><a href="ranking.html"><span class="ftr-dot"></span>Ranking Siswa</a></li>
+        <li><a href="admin.html"><span class="ftr-dot"></span>Admin Panel</a></li>
+        <li><a href="events.html"><span class="ftr-dot"></span>Events Seru</a></li>
+        <li><a href="news.html"><span class="ftr-dot"></span>Berita Terkini</a></li>
+        <li><a href="contactus.html"><span class="ftr-dot"></span>Contact Us</a></li>
+      </ul>
     </div>
+
+    <!-- KOLOM 3: KONTAK -->
+    <div class="footer-column contact-col">
+      <h4>📬 Hubungi Kami</h4>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">📍</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">Alamat</span>
+          Jl. TM Pahlawan Seribu, Tangerang 15322
+        </div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">✉️</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">Email</span>
+          perpus@digismart.sch.id
+        </div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">💬</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">WhatsApp</span>
+          +62 812-3456-789
+        </div>
+      </div>
+      <div class="social-box">
+        <a href="https://wa.me/628123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:info@digismart.usu.ac.id"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 <strong>Gressilliya Damanik</strong> — Website Digital Library. All Rights Reserved.</p>
+    <div class="ftr-bottom-badges">
+      <span>Made with 💙</span>
+      <span>DigiPath Project</span>
+      <span>Dibuat dengan ♥ untuk SMP tercinta</span>
+    </div>
+  </div>
+
 </footer>
 
 <div id="floating-saran" onclick="toggleDigiBot()" style="
