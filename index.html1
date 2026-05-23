@@ -1,0 +1,1479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DigiSmart Library | Platform Literasi Digital</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="hamburger.css">
+<style>
+/* ============================================================
+   DigiSmart Library — 3 Warna Utama
+   Navy (#0D1B3E) + Teal (#0EA5A0) + Putih
+   ============================================================ */
+:root {
+  --navy:       #0D1B3E;
+  --navy-mid:   #162650;
+  --navy-light: #1E3370;
+  --teal:       #0EA5A0;
+  --teal-light: #12C8C2;
+  --teal-pale:  #E0F7F6;
+  --white:      #FFFFFF;
+  --gray-50:    #F8F9FA;
+  --gray-100:   #F0F2F5;
+  --gray-300:   #CDD4E0;
+  --gray-500:   #8896B3;
+  --gray-600:   #6B7A99;
+  --font:       'Plus Jakarta Sans', 'Poppins', sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font);
+  background: var(--white);
+  color: var(--navy);
+  line-height: 1.6;
+  animation: none !important;
+  background-image: none !important;
+}
+
+/* ===== NAVBAR ===== */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  height: 64px;
+  background: var(--navy);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.25);
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo-img {
+  width: 38px; height: 38px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid var(--teal);
+}
+.logo-text {
+  font-family: var(--font);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+.menu {
+  display: flex;
+  gap: 0.25rem;
+  list-style: none;
+  align-items: center;
+}
+.menu a {
+  color: rgba(255,255,255,0.75);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.2s;
+  display: block;
+}
+.menu a:hover {
+  color: var(--white);
+  background: rgba(255,255,255,0.1);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.login-btn {
+  background: var(--teal);
+  color: var(--white);
+  border: none;
+  padding: 0.45rem 1.1rem;
+  border-radius: 7px;
+  font-family: var(--font);
+  font-size: 0.875rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.login-btn:hover { background: var(--teal-light); }
+.login-menu { position: relative; }
+.dropdown-login {
+  display: none;
+  position: absolute;
+  right: 0; top: 40px;
+  background: var(--navy-mid);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  overflow: hidden;
+  min-width: 170px;
+  z-index: 200;
+}
+.dropdown-login a {
+  color: rgba(255,255,255,0.8);
+  padding: 0.55rem 1rem;
+  font-size: 0.875rem;
+  display: block;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.dropdown-login a:hover {
+  background: rgba(14,165,160,0.2);
+  color: var(--white);
+}
+.login-menu:hover .dropdown-login { display: block; }
+
+/* Search icon */
+.search-icon {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.7);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 5px;
+}
+.search-icon:hover { color: var(--teal-light); transform: none; }
+.search-overlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(13,27,62,0.92);
+  backdrop-filter: blur(8px);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.search-box {
+  display: flex;
+  align-items: center;
+  border-bottom: 2px solid var(--teal);
+  width: 60%;
+  padding: 10px;
+}
+.search-box input {
+  background: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  width: 100%;
+  outline: none;
+  padding-left: 15px;
+  font-family: var(--font);
+}
+.close-icon {
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+  margin-left: 20px;
+  transition: 0.3s;
+}
+.close-icon:hover { color: var(--teal-light); transform: rotate(90deg); }
+
+/* Hamburger */
+.hamburger-btn {
+  background: rgba(255,255,255,0.1);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  border-radius: 9px;
+  padding: 8px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: all 0.2s;
+}
+.hamburger-btn:hover {
+  background: rgba(255,255,255,0.2);
+  border-color: rgba(255,255,255,0.5);
+}
+.ham-line {
+  width: 20px; height: 2px;
+  background: var(--white);
+  border-radius: 2px;
+  display: block;
+  transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), opacity 0.25s ease;
+  transform-origin: center;
+}
+.hamburger-btn.open .ham-line:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.hamburger-btn.open .ham-line:nth-child(2) { opacity: 0; }
+.hamburger-btn.open .ham-line:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+.ham-ping { display: none !important; }
+
+/* Mega overlay */
+.mega-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 200;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+  backdrop-filter: blur(2px);
+}
+.mega-overlay.open { opacity: 1; pointer-events: all; }
+
+/* Mega menu panel */
+.mega-menu {
+  position: fixed;
+  top: 0; right: 0;
+  width: min(480px, 100vw);
+  height: 100vh;
+  background: var(--gray-50);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform 0.38s cubic-bezier(0.4,0,0.2,1);
+  overflow-y: auto;
+  box-shadow: -6px 0 40px rgba(13,27,62,0.25);
+  display: flex;
+  flex-direction: column;
+}
+.mega-menu.open { transform: translateX(0); }
+.menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px 14px;
+  background: var(--navy);
+  flex-shrink: 0;
+}
+.menu-header-logo { display: flex; align-items: center; gap: 10px; }
+.menu-header .logo-icon {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+}
+.menu-header-title { color: var(--white); font-size: 15px; font-weight: 700; }
+.menu-header-sub   { color: rgba(255,255,255,0.65); font-size: 11px; margin-top: 1px; }
+.close-btn {
+  width: 34px; height: 34px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  cursor: pointer; font-size: 16px;
+  color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, transform 0.25s;
+}
+.close-btn:hover { background: rgba(255,255,255,0.25); transform: rotate(90deg); }
+.menu-body { padding: 18px 20px 24px; flex: 1; }
+.menu-section { margin-bottom: 20px; }
+.section-label {
+  font-size: 10px; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 10px; padding-bottom: 7px;
+  border-bottom: 2px solid var(--teal-pale);
+  display: flex; align-items: center; gap: 6px;
+}
+.section-label .sl-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%; background: var(--teal);
+  display: inline-block;
+}
+.section-divider { height: 1px; background: var(--gray-300); margin: 4px 0 16px; }
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 7px;
+}
+.menu-item {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 11px; border-radius: 11px;
+  text-decoration: none; color: var(--navy);
+  font-size: 13px;
+  transition: background 0.18s, transform 0.15s, box-shadow 0.18s;
+  border: 1px solid var(--gray-300);
+  background: var(--white);
+}
+.menu-item:hover {
+  background: var(--teal-pale);
+  border-color: var(--teal);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(14,165,160,0.15);
+}
+.menu-item.accent-item { background: #F0FDF9; color: #0F5346; border-color: #CCFBF1; }
+.menu-item.accent-item:hover { background: #CCFBF1; border-color: var(--teal); }
+.item-icon {
+  width: 32px; height: 32px;
+  border-radius: 9px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; font-size: 15px;
+  background: var(--teal-pale);
+}
+.menu-item.accent-item .item-icon { background: #CCFBF1; }
+.item-name { font-size: 12.5px; font-weight: 700; display: block; line-height: 1.3; color: inherit; }
+.item-desc { font-size: 10.5px; color: var(--gray-600); display: block; line-height: 1.3; }
+.menu-item.accent-item .item-desc { color: #10756A; }
+.mega-menu.open .menu-item { animation: fadeSlideIn 0.3s ease both; }
+.menu-item:nth-child(1){animation-delay:0.05s}
+.menu-item:nth-child(2){animation-delay:0.10s}
+.menu-item:nth-child(3){animation-delay:0.15s}
+.menu-item:nth-child(4){animation-delay:0.20s}
+.menu-item:nth-child(5){animation-delay:0.25s}
+@keyframes fadeSlideIn {
+  from{opacity:0;transform:translateX(18px)}
+  to{opacity:1;transform:translateX(0)}
+}
+.menu-footer {
+  padding: 14px 20px;
+  border-top: 1px solid var(--gray-300);
+  flex-shrink: 0; display: flex; gap: 8px;
+  background: var(--white);
+}
+.footer-btn {
+  flex: 1; padding: 11px; border-radius: 10px;
+  font-size: 13px; font-weight: 700;
+  cursor: pointer; transition: transform 0.15s, opacity 0.15s;
+}
+.footer-btn.primary {
+  background: var(--teal); color: var(--white);
+  border: none;
+}
+.footer-btn.primary:hover { background: var(--navy); }
+.footer-btn.secondary {
+  background: var(--white); color: var(--navy);
+  border: 2px solid var(--navy);
+}
+
+/* ===== HERO ===== */
+#beranda.hero, .hero {
+  background: var(--navy);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -100px; right: -100px;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(14,165,160,0.15) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.hero::after {
+  content: '';
+  position: absolute; bottom: -80px; left: 20%;
+  width: 300px; height: 300px;
+  background: radial-gradient(circle, rgba(14,165,160,0.08) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none;
+}
+.overlay {
+  background: none !important;
+  padding: 0 !important;
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center;
+  position: relative; z-index: 1;
+}
+.main-title {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: var(--white) !important;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 1rem;
+  text-shadow: none !important;
+}
+.main-title .highlight { color: var(--teal-light); }
+.typing-text {
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+.search { display: none !important; }
+.btn-hero {
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  border: none !important;
+  padding: 0.85rem 1.75rem !important;
+  border-radius: 8px !important;
+  font-family: var(--font) !important;
+  font-weight: 700 !important; font-size: 0.95rem !important;
+  text-decoration: none !important;
+  display: inline-flex !important; align-items: center !important; gap: 8px !important;
+  box-shadow: none !important;
+  transition: background 0.2s, transform 0.2s !important;
+  margin: 0.25rem !important;
+}
+.btn-hero:hover { background: var(--teal-light) !important; transform: translateY(-2px) !important; }
+.btn-hero.outline {
+  background: rgba(255,255,255,0.1) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+}
+.btn-hero.outline:hover { background: rgba(255,255,255,0.18) !important; transform: translateY(-2px) !important; }
+
+/* ===== BENTO / FITUR ===== */
+.bento-section, #bento {
+  padding: 5rem 2rem;
+  background: var(--gray-50);
+  text-align: center;
+}
+.section-title {
+  font-size: 2rem; font-weight: 800;
+  color: var(--navy);
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+}
+.subtitle {
+  color: var(--gray-600); font-size: 1rem;
+  margin-bottom: 3rem;
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  max-width: 1100px;
+  margin: 0 auto; padding: 0;
+  text-align: left;
+}
+.bento-card {
+  background: var(--white) !important;
+  color: var(--navy) !important;
+  border: 1px solid var(--gray-300) !important;
+  border-radius: 14px !important;
+  padding: 1.75rem !important;
+  min-height: unset !important;
+  display: flex !important; flex-direction: column !important;
+  align-items: flex-start !important; text-align: left !important;
+  justify-content: space-between !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  transition: all 0.25s !important;
+  position: relative !important; overflow: hidden !important;
+}
+.bento-card::before {
+  content: '' !important;
+  position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 3px !important; background: var(--teal) !important;
+  transform: scaleX(0) !important; transform-origin: left !important;
+  transition: transform 0.3s !important;
+}
+.bento-card:hover {
+  transform: translateY(-5px) !important;
+  box-shadow: 0 12px 30px rgba(13,27,62,0.1) !important;
+  border-color: var(--teal) !important;
+  background: var(--white) !important;
+}
+.bento-card:hover::before { transform: scaleX(1) !important; }
+.bento-card h2, .bento-card h3 {
+  color: var(--navy) !important;
+  font-size: 1.05rem !important; font-weight: 700 !important;
+  margin-bottom: 0.5rem !important;
+}
+.bento-card p {
+  color: var(--gray-600) !important;
+  font-size: 0.9rem !important; line-height: 1.6 !important;
+  margin-bottom: 1.25rem !important;
+}
+.btn-card {
+  background: var(--teal) !important;
+  color: var(--white) !important;
+  padding: 0.6rem 1.25rem !important;
+  border-radius: 7px !important;
+  font-family: var(--font) !important; font-weight: 700 !important; font-size: 0.875rem !important;
+  text-decoration: none !important; display: inline-block !important;
+  border: none !important; box-shadow: none !important;
+  transition: background 0.2s !important; margin-top: auto !important;
+}
+.btn-card:hover { background: var(--navy) !important; color: var(--white) !important; transform: none !important; }
+
+/* ===== COMMUNITY GRID (Agenda & Berita) ===== */
+.community-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--white);
+}
+.community-grid h2 {
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--navy); margin-bottom: 1.25rem;
+}
+.card-interactive {
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: 14px;
+  overflow: hidden; margin-bottom: 1.25rem;
+  transition: all 0.25s;
+}
+.card-interactive:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(13,27,62,0.1);
+  border-color: var(--teal);
+}
+.card-interactive img {
+  width: 100%; height: 180px;
+  object-fit: cover; display: block;
+}
+.card-body {
+  padding: 1.25rem;
+  background: var(--white);
+}
+.card-body h3, .card-body h4 {
+  color: var(--navy); font-weight: 700;
+  font-size: 1rem; margin-bottom: 0.4rem;
+}
+.card-body p { color: var(--gray-600); font-size: 0.875rem; line-height: 1.6; }
+
+/* Tag kecil di atas judul agenda */
+.card-body p[style] {
+  color: var(--teal) !important;
+  font-weight: 700 !important; font-size: 0.75rem !important;
+  text-transform: uppercase !important; letter-spacing: 0.5px !important;
+  background: var(--teal-pale) !important;
+  display: inline-block !important; padding: 0.2rem 0.6rem !important;
+  border-radius: 20px !important; margin-bottom: 0.5rem !important;
+}
+
+/* News item */
+.news-item {
+  display: flex; flex-direction: row; align-items: center;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-left: 4px solid var(--teal);
+  border-radius: 12px; padding: 0.85rem;
+  margin-bottom: 0.85rem; gap: 0.85rem;
+  transition: all 0.25s;
+}
+.news-item:hover {
+  transform: translateX(5px);
+  background: var(--teal-pale);
+  border-color: var(--teal);
+}
+.news-item img {
+  width: 80px; height: 70px;
+  border-radius: 8px; object-fit: cover;
+  flex-shrink: 0; margin: 0 !important;
+}
+.news-text h4 { color: var(--navy); font-size: 0.9rem; font-weight: 700; margin-bottom: 0.25rem; }
+.news-text p  { color: var(--gray-600); font-size: 0.825rem; line-height: 1.5; }
+
+/* ===== ABOUT / PROFIL ===== */
+.about {
+  padding: 5rem 2rem;
+  background: var(--gray-50);
+}
+.about-container {
+  display: flex; align-items: center; gap: 50px; flex-wrap: wrap;
+  background: var(--white);
+  border: 1px solid var(--gray-300);
+  border-radius: 20px; padding: 2.5rem;
+}
+.about-container::before { display: none !important; }
+.about-text h2 {
+  font-size: 1.75rem !important; font-weight: 800 !important;
+  color: var(--navy) !important;
+  background: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: var(--navy) !important;
+  border-right: none !important; white-space: normal !important;
+  animation: none !important; overflow: visible !important;
+  margin-bottom: 1rem !important;
+}
+.about-text p { color: var(--gray-600) !important; font-size: 1rem !important; line-height: 1.75 !important; }
+.btn-container { display: flex; gap: 15px; flex-wrap: wrap; margin-top: 25px; }
+.btn-container a {
+  background: var(--teal) !important; color: var(--white) !important;
+  padding: 0.7rem 1.5rem !important; border-radius: 8px !important;
+  font-weight: 700 !important; font-size: 0.9rem !important;
+  text-decoration: none !important; box-shadow: none !important; border: none !important;
+  transition: background 0.2s, transform 0.2s !important;
+}
+.btn-container a:hover { background: var(--navy) !important; transform: translateY(-2px) !important; }
+.profile-library-stats { display: flex; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+.stat-item {
+  background: var(--teal-pale);
+  border: 1px solid rgba(14,165,160,0.3);
+  padding: 15px; border-radius: 12px;
+  display: flex; align-items: center; gap: 12px;
+  flex: 1; min-width: 140px; transition: 0.3s;
+}
+.stat-item:hover { background: var(--teal); color: var(--white); transform: scale(1.03); }
+.stat-item i { color: var(--teal); }
+.stat-item:hover i { color: var(--white); }
+.about img { width: 270px; border-radius: 18px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+.profile-img { border: 6px solid var(--white); border-radius: 20px; }
+.blob-bg { background: linear-gradient(135deg, var(--navy), var(--teal)) !important; }
+
+/* ===== SERVICE / JAM ===== */
+.service-section { padding: 4rem 2rem; background: var(--navy); }
+.glass-card-container {
+  max-width: 900px; margin: 0 auto;
+  background: rgba(255,255,255,0.06);
+  border-radius: 20px; padding: 2rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.status-indicator {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  margin-bottom: 25px;
+  background: rgba(14,165,160,0.15);
+  border: 1px solid rgba(14,165,160,0.3);
+  color: var(--teal-light);
+  width: fit-content; margin-left: auto; margin-right: auto;
+  padding: 8px 20px; border-radius: 50px;
+}
+.pulse-dot {
+  width: 10px; height: 10px;
+  background: #28a745; border-radius: 50%;
+  animation: pulse-green 2s infinite;
+}
+@keyframes pulse-green {
+  0%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(40,167,69,0.7)}
+  70%{transform:scale(1);box-shadow:0 0 0 10px rgba(40,167,69,0)}
+  100%{transform:scale(0.95);box-shadow:0 0 0 0 rgba(40,167,69,0)}
+}
+.hours-grid-modern {
+  display: grid; grid-template-columns: repeat(auto-fit,minmax(240px,1fr)); gap: 1rem;
+}
+.hour-box {
+  display: flex; align-items: center; gap: 1rem;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px; padding: 1.25rem;
+  transition: all 0.25s;
+}
+.hour-box:hover {
+  background: rgba(14,165,160,0.15);
+  border-color: rgba(14,165,160,0.4);
+  transform: translateY(-3px);
+  box-shadow: none;
+}
+.icon-circle {
+  background: var(--teal) !important; border-radius: 12px !important;
+  width: 48px !important; height: 48px !important;
+  display: flex !important; align-items: center !important; justify-content: center !important;
+  font-size: 22px !important; color: white !important; flex-shrink: 0 !important;
+}
+.text-info span { display: block; font-size: 13px; color: rgba(255,255,255,0.55); font-weight: 600; }
+.text-info strong { font-size: 16px; color: var(--white); }
+.special-access { background: rgba(14,165,160,0.2) !important; border-color: rgba(14,165,160,0.4) !important; }
+
+/* ===== RANKING ===== */
+.ranking-section { padding: 3rem 2rem; background: var(--gray-50); display: flex; justify-content: center; }
+.ranking-container {
+  background: var(--white); border: 1px solid var(--gray-300);
+  border-radius: 16px; padding: 30px;
+  width: 100%; max-width: 500px;
+  box-shadow: none; backdrop-filter: none; text-align: center;
+}
+.ranking-title   { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 5px; }
+.ranking-subtitle { font-size: 16px; color: var(--gray-600); margin-bottom: 25px; }
+.leaderboard { display: flex; flex-direction: column; gap: 15px; margin-bottom: 25px; }
+.rank-item {
+  display: flex; align-items: center; padding: 15px 20px;
+  border-radius: 20px; background: var(--white);
+  transition: 0.3s; cursor: pointer; border: 2px solid transparent;
+}
+.rank-item:hover { transform: scale(1.03); box-shadow: 0 5px 15px rgba(0,0,0,0.08); }
+.gold   { border-color: #F59E0B !important; background: #FFFBEB !important; }
+.silver { border-color: #94A3B8 !important; background: #F8FAFC !important; }
+.bronze { border-color: #D97706 !important; background: #FFFBF0 !important; }
+.rank-number { font-size: 20px; font-weight: bold; width: 35px; height: 35px; background: #eee; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 15px; }
+.rank-info { flex-grow: 1; text-align: left; }
+.player-name { display: block; font-weight: 700; font-size: 18px; color: var(--navy); }
+.player-points { font-size: 14px; color: var(--teal); font-weight: 600; }
+.rank-badge { font-size: 24px; }
+.btn-play {
+  background: var(--teal) !important; color: white !important;
+  border: none; padding: 12px 25px; border-radius: 50px;
+  font-weight: 700; cursor: pointer; transition: 0.3s;
+  box-shadow: none !important;
+}
+.btn-play:hover { background: var(--navy) !important; transform: translateY(-2px) !important; }
+@keyframes fadeInUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== FOOTER ===== */
+.main-footer {
+  background: #070F24;
+  color: rgba(255,255,255,0.6);
+  padding: 0;
+  border-top: none;
+}
+.footer-top-banner {
+  background: var(--navy);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding: 0.85rem 2rem;
+  display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.ftr-top-text { color: rgba(255,255,255,0.8); font-size: 0.875rem; font-weight: 600; }
+.ftr-badges   { display: flex; gap: 8px; }
+.ftr-badge {
+  font-size: 11px; padding: 4px 12px; border-radius: 20px; font-weight: 600;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.75);
+}
+.ftr-badge.green  { background: rgba(14,165,160,0.2);  border-color: var(--teal);  color: var(--teal-light); }
+.ftr-badge.yellow { background: rgba(245,158,11,0.15); border-color: #F59E0B; color: #FCD34D; }
+.ftr-badge.pink   { background: rgba(236,72,153,0.15); border-color: #EC4899; color: #F9A8D4; }
+.footer-container {
+  max-width: 1100px; margin: 0 auto;
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem; padding: 3rem 2rem;
+}
+.ftr-brand-icon {
+  width: 52px; height: 52px;
+  background: var(--teal); border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 14px;
+}
+.footer-title { color: var(--teal-light) !important; font-size: 1.25rem; font-weight: 700; margin-bottom: 10px; }
+.footer-tagline { color: rgba(255,255,255,0.5); font-size: 0.875rem; line-height: 1.7; margin-bottom: 20px; }
+.ftr-stats { display: flex; gap: 10px; margin-bottom: 20px; }
+.ftr-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; padding: 10px 14px;
+  text-align: center; flex: 1;
+}
+.ftr-stat-num { color: var(--teal-light); font-size: 18px; font-weight: 800; display: block; }
+.ftr-stat-lbl { color: rgba(255,255,255,0.4); font-size: 10px; font-weight: 600; text-transform: uppercase; }
+.jam-operasional {
+  background: rgba(255,255,255,0.05);
+  padding: 15px; border-radius: 12px;
+  border-left: 3px solid var(--teal);
+}
+.op-header { font-size: 14px; margin-bottom: 8px; color: var(--white); }
+.time-list p { font-size: 13px; margin: 4px 0; color: rgba(255,255,255,0.6); }
+.time-list span { font-weight: 700; color: var(--teal-light); }
+.access-24 { color: #34D399 !important; }
+.footer-column h4 {
+  color: var(--white); font-size: 0.95rem; font-weight: 700;
+  margin-bottom: 1rem; position: relative; display: inline-block;
+}
+.footer-column h4::after {
+  content: ''; position: absolute; left: 0; bottom: -5px;
+  width: 30px; height: 2px; background: var(--teal);
+}
+.footer-links { list-style: none; padding: 0; }
+.footer-links li { margin-bottom: 10px; }
+.footer-links a { color: rgba(255,255,255,0.5); text-decoration: none; font-size: 0.875rem; transition: all 0.2s; }
+.footer-links a:hover { color: var(--teal-light); padding-left: 6px; }
+.ftr-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--teal); display: inline-block; margin-right: 8px; vertical-align: middle; }
+.ftr-contact-item { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+.ftr-contact-icon { width: 34px; height: 34px; background: rgba(14,165,160,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 16px; }
+.ftr-contact-text  { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.5; }
+.ftr-contact-label { color: var(--teal-light); font-size: 11px; font-weight: 700; text-transform: uppercase; display: block; margin-bottom: 2px; }
+.social-box { display: flex; gap: 12px; margin-top: 20px; }
+.social-box a {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: rgba(255,255,255,0.7);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  text-decoration: none; transition: all 0.3s;
+}
+.social-box a:hover { background: var(--teal); border-color: var(--teal); transform: translateY(-4px); }
+.footer-bottom {
+  max-width: 1100px; margin: 0 auto;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.3); font-size: 0.825rem; text-align: center;
+}
+.footer-bottom strong { color: rgba(255,255,255,0.6); }
+
+/* ===== WELCOME BANNER ===== */
+.welcome-banner { display: none; position: fixed; top: 85px; right: 20px; z-index: 9998; animation: slideInRight 0.6s cubic-bezier(0.175,0.885,0.32,1.275); }
+@keyframes slideInRight { from{opacity:0;transform:translateX(60px)} to{opacity:1;transform:translateX(0)} }
+.welcome-inner {
+  background: var(--white); border-radius: 18px; padding: 16px 20px;
+  box-shadow: 0 10px 35px rgba(13,27,62,0.2);
+  border-left: 5px solid var(--teal);
+  display: flex; align-items: center; gap: 14px;
+  min-width: 280px; max-width: 340px; position: relative;
+}
+.welcome-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--teal); color: white; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 700; flex-shrink: 0; }
+.welcome-text-wrap { flex: 1; }
+.welcome-label { font-size: 11px; color: #888; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px; }
+.welcome-label.returning { color: var(--teal); }
+.welcome-label.new-member { color: #059669; }
+.welcome-name  { font-size: 15px; font-weight: 700; color: var(--navy); margin-bottom: 2px; }
+.welcome-kelas { font-size: 12px; color: var(--gray-600); }
+.welcome-badge { position: absolute; top: -8px; right: 12px; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 20px; }
+.welcome-badge.returning  { background: var(--teal-pale); color: var(--teal); }
+.welcome-badge.new-member { background: #D1FAE5; color: #059669; }
+.welcome-close { position: absolute; top: 8px; right: 10px; background: none; border: none; color: #aaa; font-size: 14px; cursor: pointer; padding: 2px 5px; border-radius: 50%; transition: 0.2s; }
+.welcome-close:hover { background: var(--gray-100); color: var(--navy); }
+
+/* ===== DIGIBOT ===== */
+#floating-saran:not(#digibot-fab) { display: none !important; }
+#digibot-fab {
+  position: fixed; bottom: 25px; right: 25px;
+  width: 60px; height: 60px; border-radius: 50%;
+  background: var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  cursor: pointer; z-index: 9999;
+  box-shadow: 0 4px 20px rgba(14,165,160,0.5);
+  font-size: 24px; color: white;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+#digibot-fab:hover { background: var(--teal-light); transform: scale(1.08); }
+.digibot-wave { position: absolute; width: 60px; height: 60px; border-radius: 50%; border: 2px solid rgba(14,165,160,0.4); animation: dgWave 2s infinite; }
+@keyframes dgWave { 0%{transform:scale(1);opacity:0.8} 100%{transform:scale(1.9);opacity:0} }
+#digibot-box {
+  display: none; position: fixed; bottom: 98px; right: 25px;
+  width: 340px; max-height: 500px;
+  background: var(--navy); border-radius: 20px;
+  border: 1px solid rgba(14,165,160,0.2);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  flex-direction: column; overflow: hidden; z-index: 9998;
+  animation: dgSlideUp 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes dgSlideUp { from{opacity:0;transform:translateY(20px) scale(0.95)} to{opacity:1;transform:translateY(0) scale(1)} }
+.digibot-header { background: var(--navy); padding: 14px 16px; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.digibot-avatar { width: 38px; height: 38px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.digibot-header-info { flex: 1; }
+.digibot-name { color: var(--white); font-size: 13px; font-weight: 700; }
+.digibot-status { display: flex; align-items: center; gap: 5px; margin-top: 2px; }
+.digibot-dot { width: 7px; height: 7px; background: #34d399; border-radius: 50%; animation: dgPulse 2s infinite; }
+@keyframes dgPulse { 0%,100%{opacity:1} 50%{opacity:0.3} }
+.digibot-status span { color: rgba(255,255,255,0.65); font-size: 11px; }
+.digibot-close { background: rgba(255,255,255,0.1); border: none; color: white; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; font-size: 13px; transition: 0.2s; }
+.digibot-close:hover { background: rgba(255,255,255,0.2); }
+.digibot-body {
+  flex: 1; padding: 14px; overflow-y: auto;
+  display: flex; flex-direction: column; gap: 10px;
+  min-height: 200px; max-height: 260px;
+  background: var(--navy);
+}
+.digibot-body::-webkit-scrollbar { width: 4px; }
+.digibot-body::-webkit-scrollbar-thumb { background: var(--navy-mid); border-radius: 4px; }
+.dg-msg { display: flex; gap: 8px; align-items: flex-end; max-width: 92%; }
+.dg-msg.bot  { align-self: flex-start; }
+.dg-msg.user { align-self: flex-end; flex-direction: row-reverse; }
+.dg-avatar { width: 28px; height: 28px; border-radius: 50%; background: var(--teal); display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.dg-bubble { padding: 9px 13px; border-radius: 16px; font-size: 13px; line-height: 1.5; }
+.dg-msg.bot  .dg-bubble { background: var(--navy-mid); color: var(--white); border-bottom-left-radius: 4px; }
+.dg-msg.user .dg-bubble { background: var(--teal); color: white; border-bottom-right-radius: 4px; }
+.dg-typing { background: var(--navy-mid); border-radius: 16px; border-bottom-left-radius: 4px; padding: 10px 14px; display: flex; gap: 4px; align-items: center; }
+.dg-dot-t { width: 7px; height: 7px; border-radius: 50%; background: var(--teal-light); animation: dgTyping 1.2s infinite; }
+.dg-dot-t:nth-child(2){animation-delay:0.2s} .dg-dot-t:nth-child(3){animation-delay:0.4s}
+@keyframes dgTyping { 0%,80%,100%{transform:translateY(0)} 40%{transform:translateY(-6px)} }
+.digibot-chips { display: flex; flex-wrap: wrap; gap: 6px; padding: 8px 12px 4px; background: var(--navy); }
+.dg-chip { background: rgba(14,165,160,0.15); border: 1px solid rgba(14,165,160,0.35); color: var(--teal-light); font-size: 11px; padding: 5px 10px; border-radius: 20px; cursor: pointer; transition: 0.2s; font-family: var(--font); }
+.dg-chip:hover { background: var(--teal); color: white; border-color: var(--teal); }
+.digibot-footer { padding: 10px 12px; display: flex; gap: 8px; border-top: 1px solid rgba(255,255,255,0.06); background: var(--navy); }
+.dg-input { flex: 1; background: var(--navy-mid); border: 1px solid rgba(14,165,160,0.25); border-radius: 12px; padding: 9px 13px; color: var(--white); font-size: 13px; outline: none; font-family: var(--font); transition: border-color 0.2s; }
+.dg-input::placeholder { color: rgba(255,255,255,0.35); }
+.dg-input:focus { border-color: var(--teal); }
+.dg-send { width: 38px; height: 38px; background: var(--teal); border: none; border-radius: 12px; color: white; cursor: pointer; font-size: 15px; display: flex; align-items: center; justify-content: center; transition: 0.2s; flex-shrink: 0; }
+.dg-send:hover { background: var(--teal-light); }
+.dg-send:disabled { background: var(--navy-mid); cursor: not-allowed; }
+.digibot-powered { text-align: center; padding: 6px; color: rgba(255,255,255,0.25); font-size: 10px; background: #080e1a; }
+.digibot-powered span { color: var(--teal-light); font-weight: 700; }
+
+/* ===== FAB DARK MODE TOGGLE ===== */
+.fab-toggle {
+  position: fixed; bottom: 24px; left: 24px;
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--navy); border: 2px solid var(--teal);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; cursor: pointer; z-index: 9999;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.3);
+  transition: transform 0.2s;
+}
+.fab-toggle:hover { transform: scale(1.1); }
+
+/* ===== DARK MODE ===== */
+body.mode-gelap {
+  background: #0A0F1E !important; color: #E8EEFF !important;
+  animation: none !important; background-image: none !important;
+}
+body.mode-gelap nav { background: #070D1C !important; }
+body.mode-gelap .bento-section { background: #0D1326 !important; }
+body.mode-gelap .bento-card {
+  background: #111827 !important; border-color: #1E2A45 !important;
+}
+body.mode-gelap .bento-card h3,
+body.mode-gelap .bento-card h2 { color: #E8EEFF !important; }
+body.mode-gelap .bento-card p  { color: #8896B3 !important; }
+body.mode-gelap .section-title { color: #E8EEFF !important; }
+body.mode-gelap .subtitle      { color: #8896B3 !important; }
+body.mode-gelap .community-grid,
+body.mode-gelap .about,
+body.mode-gelap .ranking-section { background: #0A0F1E !important; }
+body.mode-gelap .card-interactive,
+body.mode-gelap .news-item,
+body.mode-gelap .about-container,
+body.mode-gelap .ranking-container { background: #111827 !important; border-color: #1E2A45 !important; }
+body.mode-gelap .card-body        { background: #111827 !important; }
+body.mode-gelap .card-body h3, body.mode-gelap .card-body h4,
+body.mode-gelap .news-text h4, body.mode-gelap .ranking-title,
+body.mode-gelap .player-name  { color: #E8EEFF !important; }
+body.mode-gelap .card-body p, body.mode-gelap .news-text p,
+body.mode-gelap .about-text p, body.mode-gelap .ranking-subtitle { color: #8896B3 !important; }
+body.mode-gelap .about-text h2 { color: #E8EEFF !important; -webkit-text-fill-color: #E8EEFF !important; }
+body.mode-gelap .stat-item { background: rgba(14,165,160,0.15) !important; border-color: rgba(14,165,160,0.3) !important; color: #E8EEFF !important; }
+body.mode-gelap .welcome-inner { background: #111827 !important; }
+body.mode-gelap .welcome-name  { color: #E8EEFF !important; }
+body.mode-gelap .welcome-kelas { color: #8896B3 !important; }
+body.mode-gelap .dropdown-login { background: #111827 !important; }
+body.mode-gelap .dropdown-login a { color: #E8EEFF !important; }
+body.mode-gelap .mega-menu  { background: #0D1326 !important; }
+body.mode-gelap .menu-item  { background: #111827 !important; border-color: #1E2A45 !important; }
+body.mode-gelap .menu-item:hover { background: rgba(14,165,160,0.15) !important; }
+body.mode-gelap .menu-footer { background: #0D1326 !important; border-top-color: #1E2A45 !important; }
+body.mode-gelap .ham-line   { background: #93C5FD !important; }
+body.mode-gelap .section-label { color: var(--teal-light) !important; border-bottom-color: rgba(14,165,160,0.2) !important; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .main-title { font-size: 2.4rem !important; }
+  .community-grid { grid-template-columns: 1fr !important; }
+  .footer-container { grid-template-columns: 1fr !important; gap: 2rem !important; }
+  .video-grid { grid-template-columns: 1fr !important; }
+  .hours-grid-modern { grid-template-columns: 1fr !important; }
+  .news-item { flex-direction: column !important; text-align: center !important; }
+  .news-item img { width: 100% !important; height: 140px !important; }
+  .menu { display: none !important; }
+  .about-container { flex-direction: column; }
+  .profile-library-stats { flex-direction: column; }
+}
+
+/* Reveal animation */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.reveal.active { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav>
+  <div class="logo">
+    <img src="logo.jpg" alt="Logo Perpustakaan" class="logo-img">
+    <span class="logo-text">DigiSmart Library</span>
+  </div>
+
+  <ul class="menu">
+    <li><a href="#beranda">Beranda</a></li>
+    <li><a href="#bento">Fitur</a></li>
+    <li><a href="events.html">Events</a></li>
+    <li><a href="news.html">Berita</a></li>
+    <li><a href="contactus.html">Kontak</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <i class="fas fa-search search-icon" id="searchBtn"></i>
+
+    <button class="hamburger-btn" id="hamBtn" onclick="toggleHamburger()">
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+      <span class="ham-line"></span>
+    </button>
+
+    <div class="login-menu">
+      <button class="login-btn">Login ▾</button>
+      <div class="dropdown-login">
+        <a href="login.html">Login Anggota</a>
+        <a href="daftar.html">Daftar Anggota</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="searchOverlay">
+  <div class="search-box">
+    <i class="fas fa-search"></i>
+    <input type="text" placeholder="Cari di DigiSmart..." id="searchInput">
+    <i class="fas fa-times close-icon" id="closeBtn"></i>
+  </div>
+</div>
+
+<!-- Mega Menu Overlay -->
+<div class="mega-overlay" id="megaOverlay" onclick="closeHamburger()"></div>
+
+<!-- Mega Menu Panel -->
+<div class="mega-menu" id="megaMenu">
+  <div class="menu-header">
+    <div class="menu-header-logo">
+      <div class="logo-icon">📚</div>
+      <div>
+        <div class="menu-header-title">DigiSmart Library</div>
+        <div class="menu-header-sub">Halo, Selamat Datang! 👋</div>
+      </div>
+    </div>
+    <button class="close-btn" onclick="closeHamburger()">✕</button>
+  </div>
+
+  <div class="menu-body">
+    <div class="menu-section">
+      <div class="section-label"><span class="sl-dot"></span>Beranda</div>
+      <div class="menu-grid">
+        <a href="about.html" class="menu-item accent-item"><div class="item-icon">ℹ️</div><div><span class="item-name">About Us</span><span class="item-desc">Tentang kami</span></div></a>
+        <a href="visi.html" class="menu-item accent-item"><div class="item-icon">🎯</div><div><span class="item-name">Visi &amp; Misi</span><span class="item-desc">Tujuan kami</span></div></a>
+        <a href="prestasi.html" class="menu-item accent-item"><div class="item-icon">🏆</div><div><span class="item-name">Prestasi Siswa</span><span class="item-desc">Capaian terbaik</span></div></a>
+        <a href="#fasilitas" class="menu-item accent-item"><div class="item-icon">🏫</div><div><span class="item-name">Fasilitas</span><span class="item-desc">Sarana sekolah</span></div></a>
+        <a href="alumni.html" class="menu-item accent-item" style="grid-column:1/-1"><div class="item-icon">🎓</div><div><span class="item-name">Testimoni Alumni</span><span class="item-desc">Cerita sukses alumni</span></div></a>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="menu-section">
+      <div class="section-label"><span class="sl-dot"></span>Fitur Literasi</div>
+      <div class="menu-grid">
+        <a href="game.html" class="menu-item"><div class="item-icon">🎮</div><div><span class="item-name">Arcade Literasi</span><span class="item-desc">Main &amp; belajar</span></div></a>
+        <a href="perpustakaan.html" class="menu-item"><div class="item-icon">📖</div><div><span class="item-name">Pojok Baca</span><span class="item-desc">Untuk belajar</span></div></a>
+        <a href="media.html" class="menu-item"><div class="item-icon">🎥</div><div><span class="item-name">Media Belajar</span><span class="item-desc">Sumber belajar</span></div></a>
+        <a href="cek-hoax.html" class="menu-item"><div class="item-icon">🔍</div><div><span class="item-name">Cek Hoax</span><span class="item-desc">Verifikasi berita</span></div></a>
+        <a href="matematika.html" class="menu-item"><div class="item-icon">🧮</div><div><span class="item-name">Math Logic</span><span class="item-desc">Logika &amp; hitung</span></div></a>
+        <a href="inggris.html" class="menu-item" style="grid-column:1/-1"><div class="item-icon">🌍</div><div><span class="item-name">English Quest</span><span class="item-desc">Belajar bahasa Inggris</span></div></a>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="menu-section">
+      <div class="section-label"><span class="sl-dot"></span>Jelajahi</div>
+      <div class="menu-grid">
+        <a href="profil.html" class="menu-item"><div class="item-icon">👤</div><div><span class="item-name">Profil</span><span class="item-desc">Halaman profil</span></div></a>
+        <a href="koleksi.html" class="menu-item"><div class="item-icon">📚</div><div><span class="item-name">Koleksi</span><span class="item-desc">Buku &amp; media</span></div></a>
+        <a href="ranking.html" class="menu-item"><div class="item-icon">📊</div><div><span class="item-name">Ranking</span><span class="item-desc">Papan peringkat</span></div></a>
+        <a href="admin.html" class="menu-item"><div class="item-icon">⚙️</div><div><span class="item-name">Admin</span><span class="item-desc">Panel admin</span></div></a>
+      </div>
+    </div>
+    <div class="section-divider"></div>
+    <div class="menu-section">
+      <div class="section-label"><span class="sl-dot"></span>News &amp; Events</div>
+      <div class="menu-grid">
+        <a href="events.html" class="menu-item"><div class="item-icon">📅</div><div><span class="item-name">Events</span><span class="item-desc">Acara terkini</span></div></a>
+        <a href="news.html" class="menu-item"><div class="item-icon">📰</div><div><span class="item-name">News</span><span class="item-desc">Berita terbaru</span></div></a>
+        <a href="contactus.html" class="menu-item" style="grid-column:1/-1"><div class="item-icon">✉️</div><div><span class="item-name">Contact Us</span><span class="item-desc">Hubungi kami</span></div></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="menu-footer">
+    <button class="footer-btn secondary" onclick="closeHamburger()">✕ Tutup</button>
+    <button class="footer-btn primary" onclick="window.location.href='login.html'">🔐 Login</button>
+  </div>
+</div>
+
+<!-- ===== HERO ===== -->
+<section id="beranda" class="hero">
+  <div class="overlay">
+    <h1 class="main-title">DigiSmart <span class="highlight">Library</span></h1>
+    <p class="typing-text">Menghapus Jarak, Memperluas Wawasan.</p>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;margin-top:1rem;">
+      <a href="perpustakaan.html" class="btn-hero">📖 Mulai Belajar →</a>
+      <a href="game.html" class="btn-hero outline">🎮 Coba Arcade</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BENTO / FITUR ===== -->
+<section id="bento" class="bento-section">
+  <h2 class="section-title">Pusat Literasi Digital</h2>
+  <p class="subtitle">Fitur utama untuk membantu siswa SMP melawan kesenjangan digital.</p>
+  <div class="video-grid">
+    <div class="bento-card">
+      <h3>Arcade Literasi 🎮</h3>
+      <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru!</p>
+      <a href="game.html" class="btn-card">MULAI MAIN ⚡</a>
+    </div>
+    <div class="bento-card">
+      <h3>Pojok Baca 📖</h3>
+      <p>Koleksi buku digital pilihan untuk pelajar SMP agar makin pinter.</p>
+      <a href="perpustakaan.html" class="btn-card">BACA SEKARANG 📚</a>
+    </div>
+    <div class="bento-card">
+      <h3>Media Belajar 🎥</h3>
+      <p>Video tutorial singkat cara riset tugas sekolah dengan benar.</p>
+      <a href="media.html" class="btn-card">TONTON VIDEO 📺</a>
+    </div>
+    <div class="bento-card">
+      <h3>Hoax Buster 🕵️‍♂️</h3>
+      <p>Alat cek fakta sederhana untuk membedakan berita asli dan palsu.</p>
+      <a href="cek-hoax.html" class="btn-card">CEK BERITA 🔍</a>
+    </div>
+    <div class="bento-card">
+      <h3>Math Logic 🔢</h3>
+      <p>Asah logika dan kecepatan berhitungmu dengan tantangan angka.</p>
+      <a href="matematika.html" class="btn-card">HITUNG SEKARANG 🧮</a>
+    </div>
+    <div class="bento-card">
+      <h3>English Quest 🌍</h3>
+      <p>Perluas kosakata dan kemampuan bahasa Inggrismu lewat petualangan.</p>
+      <a href="inggris.html" class="btn-card">START QUEST 💬</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AGENDA & BERITA ===== -->
+<div style="background:var(--white);padding:0 0 2rem;">
+<section class="community-grid">
+  <div class="column">
+    <h2>📅 Agenda Seru Kita</h2>
+    <div class="card-interactive">
+      <img src="wajib.jpeg" alt="Wajib Membaca">
+      <div class="card-body">
+        <p style="color:#0EA5A0;font-weight:bold;">Tiap Jumat Pagi</p>
+        <h3>Gerakan Literasi 15 Menit</h3>
+        <p>Mari tumbuhkan minat baca! Satu buku sejuta ilmu, dimulai dari langkah kecil setiap hari Jumat.</p>
+      </div>
+    </div>
+    <div class="card-interactive">
+      <img src="event.jpeg" alt="Event USU">
+      <div class="card-body">
+        <p style="color:#0EA5A0;font-weight:bold;">Spesial Kolaborasi</p>
+        <h3>Mahasiswa USU Lawan Kesenjangan Digital</h3>
+        <p>Membantu siswa Sumatera Utara agar lebih mahir teknologi dan siap menghadapi masa depan digital.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="column">
+    <h2>📰 Kabar Terbaru</h2>
+    <div class="news-item card-interactive">
+      <img src="prestasi.jpg" alt="Prestasi Siswa">
+      <div class="news-text">
+        <h4>Prestasi Gemilang Nasional 2024</h4>
+        <p>Siswa-siswi SMP Negeri berhasil memborong penghargaan bergengsi dalam kompetisi tingkat nasional.</p>
+      </div>
+    </div>
+    <div class="news-item card-interactive">
+      <img src="gambar2.jpg" alt="Pekan Literasi">
+      <div class="news-text">
+        <h4>📚 Pekan Literasi Sekolah 2026</h4>
+        <p>Sekolah menyelenggarakan lomba menulis cerpen, cerdas baca, hingga bengkel komik.</p>
+      </div>
+    </div>
+    <div class="news-item card-interactive">
+      <img src="guru.jpeg" alt="Guru Bersatu">
+      <div class="news-text">
+        <h4>Sinergi Guru &amp; Mahasiswa</h4>
+        <p>Kolaborasi hebat penerapan modul literasi demi sekolah bebas kesenjangan informasi.</p>
+      </div>
+    </div>
+    <div class="news-item card-interactive">
+      <img src="wajib.jpeg" alt="Selesai">
+      <div class="news-text">
+        <h4>Misi Digital Sukses Besar!</h4>
+        <p>Seluruh siswa antusias mengikuti pelatihan hingga selesai. Makin pintar IT!</p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- ===== FOOTER ===== -->
+<footer class="main-footer">
+  <div class="footer-top-banner">
+    <span class="ftr-top-text">📚 DigiSmart Library — Platform Literasi Digital #1 untuk SMP</span>
+    <div class="ftr-badges">
+      <span class="ftr-badge green">✅ Gratis</span>
+      <span class="ftr-badge yellow">⭐ Terpercaya</span>
+      <span class="ftr-badge pink">💡 Inovatif</span>
+    </div>
+  </div>
+
+  <div class="footer-container">
+    <div class="footer-column info-col">
+      <div class="ftr-brand-icon">📚</div>
+      <h3 class="footer-title">DigiSmart Library</h3>
+      <p class="footer-tagline">Solusi literasi digital modern untuk generasi cerdas masa kini. Belajar jadi lebih seru!</p>
+      <div class="ftr-stats">
+        <div class="ftr-stat"><span class="ftr-stat-num">6+</span><span class="ftr-stat-lbl">Fitur</span></div>
+        <div class="ftr-stat"><span class="ftr-stat-num">24/7</span><span class="ftr-stat-lbl">Online</span></div>
+      </div>
+      <div class="jam-operasional">
+        <p class="op-header">🕐 <strong>Jam Operasional</strong></p>
+        <div class="time-list">
+          <p>Senin – Kamis: <span>08:00 – 13:30 WIB</span></p>
+          <p>Jumat – Sabtu: <span>08:00 – 12:00 WIB</span></p>
+          <p>Minggu: <span class="access-24">Akses Digital 24/7 ✨</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-column links-col">
+      <h4>🔗 Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html"><span class="ftr-dot"></span>Beranda</a></li>
+        <li><a href="game.html"><span class="ftr-dot"></span>Fitur Literasi</a></li>
+        <li><a href="koleksi.html"><span class="ftr-dot"></span>Koleksi Buku</a></li>
+        <li><a href="ranking.html"><span class="ftr-dot"></span>Ranking Siswa</a></li>
+        <li><a href="admin.html"><span class="ftr-dot"></span>Admin Panel</a></li>
+        <li><a href="events.html"><span class="ftr-dot"></span>Events Seru</a></li>
+        <li><a href="news.html"><span class="ftr-dot"></span>Berita Terkini</a></li>
+        <li><a href="contactus.html"><span class="ftr-dot"></span>Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column contact-col">
+      <h4>📬 Hubungi Kami</h4>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">📍</div>
+        <div class="ftr-contact-text"><span class="ftr-contact-label">Alamat</span>Jl. TM Pahlawan Seribu, Tangerang 15322</div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">✉️</div>
+        <div class="ftr-contact-text"><span class="ftr-contact-label">Email</span>perpus@digismart.sch.id</div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">💬</div>
+        <div class="ftr-contact-text"><span class="ftr-contact-label">WhatsApp</span>+62 812-3456-789</div>
+      </div>
+      <div class="social-box">
+        <a href="https://wa.me/628123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:info@digismart.usu.ac.id"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 <strong>Gressilliya Damanik</strong> — Website Digital Library. All Rights Reserved.</p>
+  </div>
+</footer>
+
+<!-- ===== DIGIBOT BUTTON ===== -->
+<div id="digibot-fab" onclick="toggleDigiBot()" title="Tanya DigiBot">
+  <div class="digibot-wave"></div>
+  <i class="fas fa-robot"></i>
+</div>
+
+<!-- ===== DIGIBOT CHATBOX ===== -->
+<div id="digibot-box">
+  <div class="digibot-header">
+    <div class="digibot-avatar">🤖</div>
+    <div class="digibot-header-info">
+      <div class="digibot-name">DigiBot — Asisten DigiSmart</div>
+      <div class="digibot-status"><span class="digibot-dot"></span><span>Online &amp; siap membantu</span></div>
+    </div>
+    <button class="digibot-close" onclick="toggleDigiBot()">✕</button>
+  </div>
+  <div class="digibot-body" id="digibotBody">
+    <div class="dg-msg bot">
+      <div class="dg-avatar">🤖</div>
+      <div class="dg-bubble">Halo! Saya <b>DigiBot</b>, asisten AI DigiSmart Library. Tanya aku apapun tentang website ini ya! 😊</div>
+    </div>
+  </div>
+  <div class="digibot-chips" id="digibotChips">
+    <button class="dg-chip" onclick="dgSendChip(this,'Cara pakai Arcade Literasi?')">🎮 Arcade</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Gimana cara cek hoax?')">🔍 Cek Hoax</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Jam buka perpustakaan?')">🕐 Jam Buka</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Cara daftar akun baru?')">📝 Daftar</button>
+    <button class="dg-chip" onclick="dgSendChip(this,'Ada fitur apa saja di website ini?')">✨ Fitur</button>
+  </div>
+  <div class="digibot-footer">
+    <input type="text" id="digibotInput" class="dg-input" placeholder="Tanya apapun tentang DigiSmart..." onkeydown="if(event.key==='Enter') dgKirim()">
+    <button class="dg-send" id="dgSendBtn" onclick="dgKirim()"><i class="fas fa-paper-plane"></i></button>
+  </div>
+  <div class="digibot-powered">Powered by <span>ChatBot AI</span> · DigiSmart Library</div>
+</div>
+
+<!-- ===== FAB DARK MODE ===== -->
+<div class="fab-toggle" id="fabToggle" onclick="toggleMode()" title="Ganti Mode">
+  <span id="fabIcon">🌙</span>
+</div>
+
+<!-- ===== WELCOME BANNER ===== -->
+<div class="welcome-banner" id="welcomeBanner">
+  <div class="welcome-inner">
+    <button class="welcome-close" onclick="tutupBanner()" title="Tutup">✕</button>
+    <div class="welcome-avatar" id="wAvatar">?</div>
+    <div class="welcome-text-wrap">
+      <div class="welcome-label" id="wLabel">Selamat datang</div>
+      <div class="welcome-name"  id="wName">—</div>
+      <div class="welcome-kelas" id="wKelas">—</div>
+    </div>
+    <div class="welcome-badge" id="wBadge"></div>
+  </div>
+</div>
+
+<!-- ===== SEMUA JAVASCRIPT ===== -->
+<script>
+// --- Search Overlay ---
+document.getElementById('searchBtn').onclick = function() {
+  document.getElementById('searchOverlay').style.display = 'flex';
+  document.getElementById('searchInput').focus();
+};
+document.getElementById('closeBtn').onclick = function() {
+  document.getElementById('searchOverlay').style.display = 'none';
+};
+window.onclick = function(event) {
+  if (event.target == document.getElementById('searchOverlay'))
+    document.getElementById('searchOverlay').style.display = 'none';
+};
+
+// --- Hamburger Mega Menu ---
+function toggleHamburger() {
+  document.getElementById('hamBtn').classList.toggle('open');
+  document.getElementById('megaMenu').classList.toggle('open');
+  document.getElementById('megaOverlay').classList.toggle('open');
+}
+function closeHamburger() {
+  document.getElementById('hamBtn').classList.remove('open');
+  document.getElementById('megaMenu').classList.remove('open');
+  document.getElementById('megaOverlay').classList.remove('open');
+}
+document.addEventListener('keydown', function(e) { if (e.key === 'Escape') closeHamburger(); });
+
+// --- Dark Mode ---
+function toggleMode() {
+  const body = document.body;
+  const icon = document.getElementById('fabIcon');
+  const isDark = body.classList.toggle('mode-gelap');
+  icon.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('mode', isDark ? 'gelap' : 'terang');
+}
+document.addEventListener('DOMContentLoaded', function() {
+  if (localStorage.getItem('mode') === 'gelap') {
+    document.body.classList.add('mode-gelap');
+    document.getElementById('fabIcon').textContent = '☀️';
+  }
+});
+
+// --- Reveal on Scroll ---
+function reveal() {
+  document.querySelectorAll('.reveal').forEach(el => {
+    if (el.getBoundingClientRect().top < window.innerHeight - 100)
+      el.classList.add('active');
+  });
+}
+window.addEventListener('scroll', reveal);
+
+// --- DigiBot ---
+const DG_SYSTEM = `Kamu adalah DigiBot, asisten AI cerdas dan ramah milik DigiSmart Library — website perpustakaan digital untuk siswa SMP.
+
+Informasi DigiSmart Library:
+- Fitur: Arcade Literasi (game lawan hoaks), Pojok Baca (buku digital), Media Belajar (video tutorial), Hoax Buster (cek fakta), Math Logic (matematika), English Quest (bahasa Inggris)
+- Jam: Senin-Kamis 08:00-13:30, Jumat-Sabtu 08:00-12:00, Minggu digital 24/7
+- Daftar akun: klik Login → Daftar Anggota di navbar
+- Ranking siswa: menu Ranking di navbar
+- Kontak: perpus@digismart.sch.id | WA: +62 812-3456-789
+- Alamat: Jl. TM Pahlawan Seribu, Tangerang 15322
+- Pembuat: Gressilliya Damanik
+
+Gaya menjawab: bahasa Indonesia santai, pakai emoji secukupnya, jawaban singkat 3-4 kalimat, panggil pengguna "kamu".`;
+
+let dgMessages = [];
+let dgLoading = false;
+
+function toggleDigiBot() {
+  const box = document.getElementById('digibot-box');
+  const isOpen = box.style.display === 'flex';
+  box.style.display = isOpen ? 'none' : 'flex';
+}
+function dgAddMsg(role, text) {
+  const body = document.getElementById('digibotBody');
+  const wrap = document.createElement('div');
+  wrap.className = 'dg-msg ' + role;
+  if (role === 'bot')
+    wrap.innerHTML = `<div class="dg-avatar">🤖</div><div class="dg-bubble">${text}</div>`;
+  else
+    wrap.innerHTML = `<div class="dg-bubble">${text}</div><div class="dg-avatar" style="background:var(--navy-mid)">👤</div>`;
+  body.appendChild(wrap);
+  body.scrollTop = body.scrollHeight;
+}
+function dgShowTyping() {
+  const body = document.getElementById('digibotBody');
+  const t = document.createElement('div');
+  t.className = 'dg-msg bot'; t.id = 'dgTyping';
+  t.innerHTML = `<div class="dg-avatar">🤖</div><div class="dg-typing"><div class="dg-dot-t"></div><div class="dg-dot-t"></div><div class="dg-dot-t"></div></div>`;
+  body.appendChild(t); body.scrollTop = body.scrollHeight;
+}
+function dgRemoveTyping() { const t = document.getElementById('dgTyping'); if (t) t.remove(); }
+function dgSendChip(el, text) { el.parentElement.style.display = 'none'; dgDoSend(text); }
+function dgKirim() {
+  const input = document.getElementById('digibotInput');
+  const text = input.value.trim();
+  if (!text || dgLoading) return;
+  input.value = ''; dgDoSend(text);
+}
+async function dgDoSend(text) {
+  if (dgLoading) return;
+  dgLoading = true;
+  document.getElementById('dgSendBtn').disabled = true;
+  dgAddMsg('user', text);
+  dgMessages.push({ role: 'user', content: text });
+  dgShowTyping();
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 300,
+        system: DG_SYSTEM,
+        messages: dgMessages
+      })
+    });
+    const data = await res.json();
+    dgRemoveTyping();
+    const reply = data.content?.[0]?.text || 'Maaf, aku lagi bermasalah. Coba lagi ya! 😅';
+    dgMessages.push({ role: 'assistant', content: reply });
+    dgAddMsg('bot', reply.replace(/\n/g, '<br>'));
+  } catch(e) {
+    dgRemoveTyping();
+    dgAddMsg('bot', 'Ups, koneksi bermasalah! Coba lagi sebentar ya. 😅');
+  }
+  dgLoading = false;
+  document.getElementById('dgSendBtn').disabled = false;
+}
+
+// --- Welcome Banner ---
+(function() {
+  var session;
+  try { session = JSON.parse(localStorage.getItem('digi_session')); } catch(e) { session = null; }
+  if (!session || !session.loggedIn) return;
+  var banner  = document.getElementById('welcomeBanner');
+  var avatar  = document.getElementById('wAvatar');
+  var label   = document.getElementById('wLabel');
+  var nameEl  = document.getElementById('wName');
+  var kelasEl = document.getElementById('wKelas');
+  var badge   = document.getElementById('wBadge');
+  var namaLengkap = session.nama || 'Member';
+  var namaDepan   = namaLengkap.split(' ')[0];
+  var inisial     = namaLengkap.split(' ').map(function(w){return w[0];}).slice(0,2).join('').toUpperCase();
+  var flagKey     = 'digi_visited_' + session.email.replace(/[^a-z0-9]/gi,'');
+  var sudahPernah = localStorage.getItem(flagKey);
+  if (!sudahPernah) {
+    label.textContent = '🎉 Hei, Selamat Bergabung!';
+    label.className   = 'welcome-label new-member';
+    nameEl.textContent  = namaDepan + '!';
+    kelasEl.textContent = 'Kelas ' + (session.kelas || '-') + ' · Member Baru';
+    badge.textContent   = '✨ Member Baru';
+    badge.className     = 'welcome-badge new-member';
+    localStorage.setItem(flagKey, '1');
+  } else {
+    label.textContent = '👋 Selamat Datang Kembali,';
+    label.className   = 'welcome-label returning';
+    nameEl.textContent  = namaDepan + '!';
+    kelasEl.textContent = 'Kelas ' + (session.kelas || '-');
+    badge.textContent   = '⭐ Member Aktif';
+    badge.className     = 'welcome-badge returning';
+  }
+  avatar.textContent = inisial;
+  banner.style.display = 'block';
+  setTimeout(function() { tutupBanner(); }, 6000);
+})();
+function tutupBanner() {
+  var banner = document.getElementById('welcomeBanner');
+  if (!banner) return;
+  banner.style.opacity = '0';
+  banner.style.transition = 'opacity 0.4s';
+  setTimeout(function() { banner.style.display = 'none'; }, 400);
+}
+</script>
+
+<script src="hamburger.js"></script>
+<script src="auth-check.js"></script>
+<script src="game-score.js"></script>
+<script src="notifikasi.js"></script>
+</body>
+</html>
