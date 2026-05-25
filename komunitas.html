@@ -4,71 +4,71 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Komunitas Ceria - DigiSmart Library</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
   <style>
-    /* ── STYLE ASLI DIGISMART X ANAK SMP STYLE ── */
+    /* ── BASE BACKGROUND BIRU PASTEL & SOFT LEMBUT ── */
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f4f7fe; /* Biru super lembut */
-      color: #2d3748;
+      background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #eef2ff 100%);
+      color: #334155;
+      min-height: 100vh;
       overflow-x: hidden;
       position: relative;
     }
 
-    /* Dekorasi Lingkaran Latar Belakang khas Anak Muda */
-    body::before {
-      content: '';
+    /* Efek Gelembung Transparan Naik ke Atas (Gaya Anak Sekolah) */
+    .bubble {
       position: absolute;
-      width: 300px;
-      height: 300px;
-      background: radial-gradient(circle, rgba(13, 110, 253, 0.08) 0%, transparent 70%);
-      top: -50px;
-      right: -50px;
+      border-radius: 50%;
+      background: rgba(56, 189, 248, 0.25);
+      animation: floatUp 7s infinite ease-in-out;
+      pointer-events: none;
       z-index: -1;
     }
-    body::after {
-      content: '';
-      position: absolute;
-      width: 400px;
-      height: 400px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
-      bottom: 50px;
-      left: -100px;
-      z-index: -1;
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) scale(0.3); opacity: 0; }
+      50% { opacity: 0.8; transform: translateX(25px) scale(0.8); }
+      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
     }
 
-    /* Navbar Putih Bersih Gressilliya */
+    /* ── NAVBAR SESUAI GAMBAR ASLI & REVISI MENU KAMU ── */
     .navbar {
-      background-color: #ffffff !important;
-      box-shadow: 0 4px 20px rgba(13, 110, 253, 0.05);
-      padding: 15px 0;
+      background: rgba(255, 255, 255, 0.9) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
+      padding: 16px 0;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
     }
     .navbar-brand {
-      font-weight: 700;
-      color: #212529 !important;
-      font-size: 1.3rem;
+      font-weight: 800;
+      color: #0284c7 !important;
+      font-size: 1.35rem;
     }
     .nav-link {
-      color: #495057 !important;
-      font-weight: 500;
+      color: #475569 !important;
+      font-weight: 600;
       font-size: 0.95rem;
-      padding: 0 15px !important;
-      transition: all 0.3s ease;
+      padding: 8px 16px !important;
+      border-radius: 14px;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .nav-link:hover, .nav-link.active {
-      color: #0d6efd !important;
-      transform: translateY(-2px);
+      color: #0284c7 !important;
+      background: rgba(56, 189, 248, 0.15);
+      transform: scale(1.05) translateY(-2px);
     }
     
-    /* Tombol Biru User Gressilliya */
+    /* Tombol User Profile Gressilliya */
     .btn-user-profile {
-      background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 100%);
+      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
       color: white;
-      border-radius: 30px; /* Lebih membulat & ramah remaja */
+      border-radius: 25px;
       padding: 8px 22px;
       font-size: 0.9rem;
       font-weight: 600;
@@ -76,176 +76,191 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 4px 14px rgba(13, 110, 253, 0.2);
-      transition: all 0.3s ease;
+      box-shadow: 0 6px 15px rgba(2, 132, 199, 0.2);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .btn-user-profile:hover {
-      transform: scale(1.05);
-      box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
+      transform: scale(1.1) rotate(2deg);
+      box-shadow: 0 10px 22px rgba(2, 132, 199, 0.35);
       color: white;
     }
 
-    /* ── HEADER BANNER CERIA ── */
+    /* ── BANNER HEADER DENGAN ANIMASI OMBAK BERGERAK ── */
     .page-header {
       background: #ffffff;
-      border-bottom: 2px solid #eef2ff;
-      padding: 50px 0;
+      padding: 50px 0 70px 0;
       margin-bottom: 40px;
-      border-radius: 0 0 40px 40px;
-      box-shadow: 0 10px 30px rgba(13, 110, 253, 0.02);
+      border-radius: 0 0 60px 60px;
+      position: relative;
+      box-shadow: 0 10px 30px rgba(14, 165, 233, 0.03);
     }
     .page-header h1 {
-      font-weight: 700;
-      font-size: 2.3rem;
-      color: #1e293b;
+      font-weight: 800;
+      font-size: 2.6rem;
+      color: #0369a1;
     }
-    .page-header p {
-      color: #64748b;
-      font-size: 1.1rem;
-      margin-bottom: 0;
-    }
-
-    /* ── TAB NAVIGATION BUTTONS ── */
-    .nav-tabs-custom {
-      display: flex;
-      gap: 12px;
-      border-bottom: 2px solid #e2e8f0;
-      margin-bottom: 35px;
-      padding-bottom: 5px;
-      overflow-x: auto;
-    }
-    .tab-item-btn {
-      background: none;
-      border: none;
-      padding: 12px 24px;
-      font-weight: 600;
-      font-size: 1rem;
-      color: #64748b;
-      border-radius: 12px 12px 0 0;
-      position: relative;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .tab-item-btn:hover {
-      color: #0d6efd;
-      background: rgba(13, 110, 253, 0.05);
-      transform: translateY(-2px);
-    }
-    .tab-item-btn.active {
-      color: #0d6efd;
-      background: #ffffff;
-    }
-    .tab-item-btn.active::after {
-      content: '';
+    
+    /* Gerakan Ombak Air Interaktif */
+    .wave-container {
       position: absolute;
-      bottom: -7px;
+      bottom: 0;
       left: 0;
       width: 100%;
-      height: 4px;
-      background: #0d6efd;
-      border-radius: 10px;
+      overflow: hidden;
+      line-height: 0;
     }
-
-    /* Panel Konten Utama */
-    .content-panel {
-      display: none;
-    }
-    .content-panel.show {
+    .wave-container svg {
+      position: relative;
       display: block;
+      width: calc(130% + 1.3px);
+      height: 35px;
+      animation: waveMotion 6s infinite linear;
+    }
+    @keyframes waveMotion {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-25%); }
     }
 
-    /* Card Box Minimalis Bouncy Interaktif */
-    .custom-card {
+    /* ── TAB PILIHAN MENU MEMBAL (BOUNCY TABS) ── */
+    .nav-tabs-custom {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-bottom: 45px;
+    }
+    .tab-item-btn {
       background: #ffffff;
-      border-radius: 24px;
-      border: 1px solid rgba(13, 110, 253, 0.08);
-      padding: 35px;
-      box-shadow: 0 10px 25px rgba(13, 110, 253, 0.03);
+      border: 2px solid #bae6fd;
+      padding: 14px 28px;
+      font-weight: 700;
+      font-size: 1rem;
+      color: #0369a1;
+      border-radius: 22px;
+      cursor: pointer;
+      box-shadow: 0 6px 12px rgba(14, 165, 233, 0.04);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .tab-item-btn:hover {
+      background: #f0f9ff;
+      transform: translateY(-6px);
+      box-shadow: 0 12px 20px rgba(14, 165, 233, 0.15);
+    }
+    .tab-item-btn.active {
+      color: white;
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      border-color: #0284c7;
+      transform: scale(1.08) translateY(-4px);
+      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
+    }
+
+    /* ── PANEL KARTU INTERAKTIF LUAR BIASA ── */
+    .content-panel { display: none; }
+    .content-panel.show { display: block; }
+
+    .custom-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 35px;
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      padding: 40px;
+      box-shadow: 0 20px 45px rgba(14, 165, 233, 0.05);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .custom-card:hover {
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 20px 35px rgba(13, 110, 253, 0.08);
+      transform: translateY(-12px);
+      box-shadow: 0 30px 50px rgba(14, 165, 233, 0.15);
+      border-color: rgba(56, 189, 248, 0.3);
     }
 
-    /* Form Input yang Lucu & Lembut */
+    /* Desain Input Imut */
     .form-control, .form-select {
-      border: 2px solid #e2e8f0;
-      padding: 12px 18px;
-      border-radius: 14px;
-      font-size: 0.95rem;
+      border: 2px solid #bae6fd;
+      padding: 14px 20px;
+      border-radius: 20px;
+      font-weight: 500;
       transition: all 0.3s ease;
     }
     .form-control:focus, .form-select:focus {
-      border-color: #3b82f6;
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+      border-color: #0284c7;
+      box-shadow: 0 0 0 5px rgba(2, 132, 199, 0.2);
+      transform: scale(1.02);
     }
 
-    /* Tombol Interaktif */
+    /* Tombol Klik Animatif */
     .btn-primary-custom {
-      background: linear-gradient(135deg, #0d6efd 0%, #2563eb 100%);
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
       color: white;
       border: none;
-      border-radius: 14px;
-      padding: 14px 28px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.2);
+      border-radius: 20px;
+      padding: 16px 32px;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .btn-primary-custom:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 25px rgba(13, 110, 253, 0.35);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 15px 30px rgba(2, 132, 199, 0.4);
       color: white;
     }
 
-    /* Hasil Simulasi */
+    /* Layar Konsol Loop PHP */
     .php-list-box {
-      background: #1e293b;
+      background: #0c4a6e;
       color: #38bdf8;
-      border-radius: 16px;
-      padding: 20px;
+      border-radius: 25px;
+      padding: 25px;
       max-height: 300px;
       overflow-y: auto;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9rem;
-      box-shadow: inset 0 4px 10px rgba(0,0,0,0.2);
+      font-family: 'Courier New', monospace;
+      font-size: 0.95rem;
+      border: 3px solid #0284c7;
+      box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
     }
     .php-item {
       padding: 6px 0;
-      border-bottom: 1px solid #334155;
+      border-bottom: 1px dashed #0284c7;
     }
     
+    /* Tampilan Hasil Hitung Kalkulator */
     .calc-result-box {
-      background: #eff6ff;
-      color: #1d4ed8;
-      border: 2px dashed #3b82f6;
-      padding: 20px;
-      border-radius: 16px;
-      font-size: 1.8rem;
-      font-weight: 700;
-      animation: pulse 1.5s infinite;
+      background: #f0f9ff;
+      color: #0369a1;
+      border: 3px dashed #38bdf8;
+      padding: 25px;
+      border-radius: 25px;
+      font-size: 2.2rem;
+      font-weight: 800;
     }
 
-    /* Footer Gressilliya */
+    /* Ikon Berputar / Melayang Otomatis */
+    .floating-icon {
+      display: inline-block;
+      animation: bounceFloat 3s ease-in-out infinite;
+    }
+    @keyframes bounceFloat {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-12px) scale(1.05); }
+      100% { transform: translateY(0px); }
+    }
+
     footer {
       background: #ffffff;
-      border-top: 2px solid #eef2ff;
+      border-top: 2px solid #e0f2fe;
       padding: 25px 0;
       margin-top: 80px;
-      color: #64748b;
-      font-size: 0.95rem;
+      font-weight: 600;
+      color: #0369a1;
       border-radius: 40px 40px 0 0;
     }
   </style>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg sticky-top">
+<div id="bubble-container"></div>
+
+<nav class="navbar navbar-expand-lg sticky-top animate__animated animate__fadeInDown">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-      <i class="bi bi-book-half text-primary animate__animated animate__pulse animate__infinite"></i> DigiSmart Library
+      <i class="bi bi-balloon-heart-fill text-info floating-icon"></i> DigiSmart Library
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -253,49 +268,53 @@
     <div class="collapse navbar-collapse" id="mainNavbar">
       <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
         <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="koleksi.html">Koleksi</a></li>
-        <li class="nav-item"><a class="nav-link" href="events.html">Event</a></li>
-        <li class="nav-item"><a class="nav-link" href="contactus.html">Kontak</a></li>
+        <li class="nav-item"><a class="nav-link" href="fitur_literasi.html">Fitur Literasi</a></li>
+        <li class="nav-item"><a class="nav-link" href="jelajahi.html">Jelajahi</a></li>
+        <li class="nav-item"><a class="nav-link" href="news_events.html">News & Events</a></li>
         <li class="nav-item"><a class="nav-link active" href="komunitas.html">Komunitas</a></li>
       </ul>
       <div class="d-flex align-items-center gap-3">
-        <a href="#" class="text-secondary"><i class="bi bi-search"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-search fs-5"></i></a>
         <a href="soal3.php" class="btn-user-profile">
-          <i class="bi bi-person-circle"></i> gressilliya
+          <i class="bi bi-emoji-wink-fill animate__animated animate__pulse animate__infinite"></i> gressilliya
         </a>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="page-header text-center animate__animated animate__fadeIn">
+<div class="page-header text-center animate__animated animate__zoomIn">
   <div class="container">
-    <h1 class="display-6">🚀 Ruang Kreatif Komunitas</h1>
-    <p>Mari belajar pemrograman web bersama dengan alat interaktif yang seru!</p>
+    <h1>🎈 Ruang Komunitas Ceria 🎈</h1>
+    <p class="text-muted fw-medium" id="typing-text">Tempat berkumpulnya anak-anak hebat penjelajah digital library!</p>
+  </div>
+  <div class="wave-container">
+    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1300,20 1450,60 L1450,120 L0,120 Z" style="stroke: none; fill: #e0f2fe;"></path>
+    </svg>
   </div>
 </div>
 
 <div class="container">
   
-  <div class="nav-tabs-custom justify-content-md-center">
+  <div class="nav-tabs-custom">
     <button class="tab-item-btn active" id="btn-mhs" onclick="bukaTab('mhs')">🎒 Data Mahasiswa</button>
-    <button class="tab-item-btn" id="btn-php" onclick="bukaTab('php')">💻 Simulasi PHP</button>
-    <button class="tab-item-btn" id="btn-kalk" onclick="bukaTab('kalk')">🔢 Kalkulator</button>
-    <button class="tab-item-btn" id="btn-log" onclick="bukaTab('log')">🔒 Login Admin</button>
+    <button class="tab-item-btn" id="btn-php" onclick="bukaTab('php')">⚡ Loop 1000 Baris</button>
+    <button class="tab-item-btn" id="btn-kalk" onclick="bukaTab('kalk')">🧮 Kalkulator Pintar</button>
+    <button class="tab-item-btn" id="btn-log" onclick="bukaTab('log')">🔑 Portal Admin</button>
   </div>
 
   <div class="content-panel show animate__animated animate__fadeInUp" id="panel-mhs">
     <div class="custom-card text-center py-5">
-      <div class="mb-4 text-primary">
-        <i class="bi bi-folder-symlink" style="font-size: 4rem; display: inline-block; animation: float 3s ease-in-out infinite;"></i>
+      <div class="mb-4">
+        <i class="bi bi-folder2-open text-info floating-icon" style="font-size: 5rem;"></i>
       </div>
       <h3 class="fw-bold">Database Mahasiswa Komunitas</h3>
       <p class="text-muted mx-auto mb-4" style="max-width: 550px;">
-        Akses modul eksternal PHP untuk melakukan Create, Read, Update, dan Delete langsung pada server database lokal kamu.
+        Gunakan tombol sakti di bawah untuk melompat langsung ke mesin sistem pengolahan database siswa eksternal kamu.
       </p>
-      <a href="soal4.php" class="btn btn-primary-custom px-5 py-3">
-        <i class="bi bi-rocket-takeoff-fill me-2"></i>Buka Panel CRUD Mahasiswa
+      <a href="soal4.php" class="btn btn-primary-custom px-5 py-3 fs-5">
+        🚀 Buka Panel CRUD Sekarang
       </a>
     </div>
   </div>
@@ -304,14 +323,14 @@
     <div class="row justify-content-center">
       <div class="col-md-7">
         <div class="custom-card">
-          <h4 class="fw-bold mb-2">Simulasi Looping 1 Sampai 1000</h4>
-          <p class="text-muted small mb-4">Yuk lihat bagaimana cara komputer mencetak kalimat sebanyak 1000 kali dalam hitungan detik!</p>
-          <button class="btn btn-primary-custom w-100 mb-3" id="startLoopBtn" onclick="mulaiLoopPhp()">✨ Jalankan Kode Perulangan</button>
+          <h4 class="fw-bold mb-2 text-primary">⚡ Cetak Kilat 1000 Baris</h4>
+          <p class="text-muted small mb-4">Lihat kekuatan komputer menulis baris kalimat ribuan kali secara kilat!</p>
+          <button class="btn btn-primary-custom w-100 mb-4" id="startLoopBtn" onclick="mulaiLoopPhp()">🔥 Jalankan Mesin Loop</button>
           
           <div class="php-list-box" id="boxLoopPhp">
-            <span style="color: #64748b; font-style: italic;">Klik tombol di atas untuk memulai keajaiban loop...</span>
+            <span style="color: #94a3b8; font-style: italic;">Kotak masih kosong melompong... Pencet tombol di atas!</span>
           </div>
-          <button class="btn btn-link btn-sm mt-3 text-decoration-none w-100 text-center" onclick="resetLoopPhp()">↺ Bersihkan Layar</button>
+          <button class="btn btn-link text-danger btn-sm mt-3 w-100 text-center text-decoration-none fw-bold" onclick="resetLoopPhp()">↺ Bersihkan Semua Baris</button>
         </div>
       </div>
     </div>
@@ -321,32 +340,32 @@
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="custom-card" id="formKalkulator">
-          <h4 class="fw-bold mb-4 text-center">🧮 Kalkulator Pintar</h4>
+          <h4 class="fw-bold mb-4 text-center text-info">🧮 Hitung Angka Pintar</h4>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Masukkan Angka Pertama</label>
-            <input type="number" class="form-control text-center" id="kalk-num1" placeholder="Contoh: 12">
+            <label class="form-label small fw-bold text-secondary">Isi Angka Pertama</label>
+            <input type="number" class="form-control text-center fs-5" id="kalk-num1" placeholder="Ketik angka disini">
           </div>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Masukkan Angka Kedua</label>
-            <input type="number" class="form-control text-center" id="kalk-num2" placeholder="Contoh: 5">
+            <label class="form-label small fw-bold text-secondary">Isi Angka Kedua</label>
+            <input type="number" class="form-control text-center fs-5" id="kalk-num2" placeholder="Ketik angka disini">
           </div>
           <div class="mb-4">
-            <label class="form-label small fw-bold text-secondary">Pilih Operasi</label>
-            <select class="form-select text-center" id="kalk-op">
-              <option value="plus">Tambah (+)</option>
-              <option value="minus">Kurang (-)</option>
-              <option value="kali">Kali (×</option>
-              <option value="bagi">Bagi (÷)</option>
+            <label class="form-label small fw-bold text-secondary">Pilih Simbol Aritmatika</label>
+            <select class="form-select text-center fw-bold" id="kalk-op">
+              <option value="plus">➕ Tambah (+)</option>
+              <option value="minus">➖ Kurang (-)</option>
+              <option value="kali">✖ Kali (×)</option>
+              <option value="bagi">➗ Bagi (÷)</option>
             </select>
           </div>
-          <button class="btn btn-primary-custom w-100 py-3" onclick="prosesHitungKalk()">Hitung Sekarang ✨</button>
+          <button class="btn btn-primary-custom w-100 py-3" onclick="prosesHitungKalk()">BOOM! Dapatkan Hasil ✨</button>
         </div>
 
-        <div class="custom-card text-center animate__animated animate__zoomIn" id="hasilKalkulator" style="display: none;">
-          <h4 class="fw-bold mb-3">Tadaa! Ini Hasilnya 🎉</h4>
-          <div class="text-muted small mb-2" id="kalk-proses-text"></div>
-          <div class="calc-result-box mb-4" id="kalk-result-val">0</div>
-          <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="kembaliKeKalkForm()">← Hitung Angka Lain</button>
+        <div class="custom-card text-center animate__animated animate__bounceIn" id="hasilKalkulator" style="display: none;">
+          <h4 class="fw-bold mb-3 text-success">🎉 Yey, Berhasil Dihitung! 🎉</h4>
+          <div class="text-muted small mb-2 fs-5" id="kalk-proses-text"></div>
+          <div class="calc-result-box mb-4 animate__animated animate__pulse animate__infinite" id="kalk-result-val">0</div>
+          <button class="btn btn-outline-info btn-sm rounded-pill px-4 fw-bold" onclick="kembaliKeKalkForm()">← Hitung Ulang Angka Lain</button>
         </div>
       </div>
     </div>
@@ -356,29 +375,29 @@
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="custom-card" id="cardLoginBox">
-          <h4 class="fw-bold mb-4 text-center">🔑 Gerbang Admin Perpustakaan</h4>
+          <h4 class="fw-bold mb-4 text-center text-primary">🔐 Pintu Kunci Admin</h4>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Nama Pengguna (Username)</label>
-            <input type="text" class="form-control" id="userInput" placeholder="Ketik admin">
+            <label class="form-label small fw-bold text-secondary">Username</label>
+            <input type="text" class="form-control" id="userInput" placeholder="Isi kata: admin">
           </div>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Kata Sandi (Password)</label>
-            <input type="password" class="form-control" id="passInput" placeholder="Ketik 1234">
+            <label class="form-label small fw-bold text-secondary">Password</label>
+            <input type="password" class="form-control" id="passInput" placeholder="Isi kata: 1234">
           </div>
-          <div class="alert alert-danger p-2 small animate__animated animate__shakeX" id="errorLoginAlert" style="display: none; border-radius: 12px;">
-            <i class="bi bi-emoji-frown me-1"></i> Wah, username atau password kamu keliru!
+          <div class="alert alert-danger p-3 small animate__animated animate__shakeX" id="errorLoginAlert" style="display: none; border-radius: 20px;">
+            ❌ Yahh! Kunci salah, coba cek contekannya di bawah ya!
           </div>
-          <button class="btn btn-primary-custom w-100 py-3 mt-2" onclick="eksekusiLoginSimulasi()">Buka Pintu Masuk Portal</button>
-          <div class="text-center mt-3 text-muted" style="font-size: 0.8rem; background: #f8fafc; padding: 6px; border-radius: 8px;">
-            Petunjuk Rahasia: <code class="fw-bold">admin</code> / <code class="fw-bold">1234</code>
+          <button class="btn btn-primary-custom w-100 py-3 mt-2" onclick="eksekusiLoginSimulasi()">Buka Kunci Sistem 🗝️</button>
+          <div class="text-center mt-3 text-muted small bg-light p-2 rounded-4">
+            Bocoran Sandi: <strong>admin</strong> & <strong>1234</strong>
           </div>
         </div>
 
-        <div class="custom-card text-center py-5 animate__animated animate__bounceIn" id="cardLoginSukses" style="display: none;">
-          <div class="text-success mb-3"><i class="bi bi-patch-check-fill" style="font-size: 4rem;"></i></div>
-          <h4 class="fw-bold text-success mb-2">Hore, Berhasil Masuk!</h4>
-          <p class="text-muted small mb-4">Selamat datang kembali, Kak <strong>Admin</strong>!<br>Seluruh fitur rahasia portal sekarang sudah terbuka.</p>
-          <button class="btn btn-outline-danger btn-sm rounded-pill px-4" onclick="logoutSimulasi()">Keluar Sistem</button>
+        <div class="custom-card text-center py-5 animate__animated animate__tada" id="cardLoginSukses" style="display: none;">
+          <div class="text-success mb-3"><i class="bi bi-star-circle" style="font-size: 5rem; display:inline-block; animation:spin 4s linear infinite;"></i></div>
+          <h4 class="fw-bold text-success mb-2">Hore, Kamu Berhasil!</h4>
+          <p class="text-muted small mb-4">Selamat datang, Kak <strong>Admin Utama</strong>!<br>Gerbang digital library sekarang terbuka lebar.</p>
+          <button class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold" onclick="logoutSimulasi()">Keluar Akun</button>
         </div>
       </div>
     </div>
@@ -392,122 +411,125 @@
   </div>
 </footer>
 
-<style>
-  @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-    100% { transform: translateY(0px); }
-  }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bundle.min.js"></script>
 <script>
-  /* --- SWITCHING TAB ANIMATION --- */
+  /* --- GENERATOR BALON SABUN MELAYANG OTOMATIS --- */
+  const boxGelembung = document.getElementById('bubble-container');
+  for (let i = 0; i < 15; i++) {
+    let bola = document.createElement('div');
+    bola.className = 'bubble';
+    let ukuran = Math.random() * 50 + 15;
+    bola.style.width = ukuran + 'px';
+    bola.style.height = ukuran + 'px';
+    bola.style.left = Math.random() * 95 + 'vw';
+    bola.style.animationDelay = Math.random() * 4 + 's';
+    bola.style.animationDuration = Math.random() * 5 + 6 + 's';
+    boxGelembung.appendChild(bola);
+  }
+
+  /* --- LOGIKA PERPINDAHAN MENU TAB --- */
   function bukaTab(pilihan) {
-    const listPanel = ['mhs', 'php', 'kalk', 'log'];
-    
-    listPanel.forEach(item => {
-      let panel = document.getElementById('panel-' + item);
-      let tombol = document.getElementById('btn-' + item);
-      
-      if(item === pilihan) {
-        panel.classList.add('show');
-        tombol.classList.add('active');
+    const semuaPanel = ['mhs', 'php', 'kalk', 'log'];
+    semuaPanel.forEach(kunci => {
+      let panelTarget = document.getElementById('panel-' + kunci);
+      let tombolTarget = document.getElementById('btn-' + kunci);
+      if(kunci === pilihan) {
+        panelTarget.classList.add('show');
+        tombolTarget.classList.add('active');
       } else {
-        panel.classList.remove('show');
-        tombol.classList.remove('active');
+        panelTarget.classList.remove('show');
+        tombolTarget.classList.remove('active');
       }
     });
-
-    let param = new URL(window.location);
-    param.searchParams.set('view', pilihan);
-    history.replaceState(null, '', param);
+    let URLParam = new URL(window.location);
+    URLParam.searchParams.set('view', pilihan);
+    history.replaceState(null, '', URLParam);
   }
 
   window.addEventListener('DOMContentLoaded', function() {
-    let letView = new URLSearchParams(window.location.search).get('view') || 'mhs';
-    bukaTab(letView);
+    let viewBawaan = new URLSearchParams(window.location.search).get('view') || 'mhs';
+    bukaTab(viewBView=viewBawaan);
   });
 
-  /* --- FAST BATCH RENDER PHP ITERATION --- */
-  let statusJalan = false;
+  /* --- LOGIKA CETAK LOOP 1000 BARIS PHP SIMULASI --- */
+  let cekJalan = false;
   function mulaiLoopPhp() {
-    if (statusJalan) return;
-    statusJalan = true;
+    if (cekJalan) return;
+    cekJalan = true;
 
-    let targetBox = document.getElementById('boxLoopPhp');
-    let targetBtn = document.getElementById('startLoopBtn');
+    let papanTulis = document.getElementById('boxLoopPhp');
+    let tombolAksi = document.getElementById('startLoopBtn');
 
-    targetBox.innerHTML = '';
-    targetBtn.disabled = true;
-    targetBtn.textContent = '🚀 Sedang Memproses Baris Kilat...';
+    papanTulis.innerHTML = '';
+    tombolAksi.disabled = true;
+    tombolAksi.textContent = '⚡ Komputer sedang mengebut mengetik...';
 
-    let index = 1;
-    let batasMaksimal = 1000;
-    let renderPerBatch = 40;
+    let nomor = 1;
+    let limitMaks = 1000;
+    let tumpukanBatch = 60;
 
-    function renderLooping() {
-      let limitBatas = Math.min(index + renderPerBatch - 1, batasMaksimal);
-      let fragmenKertas = document.createDocumentFragment();
+    function cetakKeLayar() {
+      let batasAtas = Math.min(nomor + tumpukanBatch - 1, limitMaks);
+      let wadahKertas = document.createDocumentFragment();
 
-      for (; index <= limitBatas; index++) {
-        let barisDiv = document.createElement('div');
-        barisDiv.className = 'php-item animate__animated animate__fadeInLeft';
-        barisDiv.textContent = '⚡ [' + index + '] Ini adalah hari ke-' + index + ' belajar PHP';
-        fragmenKertas.appendChild(barisDiv);
+      for (; nomor <= batasAtas; nomor++) {
+        let barisElement = document.createElement('div');
+        barisElement.className = 'php-item';
+        barisElement.textContent = '🚀 Baris ke-[' + nomor + '] ── Gressilliya Damanik Semangat Belajar Coding PHP!';
+        wadahKertas.appendChild(barisElement);
       }
 
-      targetBox.appendChild(fragmenKertas);
-      targetBox.scrollTop = targetBox.scrollHeight;
+      papanTulis.appendChild(wadahKertas);
+      papanTulis.scrollTop = papanTulis.scrollHeight;
 
-      if (index <= batasMaksimal) {
-        requestAnimationFrame(renderLooping);
+      if (nomor <= limitMaks) {
+        requestAnimationFrame(cetakKeLayar);
       } else {
-        targetBtn.textContent = '🎉 Selesai! 1000 Baris Berhasil Dicetak.';
+        tombolAksi.textContent = '🎉 Sukses! 1000 Baris Selesai Dicetak.';
       }
     }
-    requestAnimationFrame(renderLooping);
+    requestAnimationFrame(cetakKeLayar);
   }
 
   function resetLoopPhp() {
-    statusJalan = false;
-    let targetBox = document.getElementById('boxLoopPhp');
-    let targetBtn = document.getElementById('startLoopBtn');
-    targetBox.innerHTML = '<span style="color: #64748b; font-style: italic;">Klik tombol di atas untuk memulai keajaiban loop...</span>';
-    targetBtn.disabled = false;
-    targetBtn.textContent = '✨ Jalankan Kode Perulangan';
+    cekJalan = false;
+    let papanTulis = document.getElementById('boxLoopPhp');
+    let tombolAksi = document.getElementById('startLoopBtn');
+    papanTulis.innerHTML = '<span style="color: #94a3b8; font-style: italic;">Kotak masih kosong melompong... Pencet tombol di atas!</span>';
+    tombolAksi.disabled = false;
+    tombolAksi.textContent = '🔥 Jalankan Mesin Loop';
   }
 
-  /* --- UTILITY CALCULATOR LOGIC --- */
+  /* --- LOGIKA KALKULATOR PINTAR REMAJA --- */
   function prosesHitungKalk() {
-    let inp1 = document.getElementById('kalk-num1').value.trim();
-    let inp2 = document.getElementById('kalk-num2').value.trim();
-    let ops  = document.getElementById('kalk-op').value;
+    let angka1 = document.getElementById('kalk-num1').value.trim();
+    let angka2 = document.getElementById('kalk-num2').value.trim();
+    let operatorAritmatika = document.getElementById('kalk-op').value;
 
-    if (inp1 === '' || inp2 === '') {
-      alert('Isi dulu kedua kotak angkanya ya!');
+    if (angka1 === '' || angka2 === '') {
+      alert('Ayo, isi dulu kedua kotak angkanya ya, Kak! 😉');
       return;
     }
 
-    let val1 = parseFloat(inp1);
-    let val2 = parseFloat(inp2);
-    let kalkulasiAkhir = 0;
-    let tandaSimbol = '';
+    let n1 = parseFloat(angka1);
+    let n2 = parseFloat(angka2);
+    let hasilMutlak = 0;
+    let teksTanda = '';
 
-    if (ops === 'plus') { kalkulasiAkhir = val1 + val2; tandaSimbol = '+'; }
-    else if (ops === 'minus') { kalkulasiAkhir = val1 - val2; tandaSimbol = '-'; }
-    else if (ops === 'kali') { kalkulasiAkhir = val1 * val2; tandaSimbol = '×'; }
-    else if (ops === 'bagi') {
-      if (val2 === 0) {
-        alert('Ups! Dalam matematika, angka tidak boleh dibagi dengan 0!');
+    if (operatorAritmatika === 'plus') { hasilMutlak = n1 + n2; teksTanda = '+'; }
+    else if (operatorAritmatika === 'minus') { hasilMutlak = n1 - n2; teksTanda = '-'; }
+    else if (operatorAritmatika === 'kali') { hasilMutlak = n1 * n2; teksTanda = '×'; }
+    else if (operatorAritmatika === 'bagi') {
+      if (n2 === 0) {
+        alert('Ups! Dalam matematika, angka apapun tidak bisa dibagi dengan 0!');
         return;
       }
-      kalkulasiAkhir = val1 / val2; tandaSimbol = '÷';
+      hasilMutlak = n1 / n2; teksTanda = '÷';
     }
 
-    kalkulasiAkhir = Math.round(kalkulasiAkhir * 1e10) / 1e10;
-    document.getElementById('kalk-proses-text').textContent = val1 + " " + tandaSimbol + " " + val2 + " adalah:";
-    document.getElementById('kalk-result-val').textContent = kalkulasiAkhir;
+    hasilMutlak = Math.round(hasilMutlak * 1e10) / 1e10;
+    document.getElementById('kalk-proses-text').textContent = n1 + " " + teksTanda + " " + n2 + " adalah :";
+    document.getElementById('kalk-result-val').textContent = hasilMutlak;
 
     document.getElementById('formKalkulator').style.display = 'none';
     document.getElementById('hasilKalkulator').style.display = 'block';
@@ -520,22 +542,18 @@
     document.getElementById('kalk-num2').value = '';
   }
 
-  /* --- SIMULATED ACCESS LOGIC --- */
+  /* --- SIMULASI PEMBUKA KUNCI PORTAL LOGIN --- */
   function eksekusiLoginSimulasi() {
-    let userAdmin = document.getElementById('userInput').value.trim();
-    let passAdmin = document.getElementById('passInput').value;
-    let panelError = document.getElementById('errorLoginAlert');
+    let adminUser = document.getElementById('userInput').value.trim();
+    let adminPass = document.getElementById('passInput').value;
+    let penandaSalah = document.getElementById('errorLoginAlert');
 
-    if (userAdmin === 'admin' && passAdmin === '1234') {
-      panelError.style.display = 'none';
+    if (adminUser === 'admin' && adminPass === '1234') {
+      penandaSalah.style.display = 'none';
       document.getElementById('cardLoginBox').style.display = 'none';
       document.getElementById('cardLoginSukses').style.display = 'block';
     } else {
-      panelError.style.display = 'block';
-      // Animasi getar ulang saat salah password
-      panelError.classList.remove('animate__shakeX');
-      void panelError.offsetWidth;
-      panelError.add('animate__shakeX');
+      penandaSalah.style.display = 'block';
     }
   }
 
@@ -547,5 +565,11 @@
     document.getElementById('errorLoginAlert').style.display = 'none';
   }
 </script>
+
+<style>
+  /* Tambahan animasi CSS khusus putaran bintang login */
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+</style>
+
 </body>
 </html>
