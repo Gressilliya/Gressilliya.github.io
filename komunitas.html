@@ -3,573 +3,1042 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DigiSmart Library</title>
-  
+  <title>Komunitas | DigiSmart Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Lora:wght@700&display=swap" rel="stylesheet">
 
   <style>
-    /* ── BASE BACKGROUND BIRU PASTEL & SOFT LEMBUT ── */
+    :root {
+      --blue:      #3b82f6;
+      --blue-dark: #1d4ed8;
+      --blue-soft: #eff6ff;
+      --blue-mid:  #bfdbfe;
+      --bg:        #f8faff;
+      --white:     #ffffff;
+      --text:      #1e293b;
+      --muted:     #64748b;
+      --border:    #e2e8f0;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #e0f2fe 0%, #f0f9ff 50%, #eef2ff 100%);
-      color: #334155;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
     }
 
-    /* Efek Gelembung Transparan Naik ke Atas (Gaya Anak Sekolah) */
-    .bubble {
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(56, 189, 248, 0.25);
-      animation: floatUp 7s infinite ease-in-out;
-      pointer-events: none;
-      z-index: -1;
+    /* ─── TOPBAR ─── */
+    .topbar {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 1px 12px rgba(59,130,246,0.06);
     }
-    @keyframes floatUp {
-      0% { transform: translateY(100vh) scale(0.3); opacity: 0; }
-      50% { opacity: 0.8; transform: translateX(25px) scale(0.8); }
-      100% { transform: translateY(-10vh) scale(1.1); opacity: 0; }
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      height: 64px;
     }
-
-    /* ── NAVBAR SESUAI GAMBAR ASLI & REVISI MENU KAMU ── */
-    .navbar {
-      background: rgba(255, 255, 255, 0.9) !important;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(14, 165, 233, 0.08);
-      padding: 16px 0;
-      border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
     }
-    .navbar-brand {
-      font-weight: 800;
-      color: #0284c7 !important;
-      font-size: 1.35rem;
+    .brand-icon {
+      width: 38px;
+      height: 38px;
+      background: var(--blue-soft);
+      border: 1.5px solid var(--blue-mid);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: var(--blue);
     }
-    .nav-link {
-      color: #475569 !important;
-      font-weight: 600;
-      font-size: 0.95rem;
-      padding: 8px 16px !important;
-      border-radius: 14px;
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    .brand-name {
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      color: var(--text);
+      font-weight: 700;
     }
-    .nav-link:hover, .nav-link.active {
-      color: #0284c7 !important;
-      background: rgba(56, 189, 248, 0.15);
-      transform: scale(1.05) translateY(-2px);
+    .brand-name span {
+      color: var(--blue);
     }
-    
-    /* Tombol User Profile Gressilliya */
-    .btn-user-profile {
-      background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      font-size: 0.83rem;
+      font-weight: 500;
+      color: var(--muted);
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    .nav-links a:hover { color: var(--blue); background: var(--blue-soft); }
+    .nav-links a.active { color: var(--blue); font-weight: 600; }
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
       color: white;
-      border-radius: 25px;
-      padding: 8px 22px;
-      font-size: 0.9rem;
+      border: none;
+      border-radius: 10px;
+      padding: 8px 18px;
+      font-size: 0.83rem;
       font-weight: 600;
       text-decoration: none;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      transition: background 0.2s;
+    }
+    .btn-profile:hover { background: var(--blue-dark); color: white; }
+
+    /* ─── MOBILE MENU ─── */
+    .hamburger {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-right { display: none; }
+      .hamburger { display: block; }
+    }
+
+    /* ─── HERO STRIP ─── */
+    .hero-strip {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 36px 24px 0;
+    }
+    .hero-inner {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .breadcrumb-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .breadcrumb-row a { color: var(--blue); text-decoration: none; }
+    .breadcrumb-row a:hover { text-decoration: underline; }
+    .hero-strip h1 {
+      font-family: 'Lora', serif;
+      font-size: 1.85rem;
+      color: var(--text);
+      line-height: 1.25;
+      margin-bottom: 6px;
+    }
+    .hero-strip h1 em {
+      font-style: normal;
+      color: var(--blue);
+    }
+    .hero-strip p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+
+    /* ─── PILL TABS ─── */
+    .pill-tabs {
+      display: flex;
+      gap: 6px;
+      padding-bottom: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .pill-tabs::-webkit-scrollbar { display: none; }
+    .pill-tab {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 20px;
+      border-radius: 12px 12px 0 0;
+      border: 1px solid transparent;
+      border-bottom: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      position: relative;
+      bottom: -1px;
+    }
+    .pill-tab:hover { color: var(--blue); background: var(--blue-soft); }
+    .pill-tab.active {
+      color: var(--blue-dark);
+      background: var(--bg);
+      border-color: var(--border);
+      border-bottom-color: var(--bg);
+    }
+    .pill-tab .tab-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--blue-mid);
+    }
+    .pill-tab.active .tab-dot { background: var(--blue); }
+
+    /* ─── CONTENT AREA ─── */
+    .content-area {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 32px 24px 80px;
+    }
+    .tab-panel { display: none; }
+    .tab-panel.show { display: block; }
+
+    /* ─── LAYOUT: 2-COLUMN SIDEBAR ─── */
+    .panel-grid {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 20px;
+      align-items: start;
+    }
+    @media (max-width: 700px) {
+      .panel-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── WHITE BOX ─── */
+    .box {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .box-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .box-header-icon {
+      width: 34px; height: 34px;
+      background: var(--blue-soft);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue);
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .box-header h3 {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--text);
+      margin: 0;
+    }
+    .box-header p {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin: 0;
+    }
+    .box-body { padding: 24px; }
+
+    /* ─── SIDEBAR INFO BOX ─── */
+    .info-box {
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-mid);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .info-box h5 {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .info-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-num {
+      min-width: 22px; height: 22px;
+      background: var(--blue);
+      color: white;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .info-text { font-size: 0.8rem; color: #1e40af; line-height: 1.5; }
+
+    /* ─── BUTTONS ─── */
+    .btn-blue {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 6px 15px rgba(2, 132, 199, 0.2);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .btn-user-profile:hover {
-      transform: scale(1.1) rotate(2deg);
-      box-shadow: 0 10px 22px rgba(2, 132, 199, 0.35);
-      color: white;
-    }
-
-    /* ── BANNER HEADER DENGAN ANIMASI OMBAK BERGERAK ── */
-    .page-header {
-      background: #ffffff;
-      padding: 50px 0 70px 0;
-      margin-bottom: 40px;
-      border-radius: 0 0 60px 60px;
-      position: relative;
-      box-shadow: 0 10px 30px rgba(14, 165, 233, 0.03);
-    }
-    .page-header h1 {
-      font-weight: 800;
-      font-size: 2.6rem;
-      color: #0369a1;
-    }
-    
-    /* Gerakan Ombak Air Interaktif */
-    .wave-container {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      overflow: hidden;
-      line-height: 0;
-    }
-    .wave-container svg {
-      position: relative;
-      display: block;
-      width: calc(130% + 1.3px);
-      height: 35px;
-      animation: waveMotion 6s infinite linear;
-    }
-    @keyframes waveMotion {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-25%); }
-    }
-
-    /* ── TAB PILIHAN MENU MEMBAL (BOUNCY TABS) ── */
-    .nav-tabs-custom {
-      display: flex;
-      gap: 15px;
-      justify-content: center;
-      margin-bottom: 45px;
-    }
-    .tab-item-btn {
-      background: #ffffff;
-      border: 2px solid #bae6fd;
-      padding: 14px 28px;
-      font-weight: 700;
-      font-size: 1rem;
-      color: #0369a1;
-      border-radius: 22px;
-      cursor: pointer;
-      box-shadow: 0 6px 12px rgba(14, 165, 233, 0.04);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .tab-item-btn:hover {
-      background: #f0f9ff;
-      transform: translateY(-6px);
-      box-shadow: 0 12px 20px rgba(14, 165, 233, 0.15);
-    }
-    .tab-item-btn.active {
-      color: white;
-      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
-      border-color: #0284c7;
-      transform: scale(1.08) translateY(-4px);
-      box-shadow: 0 10px 25px rgba(2, 132, 199, 0.3);
-    }
-
-    /* ── PANEL KARTU INTERAKTIF LUAR BIASA ── */
-    .content-panel { display: none; }
-    .content-panel.show { display: block; }
-
-    .custom-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 35px;
-      border: 3px solid rgba(255, 255, 255, 0.8);
-      padding: 40px;
-      box-shadow: 0 20px 45px rgba(14, 165, 233, 0.05);
-      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-    .custom-card:hover {
-      transform: translateY(-12px);
-      box-shadow: 0 30px 50px rgba(14, 165, 233, 0.15);
-      border-color: rgba(56, 189, 248, 0.3);
-    }
-
-    /* Desain Input Imut */
-    .form-control, .form-select {
-      border: 2px solid #bae6fd;
-      padding: 14px 20px;
-      border-radius: 20px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    .form-control:focus, .form-select:focus {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 5px rgba(2, 132, 199, 0.2);
-      transform: scale(1.02);
-    }
-
-    /* Tombol Klik Animatif */
-    .btn-primary-custom {
-      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      background: var(--blue);
       color: white;
       border: none;
-      border-radius: 20px;
-      padding: 16px 32px;
-      font-weight: 700;
-      box-shadow: 0 8px 20px rgba(2, 132, 199, 0.25);
-      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 10px;
+      padding: 12px 24px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s;
     }
-    .btn-primary-custom:hover {
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 15px 30px rgba(2, 132, 199, 0.4);
-      color: white;
+    .btn-blue:hover { background: var(--blue-dark); color: white; transform: translateY(-1px); }
+    .btn-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: transparent;
+      color: var(--blue);
+      border: 1.5px solid var(--blue-mid);
+      border-radius: 10px;
+      padding: 8px 18px;
+      font-size: 0.83rem;
+      font-weight: 600;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .btn-outline:hover { background: var(--blue-soft); border-color: var(--blue); }
+
+    /* ─── CRUD HERO ─── */
+    .crud-hero {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border-radius: 14px;
+      padding: 36px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .crud-hero .big-icon {
+      font-size: 2.8rem;
+      color: var(--blue);
+      margin-bottom: 14px;
+      display: block;
+    }
+    .crud-hero h2 {
+      font-family: 'Lora', serif;
+      font-size: 1.3rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+    .crud-hero p { font-size: 0.86rem; color: var(--muted); margin-bottom: 20px; }
+
+    .crud-pills {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .crud-pill {
+      padding: 6px 16px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: var(--white);
+      border: 1px solid var(--blue-mid);
+      color: var(--blue-dark);
     }
 
-    /* Layar Konsol Loop PHP */
-    .php-list-box {
-      background: #0c4a6e;
-      color: #38bdf8;
-      border-radius: 25px;
-      padding: 25px;
-      max-height: 300px;
+    /* ─── LOOP/TERMINAL ─── */
+    .terminal-bar {
+      background: #1e293b;
+      border-radius: 12px 12px 0 0;
+      padding: 10px 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .t-dot {
+      width: 11px; height: 11px;
+      border-radius: 50%;
+    }
+    .t-red   { background: #ef4444; }
+    .t-amber { background: #f59e0b; }
+    .t-green { background: #10b981; }
+    .terminal-title {
+      margin-left: 8px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.4);
+      font-family: monospace;
+    }
+    .terminal-body {
+      background: #0f172a;
+      border-radius: 0 0 12px 12px;
+      padding: 16px;
+      max-height: 320px;
       overflow-y: auto;
       font-family: 'Courier New', monospace;
-      font-size: 0.95rem;
-      border: 3px solid #0284c7;
-      box-shadow: inset 0 5px 15px rgba(0,0,0,0.2);
+      font-size: 0.82rem;
     }
-    .php-item {
-      padding: 6px 0;
-      border-bottom: 1px dashed #0284c7;
+    .terminal-body::-webkit-scrollbar { width: 4px; }
+    .terminal-body::-webkit-scrollbar-thumb { background: var(--blue); border-radius: 4px; }
+    .t-line {
+      color: #93c5fd;
+      padding: 2px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.6;
     }
-    
-    /* Tampilan Hasil Hitung Kalkulator */
-    .calc-result-box {
-      background: #f0f9ff;
-      color: #0369a1;
-      border: 3px dashed #38bdf8;
-      padding: 25px;
-      border-radius: 25px;
-      font-size: 2.2rem;
+    .t-line .t-num { color: #475569; }
+    .t-placeholder { color: rgba(255,255,255,0.2); font-style: italic; }
+    .t-success { color: #34d399; }
+
+    /* ─── FORM ─── */
+    .f-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .f-input, .f-select {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid var(--border);
+      border-radius: 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.9rem;
+      background: var(--bg);
+      color: var(--text);
+      margin-bottom: 16px;
+      transition: border-color 0.2s;
+      appearance: none;
+    }
+    .f-input:focus, .f-select:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--white);
+    }
+    .f-group { margin-bottom: 4px; }
+
+    .result-display {
+      background: linear-gradient(135deg, #1d4ed8, #3b82f6);
+      color: white;
+      border-radius: 12px;
+      padding: 28px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .result-display .r-label {
+      font-size: 0.78rem;
+      opacity: 0.7;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .result-display .r-val {
+      font-size: 2.4rem;
       font-weight: 800;
+      letter-spacing: -1px;
     }
 
-    /* Ikon Berputar / Melayang Otomatis */
-    .floating-icon {
-      display: inline-block;
-      animation: bounceFloat 3s ease-in-out infinite;
+    /* ─── LOGIN ─── */
+    .login-visual {
+      height: 90px;
+      background: linear-gradient(135deg, #eff6ff, #dbeafe);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
     }
-    @keyframes bounceFloat {
-      0% { transform: translateY(0px); }
-      50% { transform: translateY(-12px) scale(1.05); }
-      100% { transform: translateY(0px); }
+    .login-visual i { font-size: 2.2rem; color: var(--blue); }
+    .error-strip {
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.83rem;
+      color: #dc2626;
+      display: none;
+      margin-bottom: 14px;
     }
+    .hint-strip {
+      background: var(--blue-soft);
+      border: 1px solid var(--blue-mid);
+      border-radius: 8px;
+      padding: 10px 14px;
+      font-size: 0.8rem;
+      color: #1d4ed8;
+      text-align: center;
+      margin-top: 14px;
+    }
+    .sukses-panel { display: none; }
+    .sukses-inner {
+      text-align: center;
+      padding: 16px 0;
+    }
+    .sukses-badge {
+      width: 64px; height: 64px;
+      background: #ecfdf5;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 1.8rem;
+    }
+    .sukses-inner h3 {
+      font-family: 'Lora', serif;
+      font-size: 1.25rem;
+      color: #065f46;
+      margin-bottom: 6px;
+    }
+    .sukses-inner p { font-size: 0.86rem; color: var(--muted); }
 
+    /* ─── FOOTER ─── */
     footer {
-      background: #ffffff;
-      border-top: 2px solid #e0f2fe;
-      padding: 25px 0;
-      margin-top: 80px;
-      font-weight: 600;
-      color: #0369a1;
-      border-radius: 40px 40px 0 0;
+      background: #1e293b;
+      color: rgba(255,255,255,0.5);
+      padding: 48px 24px 24px;
+      margin-top: 40px;
     }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-brand-name {
+      font-family: 'Lora', serif;
+      color: white;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+    footer h6 {
+      color: rgba(255,255,255,0.9);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      margin-bottom: 14px;
+    }
+    footer a {
+      display: block;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.83rem;
+      margin-bottom: 8px;
+      transition: color 0.2s;
+    }
+    footer a:hover { color: white; }
+    footer hr { border-color: rgba(255,255,255,0.1); margin: 28px 0 18px; }
+    footer small { font-size: 0.8rem; }
+    .footer-accent { color: var(--blue); }
+    .social-row { display: flex; gap: 8px; margin-top: 14px; }
+    .social-btn {
+      width: 32px; height: 32px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      text-decoration: none;
+      font-size: 0.85rem;
+      transition: all 0.2s;
+    }
+    .social-btn:hover { border-color: var(--blue); color: var(--blue); }
   </style>
 </head>
 <body>
 
-<div id="bubble-container"></div>
-
-<nav class="navbar navbar-expand-lg sticky-top animate__animated animate__fadeInDown">
-  <div class="container">
-    <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-      <i class="bi bi-balloon-heart-fill text-info floating-icon"></i> DigiSmart Library
+<!-- ─── TOPBAR ─── -->
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="index.html" class="brand">
+      <div class="brand-icon"><i class="bi bi-book-half"></i></div>
+      <span class="brand-name">Digi<span>Smart</span> Library</span>
     </a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
-      <span class="navbar-toggler-icon"></span>
+
+    <button class="hamburger" id="hambBtn" onclick="toggleMobile()">
+      <i class="bi bi-list"></i>
     </button>
-    <div class="collapse navbar-collapse" id="mainNavbar">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Beranda</a></li>
-        <li class="nav-item"><a class="nav-link" href="fitur_literasi.html">Fitur Literasi</a></li>
-        <li class="nav-item"><a class="nav-link" href="jelajahi.html">Jelajahi</a></li>
-        <li class="nav-item"><a class="nav-link" href="news_events.html">News & Events</a></li>
-        <li class="nav-item"><a class="nav-link active" href="komunitas.html">Komunitas</a></li>
-      </ul>
-      <div class="d-flex align-items-center gap-3">
-        <a href="#" class="text-secondary"><i class="bi bi-search fs-5"></i></a>
-        <a href="soal3.php" class="btn-user-profile">
-          <i class="bi bi-emoji-wink-fill animate__animated animate__pulse animate__infinite"></i> gressilliya
-        </a>
-      </div>
-    </div>
-  </div>
-</nav>
 
-<div class="page-header text-center animate__animated animate__zoomIn">
-  <div class="container">
-    <h1>Komunitas</h1>
-    <p class="text-muted fw-medium" id="typing-text">Tempat berkumpulnya anak-anak hebat penjelajah digital library!</p>
-  </div>
-  <div class="wave-container">
-    <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-      <path d="M0,60 C150,100 350,20 500,60 C650,100 850,20 1000,60 C1150,100 1300,20 1450,60 L1450,120 L0,120 Z" style="stroke: none; fill: #e0f2fe;"></path>
-    </svg>
-  </div>
-</div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="index.html">Beranda</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="koleksi.html">Koleksi</a></li>
+      <li><a href="events.html">Event</a></li>
+      <li><a href="contactus.html">Kontak</a></li>
+      <li><a href="komunitas.html" class="active">Komunitas</a></li>
+    </ul>
 
-<div class="container">
-  
-  <div class="nav-tabs-custom">
-    <button class="tab-item-btn active" id="btn-mhs" onclick="bukaTab('mhs')">🎒 Data Mahasiswa</button>
-    <button class="tab-item-btn" id="btn-php" onclick="bukaTab('php')">⚡ Loop 1000 Baris</button>
-    <button class="tab-item-btn" id="btn-kalk" onclick="bukaTab('kalk')">🧮 Kalkulator Pintar</button>
-    <button class="tab-item-btn" id="btn-log" onclick="bukaTab('log')">🔑 Portal Admin</button>
-  </div>
-
-  <div class="content-panel show animate__animated animate__fadeInUp" id="panel-mhs">
-    <div class="custom-card text-center py-5">
-      <div class="mb-4">
-        <i class="bi bi-folder2-open text-info floating-icon" style="font-size: 5rem;"></i>
-      </div>
-      <h3 class="fw-bold">Database Mahasiswa Komunitas</h3>
-      <p class="text-muted mx-auto mb-4" style="max-width: 550px;">
-        Gunakan tombol sakti di bawah untuk melompat langsung ke mesin sistem pengolahan database siswa eksternal kamu.
-      </p>
-      <a href="soal4.php" class="btn btn-primary-custom px-5 py-3 fs-5">
-        Buka Panel CRUD Sekarang
+    <div class="nav-right">
+      <a href="soal3.php" class="btn-profile">
+        <i class="bi bi-person-circle"></i> gressilliya
       </a>
     </div>
   </div>
+</header>
 
-  <div class="content-panel animate__animated animate__fadeInUp" id="panel-php">
-    <div class="row justify-content-center">
-      <div class="col-md-7">
-        <div class="custom-card">
-          <h4 class="fw-bold mb-2 text-primary">⚡ Cetak Kilat 1000 Baris</h4>
-          <p class="text-muted small mb-4">Lihat kekuatan komputer menulis baris kalimat ribuan kali secara kilat!</p>
-          <button class="btn btn-primary-custom w-100 mb-4" id="startLoopBtn" onclick="mulaiLoopPhp()">🔥 Jalankan Mesin Loop</button>
-          
-          <div class="php-list-box" id="boxLoopPhp">
-            <span style="color: #94a3b8; font-style: italic;">Kotak masih kosong melompong... Pencet tombol di atas!</span>
-          </div>
-          <button class="btn btn-link text-danger btn-sm mt-3 w-100 text-center text-decoration-none fw-bold" onclick="resetLoopPhp()">↺ Bersihkan Semua Baris</button>
-        </div>
-      </div>
+<!-- ─── HERO STRIP ─── -->
+<div class="hero-strip">
+  <div class="hero-inner">
+    <div class="breadcrumb-row">
+      <a href="index.html">Beranda</a>
+      <i class="bi bi-chevron-right" style="font-size:0.65rem;"></i>
+      <span>Komunitas</span>
+    </div>
+    <h1>Ruang Belajar <em>Interaktif</em></h1>
+    <p>Eksplorasi fitur pemrograman web bersama komunitas DigiSmart Library.</p>
+
+    <div class="pill-tabs">
+      <button class="pill-tab active" id="tab-mhs" onclick="bukaTab('mhs')">
+        <span class="tab-dot"></span> Data Mahasiswa
+      </button>
+      <button class="pill-tab" id="tab-php" onclick="bukaTab('php')">
+        <span class="tab-dot"></span> Simulasi PHP
+      </button>
+      <button class="pill-tab" id="tab-kalk" onclick="bukaTab('kalk')">
+        <span class="tab-dot"></span> Kalkulator
+      </button>
+      <button class="pill-tab" id="tab-log" onclick="bukaTab('log')">
+        <span class="tab-dot"></span> Login Admin
+      </button>
     </div>
   </div>
-
-  <div class="content-panel animate__animated animate__fadeInUp" id="panel-kalk">
-    <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="custom-card" id="formKalkulator">
-          <h4 class="fw-bold mb-4 text-center text-info">🧮 Hitung Angka Pintar</h4>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Isi Angka Pertama</label>
-            <input type="number" class="form-control text-center fs-5" id="kalk-num1" placeholder="Ketik angka disini">
-          </div>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Isi Angka Kedua</label>
-            <input type="number" class="form-control text-center fs-5" id="kalk-num2" placeholder="Ketik angka disini">
-          </div>
-          <div class="mb-4">
-            <label class="form-label small fw-bold text-secondary">Pilih Simbol Aritmatika</label>
-            <select class="form-select text-center fw-bold" id="kalk-op">
-              <option value="plus">➕ Tambah (+)</option>
-              <option value="minus">➖ Kurang (-)</option>
-              <option value="kali">✖ Kali (×)</option>
-              <option value="bagi">➗ Bagi (÷)</option>
-            </select>
-          </div>
-          <button class="btn btn-primary-custom w-100 py-3" onclick="prosesHitungKalk()">BOOM! Dapatkan Hasil ✨</button>
-        </div>
-
-        <div class="custom-card text-center animate__animated animate__bounceIn" id="hasilKalkulator" style="display: none;">
-          <h4 class="fw-bold mb-3 text-success">🎉 Yey, Berhasil Dihitung! 🎉</h4>
-          <div class="text-muted small mb-2 fs-5" id="kalk-proses-text"></div>
-          <div class="calc-result-box mb-4 animate__animated animate__pulse animate__infinite" id="kalk-result-val">0</div>
-          <button class="btn btn-outline-info btn-sm rounded-pill px-4 fw-bold" onclick="kembaliKeKalkForm()">← Hitung Ulang Angka Lain</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="content-panel animate__animated animate__fadeInUp" id="panel-log">
-    <div class="row justify-content-center">
-      <div class="col-md-5">
-        <div class="custom-card" id="cardLoginBox">
-          <h4 class="fw-bold mb-4 text-center text-primary">🔐 Pintu Kunci Admin</h4>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Username</label>
-            <input type="text" class="form-control" id="userInput" placeholder="Isi kata: admin">
-          </div>
-          <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Password</label>
-            <input type="password" class="form-control" id="passInput" placeholder="Isi kata: 1234">
-          </div>
-          <div class="alert alert-danger p-3 small animate__animated animate__shakeX" id="errorLoginAlert" style="display: none; border-radius: 20px;">
-            ❌ Yahh! Kunci salah, coba cek contekannya di bawah ya!
-          </div>
-          <button class="btn btn-primary-custom w-100 py-3 mt-2" onclick="eksekusiLoginSimulasi()">Buka Kunci Sistem 🗝️</button>
-          <div class="text-center mt-3 text-muted small bg-light p-2 rounded-4">
-            Bocoran Sandi: <strong>admin</strong> & <strong>1234</strong>
-          </div>
-        </div>
-
-        <div class="custom-card text-center py-5 animate__animated animate__tada" id="cardLoginSukses" style="display: none;">
-          <div class="text-success mb-3"><i class="bi bi-star-circle" style="font-size: 5rem; display:inline-block; animation:spin 4s linear infinite;"></i></div>
-          <h4 class="fw-bold text-success mb-2">Hore, Kamu Berhasil!</h4>
-          <p class="text-muted small mb-4">Selamat datang, Kak <strong>Admin Utama</strong>!<br>Gerbang digital library sekarang terbuka lebar.</p>
-          <button class="btn btn-outline-danger btn-sm rounded-pill px-4 fw-bold" onclick="logoutSimulasi()">Keluar Akun</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </div>
 
-<footer class="text-center">
-  <div class="container">
-    <p class="mb-0">© 2026 <strong>Gressilliya Damanik</strong> — DigiSmart Library. All Rights Reserved.</p>
+<!-- ─── CONTENT ─── -->
+<div class="content-area">
+
+  <!-- PANEL: DATA MAHASISWA -->
+  <div class="tab-panel show" id="panel-mhs">
+    <div class="panel-grid">
+      <div>
+        <div class="crud-hero">
+          <i class="bi bi-person-vcard-fill big-icon"></i>
+          <h2>Database Mahasiswa Komunitas</h2>
+          <p>Akses modul PHP untuk pengelolaan data mahasiswa secara langsung pada server lokal.</p>
+          <a href="soal4.php" class="btn-blue" style="margin-bottom:20px;">
+            <i class="bi bi-box-arrow-up-right"></i> Buka Panel CRUD
+          </a>
+          <div class="crud-pills">
+            <span class="crud-pill"><i class="bi bi-plus-lg"></i> Create</span>
+            <span class="crud-pill"><i class="bi bi-eye"></i> Read</span>
+            <span class="crud-pill"><i class="bi bi-pencil"></i> Update</span>
+            <span class="crud-pill"><i class="bi bi-trash"></i> Delete</span>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-box">
+          <h5><i class="bi bi-info-circle-fill"></i> Tentang Fitur Ini</h5>
+          <div class="info-row">
+            <div class="info-num">1</div>
+            <div class="info-text">Tambah data mahasiswa baru ke database sekolah.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num">2</div>
+            <div class="info-text">Lihat dan cari seluruh daftar mahasiswa yang terdaftar.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num">3</div>
+            <div class="info-text">Edit informasi mahasiswa kapan saja dengan mudah.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num">4</div>
+            <div class="info-text">Hapus data mahasiswa yang sudah tidak aktif.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: SIMULASI PHP -->
+  <div class="tab-panel" id="panel-php">
+    <div class="panel-grid">
+      <div>
+        <div class="box">
+          <div class="box-header">
+            <div class="box-header-icon"><i class="bi bi-terminal"></i></div>
+            <div>
+              <h3>Simulasi Perulangan PHP</h3>
+              <p>Loop dari 1 hingga 1000 secara real-time</p>
+            </div>
+          </div>
+          <div class="box-body">
+            <button class="btn-blue w-100" id="btnLoop" onclick="mulaiLoop()" style="margin-bottom:16px;justify-content:center;">
+              <i class="bi bi-play-fill"></i>
+              <span id="loopBtnTxt">Jalankan Loop PHP</span>
+            </button>
+
+            <div class="terminal-bar">
+              <div class="t-dot t-red"></div>
+              <div class="t-dot t-amber"></div>
+              <div class="t-dot t-green"></div>
+              <span class="terminal-title">output.php — bash</span>
+            </div>
+            <div class="terminal-body" id="loopBox">
+              <div class="t-placeholder">// klik "Jalankan Loop PHP" untuk memulai...</div>
+            </div>
+
+            <button class="btn-outline" onclick="resetLoop()" style="margin-top:12px;">
+              <i class="bi bi-arrow-counterclockwise"></i> Reset Output
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-box">
+          <h5><i class="bi bi-code-slash"></i> Cara Kerja Loop</h5>
+          <div class="info-row">
+            <div class="info-num">1</div>
+            <div class="info-text"><code>for ($i=1; $i&lt;=1000; $i++)</code> — perulangan mulai dari angka 1.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num">2</div>
+            <div class="info-text">Setiap iterasi mencetak satu baris teks ke layar.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num">3</div>
+            <div class="info-text">Perulangan berhenti otomatis ketika $i melebihi 1000.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: KALKULATOR -->
+  <div class="tab-panel" id="panel-kalk">
+    <div class="panel-grid">
+      <div>
+        <div class="box" id="kalkFormBox">
+          <div class="box-header">
+            <div class="box-header-icon"><i class="bi bi-calculator"></i></div>
+            <div>
+              <h3>Kalkulator Sederhana</h3>
+              <p>Masukkan dua angka dan pilih operasi</p>
+            </div>
+          </div>
+          <div class="box-body">
+            <div class="f-group">
+              <label class="f-label">Bilangan Pertama</label>
+              <input type="number" class="f-input" id="bil1" placeholder="Contoh: 25">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Bilangan Kedua</label>
+              <input type="number" class="f-input" id="bil2" placeholder="Contoh: 8">
+            </div>
+            <div class="f-group">
+              <label class="f-label">Operasi Hitung</label>
+              <select class="f-select" id="operasi">
+                <option value="tambah">+ Penjumlahan</option>
+                <option value="kurang">− Pengurangan</option>
+                <option value="kali">× Perkalian</option>
+                <option value="bagi">÷ Pembagian</option>
+              </select>
+            </div>
+            <button class="btn-blue w-100" onclick="hitungKalk()" style="justify-content:center;padding:12px;">
+              Hitung Sekarang
+            </button>
+          </div>
+        </div>
+
+        <div class="box" id="hasilBox" style="display:none;">
+          <div class="box-header">
+            <div class="box-header-icon"><i class="bi bi-check2-circle"></i></div>
+            <div>
+              <h3>Hasil Perhitungan</h3>
+              <p id="kalkEkspresi">—</p>
+            </div>
+          </div>
+          <div class="box-body">
+            <div class="result-display">
+              <div class="r-label">Hasil</div>
+              <div class="r-val" id="kalkHasil">0</div>
+            </div>
+            <button class="btn-outline w-100" onclick="kembaliKalk()" style="justify-content:center;">
+              <i class="bi bi-arrow-left"></i> Hitung Lagi
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="info-box">
+          <h5><i class="bi bi-lightbulb-fill"></i> Tips Kalkulator</h5>
+          <div class="info-row">
+            <div class="info-num"><i class="bi bi-plus" style="font-size:0.7rem;"></i></div>
+            <div class="info-text">Penjumlahan menggabungkan dua nilai menjadi satu total.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num"><i class="bi bi-dash" style="font-size:0.7rem;"></i></div>
+            <div class="info-text">Pengurangan mencari selisih antara dua angka.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num"><i class="bi bi-x" style="font-size:0.7rem;"></i></div>
+            <div class="info-text">Perkalian menjumlahkan angka pertama sejumlah angka kedua.</div>
+          </div>
+          <div class="info-row">
+            <div class="info-num"><i class="bi bi-slash" style="font-size:0.7rem;"></i></div>
+            <div class="info-text">Pembagian tidak bisa dengan angka 0 — akan muncul peringatan.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PANEL: LOGIN -->
+  <div class="tab-panel" id="panel-log">
+    <div style="max-width:420px; margin: 0 auto;">
+      <div class="box" id="loginPanel">
+        <div class="box-header">
+          <div class="box-header-icon"><i class="bi bi-shield-lock"></i></div>
+          <div>
+            <h3>Login Admin</h3>
+            <p>Masuk ke sistem perpustakaan</p>
+          </div>
+        </div>
+        <div class="box-body">
+          <div class="login-visual">
+            <i class="bi bi-person-badge"></i>
+          </div>
+          <div class="f-group">
+            <label class="f-label">Username</label>
+            <input type="text" class="f-input" id="loginUser" placeholder="Masukkan username">
+          </div>
+          <div class="f-group">
+            <label class="f-label">Password</label>
+            <input type="password" class="f-input" id="loginPass" placeholder="Masukkan password">
+          </div>
+          <div class="error-strip" id="loginErr">
+            <i class="bi bi-exclamation-circle me-1"></i> Username atau password salah!
+          </div>
+          <button class="btn-blue w-100" onclick="doLogin()" style="justify-content:center;padding:12px;">
+            <i class="bi bi-box-arrow-in-right"></i> Masuk ke Sistem
+          </button>
+          <div class="hint-strip">
+            <i class="bi bi-key me-1"></i>
+            Gunakan: <strong>admin</strong> / <strong>1234</strong>
+          </div>
+        </div>
+      </div>
+
+      <div class="box sukses-panel" id="suksesPanel">
+        <div class="box-body">
+          <div class="sukses-inner">
+            <div class="sukses-badge">✅</div>
+            <h3>Login Berhasil!</h3>
+            <p>Selamat datang, <strong id="namaAdmin">Admin</strong>.<br>Semua fitur portal sudah terbuka.</p>
+            <button class="btn-outline" onclick="logoutSimulasi()" style="margin-top:20px;">
+              <i class="bi bi-box-arrow-left"></i> Keluar Sistem
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- /content-area -->
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-inner">
+    <div class="row g-4 mb-2">
+      <div class="col-lg-4">
+        <div class="footer-brand-name">DigiSmart Library</div>
+        <p style="font-size:0.83rem;line-height:1.6;">Perpustakaan digital sekolah yang menghubungkan siswa, guru, dan komunitas melalui budaya membaca.</p>
+        <div class="social-row">
+          <a href="#" class="social-btn"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-twitter-x"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Navigasi</h6>
+        <a href="index.html">Beranda</a>
+        <a href="about.html">About</a>
+        <a href="koleksi.html">Koleksi</a>
+        <a href="events.html">Event</a>
+        <a href="contactus.html">Kontak</a>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Komunitas</h6>
+        <a href="komunitas.html?view=mhs">Data Mahasiswa</a>
+        <a href="komunitas.html?view=php">Simulasi PHP</a>
+        <a href="komunitas.html?view=kalk">Kalkulator</a>
+        <a href="komunitas.html?view=log">Login Admin</a>
+      </div>
+      <div class="col-lg-3 offset-lg-1">
+        <h6>Kontak</h6>
+        <p style="font-size:0.83rem;margin-bottom:8px;"><i class="bi bi-geo-alt me-2" style="color:var(--blue)"></i>Jl. Pahlawan Seribu, Tangerang 15322</p>
+        <p style="font-size:0.83rem;"><i class="bi bi-envelope me-2" style="color:var(--blue)"></i>perpus@digismart.sch.id</p>
+      </div>
+    </div>
+    <hr>
+    <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;">
+      <small>© 2026 <strong style="color:white;">Gressilliya Damanik</strong> — DigiSmart Library. All Rights Reserved.</small>
+      <small class="footer-accent">Membangun Generasi Literat ✦</small>
+    </div>
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  /* --- GENERATOR BALON SABUN MELAYANG OTOMATIS --- */
-  const boxGelembung = document.getElementById('bubble-container');
-  for (let i = 0; i < 15; i++) {
-    let bola = document.createElement('div');
-    bola.className = 'bubble';
-    let ukuran = Math.random() * 50 + 15;
-    bola.style.width = ukuran + 'px';
-    bola.style.height = ukuran + 'px';
-    bola.style.left = Math.random() * 95 + 'vw';
-    bola.style.animationDelay = Math.random() * 4 + 's';
-    bola.style.animationDuration = Math.random() * 5 + 6 + 's';
-    boxGelembung.appendChild(bola);
-  }
-
-  /* --- LOGIKA PERPINDAHAN MENU TAB --- */
-  function bukaTab(pilihan) {
-    const semuaPanel = ['mhs', 'php', 'kalk', 'log'];
-    semuaPanel.forEach(kunci => {
-      let panelTarget = document.getElementById('panel-' + kunci);
-      let tombolTarget = document.getElementById('btn-' + kunci);
-      if(kunci === pilihan) {
-        panelTarget.classList.add('show');
-        tombolTarget.classList.add('active');
-      } else {
-        panelTarget.classList.remove('show');
-        tombolTarget.classList.remove('active');
-      }
+  /* ── TAB SWITCHING ── */
+  var tabs = ['mhs','php','kalk','log'];
+  function bukaTab(id) {
+    tabs.forEach(function(t) {
+      document.getElementById('panel-' + t).classList.remove('show');
+      document.getElementById('tab-' + t).classList.remove('active');
     });
-    let URLParam = new URL(window.location);
-    URLParam.searchParams.set('view', pilihan);
-    history.replaceState(null, '', URLParam);
+    document.getElementById('panel-' + id).classList.add('show');
+    document.getElementById('tab-' + id).classList.add('active');
+    var u = new URL(window.location);
+    u.searchParams.set('view', id);
+    history.replaceState(null, '', u);
   }
-
   window.addEventListener('DOMContentLoaded', function() {
-    let viewBawaan = new URLSearchParams(window.location.search).get('view') || 'mhs';
-    bukaTab(viewBView=viewBawaan);
+    var v = new URLSearchParams(window.location.search).get('view') || 'mhs';
+    bukaTab(v);
   });
 
-  /* --- LOGIKA CETAK LOOP 1000 BARIS PHP SIMULASI --- */
-  let cekJalan = false;
-  function mulaiLoopPhp() {
-    if (cekJalan) return;
-    cekJalan = true;
+  /* ── MOBILE MENU ── */
+  function toggleMobile() {
+    var nl = document.getElementById('navLinks');
+    nl.style.display = nl.style.display === 'flex' ? 'none' : 'flex';
+    nl.style.flexDirection = 'column';
+    nl.style.position = 'absolute';
+    nl.style.top = '64px';
+    nl.style.left = '0';
+    nl.style.right = '0';
+    nl.style.background = 'white';
+    nl.style.padding = '12px';
+    nl.style.boxShadow = '0 8px 24px rgba(0,0,0,0.1)';
+    nl.style.zIndex = '99';
+  }
 
-    let papanTulis = document.getElementById('boxLoopPhp');
-    let tombolAksi = document.getElementById('startLoopBtn');
-
-    papanTulis.innerHTML = '';
-    tombolAksi.disabled = true;
-    tombolAksi.textContent = '⚡ Komputer sedang mengebut mengetik...';
-
-    let nomor = 1;
-    let limitMaks = 1000;
-    let tumpukanBatch = 60;
-
-    function cetakKeLayar() {
-      let batasAtas = Math.min(nomor + tumpukanBatch - 1, limitMaks);
-      let wadahKertas = document.createDocumentFragment();
-
-      for (; nomor <= batasAtas; nomor++) {
-        let barisElement = document.createElement('div');
-        barisElement.className = 'php-item';
-        barisElement.textContent = '🚀 Baris ke-[' + nomor + '] ── Gressilliya Damanik Semangat Belajar Coding PHP!';
-        wadahKertas.appendChild(barisElement);
+  /* ── LOOP ── */
+  var loopRunning = false;
+  function mulaiLoop() {
+    if (loopRunning) return;
+    loopRunning = true;
+    var box = document.getElementById('loopBox');
+    var btn = document.getElementById('btnLoop');
+    var txt = document.getElementById('loopBtnTxt');
+    box.innerHTML = '';
+    btn.disabled = true;
+    txt.textContent = 'Sedang Berjalan...';
+    var i = 1, total = 1000, batch = 50;
+    function render() {
+      var lim = Math.min(i + batch - 1, total);
+      var frag = document.createDocumentFragment();
+      for (; i <= lim; i++) {
+        var div = document.createElement('div');
+        div.className = 't-line';
+        div.innerHTML = '<span class="t-num">' + String(i).padStart(4,' ') + ' |</span>  echo "Ini adalah hari ke-' + i + ' belajar PHP";';
+        frag.appendChild(div);
       }
-
-      papanTulis.appendChild(wadahKertas);
-      papanTulis.scrollTop = papanTulis.scrollHeight;
-
-      if (nomor <= limitMaks) {
-        requestAnimationFrame(cetakKeLayar);
+      box.appendChild(frag);
+      box.scrollTop = box.scrollHeight;
+      if (i <= total) {
+        requestAnimationFrame(render);
       } else {
-        tombolAksi.textContent = '🎉 Sukses! 1000 Baris Selesai Dicetak.';
+        var done = document.createElement('div');
+        done.className = 't-success';
+        done.textContent = '✓ Loop selesai — 1000 baris berhasil dicetak.';
+        box.appendChild(done);
+        txt.textContent = 'Selesai!';
       }
     }
-    requestAnimationFrame(cetakKeLayar);
+    requestAnimationFrame(render);
+  }
+  function resetLoop() {
+    loopRunning = false;
+    document.getElementById('loopBox').innerHTML = '<div class="t-placeholder">// klik "Jalankan Loop PHP" untuk memulai...</div>';
+    var btn = document.getElementById('btnLoop');
+    btn.disabled = false;
+    document.getElementById('loopBtnTxt').textContent = 'Jalankan Loop PHP';
   }
 
-  function resetLoopPhp() {
-    cekJalan = false;
-    let papanTulis = document.getElementById('boxLoopPhp');
-    let tombolAksi = document.getElementById('startLoopBtn');
-    papanTulis.innerHTML = '<span style="color: #94a3b8; font-style: italic;">Kotak masih kosong melompong... Pencet tombol di atas!</span>';
-    tombolAksi.disabled = false;
-    tombolAksi.textContent = '🔥 Jalankan Mesin Loop';
-  }
-
-  /* --- LOGIKA KALKULATOR PINTAR REMAJA --- */
-  function prosesHitungKalk() {
-    let angka1 = document.getElementById('kalk-num1').value.trim();
-    let angka2 = document.getElementById('kalk-num2').value.trim();
-    let operatorAritmatika = document.getElementById('kalk-op').value;
-
-    if (angka1 === '' || angka2 === '') {
-      alert('Ayo, isi dulu kedua kotak angkanya ya, Kak! 😉');
-      return;
+  /* ── KALKULATOR ── */
+  function hitungKalk() {
+    var v1 = document.getElementById('bil1').value.trim();
+    var v2 = document.getElementById('bil2').value.trim();
+    var op = document.getElementById('operasi').value;
+    if (!v1 || !v2) { alert('Isi kedua bilangan terlebih dahulu.'); return; }
+    var n1 = parseFloat(v1), n2 = parseFloat(v2), hasil, simbol;
+    switch(op) {
+      case 'tambah': hasil = n1+n2; simbol='+'; break;
+      case 'kurang': hasil = n1-n2; simbol='−'; break;
+      case 'kali':   hasil = n1*n2; simbol='×'; break;
+      case 'bagi':
+        if (n2===0){ alert('Tidak bisa membagi dengan angka 0!'); return; }
+        hasil = n1/n2; simbol='÷'; break;
     }
-
-    let n1 = parseFloat(angka1);
-    let n2 = parseFloat(angka2);
-    let hasilMutlak = 0;
-    let teksTanda = '';
-
-    if (operatorAritmatika === 'plus') { hasilMutlak = n1 + n2; teksTanda = '+'; }
-    else if (operatorAritmatika === 'minus') { hasilMutlak = n1 - n2; teksTanda = '-'; }
-    else if (operatorAritmatika === 'kali') { hasilMutlak = n1 * n2; teksTanda = '×'; }
-    else if (operatorAritmatika === 'bagi') {
-      if (n2 === 0) {
-        alert('Ups! Dalam matematika, angka apapun tidak bisa dibagi dengan 0!');
-        return;
-      }
-      hasilMutlak = n1 / n2; teksTanda = '÷';
-    }
-
-    hasilMutlak = Math.round(hasilMutlak * 1e10) / 1e10;
-    document.getElementById('kalk-proses-text').textContent = n1 + " " + teksTanda + " " + n2 + " adalah :";
-    document.getElementById('kalk-result-val').textContent = hasilMutlak;
-
-    document.getElementById('formKalkulator').style.display = 'none';
-    document.getElementById('hasilKalkulator').style.display = 'block';
+    hasil = Math.round(hasil*1e10)/1e10;
+    document.getElementById('kalkEkspresi').textContent = n1 + ' ' + simbol + ' ' + n2 + ' =';
+    document.getElementById('kalkHasil').textContent = hasil;
+    document.getElementById('kalkFormBox').style.display = 'none';
+    document.getElementById('hasilBox').style.display = 'block';
+  }
+  function kembaliKalk() {
+    document.getElementById('kalkFormBox').style.display = 'block';
+    document.getElementById('hasilBox').style.display = 'none';
+    document.getElementById('bil1').value='';
+    document.getElementById('bil2').value='';
   }
 
-  function kembaliKeKalkForm() {
-    document.getElementById('formKalkulator').style.display = 'block';
-    document.getElementById('hasilKalkulator').style.display = 'none';
-    document.getElementById('kalk-num1').value = '';
-    document.getElementById('kalk-num2').value = '';
-  }
-
-  /* --- SIMULASI PEMBUKA KUNCI PORTAL LOGIN --- */
-  function eksekusiLoginSimulasi() {
-    let adminUser = document.getElementById('userInput').value.trim();
-    let adminPass = document.getElementById('passInput').value;
-    let penandaSalah = document.getElementById('errorLoginAlert');
-
-    if (adminUser === 'admin' && adminPass === '1234') {
-      penandaSalah.style.display = 'none';
-      document.getElementById('cardLoginBox').style.display = 'none';
-      document.getElementById('cardLoginSukses').style.display = 'block';
+  /* ── LOGIN ── */
+  function doLogin() {
+    var u = document.getElementById('loginUser').value.trim();
+    var p = document.getElementById('loginPass').value;
+    var err = document.getElementById('loginErr');
+    if (u==='admin' && p==='1234') {
+      err.style.display='none';
+      document.getElementById('namaAdmin').textContent = 'Admin';
+      document.getElementById('loginPanel').style.display='none';
+      var sp = document.getElementById('suksesPanel');
+      sp.style.display='block';
+      sp.classList.add('show');
     } else {
-      penandaSalah.style.display = 'block';
+      err.style.display='block';
     }
   }
-
   function logoutSimulasi() {
-    document.getElementById('cardLoginBox').style.display = 'block';
-    document.getElementById('cardLoginSukses').style.display = 'none';
-    document.getElementById('userInput').value = '';
-    document.getElementById('passInput').value = '';
-    document.getElementById('errorLoginAlert').style.display = 'none';
+    document.getElementById('loginPanel').style.display='block';
+    document.getElementById('suksesPanel').style.display='none';
+    document.getElementById('loginUser').value='';
+    document.getElementById('loginPass').value='';
+    document.getElementById('loginErr').style.display='none';
   }
+  document.addEventListener('keydown', function(e){
+    if(e.key==='Enter' && document.getElementById('panel-log').classList.contains('show')) doLogin();
+  });
 </script>
-
-<style>
-  /* Tambahan animasi CSS khusus putaran bintang login */
-  @keyframes spin { 100% { transform: rotate(360deg); } }
-</style>
-
 </body>
 </html>
