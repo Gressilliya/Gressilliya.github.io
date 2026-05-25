@@ -3,102 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Komunitas - DigiSmart Library</title>
+  <title>Komunitas Ceria - DigiSmart Library</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
-    /* ── STYLE ASLI DIGISMART LIBRARY KM ── */
+    /* ── STYLE ASLI DIGISMART X ANAK SMP STYLE ── */
     body {
       font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      color: #212529;
+      background-color: #f4f7fe; /* Biru super lembut */
+      color: #2d3748;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    /* Navbar Putih Bersih */
+    /* Dekorasi Lingkaran Latar Belakang khas Anak Muda */
+    body::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(13, 110, 253, 0.08) 0%, transparent 70%);
+      top: -50px;
+      right: -50px;
+      z-index: -1;
+    }
+    body::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.1) 0%, transparent 70%);
+      bottom: 50px;
+      left: -100px;
+      z-index: -1;
+    }
+
+    /* Navbar Putih Bersih Gressilliya */
     .navbar {
       background-color: #ffffff !important;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+      box-shadow: 0 4px 20px rgba(13, 110, 253, 0.05);
       padding: 15px 0;
     }
     .navbar-brand {
       font-weight: 700;
       color: #212529 !important;
-      font-size: 1.25rem;
+      font-size: 1.3rem;
     }
     .nav-link {
       color: #495057 !important;
       font-weight: 500;
       font-size: 0.95rem;
       padding: 0 15px !important;
+      transition: all 0.3s ease;
     }
     .nav-link:hover, .nav-link.active {
       color: #0d6efd !important;
+      transform: translateY(-2px);
     }
     
     /* Tombol Biru User Gressilliya */
     .btn-user-profile {
-      background-color: #0d6efd;
+      background: linear-gradient(135deg, #0d6efd 0%, #3b82f6 100%);
       color: white;
-      border-radius: 6px;
-      padding: 6px 18px;
+      border-radius: 30px; /* Lebih membulat & ramah remaja */
+      padding: 8px 22px;
       font-size: 0.9rem;
-      font-weight: 500;
+      font-weight: 600;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      box-shadow: 0 4px 14px rgba(13, 110, 253, 0.2);
+      transition: all 0.3s ease;
     }
     .btn-user-profile:hover {
-      background-color: #0b5ed7;
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(13, 110, 253, 0.3);
       color: white;
     }
 
-    /* ── HERO BANNER BERSIH ── */
+    /* ── HEADER BANNER CERIA ── */
     .page-header {
       background: #ffffff;
-      border-bottom: 1px solid #e9ecef;
-      padding: 40px 0;
-      margin-bottom: 30px;
+      border-bottom: 2px solid #eef2ff;
+      padding: 50px 0;
+      margin-bottom: 40px;
+      border-radius: 0 0 40px 40px;
+      box-shadow: 0 10px 30px rgba(13, 110, 253, 0.02);
     }
     .page-header h1 {
       font-weight: 700;
-      font-size: 2rem;
-      color: #212529;
+      font-size: 2.3rem;
+      color: #1e293b;
     }
     .page-header p {
-      color: #6c757d;
+      color: #64748b;
+      font-size: 1.1rem;
       margin-bottom: 0;
     }
 
-    /* ── TAB NAVIGATION MENU ── */
+    /* ── TAB NAVIGATION BUTTONS ── */
     .nav-tabs-custom {
       display: flex;
-      gap: 10px;
-      border-bottom: 2px solid #dee2e6;
-      margin-bottom: 30px;
+      gap: 12px;
+      border-bottom: 2px solid #e2e8f0;
+      margin-bottom: 35px;
+      padding-bottom: 5px;
+      overflow-x: auto;
     }
     .tab-item-btn {
       background: none;
       border: none;
-      padding: 12px 20px;
+      padding: 12px 24px;
       font-weight: 600;
-      font-size: 0.95rem;
-      color: #6c757d;
-      border-bottom: 3px solid transparent;
+      font-size: 1rem;
+      color: #64748b;
+      border-radius: 12px 12px 0 0;
+      position: relative;
       cursor: pointer;
-      transition: all 0.2s;
+      white-space: nowrap;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .tab-item-btn:hover {
       color: #0d6efd;
+      background: rgba(13, 110, 253, 0.05);
+      transform: translateY(-2px);
     }
     .tab-item-btn.active {
       color: #0d6efd;
-      border-bottom-color: #0d6efd;
+      background: #ffffff;
+    }
+    .tab-item-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -7px;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #0d6efd;
+      border-radius: 10px;
     }
 
-    /* Panel Konten */
+    /* Panel Konten Utama */
     .content-panel {
       display: none;
     }
@@ -106,48 +155,88 @@
       display: block;
     }
 
-    /* Card Box Minimalis */
+    /* Card Box Minimalis Bouncy Interaktif */
     .custom-card {
       background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid #e9ecef;
-      padding: 30px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+      border-radius: 24px;
+      border: 1px solid rgba(13, 110, 253, 0.08);
+      padding: 35px;
+      box-shadow: 0 10px 25px rgba(13, 110, 253, 0.03);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .custom-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 35px rgba(13, 110, 253, 0.08);
     }
 
-    /* Style Khusus Fitur */
+    /* Form Input yang Lucu & Lembut */
+    .form-control, .form-select {
+      border: 2px solid #e2e8f0;
+      padding: 12px 18px;
+      border-radius: 14px;
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+    }
+
+    /* Tombol Interaktif */
+    .btn-primary-custom {
+      background: linear-gradient(135deg, #0d6efd 0%, #2563eb 100%);
+      color: white;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 28px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 15px rgba(13, 110, 253, 0.2);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .btn-primary-custom:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 25px rgba(13, 110, 253, 0.35);
+      color: white;
+    }
+
+    /* Hasil Simulasi */
     .php-list-box {
-      background: #212529;
-      color: #f8f9fa;
-      border-radius: 8px;
-      padding: 15px;
-      max-height: 350px;
+      background: #1e293b;
+      color: #38bdf8;
+      border-radius: 16px;
+      padding: 20px;
+      max-height: 300px;
       overflow-y: auto;
-      font-family: monospace;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 0.9rem;
+      box-shadow: inset 0 4px 10px rgba(0,0,0,0.2);
     }
     .php-item {
-      padding: 4px 0;
-      border-bottom: 1px solid #343a40;
+      padding: 6px 0;
+      border-bottom: 1px solid #334155;
     }
     
     .calc-result-box {
-      background: #e7f1ff;
-      color: #0c4128;
-      border-left: 5px solid #0d6efd;
-      padding: 15px;
-      border-radius: 6px;
-      font-size: 1.5rem;
+      background: #eff6ff;
+      color: #1d4ed8;
+      border: 2px dashed #3b82f6;
+      padding: 20px;
+      border-radius: 16px;
+      font-size: 1.8rem;
       font-weight: 700;
+      animation: pulse 1.5s infinite;
     }
 
-    /* Footer Clean */
+    /* Footer Gressilliya */
     footer {
       background: #ffffff;
-      border-top: 1px solid #e9ecef;
-      padding: 20px 0;
-      margin-top: 60px;
-      color: #6c757d;
-      font-size: 0.9rem;
+      border-top: 2px solid #eef2ff;
+      padding: 25px 0;
+      margin-top: 80px;
+      color: #64748b;
+      font-size: 0.95rem;
+      border-radius: 40px 40px 0 0;
     }
   </style>
 </head>
@@ -156,7 +245,7 @@
 <nav class="navbar navbar-expand-lg sticky-top">
   <div class="container">
     <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-      <i class="bi bi-book-half text-primary"></i> DigiSmart Library
+      <i class="bi bi-book-half text-primary animate__animated animate__pulse animate__infinite"></i> DigiSmart Library
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar">
       <span class="navbar-toggler-icon"></span>
@@ -171,123 +260,125 @@
         <li class="nav-item"><a class="nav-link active" href="komunitas.html">Komunitas</a></li>
       </ul>
       <div class="d-flex align-items-center gap-3">
-        <a href="#" class="text-dark"><i class="bi bi-search"></i></a>
+        <a href="#" class="text-secondary"><i class="bi bi-search"></i></a>
         <a href="soal3.php" class="btn-user-profile">
-          <i class="bi bi-person-fill"></i> gressilliya
+          <i class="bi bi-person-circle"></i> gressilliya
         </a>
       </div>
     </div>
   </div>
 </nav>
 
-<div class="page-header">
+<div class="page-header text-center animate__animated animate__fadeIn">
   <div class="container">
-    <h1>Ruang Komunitas</h1>
-    <p>Pusat simulasi pemrograman web, alat utilitas, dan pengelolaan data internal perpustakaan digital.</p>
+    <h1 class="display-6">🚀 Ruang Kreatif Komunitas</h1>
+    <p>Mari belajar pemrograman web bersama dengan alat interaktif yang seru!</p>
   </div>
 </div>
 
 <div class="container">
   
-  <div class="nav-tabs-custom">
-    <button class="tab-item-btn active" id="btn-mhs" onclick="bukaTab('mhs')"><i class="bi bi-hdd-network me-2"></i>Data Mahasiswa</button>
-    <button class="tab-item-btn" id="btn-php" onclick="bukaTab('php')"><i class="bi bi-filetype-php me-2"></i>Belajar PHP</button>
-    <button class="tab-item-btn" id="btn-kalk" onclick="bukaTab('kalk')"><i class="bi bi-calculator me-2"></i>Kalkulator</button>
-    <button class="tab-item-btn" id="btn-log" onclick="bukaTab('log')"><i class="bi bi-lock me-2"></i>Login Admin</button>
+  <div class="nav-tabs-custom justify-content-md-center">
+    <button class="tab-item-btn active" id="btn-mhs" onclick="bukaTab('mhs')">🎒 Data Mahasiswa</button>
+    <button class="tab-item-btn" id="btn-php" onclick="bukaTab('php')">💻 Simulasi PHP</button>
+    <button class="tab-item-btn" id="btn-kalk" onclick="bukaTab('kalk')">🔢 Kalkulator</button>
+    <button class="tab-item-btn" id="btn-log" onclick="bukaTab('log')">🔒 Login Admin</button>
   </div>
 
-  <div class="content-panel show" id="panel-mhs">
+  <div class="content-panel show animate__animated animate__fadeInUp" id="panel-mhs">
     <div class="custom-card text-center py-5">
-      <div class="mb-3 text-primary"><i class="bi bi-database-check" style="font-size: 3.5rem;"></i></div>
+      <div class="mb-4 text-primary">
+        <i class="bi bi-folder-symlink" style="font-size: 4rem; display: inline-block; animation: float 3s ease-in-out infinite;"></i>
+      </div>
       <h3 class="fw-bold">Database Mahasiswa Komunitas</h3>
       <p class="text-muted mx-auto mb-4" style="max-width: 550px;">
-        Gunakan modul eksternal PHP untuk memproses Create, Read, Update, dan Delete langsung ke server database MySQL lokal Anda.
+        Akses modul eksternal PHP untuk melakukan Create, Read, Update, dan Delete langsung pada server database lokal kamu.
       </p>
-      <a href="soal4.php" class="btn btn-primary px-4 py-2 fw-medium">
-        <i class="bi bi-box-arrow-up-right me-2"></i>Buka Panel Data Mahasiswa (CRUD)
+      <a href="soal4.php" class="btn btn-primary-custom px-5 py-3">
+        <i class="bi bi-rocket-takeoff-fill me-2"></i>Buka Panel CRUD Mahasiswa
       </a>
     </div>
   </div>
 
-  <div class="content-panel" id="panel-php">
+  <div class="content-panel animate__animated animate__fadeInUp" id="panel-php">
     <div class="row justify-content-center">
-      <div class="col-md-6">
+      <div class="col-md-7">
         <div class="custom-card">
-          <h4 class="fw-bold mb-3">Soal 1: Perulangan 1 - 1000</h4>
-          <p class="text-muted small">Simulasi struktur looping PHP untuk menampilkan daftar baris kalimat belajar.</p>
-          <button class="btn btn-primary w-100 mb-3 fw-medium" id="startLoopBtn" onclick="mulaiLoopPhp()">▶ Jalankan Loop</button>
+          <h4 class="fw-bold mb-2">Simulasi Looping 1 Sampai 1000</h4>
+          <p class="text-muted small mb-4">Yuk lihat bagaimana cara komputer mencetak kalimat sebanyak 1000 kali dalam hitungan detik!</p>
+          <button class="btn btn-primary-custom w-100 mb-3" id="startLoopBtn" onclick="mulaiLoopPhp()">✨ Jalankan Kode Perulangan</button>
           
           <div class="php-list-box" id="boxLoopPhp">
-            <span class="text-secondary italic">Klik tombol untuk memulai simulasi perulangan...</span>
+            <span style="color: #64748b; font-style: italic;">Klik tombol di atas untuk memulai keajaiban loop...</span>
           </div>
-          <button class="btn btn-outline-secondary btn-sm mt-3" onclick="resetLoopPhp()">↺ Reset Tampilan</button>
+          <button class="btn btn-link btn-sm mt-3 text-decoration-none w-100 text-center" onclick="resetLoopPhp()">↺ Bersihkan Layar</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="content-panel" id="panel-kalk">
+  <div class="content-panel animate__animated animate__fadeInUp" id="panel-kalk">
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="custom-card" id="formKalkulator">
-          <h4 class="fw-bold mb-4 text-center">🔢 Kalkulator Sederhana</h4>
+          <h4 class="fw-bold mb-4 text-center">🧮 Kalkulator Pintar</h4>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Bilangan Pertama</label>
-            <input type="number" class="form-control" id="kalk-num1" placeholder="0" step="any">
+            <label class="form-label small fw-bold text-secondary">Masukkan Angka Pertama</label>
+            <input type="number" class="form-control text-center" id="kalk-num1" placeholder="Contoh: 12">
           </div>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Bilangan Kedua</label>
-            <input type="number" class="form-control" id="kalk-num2" placeholder="0" step="any">
+            <label class="form-label small fw-bold text-secondary">Masukkan Angka Kedua</label>
+            <input type="number" class="form-control text-center" id="kalk-num2" placeholder="Contoh: 5">
           </div>
           <div class="mb-4">
-            <label class="form-label small fw-bold text-secondary">Operasi Aritmatika</label>
-            <select class="form-select" id="kalk-op">
-              <option value="plus">Penjumlahan (+)</option>
-              <option value="minus">Pengurangan (-)</option>
-              <option value="kali">Perkalian (×</option>
-              <option value="bagi">Pembagian (÷)</option>
+            <label class="form-label small fw-bold text-secondary">Pilih Operasi</label>
+            <select class="form-select text-center" id="kalk-op">
+              <option value="plus">Tambah (+)</option>
+              <option value="minus">Kurang (-)</option>
+              <option value="kali">Kali (×</option>
+              <option value="bagi">Bagi (÷)</option>
             </select>
           </div>
-          <button class="btn btn-primary w-100 py-2 fw-medium" onclick="prosesHitungKalk()">Hitung Sekarang</button>
+          <button class="btn btn-primary-custom w-100 py-3" onclick="prosesHitungKalk()">Hitung Sekarang ✨</button>
         </div>
 
-        <div class="custom-card text-center" id="hasilKalkulator" style="display: none;">
-          <h4 class="fw-bold mb-3">Hasil Perhitungan</h4>
+        <div class="custom-card text-center animate__animated animate__zoomIn" id="hasilKalkulator" style="display: none;">
+          <h4 class="fw-bold mb-3">Tadaa! Ini Hasilnya 🎉</h4>
           <div class="text-muted small mb-2" id="kalk-proses-text"></div>
           <div class="calc-result-box mb-4" id="kalk-result-val">0</div>
-          <button class="btn btn-outline-primary btn-sm" onclick="kembaliKeKalkForm()">← Hitung Angka Lain</button>
+          <button class="btn btn-outline-primary btn-sm rounded-pill px-4" onclick="kembaliKeKalkForm()">← Hitung Angka Lain</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div class="content-panel" id="panel-log">
+  <div class="content-panel animate__animated animate__fadeInUp" id="panel-log">
     <div class="row justify-content-center">
       <div class="col-md-5">
         <div class="custom-card" id="cardLoginBox">
-          <h4 class="fw-bold mb-4 text-center">🔐 Login Portal Admin</h4>
+          <h4 class="fw-bold mb-4 text-center">🔑 Gerbang Admin Perpustakaan</h4>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Username</label>
-            <input type="text" class="form-control" id="userInput" placeholder="Masukkan username">
+            <label class="form-label small fw-bold text-secondary">Nama Pengguna (Username)</label>
+            <input type="text" class="form-control" id="userInput" placeholder="Ketik admin">
           </div>
           <div class="mb-3">
-            <label class="form-label small fw-bold text-secondary">Password</label>
-            <input type="password" class="form-control" id="passInput" placeholder="Masukkan password">
+            <label class="form-label small fw-bold text-secondary">Kata Sandi (Password)</label>
+            <input type="password" class="form-control" id="passInput" placeholder="Ketik 1234">
           </div>
-          <div class="alert alert-danger p-2 small" id="errorLoginAlert" style="display: none; border-radius: 6px;">
-            <i class="bi bi-x-circle me-1"></i> Username atau password salah.
+          <div class="alert alert-danger p-2 small animate__animated animate__shakeX" id="errorLoginAlert" style="display: none; border-radius: 12px;">
+            <i class="bi bi-emoji-frown me-1"></i> Wah, username atau password kamu keliru!
           </div>
-          <button class="btn btn-primary w-100 py-2 fw-medium mt-2" onclick="eksekusiLoginSimulasi()">Masuk Sistem</button>
-          <div class="text-center mt-3 text-muted" style="font-size: 0.78rem;">
-            Default Akun: <code class="fw-bold">admin</code> / <code class="fw-bold">1234</code>
+          <button class="btn btn-primary-custom w-100 py-3 mt-2" onclick="eksekusiLoginSimulasi()">Buka Pintu Masuk Portal</button>
+          <div class="text-center mt-3 text-muted" style="font-size: 0.8rem; background: #f8fafc; padding: 6px; border-radius: 8px;">
+            Petunjuk Rahasia: <code class="fw-bold">admin</code> / <code class="fw-bold">1234</code>
           </div>
         </div>
 
-        <div class="custom-card text-center py-4" id="cardLoginSukses" style="display: none;">
-          <div class="text-success mb-3"><i class="bi bi-shield-check" style="font-size: 3.5rem;"></i></div>
-          <h4 class="fw-bold text-success mb-2">Autentikasi Berhasil</h4>
-          <p class="text-muted small mb-4">Selamat datang kembali, <strong>Admin</strong>!<br>Akses akun Anda telah diverifikasi secara penuh.</p>
-          <button class="btn btn-outline-danger btn-sm" onclick="logoutSimulasi()">Keluar Akun</button>
+        <div class="custom-card text-center py-5 animate__animated animate__bounceIn" id="cardLoginSukses" style="display: none;">
+          <div class="text-success mb-3"><i class="bi bi-patch-check-fill" style="font-size: 4rem;"></i></div>
+          <h4 class="fw-bold text-success mb-2">Hore, Berhasil Masuk!</h4>
+          <p class="text-muted small mb-4">Selamat datang kembali, Kak <strong>Admin</strong>!<br>Seluruh fitur rahasia portal sekarang sudah terbuka.</p>
+          <button class="btn btn-outline-danger btn-sm rounded-pill px-4" onclick="logoutSimulasi()">Keluar Sistem</button>
         </div>
       </div>
     </div>
@@ -301,50 +392,44 @@
   </div>
 </footer>
 
+<style>
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-12px); }
+    100% { transform: translateY(0px); }
+  }
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  /* --- MEKANISME PERPINDAHAN TAB --- */
+  /* --- SWITCHING TAB ANIMATION --- */
   function bukaTab(pilihan) {
-    // Sembunyikan semua panel
-    document.getElementById('panel-mhs').classList.remove('show');
-    document.getElementById('panel-php').classList.remove('show');
-    document.getElementById('panel-kalk').classList.remove('show');
-    document.getElementById('panel-log').classList.remove('show');
+    const listPanel = ['mhs', 'php', 'kalk', 'log'];
+    
+    listPanel.forEach(item => {
+      let panel = document.getElementById('panel-' + item);
+      let tombol = document.getElementById('btn-' + item);
+      
+      if(item === pilihan) {
+        panel.classList.add('show');
+        tombol.classList.add('active');
+      } else {
+        panel.classList.remove('show');
+        tombol.classList.remove('active');
+      }
+    });
 
-    // Matikan semua tombol aktif
-    document.getElementById('btn-mhs').classList.remove('active');
-    document.getElementById('btn-php').classList.remove('active');
-    document.getElementById('btn-kalk').classList.remove('active');
-    document.getElementById('btn-log').classList.remove('active');
-
-    // Aktifkan pilihan user
-    if (pilihan === 'mhs') {
-      document.getElementById('panel-mhs').classList.add('show');
-      document.getElementById('btn-mhs').classList.add('active');
-    } else if (pilihan === 'php') {
-      document.getElementById('panel-php').classList.add('show');
-      document.getElementById('btn-php').classList.add('active');
-    } else if (pilihan === 'kalk') {
-      document.getElementById('panel-kalk').classList.add('show');
-      document.getElementById('btn-kalk').classList.add('active');
-    } else if (pilihan === 'log') {
-      document.getElementById('panel-log').classList.add('show');
-      document.getElementById('btn-log').classList.add('active');
-    }
-
-    // Ubah URL Parameter agar saat di-refresh tab tetap diam di tempat
     let param = new URL(window.location);
     param.searchParams.set('view', pilihan);
     history.replaceState(null, '', param);
   }
 
-  // Load Tab otomatis via URL Parameter sewaktu halaman dimuat
   window.addEventListener('DOMContentLoaded', function() {
     let letView = new URLSearchParams(window.location.search).get('view') || 'mhs';
     bukaTab(letView);
   });
 
-  /* --- JAVASCRIPT: BELAJAR PHP LOOPING --- */
+  /* --- FAST BATCH RENDER PHP ITERATION --- */
   let statusJalan = false;
   function mulaiLoopPhp() {
     if (statusJalan) return;
@@ -355,11 +440,11 @@
 
     targetBox.innerHTML = '';
     targetBtn.disabled = true;
-    targetBtn.textContent = 'Memuat Data Baris...';
+    targetBtn.textContent = '🚀 Sedang Memproses Baris Kilat...';
 
     let index = 1;
     let batasMaksimal = 1000;
-    let renderPerBatch = 50;
+    let renderPerBatch = 40;
 
     function renderLooping() {
       let limitBatas = Math.min(index + renderPerBatch - 1, batasMaksimal);
@@ -367,8 +452,8 @@
 
       for (; index <= limitBatas; index++) {
         let barisDiv = document.createElement('div');
-        barisDiv.className = 'php-item';
-        barisDiv.textContent = index + '. Ini adalah hari ke-' + index + ' belajar PHP';
+        barisDiv.className = 'php-item animate__animated animate__fadeInLeft';
+        barisDiv.textContent = '⚡ [' + index + '] Ini adalah hari ke-' + index + ' belajar PHP';
         fragmenKertas.appendChild(barisDiv);
       }
 
@@ -378,7 +463,7 @@
       if (index <= batasMaksimal) {
         requestAnimationFrame(renderLooping);
       } else {
-        targetBtn.textContent = 'Loop Selesai Ditampilkan!';
+        targetBtn.textContent = '🎉 Selesai! 1000 Baris Berhasil Dicetak.';
       }
     }
     requestAnimationFrame(renderLooping);
@@ -388,19 +473,19 @@
     statusJalan = false;
     let targetBox = document.getElementById('boxLoopPhp');
     let targetBtn = document.getElementById('startLoopBtn');
-    targetBox.innerHTML = '<span class="text-secondary italic">Klik tombol untuk memulai simulasi perulangan...</span>';
+    targetBox.innerHTML = '<span style="color: #64748b; font-style: italic;">Klik tombol di atas untuk memulai keajaiban loop...</span>';
     targetBtn.disabled = false;
-    targetBtn.textContent = '▶ Jalankan Loop';
+    targetBtn.textContent = '✨ Jalankan Kode Perulangan';
   }
 
-  /* --- JAVASCRIPT: KALKULATOR UTILITY --- */
+  /* --- UTILITY CALCULATOR LOGIC --- */
   function prosesHitungKalk() {
     let inp1 = document.getElementById('kalk-num1').value.trim();
     let inp2 = document.getElementById('kalk-num2').value.trim();
     let ops  = document.getElementById('kalk-op').value;
 
     if (inp1 === '' || inp2 === '') {
-      alert('Tolong input kedua angka nilainya terlebih dahulu!');
+      alert('Isi dulu kedua kotak angkanya ya!');
       return;
     }
 
@@ -414,14 +499,14 @@
     else if (ops === 'kali') { kalkulasiAkhir = val1 * val2; tandaSimbol = '×'; }
     else if (ops === 'bagi') {
       if (val2 === 0) {
-        alert('Kesalahan matematika: Angka tidak bisa dibagi dengan nol!');
+        alert('Ups! Dalam matematika, angka tidak boleh dibagi dengan 0!');
         return;
       }
       kalkulasiAkhir = val1 / val2; tandaSimbol = '÷';
     }
 
     kalkulasiAkhir = Math.round(kalkulasiAkhir * 1e10) / 1e10;
-    document.getElementById('kalk-proses-text').textContent = val1 + " " + tandaSimbol + " " + val2 + " =";
+    document.getElementById('kalk-proses-text').textContent = val1 + " " + tandaSimbol + " " + val2 + " adalah:";
     document.getElementById('kalk-result-val').textContent = kalkulasiAkhir;
 
     document.getElementById('formKalkulator').style.display = 'none';
@@ -435,7 +520,7 @@
     document.getElementById('kalk-num2').value = '';
   }
 
-  /* --- JAVASCRIPT: SIMULASI PORTAL LOGIN --- */
+  /* --- SIMULATED ACCESS LOGIC --- */
   function eksekusiLoginSimulasi() {
     let userAdmin = document.getElementById('userInput').value.trim();
     let passAdmin = document.getElementById('passInput').value;
@@ -447,6 +532,10 @@
       document.getElementById('cardLoginSukses').style.display = 'block';
     } else {
       panelError.style.display = 'block';
+      // Animasi getar ulang saat salah password
+      panelError.classList.remove('animate__shakeX');
+      void panelError.offsetWidth;
+      panelError.add('animate__shakeX');
     }
   }
 
