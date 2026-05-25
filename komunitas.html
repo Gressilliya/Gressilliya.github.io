@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Komunitas | DigiSmart Library</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <style>
+    /* ── BASE ── */
+    body { font-family: 'DM Sans', sans-serif; background: #f0f4f8; margin: 0; }
+
+    /* ── NAVBAR ── */
+    nav.navbar { background-color: #0f2240 !important; }
+    nav.navbar .navbar-brand { font-family: 'Playfair Display', serif; color: #fff; }
+    nav.navbar .nav-link { font-size: 0.85rem; letter-spacing: 0.05em; color: rgba(255,255,255,.75) !important; }
+    nav.navbar .nav-link:hover { color: #fff !important; }
+    nav.navbar .dropdown-menu { background-color: #0f2240; border: 1px solid rgba(255,255,255,0.1); }
+    nav.navbar .dropdown-item { color: rgba(255,255,255,.75); font-size: 0.85rem; padding: 8px 18px; }
+    nav.navbar .dropdown-item:hover { background-color: #1a3560; color: #fff; }
+
+    /* ── HERO ── */
+    .hero-section {
+      background: linear-gradient(135deg, #0f2240 0%, #1a3560 60%, #0f2240 100%);
+      color: #fff; padding: 44px 0 0;
+    }
+    .hero-section h1 { font-family: 'Playfair Display', serif; font-size: 1.9rem; }
+    .hero-section p  { color: rgba(255,255,255,0.6); font-size: 0.9rem; }
+
+    /* ── TAB BUTTONS ── */
+    .tab-nav { display: flex; gap: 0; margin-top: 28px; }
+    .tab-btn {
+      padding: 11px 30px; font-size: 0.85rem; font-weight: 600;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      color: rgba(255,255,255,0.5); background: transparent;
+      border: none; border-bottom: 3px solid transparent; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn:hover { color: rgba(255,255,255,0.85); }
+    .tab-btn.active { color: #f7c948; border-bottom-color: #f7c948; background: rgba(255,255,255,0.05); }
+    .tab-btn i { margin-right: 7px; }
+
+    /* ── TAB PANE ── */
+    .tab-pane { display: none; }
+    .tab-pane.show { display: block; }
+
+    /* ══════════════════════════════════════
+       TAB 1 — BELAJAR PHP (gaya soal1.php)
+       ══════════════════════════════════════ */
+    .php-page {
+      padding: 36px 20px;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+    .php-page h2 { color: #333; margin-bottom: 20px; font-size: 1.25rem; font-weight: 700; }
+
+    /* list-container persis soal1.php tapi warna DigiSmart */
+    .list-container {
+      background: #0f2240;
+      display: inline-block;
+      padding: 10px;
+      border-radius: 5px;
+      max-height: 400px;
+      overflow-y: auto;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .list-container::-webkit-scrollbar { width: 5px; }
+    .list-container::-webkit-scrollbar-thumb { background: #f7c948; border-radius: 3px; }
+    .list-item {
+      color: white;
+      padding: 6px 10px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-size: 14px;
+    }
+    .list-item:last-child { border-bottom: none; }
+
+    .btn-run {
+      width: 100%;
+      background: #0f2240; color: white;
+      padding: 11px; border: none; border-radius: 5px;
+      font-size: 15px; font-weight: 600; cursor: pointer;
+      margin-bottom: 14px; transition: background 0.2s;
+    }
+    .btn-run:hover   { background: #1a3560; }
+    .btn-run:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .btn-back-php {
+      display: inline-block; margin-top: 14px;
+      background: #0f2240; color: white;
+      padding: 9px 22px; border-radius: 5px;
+      text-decoration: none; font-size: 14px; font-weight: 600;
+      border: none; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-back-php:hover { background: #1a3560; color: #fff; }
+
+    /* ══════════════════════════════════════
+       TAB 2 — KALKULATOR (gaya soal2 + soal2_hasil)
+       ══════════════════════════════════════ */
+    .kalk-page {
+      padding: 36px 20px;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    /* -- FORM CARD (soal2.php) -- */
+    .kalk-card {
+      background: white; padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    .kalk-card h2 { text-align: center; color: #333; margin-bottom: 25px; font-size: 1.2rem; }
+    .kalk-card label { display: block; margin-bottom: 5px; color: #555; font-weight: bold; font-size: 0.9rem; }
+    .kalk-card input[type="number"],
+    .kalk-card select {
+      width: 100%; padding: 10px; margin-bottom: 15px;
+      border: 1px solid #ccc; border-radius: 5px;
+      font-size: 15px; box-sizing: border-box;
+    }
+    .kalk-card input[type="number"]:focus,
+    .kalk-card select:focus { outline: 2px solid #0f2240; border-color: #0f2240; }
+
+    .btn-hitung {
+      width: 100%; background: #0f2240; color: white;
+      padding: 12px; border: none; border-radius: 5px;
+      font-size: 16px; cursor: pointer; font-weight: 600;
+      transition: background 0.2s;
+    }
+    .btn-hitung:hover { background: #1a3560; }
+
+    /* -- HASIL CARD (soal2_hasil.php) -- */
+    .hasil-card {
+      background: white; padding: 40px;
+      border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      text-align: center; display: none;
+    }
+    .hasil-card h2 { color: #333; margin-bottom: 16px; font-size: 1.2rem; }
+    .result-box {
+      background: #0f2240; color: white;
+      padding: 20px; border-radius: 8px;
+      font-size: 26px; font-weight: 700; margin: 16px 0;
+    }
+    .detail { color: #555; font-size: 15px; margin-bottom: 4px; }
+    .error-msg { color: red; font-size: 15px; margin: 16px 0; }
+
+    .btn-back-kalk {
+      display: inline-block; background: #0f2240; color: white;
+      padding: 10px 24px; border-radius: 5px; text-decoration: none;
+      font-size: 14px; font-weight: 600; border: none; cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-back-kalk:hover { background: #1a3560; color: #fff; }
+
+    /* ══════════════════════════════════════
+       TAB 3 — LOGIN (gaya soal3_sukses.php)
+       ══════════════════════════════════════ */
+    .login-page {
+      padding: 36px 20px;
+      max-width: 430px;
+      margin: 0 auto;
+    }
+
+    /* -- LOGIN FORM CARD -- */
+    .login-card {
+      background: white; padding: 50px 40px;
+      border-radius: 12px; text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+    .login-card h2 { color: #333; margin: 0 0 24px; font-size: 1.25rem; }
+    .login-card label { display: block; text-align: left; margin-bottom: 5px; color: #555; font-weight: bold; font-size: 0.9rem; }
+    .login-card input[type="text"],
+    .login-card input[type="password"] {
+      width: 100%; padding: 10px 14px; margin-bottom: 15px;
+      border: 1px solid #ccc; border-radius: 6px;
+      font-size: 15px; box-sizing: border-box;
+    }
+    .login-card input:focus { outline: 2px solid #0f2240; border-color: #0f2240; }
+
+    .btn-login {
+      width: 100%; background: #0f2240; color: white;
+      padding: 12px; border: none; border-radius: 6px;
+      font-size: 16px; cursor: pointer; font-weight: 600;
+      transition: background 0.2s; margin-top: 4px;
+    }
+    .btn-login:hover { background: #1a3560; }
+    .login-error { color: red; font-size: 14px; margin-top: 10px; display: none; }
+
+    /* -- SUKSES CARD (soal3_sukses.php) -- */
+    .sukses-card {
+      background: white; padding: 50px 40px;
+      border-radius: 12px; text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+      display: none;
+    }
+    .sukses-card .icon { font-size: 60px; }
+    .sukses-card h2   { color: #28a745; margin: 15px 0 10px; font-size: 1.4rem; }
+    .sukses-card p    { color: #555; font-size: 0.95rem; }
+
+    .btn-back-login {
+      display: inline-block; margin-top: 20px;
+      background: #0f2240; color: white;
+      padding: 10px 25px; border-radius: 6px;
+      text-decoration: none; font-size: 14px; font-weight: 600;
+      border: none; cursor: pointer; transition: background 0.2s;
+    }
+    .btn-back-login:hover { background: #1a3560; color: #fff; }
+
+    /* ── FOOTER ── */
+    footer { background-color: #0a1828; margin-top: 0; }
+    footer p, footer small { color: rgba(255,255,255,0.5); font-size: 0.83rem; }
+    footer a { color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.85rem; }
+    footer a:hover { color: #fff; }
+    footer h6 { color: #fff; font-weight: 700; margin-bottom: 14px; letter-spacing: 0.04em; }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════ NAVBAR ═══════════ -->
+<nav class="navbar navbar-expand-lg sticky-top navbar-dark py-0">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 py-3" href="index.html">
+      <div class="bg-warning text-dark rounded fw-bold d-flex align-items-center justify-content-center"
+           style="width:36px;height:36px;">LS</div>
+      DigiSmart Library
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto text-uppercase" style="font-size:0.85rem;letter-spacing:0.05em;">
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="index.html">Beranda</a></li>
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="koleksi.html">Koleksi</a></li>
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="events.html">Event</a></li>
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="contactus.html">Kontak</a></li>
+
+        <!-- ★ MENU KOMUNITAS ★ -->
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-3 py-4"
+             href="#" id="komunitasDropdown" role="button"
+             data-bs-toggle="dropdown" aria-expanded="false"
+             style="border-bottom:3px solid #f7c948;">
+            Komunitas
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="komunitasDropdown"
+              style="background-color:#0f2240;">
+            <li><a class="dropdown-item" href="komunitas.html?tab=php">
+              <i class="bi bi-code-slash me-2"></i>1. Belajar PHP</a></li>
+            <li><a class="dropdown-item" href="komunitas.html?tab=kalkulator">
+              <i class="bi bi-calculator me-2"></i>2. Kalkulator</a></li>
+            <li><a class="dropdown-item" href="komunitas.html?tab=login">
+              <i class="bi bi-person-lock me-2"></i>3. Login</a></li>
+          </ul>
+        </li>
+        <!-- ★ AKHIR MENU KOMUNITAS ★ -->
+
+        <li class="nav-item"><a class="nav-link px-3 py-4" href="login.html">Login</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════ HERO + TAB NAV ═══════════ -->
+<div class="hero-section">
+  <div class="container">
+    <div class="mb-3">
+      <a href="index.html" class="btn btn-sm btn-outline-light rounded-pill px-3">
+        <i class="bi bi-arrow-left me-1"></i>Kembali ke Beranda
+      </a>
+    </div>
+    <h1 class="mb-1">Komunitas DigiSmart</h1>
+    <p class="mb-0">Belajar PHP, Kalkulator, dan Login bersama komunitas.</p>
+    <div class="tab-nav">
+      <button class="tab-btn active" id="btnTabPhp" onclick="switchTab('php')">
+        <i class="bi bi-code-slash"></i>Belajar PHP
+      </button>
+      <button class="tab-btn" id="btnTabKalk" onclick="switchTab('kalkulator')">
+        <i class="bi bi-calculator"></i>Kalkulator
+      </button>
+      <button class="tab-btn" id="btnTabLogin" onclick="switchTab('login')">
+        <i class="bi bi-person-lock"></i>Login
+      </button>
+    </div>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TAB 1 — BELAJAR PHP (soal1.php style)
+     ════════════════════════════════════════ -->
+<div class="tab-pane show" id="tabPhp">
+  <div class="php-page">
+    <h2>Soal 1 - Daftar Belajar PHP (1 – 1000)</h2>
+
+    <button class="btn-run" id="btnRunLoop" onclick="runLoop()">
+      ▶ Jalankan Loop
+    </button>
+
+    <div class="list-container" id="loopContainer">
+      <div class="list-item" style="color:rgba(255,255,255,0.45);font-style:italic;">
+        Klik tombol di atas untuk memulai perulangan...
+      </div>
+    </div>
+
+    <br>
+    <button class="btn-back-php" onclick="resetLoop()">↺ Reset</button>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TAB 2 — KALKULATOR (soal2 + soal2_hasil style)
+     ════════════════════════════════════════ -->
+<div class="tab-pane" id="tabKalkulator">
+  <div class="kalk-page">
+
+    <!-- FORM (soal2.php) -->
+    <div class="kalk-card" id="kalkForm">
+      <h2>🔢 Kalkulator Sederhana</h2>
+
+      <label>Bilangan 1:</label>
+      <input type="number" id="bil1" placeholder="Masukkan bilangan 1" step="any">
+
+      <label>Bilangan 2:</label>
+      <input type="number" id="bil2" placeholder="Masukkan bilangan 2" step="any">
+
+      <label>Pilih Operasi:</label>
+      <select id="operasi">
+        <option value="tambah">Penjumlahan (+)</option>
+        <option value="kurang">Pengurangan (-)</option>
+        <option value="kali">Perkalian (×)</option>
+        <option value="bagi">Pembagian (÷)</option>
+      </select>
+
+      <button class="btn-hitung" onclick="hitungKalk()">Hitung</button>
+    </div>
+
+    <!-- HASIL (soal2_hasil.php) -->
+    <div class="hasil-card" id="hasilCard">
+      <h2>📊 Hasil Perhitungan</h2>
+      <div id="hasilContent"></div>
+      <button class="btn-back-kalk" onclick="kembaliKalk()">← Hitung Lagi</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     TAB 3 — LOGIN (soal3 + soal3_sukses style)
+     ════════════════════════════════════════ -->
+<div class="tab-pane" id="tabLogin">
+  <div class="login-page">
+
+    <!-- FORM LOGIN -->
+    <div class="login-card" id="loginCard">
+      <h2>🔐 Login Admin</h2>
+
+      <label>Username:</label>
+      <input type="text" id="loginUser" placeholder="Masukkan username">
+
+      <label>Password:</label>
+      <input type="password" id="loginPass" placeholder="Masukkan password">
+
+      <button class="btn-login" onclick="doLogin()">Login</button>
+      <div class="login-error" id="loginError">⚠️ Username atau password salah!</div>
+
+      <p style="margin-top:18px;font-size:0.8rem;color:#aaa;">
+        Gunakan: <strong>admin</strong> / <strong>admin123</strong>
+      </p>
+    </div>
+
+    <!-- HALAMAN SUKSES (soal3_sukses.php) -->
+    <div class="sukses-card" id="suksesCard">
+      <div class="icon">✅</div>
+      <h2>Login Sukses!</h2>
+      <p>Selamat datang, <strong id="namaAdmin">Admin</strong>!<br>Anda berhasil masuk ke sistem.</p>
+      <button class="btn-back-login" onclick="kembaliLogin()">← Kembali ke Login</button>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="pt-5 pb-3 mt-2">
+  <div class="container">
+    <div class="row g-4 mb-4">
+      <div class="col-lg-4">
+        <h6><i class="bi bi-book-half me-2 text-warning"></i>DigiSmart Library</h6>
+        <p>Perpustakaan digital sekolah yang menghubungkan siswa, guru, dan komunitas melalui budaya membaca.</p>
+        <div class="d-flex gap-2">
+          <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-instagram"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="btn btn-sm btn-outline-secondary rounded-circle"><i class="bi bi-twitter-x"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Navigasi</h6>
+        <ul class="list-unstyled">
+          <li><a href="index.html">Beranda</a></li>
+          <li><a href="koleksi.html">Koleksi</a></li>
+          <li><a href="events.html">Event</a></li>
+        </ul>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Komunitas</h6>
+        <ul class="list-unstyled">
+          <li><a href="komunitas.html?tab=php"><i class="bi bi-code-slash me-1"></i>Belajar PHP</a></li>
+          <li><a href="komunitas.html?tab=kalkulator"><i class="bi bi-calculator me-1"></i>Kalkulator</a></li>
+          <li><a href="komunitas.html?tab=login"><i class="bi bi-person-lock me-1"></i>Login</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-3 offset-lg-1">
+        <h6>Kontak</h6>
+        <p><i class="bi bi-geo-alt text-warning me-2"></i>Jl. TM Pahlawan Seribu, Tangerang 15322</p>
+        <p><i class="bi bi-envelope text-warning me-2"></i>perpus@digismart.sch.id</p>
+      </div>
+    </div>
+    <hr class="border-secondary">
+    <div class="d-flex justify-content-between">
+      <small>© 2026 <strong style="color:#fff;">Gressilliya Damanik</strong> — DigiSmart Library</small>
+      <small class="text-warning">Membangun Generasi Literat</small>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+/* ════════════════════════════
+   TAB SWITCHING
+   ════════════════════════════ */
+function switchTab(tab) {
+  ['php','kalkulator','login'].forEach(function(t) {
+    document.getElementById('tabPhp'     .replace('php', 'tab' + t.charAt(0).toUpperCase() + t.slice(1)) || 'x');
+  });
+  // sembunyikan semua pane & nonaktifkan semua btn
+  document.getElementById('tabPhp').classList.remove('show');
+  document.getElementById('tabKalkulator').classList.remove('show');
+  document.getElementById('tabLogin').classList.remove('show');
+  document.getElementById('btnTabPhp').classList.remove('active');
+  document.getElementById('btnTabKalk').classList.remove('active');
+  document.getElementById('btnTabLogin').classList.remove('active');
+
+  if (tab === 'php') {
+    document.getElementById('tabPhp').classList.add('show');
+    document.getElementById('btnTabPhp').classList.add('active');
+  } else if (tab === 'kalkulator') {
+    document.getElementById('tabKalkulator').classList.add('show');
+    document.getElementById('btnTabKalk').classList.add('active');
+  } else {
+    document.getElementById('tabLogin').classList.add('show');
+    document.getElementById('btnTabLogin').classList.add('active');
+  }
+
+  var url = new URL(window.location);
+  url.searchParams.set('tab', tab);
+  history.replaceState(null, '', url);
+}
+
+// Buka tab sesuai URL ?tab=
+window.addEventListener('DOMContentLoaded', function () {
+  var tab = new URLSearchParams(window.location.search).get('tab') || 'php';
+  switchTab(tab);
+});
+
+
+/* ════════════════════════════
+   TAB 1 — LOOP PHP (soal1.php)
+   ════════════════════════════ */
+var loopRunning = false;
+
+function runLoop() {
+  if (loopRunning) return;
+  loopRunning = true;
+
+  var container = document.getElementById('loopContainer');
+  var btnRun    = document.getElementById('btnRunLoop');
+
+  container.innerHTML = '';
+  btnRun.disabled     = true;
+  btnRun.textContent  = '⏳ Memproses...';
+
+  var i         = 1;
+  var total     = 1000;
+  var batchSize = 50;
+
+  function renderBatch() {
+    var limit = Math.min(i + batchSize - 1, total);
+    var frag  = document.createDocumentFragment();
+
+    for (; i <= limit; i++) {
+      var div       = document.createElement('div');
+      div.className = 'list-item';
+      div.textContent = i + '. Ini adalah hari ke-' + i + ' belajar PHP';
+      frag.appendChild(div);
+    }
+
+    container.appendChild(frag);
+    container.scrollTop = container.scrollHeight;
+
+    if (i <= total) {
+      requestAnimationFrame(renderBatch);
+    } else {
+      btnRun.textContent = '✅ Selesai!';
+    }
+  }
+
+  requestAnimationFrame(renderBatch);
+}
+
+function resetLoop() {
+  loopRunning = false;
+  var container = document.getElementById('loopContainer');
+  var btnRun    = document.getElementById('btnRunLoop');
+  container.innerHTML = '<div class="list-item" style="color:rgba(255,255,255,0.45);font-style:italic;">Klik tombol di atas untuk memulai perulangan...</div>';
+  btnRun.disabled    = false;
+  btnRun.textContent = '▶ Jalankan Loop';
+}
+
+
+/* ════════════════════════════
+   TAB 2 — KALKULATOR (soal2 + soal2_hasil)
+   ════════════════════════════ */
+function hitungKalk() {
+  var bil1    = document.getElementById('bil1').value.trim();
+  var bil2    = document.getElementById('bil2').value.trim();
+  var operasi = document.getElementById('operasi').value;
+
+  if (bil1 === '' || bil2 === '') {
+    alert('Mohon isi kedua bilangan terlebih dahulu!');
+    return;
+  }
+
+  var n1      = parseFloat(bil1);
+  var n2      = parseFloat(bil2);
+  var hasil   = 0;
+  var simbol  = '';
+  var content = '';
+
+  switch (operasi) {
+    case 'tambah': hasil = n1 + n2; simbol = '+'; break;
+    case 'kurang': hasil = n1 - n2; simbol = '-'; break;
+    case 'kali':   hasil = n1 * n2; simbol = '×'; break;
+    case 'bagi':
+      if (n2 === 0) {
+        document.getElementById('hasilContent').innerHTML =
+          "<p class='error-msg'>⚠️ Tidak bisa membagi dengan angka 0!</p>";
+        document.getElementById('kalkForm').style.display  = 'none';
+        document.getElementById('hasilCard').style.display = 'block';
+        return;
+      }
+      hasil = n1 / n2; simbol = '÷'; break;
+  }
+
+  // bulatkan desimal panjang
+  hasil = Math.round(hasil * 1e10) / 1e10;
+
+  document.getElementById('hasilContent').innerHTML =
+    "<p class='detail'>" + n1 + " " + simbol + " " + n2 + " =</p>" +
+    "<div class='result-box'>" + hasil + "</div>";
+
+  document.getElementById('kalkForm').style.display  = 'none';
+  document.getElementById('hasilCard').style.display = 'block';
+}
+
+function kembaliKalk() {
+  document.getElementById('kalkForm').style.display  = 'block';
+  document.getElementById('hasilCard').style.display = 'none';
+  document.getElementById('bil1').value = '';
+  document.getElementById('bil2').value = '';
+}
+
+
+/* ════════════════════════════
+   TAB 3 — LOGIN (soal3 + soal3_sukses)
+   ════════════════════════════ */
+// Kredensial sederhana (simulasi, tidak ada server)
+var USERS = { 'admin': 'admin123', 'gressilliya': '12345' };
+
+function doLogin() {
+  var user = document.getElementById('loginUser').value.trim();
+  var pass = document.getElementById('loginPass').value;
+  var errEl = document.getElementById('loginError');
+
+  if (USERS[user] && USERS[user] === pass) {
+    // Login berhasil — tampilkan halaman sukses
+    errEl.style.display = 'none';
+    document.getElementById('namaAdmin').textContent = user.charAt(0).toUpperCase() + user.slice(1);
+    document.getElementById('loginCard').style.display  = 'none';
+    document.getElementById('suksesCard').style.display = 'block';
+  } else {
+    errEl.style.display = 'block';
+  }
+}
+
+function kembaliLogin() {
+  document.getElementById('loginCard').style.display  = 'block';
+  document.getElementById('suksesCard').style.display = 'none';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  document.getElementById('loginError').style.display = 'none';
+}
+
+// Enter = login jika tab login aktif
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('tabLogin').classList.contains('show')) {
+    doLogin();
+  }
+});
+</script>
+</body>
+</html>
