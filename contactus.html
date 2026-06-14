@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us | DigiSmart Library</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
             --primary: #38bdf8;
             --secondary: #818cf8;
             --accent: #f472b6;
+            --success: #22c55e;
             --bg-dark: #0f172a;
             --card-bg: rgba(255, 255, 255, 0.03);
+            --input-bg: #0b1120;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -24,75 +26,101 @@
             position: fixed; top: 25px; left: 25px; z-index: 1000;
             background: rgba(255,255,255,0.05); backdrop-filter: blur(10px);
             padding: 12px 20px; border-radius: 15px; text-decoration: none;
-            color: white; font-weight: 600; border: 1px solid rgba(255,255,255,0.1);
+            color: white; font-weight: 600; border: 1px solid rgba(45, 212, 191, 0.2);
             display: flex; align-items: center; gap: 10px; transition: 0.3s;
         }
-        .btn-back:hover { background: var(--primary); transform: translateX(-5px); }
+        .btn-back:hover { background: var(--primary); transform: translateX(-5px); box-shadow: 0 0 15px rgba(56, 189, 248, 0.4); }
 
-        /* --- HERO --- */
+        /* --- HERO SECTION --- */
         .hero-section {
-            height: 100vh; display: flex; flex-direction: column;
+            height: 60vh; display: flex; flex-direction: column;
             justify-content: center; align-items: center; position: relative;
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            overflow: hidden;
+            overflow: hidden; text-align: center; padding: 20px;
         }
         .hero-title {
-            font-size: 4rem; font-weight: 800; text-align: center; z-index: 10;
-            background: linear-gradient(to right, var(--primary), var(--accent));
+            font-size: 3.5rem; font-weight: 800; z-index: 10;
+            background: linear-gradient(to right, var(--primary), var(--secondary), var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            animation: fadeInDown 1.5s ease;
+            animation: fadeInDown 1.2s ease; letter-spacing: 1px;
         }
 
-        /* --- CONTACT CARD --- */
-        .content-section { padding: 100px 20px; display: flex; justify-content: center; }
+        /* --- CONTAINER REVISI UTAMA --- */
+        .content-section { padding: 0 20px 100px; display: flex; justify-content: center; margin-top: -80px; position: relative; z-index: 20; }
         .contact-card {
-            background: var(--card-bg); backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 40px;
-            padding: 50px; width: 100%; max-width: 1100px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
-            box-shadow: 0 40px 100px rgba(0,0,0,0.5);
-            opacity: 0; transform: translateY(50px); transition: 1s ease;
+            background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 40px;
+            padding: 50px; width: 100%; max-width: 750px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            opacity: 0; transform: translateY(50px); transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .contact-card.active { transform: translateY(0); opacity: 1; }
+        .contact-card.active { transform: translateY(0); opacity: 1; border-color: rgba(56, 189, 248, 0.3); }
 
-        .info-header h2 { font-size: 2.5rem; color: var(--primary); }
-        .contact-item {
-            display: flex; align-items: flex-start; margin-bottom: 20px; gap: 15px;
-            padding: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 20px;
-        }
-        .contact-item i { color: var(--accent); font-size: 1.2rem; }
-
-        /* --- FEEDBACK --- */
-        .feedback-area { margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.05); border-radius: 25px; }
+        /* --- FORMULIR ULASAN --- */
+        .feedback-area h2 { font-size: 2rem; color: var(--primary); font-weight: 700; text-align: center; margin-bottom: 8px; }
+        .feedback-area p.subtitle { color: #94a3b8; text-align: center; font-size: 0.95rem; margin-bottom: 35px; }
+        
+        .input-group { margin-bottom: 20px; position: relative; }
+        .input-group i { position: absolute; left: 18px; top: 16px; color: #64748b; font-size: 1.1rem; transition: 0.3s; }
+        
         .input-group input, .input-group textarea {
-            width: 100%; padding: 12px; background: #0f172a; border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; color: white; margin-bottom: 10px; outline: none;
+            width: 100%; padding: 15px 15px 15px 50px; background: var(--input-bg); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px; color: white; outline: none; transition: 0.3s; font-size: 0.95rem;
         }
-        .submit-btn { width: 100%; padding: 12px; background: linear-gradient(to right, var(--primary), var(--secondary)); border: none; border-radius: 12px; color: white; font-weight: 600; cursor: pointer; }
+        .input-group input:focus, .input-group textarea:focus {
+            border-color: var(--primary); box-shadow: 0 0 15px rgba(56, 189, 248, 0.2); background: rgba(15, 23, 42, 0.8);
+        }
+        .input-group input:focus ~ i, .input-group textarea:focus ~ i { color: var(--primary); }
 
-        /* --- SOCIALS --- */
-        .social-group { display: flex; gap: 15px; margin-top: 25px; }
-        .social-btn { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 20px; color: white; text-decoration: none; transition: 0.5s; }
-        .wa { background: #25D366; } .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%); } .fb { background: #1877F2; } .gm { background: #EA4335; }
+        /* --- EMOTICON KEPUASAN (RATING) --- */
+        .rating-container { text-align: center; margin: 30px 0; }
+        .rating-container h4 { font-size: 1rem; color: #cbd5e1; font-weight: 500; margin-bottom: 15px; }
+        .emoji-group { display: flex; justify-content: center; gap: 20px; }
+        
+        .emoji-btn {
+            font-size: 2.2rem; cursor: pointer; transition: transform 0.3s, filter 0.3s;
+            background: none; border: none; outline: none; filter: grayscale(40%); opacity: 0.6;
+        }
+        .emoji-btn:hover { transform: scale(1.3); filter: grayscale(0%); opacity: 1; }
+        .emoji-btn.selected { filter: grayscale(0%); opacity: 1; transform: scale(1.35); animation: pulseGlow 1.5s infinite alternate; }
 
-        /* --- MAPS --- */
-        .map-wrapper { border-radius: 30px; overflow: hidden; height: 100%; min-height: 400px; }
+        /* --- BUTTON SUBMIT --- */
+        .submit-btn { 
+            width: 100%; padding: 16px; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary)); 
+            border: none; border-radius: 16px; color: white; 
+            font-weight: 600; font-size: 1rem; cursor: pointer; 
+            transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 10px;
+            box-shadow: 0 8px 20px rgba(129, 140, 248, 0.25);
+        }
+        .submit-btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 12px 25px rgba(56, 189, 248, 0.4);
+            filter: brightness(1.1);
+        }
+        .submit-btn:active { transform: translateY(-1px); }
 
-        /* --- CHATBOX CSS --- */
-        #floating-saran { position: fixed; bottom: 30px; right: 30px; background: var(--primary); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; z-index: 9999; box-shadow: 0 10px 25px rgba(0,0,0,0.3); }
-        #chat-box-container { position: fixed; bottom: 100px; right: 30px; width: 320px; height: 450px; background: #1e293b; border-radius: 20px; display: none; flex-direction: column; box-shadow: 0 15px 35px rgba(0,0,0,0.4); z-index: 10000; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; }
-        .chat-header { background: var(--primary); color: white; padding: 15px; display: flex; justify-content: space-between; font-weight: bold; }
-        .chat-body { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; background: #0f172a; }
-        .msg { padding: 10px; border-radius: 12px; font-size: 13px; max-width: 85%; }
-        .bot-msg { background: #334155; align-self: flex-start; color: white; }
-        .user-msg { background: var(--primary); align-self: flex-end; color: white; }
-        .chat-footer { padding: 10px; background: #1e293b; display: flex; gap: 8px; }
-        .chat-footer input { flex: 1; background: #0f172a; border: 1px solid #334155; padding: 8px; color: white; border-radius: 8px; outline: none; }
-        .chat-footer button { background: var(--primary); border: none; color: white; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+        /* --- ANIMASI & CONTAINER SUKSES --- */
+        #success-msg { text-align: center; padding: 40px 10px; display: none; }
+        #success-msg h3 { font-size: 1.8rem; font-weight: 700; color: var(--success); margin: 20px 0 10px; }
+        #success-msg p { color: #cbd5e1; font-size: 0.95rem; line-height: 1.6; }
+        
+        .success-icon-box {
+            width: 80px; height: 80px; background: rgba(34, 197, 94, 0.1); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin: 0 auto;
+            border: 2px solid var(--success); box-shadow: 0 0 20px rgba(34, 197, 94, 0.2);
+            animation: bounceIn 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+        .success-icon-box i { color: var(--success); font-size: 3rem; }
 
-        /* Animations */
-        @keyframes float { 0% { transform: translateY(110vh); opacity: 0; } 100% { transform: translateY(-10vh); opacity: 0.5; } }
-        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- FLOATING BACKGROUND ANIMATION --- */
+        .floating-icons i { position: absolute; color: rgba(255,255,255,0.03); font-size: 24px; pointer-events: none; }
+
+        /* Keyframes */
+        @keyframes float { 0% { transform: translateY(110vh) rotate(0deg); opacity: 0; } 10% { opacity: 0.4; } 90% { opacity: 0.4; } 100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-40px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes bounceIn { 0% { transform: scale(0.3); opacity: 0; } 50% { transform: scale(1.05); opacity: 0.8; } 70% { transform: scale(0.9); opacity: 0.9; } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes pulseGlow { 0% { drop-shadow: 0 0 5px rgba(56, 189, 248, 0.3); } 100% { filter: drop-shadow(0 0 15px rgba(56, 189, 248, 0.8)); } }
     </style>
 </head>
 <body>
@@ -103,139 +131,106 @@
 
     <section class="hero-section">
         <div class="floating-icons" id="icon-container"></div>
-        <h1 class="hero-title">Let's Connect<br>With DigiSmart</h1>
-        <p style="z-index: 10; margin-top: 10px; opacity: 0.7;">Hapus Jarak, Memperluas Wawasan.</p>
-        <div class="scroll-indicator" style="position:absolute; bottom:30px; color:var(--primary); font-size:2rem; cursor:pointer;" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
-            <i class="fas fa-chevron-down"></i>
-        </div>
+        <h1 class="hero-title">Ulasan & Saran Website</h1>
+        <p style="z-index: 10; margin-top: 15px; opacity: 0.7; color: #94a3b8; font-size: 1.1rem;">Suaramu berharga demi pengembangan kualitas sistem DigiSmart Library.</p>
     </section>
 
     <section class="content-section" id="contact">
         <div class="contact-card" id="card">
-            <div class="info-side">
-                <div class="info-header">
-                    <h2>Hubungi Kami</h2>
-                    <p>Kami siap membantu kamu menjelajahi dunia literasi digital.</p>
+            
+            <div class="feedback-area">
+                <div id="form-content">
+                    <h2>Beri Ulasan Website 💬</h2>
+                    <p class="subtitle">Silakan isi formulir di bawah ini untuk menyampaikan kritik, saran, atau impresi kamu.</p>
+                    
+                    <div class="input-group">
+                        <input type="text" id="nama" placeholder="Nama Lengkap" required>
+                        <i class="fas fa-user"></i>
+                    </div>
+                    
+                    <div class="input-group">
+                        <textarea id="saran" rows="4" placeholder="Tuliskan ulasan atau saran terbaikmu untuk website ini..." required></textarea>
+                        <i class="fas fa-comment-alt"></i>
+                    </div>
+
+                    <div class="rating-container">
+                        <h4>Bagaimana pengalamanmu menggunakan DigiSmart?</h4>
+                        <div class="emoji-group">
+                            <button type="button" class="emoji-btn" onclick="selectEmoji(this, 'Sangat Kecewa')">😢</button>
+                            <button type="button" class="emoji-btn" onclick="selectEmoji(this, 'Biasa Saja')">😐</button>
+                            <button type="button" class="emoji-btn" onclick="selectEmoji(this, 'Puas')">😊</button>
+                            <button type="button" class="emoji-btn" onclick="selectEmoji(this, 'Sangat Puas')">😍</button>
+                        </div>
+                        <input type="hidden" id="selected-rating" value="">
+                    </div>
+                    
+                    <button type="button" class="submit-btn" onclick="kirimUlasan()">Kirim Ulasan Resmi 🚀</button>
                 </div>
 
-                <div class="contact-item">
-                    <i class="fas fa-map-marked-alt"></i>
-                    <div>
-                        <strong>Lokasi Kami</strong>
-                        Jl. Universitas No.9, Padang Bulan, Kec. Medan Baru, Kota Medan (USU).
+                <div id="success-msg">
+                    <div class="success-icon-box">
+                        <i class="fas fa-check"></i>
                     </div>
-                </div>
-
-                <div class="contact-item">
-                    <i class="fas fa-clock"></i>
-                    <div>
-                        <strong>Jam Operasional</strong>
-                        <span>Senin - Kamis: 08:00 - 13:30 WIB</span><br>
-                        <span>Jumat - Sabtu: 08:00 - 12:00 WIB</span>
-                    </div>
-                </div>
-
-                <div class="feedback-area">
-                    <h3>Beri Ulasan Website 💬</h3>
-                    <div id="form-content">
-                        <div class="input-group"><input type="text" id="nama" placeholder="Nama Lengkap"></div>
-                        <div class="input-group"><textarea id="saran" rows="2" placeholder="Saran kamu..."></textarea></div>
-                        <button type="button" class="submit-btn" onclick="kirimUlasan()">Kirim Ulasan 🚀</button>
-                    </div>
-                    <div id="success-msg" style="display:none; text-align:center; padding:10px;">
-                        <i class="fas fa-check-circle" style="color:#22c55e; font-size:2rem;"></i>
-                        <p>Terima Kasih! Ulasan kamu sudah kami terima.</p>
-                    </div>
-                </div>
-
-                <div class="social-group">
-                    <a href="https://wa.me/628123456789" target="_blank" class="social-btn wa"><i class="fab fa-whatsapp"></i></a>
-                    <a href="#" class="social-btn ig"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="social-btn fb"><i class="fab fa-facebook-f"></i></a>
-                    <a href="mailto:info@digismart.usu.ac.id" class="social-btn gm"><i class="fas fa-envelope"></i></a>
+                    <h3>Ulasan Berhasil Terkirim!</h3>
+                    <p id="thanks-text">Terima kasih banyak atas partisipasinya. Masukan serta tingkat kepuasan yang kamu kirimkan telah tersimpan di sistem kami untuk proses evaluasi berkala DigiSmart Lab.</p>
                 </div>
             </div>
 
-            <div class="map-wrapper">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3982.1030252814!2d98.6572!3d3.564!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMzMnNTAuNCJOIDk4wrAzOScyNS45IkU!5e0!3m2!1sid!2sid!4v1625000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
         </div>
     </section>
 
-    <div id="floating-saran" onclick="toggleDigiBot()"><i class="fas fa-comment-dots"></i></div>
-    <div id="chat-box-container">
-        <div class="chat-header"><span>🤖 DigiBot</span><i class="fas fa-times" onclick="toggleDigiBot()" style="cursor:pointer"></i></div>
-        <div class="chat-body" id="chatList">
-            <div class="msg bot-msg">Halo! Ada yang bisa saya bantu di DigiSmart Library? 😊</div>
-        </div>
-        <div class="chat-footer">
-            <input type="text" id="botInput" placeholder="Ketik pesan..." onkeypress="if(event.key==='Enter') botKirim()">
-            <button onclick="botKirim()"><i class="fas fa-paper-plane"></i></button>
-        </div>
-    </div>
-
     <script>
-        // Floating Icons
+        // Animasi Floating Icons di Background
         const container = document.getElementById('icon-container');
-        const iconTypes = ['fa-book', 'fa-laptop-code', 'fa-brain'];
-        for (let i = 0; i < 15; i++) {
+        const iconTypes = ['fa-book', 'fa-pen-fancy', 'fa-star', 'fa-thumbs-up', 'fa-lightbulb'];
+        for (let i = 0; i < 20; i++) {
             const icon = document.createElement('i');
             icon.className = `fas ${iconTypes[Math.floor(Math.random() * iconTypes.length)]}`;
-            icon.style.left = `${Math.random() * 100}vw`; icon.style.position = 'absolute';
-            icon.style.animation = `float ${Math.random() * 5 + 5}s linear infinite`;
-            icon.style.color = 'rgba(255,255,255,0.1)'; icon.style.fontSize = '20px';
+            icon.style.left = `${Math.random() * 100}vw`; 
+            icon.style.top = `${Math.random() * 50}vh`;
+            icon.style.position = 'absolute';
+            icon.style.animation = `float ${Math.random() * 6 + 6}s linear infinite`;
+            icon.style.animationDelay = `${Math.random() * 3}s`;
             container.appendChild(icon);
         }
 
-        // Observer
+        // Trigger Animasi Muncul Card Saat Scroll/Load
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         observer.observe(document.getElementById('card'));
 
-        // Feedback
+        // Fungsi Seleksi Emoji Rating
+        function selectEmoji(element, ratingValue) {
+            const emojis = document.querySelectorAll('.emoji-btn');
+            emojis.forEach(emo => emo.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('selected-rating').value = ratingValue;
+        }
+
+        // Eksekusi Pengiriman Ulasan Terintegrasi
         function kirimUlasan() {
-            if(!document.getElementById('nama').value || !document.getElementById('saran').value) return alert("Isi semua dulu!");
+            const nama = document.getElementById('nama').value.trim();
+            const saran = document.getElementById('saran').value.trim();
+            const rating = document.getElementById('selected-rating').value;
+
+            if(!nama || !saran) {
+                alert("Harap lengkapi nama dan isi ulasan terlebih dahulu! ⚠️");
+                return;
+            }
+
+            if(!rating) {
+                alert("Pilih salah satu emoticon tingkat kepuasan di bawah ya! 😊");
+                return;
+            }
+
+            // Atur teks kustom di halaman sukses jika menggunakan rating tertentu
+            const thanksText = document.getElementById('thanks-text');
+            thanksText.innerHTML = `Halo <strong>${nama}</strong>, terima kasih banyak atas ulasan dan penilaian berstatus <strong>"${rating}"</strong> yang kamu berikan. Masukan berharga ini akan segera kami evaluasi demi kenyamanan bersama! ✨`;
+
+            // Sembunyikan form input, ganti dengan efek animasi sukses
             document.getElementById('form-content').style.display = 'none';
             document.getElementById('success-msg').style.display = 'block';
-        }
-
-        // CHATBOT LOGIC
-        const botData = {
-            "halo": "Halo juga! Ada yang bisa saya bantu di DigiSmart?",
-            "hallo": "Halo! Senang bertemu kamu.",
-            "jam": "Senin-Kamis (08:00-13:30) & Jumat-Sabtu (08:00-12:00).",
-            "buku": "Cari buku di menu 'Koleksi Digital' atau kotak pencarian.",
-            "admin": "Admin ada di meja sirkulasi lantai 1.",
-            "pagi": "Selamat pagi! Semangat belajarnya!"
-        };
-
-        function toggleDigiBot() {
-            const c = document.getElementById('chat-box-container');
-            c.style.display = (c.style.display === 'flex') ? 'none' : 'flex';
-        }
-
-        function botKirim() {
-            const i = document.getElementById('botInput');
-            const txt = i.value.trim();
-            if(!txt) return;
-
-            tambahChat(txt, 'user-msg');
-            i.value = "";
-
-            setTimeout(() => {
-                let lowTxt = txt.toLowerCase();
-                let res = "Maaf, saya tidak mengerti. Coba tanya 'jam' atau 'admin'.";
-                for(let k in botData) { if(lowTxt.includes(k)) { res = botData[k]; break; } }
-                tambahChat(res, 'bot-msg');
-            }, 600);
-        }
-
-        function tambahChat(t, s) {
-            const l = document.getElementById('chatList');
-            const d = document.createElement('div');
-            d.className = 'msg ' + s; d.innerText = t;
-            l.appendChild(d); l.scrollTop = l.scrollHeight;
         }
     </script>
 </body>
