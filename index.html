@@ -139,7 +139,7 @@
         .full-width-item { grid-column: 1 / -1; }
 
         /* =======================================================
-           2. NAV RIGHT ELEMENTS (SEARCH & LOGIN)
+           2. NAV RIGHT ELEMENTS (SEARCH & LOGIN) - REVISI
            ======================================================= */
         .nav-right {
             display: flex;
@@ -158,7 +158,11 @@
             color: var(--accent-green);
         }
 
-        .login-menu { position: relative; }
+        .login-menu { 
+            position: relative; 
+            z-index: 1005; /* Ditambahkan agar tombol login berada di atas elemen overlay */
+        }
+        
         .login-btn {
             background: linear-gradient(45deg, #2c7be5, var(--accent-green));
             color: white;
@@ -171,6 +175,7 @@
         }
 
         .login-menu:hover .dropdown-login { display: block; }
+        
         .dropdown-login {
             display: none;
             position: absolute;
@@ -182,7 +187,9 @@
             border: 1px solid rgba(45, 212, 191, 0.2);
             padding: 6px 0;
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            z-index: 1010; /* Ditambahkan agar menu dropdown tidak tertutup elemen lain di bawahnya */
         }
+        
         .dropdown-login a {
             color: var(--text-light);
             padding: 10px 16px;
@@ -190,7 +197,11 @@
             display: block;
             font-size: 13px;
         }
-        .dropdown-login a:hover { background: rgba(45, 212, 191, 0.1); color: var(--accent-green); }
+        
+        .dropdown-login a:hover { 
+            background: rgba(45, 212, 191, 0.1); 
+            color: var(--accent-green); 
+        }
 
         /* Footer Kustomisasi di dalam struktur menu tambahan */
         .menu-footer {
