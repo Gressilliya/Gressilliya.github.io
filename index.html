@@ -904,6 +904,178 @@
         margin-top: 20px;
     }
 }
+
+        /* ==========================================================================
+   WIDGET ASISTEN AI CYBER CHATBOT
+   ========================================================================== */
+.ai-widget-container {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    z-index: 9999;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Tombol Lingkaran Aktivasi (Gaya Hologram Siri) */
+.ai-trigger-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #050b08;
+    border: 2px solid var(--neon-blue);
+    color: var(--neon-blue);
+    font-size: 1.6rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 20px rgba(0, 210, 255, 0.4);
+    position: relative;
+    transition: 0.3s;
+}
+
+/* Efek lingkaran berdenyut di belakang tombol */
+.ai-trigger-btn::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid var(--neon-blue);
+    animation: siriPulse 2s infinite linear;
+    opacity: 0.6;
+}
+
+@keyframes siriPulse {
+    0% { transform: scale(1); opacity: 0.6; }
+    100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* Jendela Chat Box AI */
+.ai-chat-box {
+    position: absolute;
+    bottom: 75px;
+    right: 0;
+    width: 330px;
+    height: 430px;
+    background: rgba(5, 15, 10, 0.98);
+    border: 2px solid var(--neon-blue);
+    border-radius: 16px;
+    box-shadow: 0 0 30px rgba(0, 210, 255, 0.2);
+    display: none; /* Tersembunyi default, muncul pas diklik */
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* Bagian Atas Chat (Header) */
+.ai-chat-header {
+    background: rgba(0, 210, 255, 0.1);
+    border-bottom: 1px solid rgba(0, 210, 255, 0.3);
+    padding: 12px 15px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ai-avatar-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: #000;
+    border: 1px solid var(--scanner-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+}
+
+.ai-status-info h5 {
+    color: #fff;
+    font-size: 0.85rem;
+    font-family: 'Orbitron', sans-serif;
+}
+.ai-status-info span {
+    color: var(--scanner-green);
+    font-size: 0.7rem;
+    display: block;
+}
+
+/* Area Isi Pesan Chat */
+.ai-chat-body {
+    flex: 1;
+    padding: 15px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Balon Chat */
+.chat-msg {
+    max-width: 80%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+.chat-msg.bot {
+    background: rgba(255, 255, 255, 0.05);
+    color: #e2e8f0;
+    align-self: flex-start;
+    border-left: 3px solid var(--neon-blue);
+}
+.chat-msg.user {
+    background: var(--scanner-green);
+    color: #000;
+    font-weight: 500;
+    align-self: flex-end;
+}
+
+/* Form Input Bawah */
+.ai-chat-footer {
+    padding: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    display: flex;
+    gap: 8px;
+}
+
+.ai-input {
+    flex: 1;
+    background: #000;
+    border: 1px solid rgba(0, 210, 255, 0.3);
+    border-radius: 8px;
+    padding: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    outline: none;
+}
+
+.ai-send-btn {
+    background: var(--neon-blue);
+    border: none;
+    color: #000;
+    padding: 0 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: 0.2s;
+}
+.ai-send-btn:hover { background: var(--scanner-green); }
+
+/* Responsif Layar Kecil HP */
+@media (max-width: 480px) {
+    .ai-chat-box {
+        width: calc(100vw - 40px);
+        height: 380px;
+        right: -10px;
+    }
+}
     </style>
 </head>
 <body>
@@ -1276,6 +1448,36 @@
   </div>
 
 </footer>
+
+<div class="ai-widget-container">
+    <button class="ai-trigger-btn" id="aiBtn" onclick="toggleAIChat()">
+        <i class="fas fa-robot"></i>
+    </button>
+
+    <div class="ai-chat-box" id="aiChatBox">
+        <div class="ai-chat-header">
+            <div class="ai-avatar-circle">👩‍💻</div>
+            <div class="ai-status-info">
+                <h5>Librarian AI Asisten</h5>
+                <span>🟢 Pustakawan Off-Duty (Malam Aktif)</span>
+            </div>
+            <button style="margin-left:auto; background:none; border:none; color:#64748b; cursor:pointer;" onclick="toggleAIChat()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div class="ai-chat-body" id="aiChatBody">
+            <div class="chat-msg bot">
+                <strong>Haii students!</strong> 👋 Apa yang perlu kami bantu? Pustakawan asli sudah pulang, jadi aku asisten AI yang siap jawab pertanyaanmu seputar website perpus ini! ✨
+            </div>
+        </div>
+
+        <div class="ai-chat-footer">
+            <input type="text" id="aiInputField" class="ai-input" placeholder="Tanyakan sesuatu..." onkeypress="checkAIEter(event)">
+            <button class="ai-send-btn" onclick="sendAiMessage()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+</div>
     
 <div id="toastWelcome" class="toast-welcome">
         <i class="fas fa-robot"></i>
@@ -1491,6 +1693,76 @@ function proteksi(event, url) {
     }
 }
 </script>
-    
+
+<script>
+    // ==========================================================================
+    // LOGIKA CHATBOT ASISTEN AI DIGITAL LIBRARY
+    // ==========================================================================
+
+    // 1. Fungsi Buka-Tutup Kotak Asisten AI (Sudah Dioptimalkan untuk Klik Pertama)
+    function toggleAIChat() {
+        const box = document.getElementById('aiChatBox');
+        if (!box) return;
+
+        // Memeriksa display atau computed style agar klik pertama langsung jalan di HP
+        if (box.style.display === 'flex' || window.getComputedStyle(box).display === 'flex') {
+            box.style.display = 'none';
+        } else {
+            box.style.display = 'flex';
+            const inputField = document.getElementById('aiInputField');
+            if (inputField) inputField.focus();
+        }
+    }
+
+    // 2. Deteksi Enter Keyboard saat siswa mengetik pertanyaan
+    function checkAIEter(e) {
+        if (e.key === 'Enter') {
+            sendAiMessage();
+        }
+    }
+
+    // 3. Proses Kirim Pesan & Balasan Otomatis Otak Bot AI
+    function sendAiMessage() {
+        const input = document.getElementById('aiInputField');
+        const body = document.getElementById('aiChatBody');
+        
+        // Validasi: Jika input kosong atau elemen tidak ditemukan, batalkan proses
+        if (!input || !body || input.value.trim() === "") return;
+
+        let userText = input.value.trim();
+        
+        // Tampilkan pertanyaan user ke dalam chat box
+        let userHtml = `<div class="chat-msg user">${userText}</div>`;
+        body.innerHTML += userHtml;
+        
+        input.value = ""; // Bersihkan kolom ketik setelah kirim
+        body.scrollTop = body.scrollHeight; // Otomatis scroll ke pesan paling bawah
+
+        // Beri jeda efek mengetik selama 600ms (Simulasi AI sedang berpikir)
+        setTimeout(() => {
+            // Jawaban default jika kata kunci tidak cocok
+            let reply = "Maaf students, perintah enkripsi tidak dikenali. Coba tanyakan tentang 'cara pinjam', 'game hoax buster', atau 'jam operasional'.";
+            let lowerText = userText.toLowerCase();
+
+            // Aturan Logika Pencocokan Kata Kunci (Keywords)
+            if (lowerText.includes('pinjam') || lowerText.includes('buku')) {
+                reply = "📚 <strong>Cara Pinjam Buku:</strong> Silakan login akun dulu di menu atas, pilih koleksi buku, lalu klik tombol klaim pinjam untuk mendapatkan kode QR ambil di perpustakaan besok pagi!";
+            } else if (lowerText.includes('game') || lowerText.includes('hoax')) {
+                reply = "🎮 <strong>Game Hoax Buster:</strong> Akses game bisa langsung diklik lewat card menu utama setelah kamu sukses melakukan Login Agen ya!";
+            } else if (lowerText.includes('jam') || lowerText.includes('buka') || lowerText.includes('tutup') || lowerText.includes('operasional')) {
+                reply = "🕐 <strong>Jam Layanan Fisik:</strong> Senin-Kamis buka jam 08:00 - 13:30 WIB. Tapi kalau sistem website perpustakaan digital ini aktif non-stop 24 jam penuh!";
+            } else if (lowerText.includes('halo') || lowerText.includes('hai') || lowerText.includes('p') || lowerText.includes('assalamualaikum')) {
+                reply = "Haii juga student! Ada yang bisa aku bantu seputar fitur perpustakaan digital ini? 😊";
+            }
+
+            // Tampilkan balasan bot ke dalam chat box
+            let botHtml = `<div class="chat-msg bot">${reply}</div>`;
+            body.innerHTML += botHtml;
+            
+            // Scroll ke bawah lagi setelah pesan bot muncul
+            body.scrollTop = body.scrollHeight;
+        }, 600);
+    }
+</script>
 </body>
 </html>
