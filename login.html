@@ -109,30 +109,23 @@
 </div>
 
 <script>
-// ===== HELPER =====
 function getUsers() {
-    try { return JSON.parse(localStorage.getItem('digi_users') || '[]'); } catch { return []; }
-}
-function setSession(user) {
-    // Simpan sesi tanpa menyimpan no.hp di session (lebih aman)
-    const sessionData = { nama: user.nama, email: user.email, kelas: user.kelas, loggedIn: true };
-    localStorage.setItem('digi_session', JSON.stringify(sessionData));
-}
-function showAlert(msg, type) {
-    const el = document.getElementById('alertBox');
-    el.textContent = msg;
-    el.className = 'alert ' + type;
+    return JSON.parse(localStorage.getItem('digi_users') || '[]');
 }
 
-// ===== CEK SUDAH LOGIN, REDIRECT LANGSUNG =====
-(function() {
-    try {
-        const s = JSON.parse(localStorage.getItem('digi_session'));
-        if (s && s.loggedIn) { window.location.href = 'index.html'; }
-    } catch {}
-})();
+function showAlert(message, type) {
+    const alertBox = document.getElementById('alertBox');
+    alertBox.textContent = message;
+    alertBox.className = 'alert ' + type;
+}
 
-// ===== PROSES LOGIN =====
+// Jika sudah login
+const currentSession = JSON.parse(localStorage.getItem('digi_session') || 'null');
+
+if (currentSession && currentSession.loggedIn) {
+    window.location.href = 'index.html';
+}
+
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
@@ -140,42 +133,57 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     const phone = document.getElementById('loginPhone').value.trim();
 
     if (!email || !phone) {
-        showAlert('Isi semua kolom terlebih dahulu.', 'error');
+        showAlert('Semua kolom wajib diisi.', 'error');
         return;
     }
 
-    const btn    = document.getElementById('btnLogin');
+    const btn = document.getElementById('btnLogin');
     const loader = document.getElementById('loader');
-    const btnTxt = document.getElementById('btnText');
+    const btnText = document.getElementById('btnText');
 
-    btnTxt.textContent = 'Memeriksa...';
-    loader.style.display = 'inline-block';
     btn.disabled = true;
+    loader.style.display = 'inline-block';
+    btnText.textContent = 'Memeriksa...';
 
     setTimeout(() => {
+
         const users = getUsers();
 
-        // Cari user dengan email DAN nomor hp yang cocok
-        const found = users.find(u =>
-            u.email.toLowerCase() === email &&
-            u.phone === phone
+        const user = users.find(u =>
+            u.email &&
+            u.phone &&
+            u.email.toLowerCase().trim() === email &&
+            u.phone.trim() === phone
         );
 
-        if (!found) {
-            showAlert('Email atau nomor HP tidak ditemukan. Coba daftar dulu jika belum punya akun.', 'error');
-            btnTxt.textContent = 'Masuk Perpustakaan';
-            loader.style.display = 'none';
+        if (!user) {
+            showAlert(
+                'Email atau nomor WhatsApp tidak sesuai dengan data pendaftaran.',
+                'error'
+            );
+
             btn.disabled = false;
+            loader.style.display = 'none';
+            btnText.textContent = 'Masuk Perpustakaan';
             return;
         }
 
-        // Login berhasil
-        setSession(found);
+        // Simpan session login
+        localStorage.setItem('digi_session', JSON.stringify({
+            loggedIn: true,
+            nama: user.nama,
+            email: user.email,
+            kelas: user.kelas,
+            loginTime: new Date().toISOString()
+        }));
+
         showAlert('Login berhasil! Mengalihkan...', 'success');
 
-        setTimeout(() => { window.location.href = 'index.html'; }, 1200);
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 1000);
 
-    }, 900);
+    }, 800);
 });
 </script>
 
