@@ -738,9 +738,11 @@
         </div>
 
         <!-- Tombol Login & Daftar langsung -->
-        <a href="login.html" class="login-btn">
-            <i class="fas fa-user"></i> Login
-        </a>
+        <div id="navAuthContainer">
+    <a href="login.html" class="login-btn">
+        <i class="fas fa-user"></i> Login
+    </a>
+</div>
         <a href="daftar.html" class="login-btn" style="background: var(--bg-surface2); color: var(--text); border: 1px solid var(--border); text-decoration:none;">
             <i class="fas fa-user-plus"></i> Daftar
         </a>
@@ -898,9 +900,132 @@
     </div>
 </section>
 
-<!-- =====================================================
-     JAVASCRIPT
-===================================================== -->
+<div id="toastWelcome" class="toast-welcome">
+        <i class="fas fa-robot"></i>
+        <span id="toastMessage">Selamat datang!</span>
+    </div>
+
+    <script>
+        // ==========================================
+        // 1. TAMBAHKAN STYLE CSS SECARA OTOMATIS
+        // ==========================================
+        const styleElement = document.createElement('style');
+        styleElement.innerHTML = `
+            /* Gaya kotak notifikasi melayang */
+            .toast-welcome {
+                position: fixed;
+                top: -100px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: #0f1c24;
+                border: 1px solid #2dd4bf;
+                box-shadow: 0 0 20px rgba(45, 212, 191, 0.25);
+                padding: 12px 25px;
+                border-radius: 12px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                z-index: 99999;
+                backdrop-filter: blur(10px);
+                transition: top 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s;
+                opacity: 0;
+            }
+            .toast-welcome.show {
+                top: 25px;
+                opacity: 1;
+            }
+            .toast-welcome i {
+                color: #2dd4bf;
+                font-size: 1.2rem;
+            }
+            .toast-welcome span {
+                color: #e2e8f0;
+                font-size: 0.9rem;
+            }
+
+            /* Gaya tampilan Profil Siswa di Navbar */
+            .nav-profile-box {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                background: rgba(45, 212, 191, 0.08);
+                border: 1px solid rgba(45, 212, 191, 0.2);
+                padding: 6px 14px;
+                border-radius: 10px;
+                color: #ffffff;
+                font-size: 0.9rem;
+            }
+            .nav-profile-box i.fa-user-circle {
+                color: #2dd4bf;
+                font-size: 1.2rem;
+            }
+            .btn-logout-quick {
+                color: #ef4444;
+                margin-left: 5px;
+                text-decoration: none;
+                transition: 0.2s;
+            }
+            .btn-logout-quick:hover {
+                transform: scale(1.1);
+            }
+        `;
+        document.head.appendChild(styleElement);
+
+
+        // ==========================================
+        // 2. LOGIKA OTOMATIS BERUBAH SAAT LOGIN
+        // ==========================================
+        document.addEventListener("DOMContentLoaded", () => {
+            const session = JSON.parse(localStorage.getItem('digi_session'));
+            const authContainer = document.getElementById('navAuthContainer');
+            
+            if (session && session.loggedIn) {
+                const namaSiswa = session.username || "Siswa DigiSmart";
+
+                if (authContainer) {
+                    authContainer.innerHTML = `
+                        <div class="nav-profile-box">
+                            <i class="fas fa-user-circle"></i>
+                            <strong>${namaSiswa}</strong>
+                            <a href="#" onclick="prosesLogoutBeranda(event)" class="btn-logout-quick" title="Keluar Akun">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
+                    `;
+                }
+
+                if (!sessionStorage.getItem('welcome_notified')) {
+                    const toast = document.getElementById('toastWelcome');
+                    const toastMsg = document.getElementById('toastMessage');
+                    
+                    if (toast) {
+                        toastMsg.innerHTML = `Selamat datang kembali, <strong>${namaSiswa}</strong>! ✨`;
+                        
+                        setTimeout(() => {
+                            toast.classList.add('show');
+                        }, 500);
+
+                        setTimeout(() => {
+                            toast.classList.remove('show');
+                        }, 3500);
+
+                        sessionStorage.setItem('welcome_notified', 'true');
+                    }
+                }
+            }
+        });
+
+        // Fungsi Logout
+        function prosesLogoutBeranda(event) {
+            event.preventDefault();
+            if (confirm("Apakah kamu yakin ingin keluar dari sistem DigiSmart?")) {
+                localStorage.removeItem('digi_session');
+                sessionStorage.removeItem('welcome_notified');
+                window.location.reload();
+            }
+        }
+    </script>
+
 <script>
 /* ── 1. SEARCH OVERLAY ── */
 const searchBtn     = document.getElementById('searchBtn');
@@ -989,6 +1114,5 @@ function proteksi(event, url) {
     }
 }
 </script>
-
 </body>
 </html>
