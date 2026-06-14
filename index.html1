@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>DigiPath | Level Up Your Skills</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="hamburger.css">
+
+    <style>
+        /* =======================================================
+           1. VARIABLE WARNA UTAMA & RESET (Agar Konsisten)
+           ======================================================= */
+        :root {
+            --primary-blue: #2c7be5;
+            --primary-dark-blue: #1a5ab5;
+            --gradient-futuristic: linear-gradient(45deg, #2c7be5, #2dd4bf);
+            --bg-light: #f8faff;
+            --bg-dark: #0f172a;
+            --text-main: #333333;
+            --text-muted: #666666;
+            --card-light: #ffffff;
+            --card-dark: #1e293b;
+            --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            width: 100%;
+            overflow-x: hidden; /* Mencegah halaman bisa digeser ke kanan/kiri di HP */
+        }
+
+        body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-light);
+            color: var(--text-main);
+            transition: background-color 0.3s, color 0.3s;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* =======================================================
+           2. NAVBAR FUTURISTIC (Aman di iOS & Android)
+           ======================================================= */
+        .navbar-futuristic {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px); /* Wajib untuk Safari iOS */
+            border-bottom: 1px solid rgba(44, 123, 229, 0.1);
+            padding: 12px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+        }
+
+        .logo-img-animated {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--primary-blue);
+            object-fit: cover;
+            animation: pulse-border 2s infinite;
+        }
+
+        @keyframes pulse-border {
+            0% { box-shadow: 0 0 0 0 rgba(44, 123, 229, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(44, 123, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(44, 123, 229, 0); }
+        }
+
+        .logo-text-gradient {
+            font-size: 20px;
+            font-weight: 700;
+            background: var(--gradient-futuristic);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: var(--text-main);
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover { color: var(--primary-blue); }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: var(--primary-blue);
+            transition: var(--transition-smooth);
+        }
+
+        .nav-link:hover::after { width: 100%; }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-search input {
+            padding: 10px 16px;
+            width: 180px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 14px;
+            background: #f1f5f9;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-search input:focus {
+            width: 220px;
+            box-shadow: 0 0 0 2px rgba(44, 123, 229, 0.2);
+        }
+
+        .btn-glow {
+            background: var(--gradient-futuristic);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(44, 123, 229, 0.3);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-glow:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 123, 229, 0.5);
+        }
+
+        /* =======================================================
+           3. HERO BERANDA SECTION (Responsif Tinggi Layar)
+           ======================================================= */
+        .hero {
+            min-height: 100vh;
+            padding-top: 80px;
+            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.75)), 
+                        url("https://images.unsplash.com/photo-1507842217343-583bb7270b66") center/cover no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 20px;
+        }
+
+        .hero-content {
+            text-align: center;
+            color: white;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-size: clamp(2rem, 5vw, 3rem); /* Ukuran otomatis mengecil di layar HP */
+            font-weight: 700;
+            line-height: 1.2;
+            text-shadow: 0 4px 12px rgba(0,0,0,0.4);
+        }
+
+        .hero-content p {
+            margin-top: 15px;
+            font-weight: 300;
+            color: #e2e8f0;
+            font-size: clamp(1rem, 2vw, 1.2rem);
+        }
+
+        .search-hero {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .search-hero input {
+            padding: 14px 20px;
+            width: 100%;
+            max-width: 340px;
+            border-radius: 30px;
+            border: none;
+            outline: none;
+            font-size: 15px;
+        }
+
+        .btn-hero {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(44, 123, 229, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-hero:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark-blue);
+        }
+
+        /* =======================================================
+           4. BENTO GRID SYSTEM (Fleksibel Otomatis)
+           ======================================================= */
+        .bento-section {
+            padding: 80px 24px;
+            background: var(--card-light);
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.4rem);
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        .subtitle {
+            margin-top: 8px;
+            margin-bottom: 40px;
+            color: var(--text-muted);
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bento-card {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark-blue) 100%);
+            color: white;
+            padding: 35px 25px;
+            border-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            justify-content: space-between;
+            min-height: 380px;
+            box-shadow: 0 10px 30px rgba(44, 123, 229, 0.25);
+            transition: var(--transition-smooth);
+        }
+
+        .bento-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 16px 35px rgba(44, 123, 229, 0.4);
+        }
+
+        .bento-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .bento-card p {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .btn-card {
+            background: #ffffff;
+            color: var(--primary-blue);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 14px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-card:hover { transform: scale(1.05); }
+
+        /* =======================================================
+           5. ABOUT / PROFIL SECTION
+           ======================================================= */
+        .about {
+            padding: 80px 24px;
+            background: #f1f5f9;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            flex-wrap: wrap; /* Menumpuk vertikal otomatis di HP */
+        }
+
+        .about img {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+
+        .about-text {
+            flex: 1;
+            min-width: 280px;
+            max-width: 600px;
+        }
+
+        .about-text h2 {
+            font-size: clamp(1.8rem, 3vw, 2.2rem);
+            font-weight: 800;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-dark-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+        }
+
+        .about-text p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: #475569;
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .btn-container {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn-container a {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-dark-blue) 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(44, 123, 229, 0.2);
+            transition: var(--transition-smooth);
+        }
+
+        .btn-container a:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(44, 123, 229, 0.35);
+        }
+
+        .btn-container a[href*="instagram"] {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+        }
+
+        /* =======================================================
+           6. GLASSMORPHISM JAM LAYANAN
+           ======================================================= */
+        .service-section {
+            padding: 80px 24px;
+            background: var(--bg-light);
+        }
+
+        .glass-card-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 32px;
+            padding: 40px 24px;
+            border: 1px solid rgba(44, 123, 229, 0.15);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.02);
+        }
+
+        .status-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 35px;
+            background: #eef6ff;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 8px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--primary-blue);
+            font-size: 14px;
+        }
+
+        .pulse-dot {
+            width: 10px;
+            height: 10px;
+            background: #28a745;
+            border-radius: 50%;
+            animation: pulse-green 2s infinite;
+        }
+
+        .hours-grid-modern {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .hour-box {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 20px;
+            background: var(--card-light);
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            transition: var(--transition-smooth);
+        }
+
+        .hour-box:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-blue);
+            box-shadow: 0 10px 20px rgba(44, 123, 229, 0.08);
+        }
+
+        .icon-circle {
+            width: 52px;
+            height: 52px;
+            background: var(--primary-blue);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .text-info span {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .text-info strong {
+            font-size: 16px;
+            color: var(--text-main);
+        }
+
+        /* =======================================================
+           7. SYSTEM SWITCH / MODE GELAP (DARK MODE)
+           ======================================================= */
+        .theme-switch-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .theme-switch {
+            display: inline-block;
+            height: 26px;
+            position: relative;
+            width: 50px;
+        }
+
+        .theme-switch input { display: none; }
+
+        .slider {
+            background-color: #cbd5e1;
+            bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0;
+            transition: .4s; display: flex; align-items: center; justify-content: space-around; padding: 0 4px;
+            border-radius: 34px;
+        }
+
+        .slider i { font-size: 10px; color: white; }
+
+        .slider:before {
+            background-color: white; bottom: 3px; content: ""; height: 20px; left: 3px;
+            position: absolute; transition: .4s; width: 20px; z-index: 2; border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary-blue); }
+        input:checked + .slider:before { transform: translateX(24px); }
+
+        /* Penerapan Aturan CSS Dark Mode */
+        body.mode-gelap {
+            background-color: var(--bg-dark);
+            color: #e2e8f0;
+        }
+        body.mode-gelap .navbar-futuristic {
+            background: rgba(30, 41, 59, 0.85);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        body.mode-gelap .nav-link { color: #cbd5e1; }
+        body.mode-gelap .bento-section { background: var(--bg-dark); }
+        body.mode-gelap .section-title { color: #ffffff; }
+        body.mode-gelap .about { background: #1e293b; }
+        body.mode-gelap .about-text p { color: #cbd5e1; }
+        body.mode-gelap .glass-card-container {
+            background: rgba(30, 41, 59, 0.7);
+            border-color: rgba(255,255,255,0.1);
+        }
+        body.mode-gelap .hour-box {
+            background: var(--card-dark);
+            border-color: #334155;
+        }
+        body.mode-gelap .text-info strong { color: #ffffff; }
+        body.mode-gelap .status-indicator { background: #1e3a5f; color: #93c5fd; }
+
+        /* =======================================================
+           8. RESPONSIVE ENGINE MEDIA QUERIES (KHUSUS SMARTPHONE & IOS)
+           ======================================================= */
+        @media (max-width: 768px) {
+            .nav-menu, .nav-right .nav-search {
+                display: none; /* Sembunyikan menu bawaan agar digantikan hamburger eksternal */
+            }
+
+            .nav-container {
+                padding: 0 16px;
+            }
+
+            .navbar-futuristic {
+                padding: 8px 0;
+            }
+
+            /* Paksa Semua Grid Berubah Menjadi 1 Kolom Sempurna */
+            .bento-grid, .hours-grid-modern {
+                grid-template-columns: 1fr !important;
+                gap: 16px;
+            }
+
+            .bento-card {
+                min-height: auto;
+                padding: 30px 20px;
+            }
+
+            .glass-card-container {
+                padding: 24px 16px;
+                border-radius: 24px;
+            }
+
+            /* Optimasi Form Input di iOS Safari (Mencegah Auto Zoom Rusak) */
+            input, textarea, select, button {
+                font-size: 16px !important; 
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar-futuristic">
+        <div class="nav-container">
+            <a href="#" class="logo">
+                <img src="https://via.placeholder.com/150" alt="Logo" class="logo-img-animated">
+                <span class="logo-text-gradient">DigiPath</span>
+            </a>
+            
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link">Beranda</a></li>
+                <li><a href="#" class="nav-link">Fitur</a></li>
+                <li><a href="#" class="nav-link">Profil</a></li>
+                <li><a href="#" class="nav-link">Layanan</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <div class="nav-search">
+                    <input type="text" placeholder="Cari materi...">
+                </div>
+                
+                <div class="theme-switch-wrapper">
+                    <label class="theme-switch" for="checkbox">
+                        <input type="checkbox" id="checkbox" onclick="toggleDarkMode()">
+                        <div class="slider round">
+                            <i class="fas fa-sun"></i>
+                            <i class="fas fa-moon"></i>
+                        </div>
+                    </label>
+                </div>
+
+                <button class="btn-glow">Masuk</button>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Level Up Your Skills With DigiPath</h1>
+            <p>Gerbang utama transformasi literasi digital dan peningkatan kompetensi tanpa batas.</p>
+            <div class="search-hero">
+                <input type="text" placeholder="Mau belajar apa hari ini?">
+                <button class="btn-hero"><i class="fas fa-rocket"></i> Mulai</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="bento-section">
+        <h2 class="section-title">Fitur Unggulan</h2>
+        <p class="subtitle">Akses berbagai modul pembelajaran interaktif dalam satu ekosistem.</p>
+        
+        <div class="bento-grid">
+            <div class="bento-card">
+                <h3>Arcade Literasi</h3>
+                <p>Metode gamifikasi seru untuk menguji tingkat literasi informasi tanpa rasa bosan.</p>
+                <a href="#" class="btn-card">Mainkan Sekarang</a>
+            </div>
+            <div class="bento-card">
+                <h3>Hoax Buster Tools</h3>
+                <p>Validasi informasi secara real-time dengan basis data terpercaya melawan misinformasi.</p>
+                <a href="#" class="btn-card">Periksa Berita</a>
+            </div>
+            <div class="bento-card">
+                <h3>Digital Library</h3>
+                <p>Koleksi koleksi arsip digital, e-book, dan jurnal ilmiah terintegrasi otomatis.</p>
+                <a href="#" class="btn-card">Buka Koleksi</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="about">
+        <div class="about-container">
+            <img src="https://via.placeholder.com/300x400" alt="Foto Profil">
+            <div class="about-text">
+                <h2>Profil Layanan</h2>
+                <p>DigiPath dirancang untuk menjembatani kesenjangan digital tingkat kedua melalui praktik literasi informasi yang adaptif dan inklusif bagi seluruh lapisan masyarakat.</p>
+                <div class="btn-container">
+                    <a href="#"><i class="fas fa-envelope"></i> Hubungi Kami</a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="service-section">
+        <div class="glass-card-container">
+            <div class="status-indicator">
+                <span class="pulse-dot"></span> Layanan Online Terbuka
+            </div>
+            
+            <div class="hours-grid-modern">
+                <div class="hour-box">
+                    <div class="icon-circle"><i class="fas fa-calendar-day"></i></div>
+                    <div class="text-info">
+                        <span>Senin - Kamis</span>
+                        <strong>07:30 - 16:00 WIB</strong>
+                    </div>
+                </div>
+                <div class="hour-box">
+                    <div class="icon-circle"><i class="fas fa-calendar-check"></i></div>
+                    <div class="text-info">
+                        <span>Jumat</span>
+                        <strong>07:30 - 16:30 WIB</strong>
+                    </div>
+                </div>
+                <div class="hour-box">
+                    <div class="icon-circle"><i class="fas fa-infinity"></i></div>
+                    <div class="text-info">
+                        <span>Sabtu - Minggu</span>
+                        <strong>Akses Digital 24 Jam</strong>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Fungsi Logika Dark Mode / Light Mode
+        function toggleDarkMode() {
+            const body = document.body;
+            body.classList.toggle("mode-gelap");
+        }
+    </script>
+</body>
+</html>
