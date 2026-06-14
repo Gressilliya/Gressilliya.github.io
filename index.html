@@ -612,6 +612,253 @@
             .login-btn { padding: 7px 14px; font-size: 12px; }
             .bento-section { padding: 40px 16px 60px; }
         }
+
+        :root { 
+    --scanner-green: #00ff41; 
+    --alert-red: #ff3e3e; 
+    --dark-scanner: #050b08; 
+    --neon-blue: #00d2ff;
+    --border-glow: rgba(0, 255, 65, 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body { 
+    font-family: 'Poppins', sans-serif; 
+    background: var(--dark-scanner); 
+    color: var(--scanner-green); 
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 80px 20px 40px; /* Jarak aman agar tidak tertutup tombol beranda */
+    position: relative;
+}
+
+/* Background Matrix Grid */
+.scanner-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: linear-gradient(rgba(0, 255, 65, 0.03) 1px, transparent 1px), 
+                      linear-gradient(90deg, rgba(0, 255, 65, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px; z-index: -1;
+    animation: gridMove 25s linear infinite;
+}
+
+@keyframes gridMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 1000px; }
+}
+
+.container { 
+    width: 100%;
+    max-width: 750px; 
+    z-index: 5;
+}
+
+/* --- TERMINAL BOX FRAME --- */
+.scanner-box {
+    background: rgba(5, 15, 10, 0.85); 
+    border: 2px solid var(--scanner-green); 
+    border-radius: 24px;
+    padding: 40px 30px; 
+    position: relative; 
+    backdrop-filter: blur(20px); 
+    box-shadow: 0 0 40px var(--border-glow), inset 0 0 20px rgba(0, 255, 65, 0.1);
+    min-height: 520px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Sudut Aksesoris Kerangka Cyber */
+.scanner-box::before, .scanner-box::after {
+    content: ''; position: absolute; width: 16px; height: 16px; border-color: var(--neon-blue); border-style: solid; transition: 0.3s;
+}
+.scanner-box::before { top: -2px; left: -2px; border-width: 4px 0 0 4px; border-top-left-radius: 12px; }
+.scanner-box::after { bottom: -2px; right: -2px; border-width: 0 4px 4px 0; border-bottom-right-radius: 12px; }
+
+/* --- LASER SCANNER MATRIX --- */
+.scanner-line {
+    position: absolute; left: 2px; width: calc(100% - 4px); height: 4px; 
+    background: linear-gradient(90deg, transparent, var(--scanner-green), transparent);
+    box-shadow: 0 0 15px var(--scanner-green), 0 0 30px var(--scanner-green); 
+    animation: scan 3.5s ease-in-out infinite; 
+    display: none; z-index: 10;
+    opacity: 0.8;
+}
+@keyframes scan { 0%, 100% { top: 3%; } 50% { top: 97%; } }
+
+/* Inputs & Selects Cyber */
+.reg-input {
+    width: 100%; padding: 16px; margin: 18px 0; 
+    background: rgba(0, 5, 2, 0.9);
+    border: 1px solid rgba(0, 255, 65, 0.4); 
+    color: #fff; 
+    border-radius: 12px; 
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.95rem; letter-spacing: 1px;
+    outline: none; transition: 0.3s;
+    text-align: center;
+}
+.reg-input:focus {
+    border-color: var(--neon-blue);
+    box-shadow: 0 0 15px rgba(0, 210, 255, 0.3);
+}
+
+/* --- LIVE MONITOR DISPLAY --- */
+#news-display {
+    background: rgba(0, 4, 2, 0.95); 
+    border: 1px solid var(--neon-blue); 
+    padding: 35px 25px;
+    border-radius: 16px; 
+    margin: 20px 0 30px; 
+    min-height: 160px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+    font-size: 1.15rem;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+    box-shadow: inset 0 0 20px rgba(0, 210, 255, 0.1);
+    position: relative;
+}
+
+/* --- PROGRESS BAR STREAM --- */
+.stream-bar-container {
+    width: 100%; height: 6px; background: rgba(255,255,255,0.05);
+    border-radius: 10px; margin-bottom: 25px; overflow: hidden;
+    border: 1px solid rgba(0, 255, 65, 0.1);
+}
+.stream-bar-fill {
+    height: 100%; width: 10%; background: linear-gradient(90deg, var(--scanner-green), var(--neon-blue));
+    box-shadow: 0 0 10px var(--scanner-green); transition: width 0.4s ease;
+}
+
+/* --- CYBER COMBAT BUTTONS --- */
+.btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.btn-choice {
+    padding: 16px; font-family: 'Orbitron', sans-serif; border-radius: 14px; 
+    cursor: pointer; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+    border: 2px solid; font-weight: 700; letter-spacing: 1px; font-size: 0.9rem;
+}
+.btn-hoax { color: var(--alert-red); border-color: var(--alert-red); background: rgba(255, 62, 62, 0.05); }
+.btn-fakta { color: var(--scanner-green); border-color: var(--scanner-green); background: rgba(0, 255, 65, 0.05); }
+
+.btn-hoax:hover { background: var(--alert-red); color: #000; box-shadow: 0 0 25px var(--alert-red); transform: translateY(-3px); }
+.btn-fakta:hover { background: var(--scanner-green); color: #000; box-shadow: 0 0 25px var(--scanner-green); transform: translateY(-3px); }
+
+.btn-analyze { 
+    background: linear-gradient(135deg, var(--scanner-green), #00b32d); color: #000; border: none; 
+    padding: 16px 45px; border-radius: 50px; font-family: 'Orbitron', sans-serif; 
+    cursor: pointer; font-weight: 800; transition: 0.3s; letter-spacing: 1px;
+    box-shadow: 0 5px 15px rgba(0, 255, 65, 0.2);
+}
+.btn-analyze:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--scanner-green); }
+
+/* Briefing Style Card */
+.briefing-card {
+    background: rgba(0, 255, 65, 0.03); padding: 25px; border-radius: 16px;
+    border: 1px dashed rgba(0, 255, 65, 0.3); text-align: left; margin: 25px 0; font-size: 0.95rem; line-height: 1.7; color: #e2e8f0;
+}
+
+#game-ui, #result-ui, #briefing-ui { display: none; }
+
+/* NAVIGATION BACK BUTTON */
+.back-btn { 
+    position: absolute; top: 20px; left: 20px; 
+    color: var(--scanner-green); text-decoration: none; 
+    border: 1px solid var(--scanner-green); 
+    padding: 8px 16px; border-radius: 10px; 
+    z-index: 100; font-family: 'Orbitron', sans-serif; font-size: 0.75rem; 
+    transition: 0.3s; background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+    letter-spacing: 1px;
+}
+.back-btn:hover { background: var(--scanner-green); color: #000; box-shadow: 0 0 15px var(--scanner-green); }
+
+/* SYSTEM FEEDBACK SCREEN BLINK ANIMATIONS */
+.matrix-pulse { animation: screenCorrect 0.4s ease-out; }
+.screen-shake { animation: screenWrong 0.4s ease-out; }
+
+@keyframes screenCorrect {
+    0% { box-shadow: inset 0 0 100px rgba(0, 255, 65, 0.6); }
+    100% { box-shadow: inset 0 0 0px rgba(0, 255, 65, 0); }
+}
+@keyframes screenWrong {
+    0%, 100% { transform: translateX(0); box-shadow: inset 0 0 100px rgba(255, 62, 62, 0.6); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+/* Glitch Core Effect */
+.glitch-title {
+    font-family: 'Orbitron', sans-serif; color: var(--neon-blue); letter-spacing: 3px; font-weight: 900;
+    text-shadow: 0 0 10px rgba(0, 210, 255, 0.4); position: relative;
+}
+
+/* ==========================================
+   ⚡ QUERY RESPONSIVE KHUSUS LAYAR HP ⚡
+   ========================================== */
+@media (max-width: 600px) {
+    body {
+        padding: 90px 12px 30px; 
+        overflow-y: auto; /* Layar HP bisa di-scroll lancar jika konten panjang */
+    }
+
+    .back-btn {
+        top: 15px; left: 15px;
+        padding: 6px 12px;
+        font-size: 0.65rem;
+    }
+
+    .scanner-box {
+        padding: 30px 16px 20px;
+        min-height: auto; /* Kotak fleksibel mengikuti isi teks */
+    }
+
+    .glitch-title {
+        font-size: 1.6rem;
+    }
+
+    #news-display {
+        padding: 22px 15px;
+        font-size: 0.95rem; 
+        min-height: 140px;
+        margin-bottom: 20px;
+    }
+
+    .briefing-card {
+        padding: 15px 12px;
+        font-size: 0.85rem;
+        margin: 15px 0;
+    }
+
+    .btn-grid {
+        grid-template-columns: 1fr; /* Tombol HOAX & FAKTA otomatis menumpuk atas-bawah */
+        gap: 12px;
+    }
+
+    .btn-choice {
+        padding: 14px;
+        font-size: 0.85rem;
+    }
+
+    .btn-analyze {
+        width: 100%; 
+        padding: 14px 20px;
+        font-size: 0.85rem;
+    }
+
+    #result-ui h2 {
+        font-size: 1.3rem;
+    }
+
+    #final-scr {
+        font-size: 4rem !important;
+    }
+}
     </style>
 </head>
 <body>
