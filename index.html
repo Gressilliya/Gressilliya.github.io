@@ -601,7 +601,7 @@
             <div class="login-menu">
                 <button class="login-btn">Login ▾</button>
                 <div class="dropdown-login">
-                    <a href="login.html" onclick="window.location.href='login.html';">Login Anggota</a>
+                   <a href="login.html" onclick="window.location.href='login.html';">Login Anggota</a>>
                     <a href="daftar.html" onclick="window.location.href='daftar.html';">Daftar Anggota</a>
                 </div>
             </div>
@@ -695,5 +695,17 @@
             }, 500);
         }
     </script>
+
+    <script>
+    // ===== CEK SUDAH LOGIN, REDIRECT LANGSUNG =====
+    (function() {
+        try {
+            const s = JSON.parse(localStorage.getItem('digi_session'));
+            if (s && s.loggedIn) { window.location.href = 'index.html'; }
+        } catch {}
+    })();
+</script>
+
+    <script src="notifikasi.js"></script>
 </body>
 </html>
