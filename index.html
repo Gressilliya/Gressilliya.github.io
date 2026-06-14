@@ -632,43 +632,49 @@
         </div>
 
         <div class="bento-grid">
+            <!-- 1. Arcade Literasi (KHUSUS SISWA - DIKUNCI) -->
             <div class="game-card card-arcade">
                 <h3>Arcade Literasi <span>🎮</span></h3>
                 <p>Uji kemampuanmu melawan hoaks dengan game interaktif yang seru!</p>
-                <a href="game.html" class="game-btn">Mulai Main ⚡</a>
+                <a href="#" class="game-btn" onclick="proteksiFiturSiswa(event, 'game.html')">Mulai Main ⚡</a>
             </div>
 
+            <!-- 2. Pojok Baca (UMUM & SISWA - BEBAS AKSES) -->
             <div class="game-card card-baca">
                 <h3>Pojok Baca <span>📖</span></h3>
                 <p>Koleksi buku digital pilihan untuk pelajar SMP agar makin pinter.</p>
                 <a href="perpustakaan.html" class="game-btn">Baca Sekarang 📚</a>
             </div>
 
+            <!-- 3. Media Belajar (UMUM & SISWA - BEBAS AKSES) -->
             <div class="game-card card-media">
                 <h3>Media Belajar <span>🎥</span></h3>
                 <p>Video tutorial singkat cara riset tugas sekolah dengan benar.</p>
                 <a href="media.html" class="game-btn">Tonton Video 📺</a>
             </div>
 
+            <!-- 4. Hoax Buster (KHUSUS SISWA - DIKUNCI) -->
             <div class="game-card card-hoax">
                 <h3>Hoax Buster <span>🕵️‍♂️</span></h3>
                 <p>Alat cek fakta sederhana untuk membedakan berita asli dan palsu.</p>
-                <a href="cek-hoax.html" class="game-btn">Cek Berita 🔍</a>
+                <a href="#" class="game-btn" onclick="proteksiFiturSiswa(event, 'cek-hoax.html')">Cek Berita 🔍</a>
             </div>
 
+            <!-- 5. Math Logic (KHUSUS SISWA - DIKUNCI) -->
             <div class="game-card card-math">
                 <h3>Math Logic <span>🔢</span></h3>
                 <p>Asah logika dan kecepatan berhitungmu dengan tantangan angka.</p>
-                <a href="matematika.html" class="game-btn">Hitung Sekarang 🧮</a>
+                <a href="#" class="game-btn" onclick="proteksiFiturSiswa(event, 'matematika.html')">Hitung Sekarang 🧮</a>
             </div>
 
+            <!-- 6. English Quest (KHUSUS SISWA - DIKUNCI) -->
             <div class="game-card card-english">
                 <h3>English Quest <span>🌍</span></h3>
                 <p>Perluas kosakata dan kemampuan bahasa Inggrismu lewat petualangan.</p>
-                <a href="inggris.html" class="game-btn">Start Quest 💬</a>
+                <a href="#" class="game-btn" onclick="proteksiFiturSiswa(event, 'inggris.html')">Start Quest 💬</a>
             </div>
         </div>
-    </section>
+</section>
 
     <script>
         const searchBtn = document.getElementById('searchBtn');
@@ -695,5 +701,28 @@
             }, 500);
         }
     </script>
+
+    <script>
+// FUNGSI UNTUK MENGUNCI FITUR KHUSUS SISWA
+function proteksiFiturSiswa(event, urlTujuan) {
+    try {
+        // Mengambil sesi login dari local storage browser
+        const session = JSON.parse(localStorage.getItem('digi_session'));
+        
+        // Cek apakah ada siswa yang sedang login
+        if (session && session.loggedIn) {
+            // Jika SUDAH login, izinkan masuk ke halaman fitur siswa
+            window.location.href = urlTujuan;
+        } else {
+            // Jika BELUM login (orang tua/umum), cegah masuk dan beri peringatan
+            event.preventDefault();
+            alert("Maaf, fitur ini khusus untuk Siswa! Silakan daftar atau login terlebih dahulu.");
+            window.location.href = 'login.html';
+        }
+    } catch (error) {
+        window.location.href = 'login.html';
+    }
+}
+</script>
 </body>
 </html>
