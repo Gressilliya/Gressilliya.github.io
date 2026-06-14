@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pojok Baca Digital | DigiSmart Lab</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
         /* Reset & Base */
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
@@ -18,7 +18,7 @@
             overflow-x: hidden;
         }
 
-        /* --- NAVIGASI MELAYANG (BARU) --- */
+        /* --- NAVIGASI MELAYANG --- */
         .top-nav {
             position: fixed;
             top: 20px;
@@ -66,7 +66,7 @@
         .header { 
             text-align: center; 
             margin-bottom: 50px; 
-            padding-top: 60px; /* Jarak agar tidak tertutup Nav */
+            padding-top: 60px;
         }
         
         .header h1 { 
@@ -104,25 +104,29 @@
         /* --- GRID & CARDS --- */
         .book-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .book-card {
-            background: rgba(30, 41, 59, 0.5);
+            background: rgba(30, 41, 59, 0.4);
             border-radius: 25px;
-            padding: 30px;
+            padding: 25px;
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .book-card:hover {
-            transform: translateY(-15px);
+            transform: translateY(-10px);
             border-color: #2dd4bf;
-            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.2);
+            box-shadow: 0 10px 30px rgba(45, 212, 191, 0.15);
         }
 
         .category-tag {
@@ -131,48 +135,167 @@
             color: #2dd4bf;
             font-weight: 800;
             margin-bottom: 15px;
-            display: block;
+            display: inline-block;
+            background: rgba(45, 212, 191, 0.1);
+            padding: 4px 12px;
+            border-radius: 20px;
+            align-self: center;
         }
 
-        .icon-box {
-            width: 100px;
-            height: 130px;
+        /* Status Badges */
+        .status-badge {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 30px;
+            text-transform: uppercase;
+        }
+        .status-terpinjam { background: #ef4444; color: white; box-shadow: 0 0 10px rgba(239, 68, 68, 0.4); }
+        .status-soon { background: #f59e0b; color: #0b1120; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+        .status-tersedia { background: #10b981; color: white; }
+
+        /* Book Cover Container */
+        .cover-box {
+            width: 130px;
+            height: 180px;
             margin: 0 auto 20px;
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 12px 24px rgba(0,0,0,0.4);
+            border: 2px solid rgba(255,255,255,0.1);
+            background: #1e293b;
         }
 
-        .bg-teal { background: linear-gradient(135deg, #2dd4bf, #0d9488); }
-        .bg-orange { background: linear-gradient(135deg, #f59e0b, #d97706); }
-        .bg-blue { background: linear-gradient(135deg, #3b82f6, #1d4ed8); }
-        .bg-pink { background: linear-gradient(135deg, #ec4899, #be185d); }
+        .cover-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
-        .book-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .book-card p { font-size: 0.85rem; color: #94a3b8; margin-bottom: 25px; }
+        .book-card h3 { font-size: 1.15rem; margin-bottom: 8px; font-weight: 700; color: #f8fafc; }
+        .book-card p.short-desc { font-size: 0.8rem; color: #94a3b8; margin-bottom: 20px; line-height: 1.5; }
 
         .btn-baca {
-            display: inline-block;
-            padding: 10px 25px;
+            display: block;
+            padding: 11px 20px;
             background: transparent;
             border: 1px solid #2dd4bf;
-            color: white;
+            color: #2dd4bf;
             text-decoration: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             transition: 0.3s;
-            width: 100%;
+            cursor: pointer;
+            text-transform: uppercase;
         }
 
         .btn-baca:hover {
             background: #2dd4bf;
             color: #0b1120;
+            box-shadow: 0 0 15px rgba(45, 212, 191, 0.4);
         }
+
+        .btn-disabled {
+            border-color: #334155 !important;
+            color: #64748b !important;
+            cursor: not-allowed;
+        }
+        .btn-disabled:hover { background: transparent !important; color: #64748b !important; box-shadow: none !important; }
+
+        /* --- DYNAMIC OPAC MODAL SYSTEM --- */
+        .opac-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: 0.4s ease;
+            padding: 20px;
+        }
+
+        .opac-modal.open { opacity: 1; pointer-events: auto; }
+
+        .modal-content {
+            background: #0f172a;
+            border: 1px solid rgba(45, 212, 191, 0.3);
+            border-radius: 30px;
+            max-width: 850px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 40px;
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transform: scale(0.9);
+            transition: 0.4s ease;
+        }
+        .opac-modal.open .modal-content { transform: scale(1); }
+
+        .close-modal {
+            position: absolute;
+            top: 25px; right: 25px;
+            background: rgba(255,255,255,0.05);
+            border: none; color: #94a3b8;
+            width: 40px; height: 40px; border-radius: 50%;
+            font-size: 1.2rem; cursor: pointer; transition: 0.3s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .close-modal:hover { background: #ef4444; color: white; }
+
+        .opac-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr;
+            gap: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .opac-layout { grid-template-columns: 1fr; text-align: center; }
+            .modal-cover { margin: 0 auto; }
+        }
+
+        .modal-cover {
+            width: 200px; height: 280px;
+            border-radius: 15px; overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .modal-cover img { width: 100%; height: 100%; object-fit: cover; }
+
+        .modal-details h2 { font-size: 1.8rem; color: #fff; margin-bottom: 5px; font-weight: 800; }
+        .modal-author { color: #2dd4bf; font-weight: 600; margin-bottom: 20px; font-size: 0.95rem; }
+        
+        .section-headline {
+            font-size: 0.9rem; font-weight: 700; text-transform: uppercase;
+            color: #2dd4bf; margin-bottom: 10px; letter-spacing: 1px;
+            border-bottom: 1px solid rgba(45,212,191,0.2); padding-bottom: 5px;
+        }
+        .modal-sinopsis { font-size: 0.88rem; color: #cbd5e1; line-height: 1.7; margin-bottom: 25px; text-align: justify; }
+
+        /* Meta Grid Tag (OPAC Style) */
+        .meta-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px; margin-bottom: 25px; background: rgba(30, 41, 59, 0.3);
+            padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
+        }
+        .meta-item { font-size: 0.8rem; }
+        .meta-item label { display: block; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 2px; }
+        .meta-item span { color: #f1f5f9; font-weight: 500; }
+
+        /* Extra Books List Layout */
+        .extra-list { list-style: none; padding-left: 0; }
+        .extra-list li {
+            font-size: 0.85rem; color: #cbd5e1; padding: 6px 0;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .extra-list li::before { content: "📚"; font-size: 0.8rem; }
     </style>
 </head>
 <body>
@@ -197,46 +320,137 @@
     </div>
 
     <div class="book-grid">
+        
         <div class="book-card">
+            <span class="status-badge status-tersedia">Tersedia</span>
             <span class="category-tag">Novel Remaja</span>
-            <div class="icon-box bg-pink">
-                <i class="fas fa-heart"></i>
+            <div class="cover-box">
+                <img src="bukusahabat.jpg" alt="Cover Persahabatan SMP">
             </div>
             <h3>Persahabatan SMP</h3>
-            <p>Kisah seru petualangan 5 sahabat di sekolah baru.</p>
-            <a href="novel.html" class="btn-baca">BACA SEKARANG</a>
+            <p class="short-desc">Kisah seru petualangan dan seluk-beluk dunia persahabatan 5 sahabat.</p>
+            <button class="btn-baca" onclick="openOpac('buku1')">BACA SEKARANG</button>
         </div>
 
         <div class="book-card">
+            <span class="status-badge status-terpinjam">Terpinjam</span>
+            <span class="category-tag">Novel Remaja</span>
+            <div class="cover-box">
+                <img src="KisahTentangPersahabatan.png" alt="Cover Kisah Tentang Persahabatan">
+            </div>
+            <h3>Kisah Tentang Persahabatan</h3>
+            <p class="short-desc">Karya inspiratif Miftahul Anam tentang arti mendalam dari sebuah komitmen pertemanan.</p>
+            <button class="btn-baca btn-disabled" disabled>TERPINJAM</button>
+        </div>
+
+        <div class="book-card">
+            <span class="status-badge status-soon">Coming Soon</span>
             <span class="category-tag">Komik</span>
-            <div class="icon-box bg-orange">
-                <i class="fas fa-mask"></i>
+            <div class="cover-box">
+                <img src="komik.jpg" alt="Cover Si Jagoan IT">
             </div>
             <h3>Si Jagoan IT</h3>
-            <p>Belajar teknologi lewat cerita komik yang kocak!</p>
-            <a href="komik.html" class="btn-baca">BACA SEKARANG</a>
+            <p class="short-desc">Kebiasaan Mampu Mengubah Takdir. Belajar teknologi & ulet kerja keras lewat komik kocak!</p>
+            <button class="btn-baca btn-disabled" disabled>COMING SOON</button>
         </div>
 
         <div class="book-card">
-            <span class="category-tag">Sains & Tekno</span>
-            <div class="icon-box bg-teal">
-                <i class="fas fa-atom"></i>
-            </div>
-            <h3>Misteri Atom</h3>
-            <p>Belajar partikel terkecil dengan cara yang seru.</p>
-            <a href="sains.html" class="btn-baca">BACA SEKARANG</a>
-        </div>
-
-        <div class="book-card">
+            <span class="status-badge status-soon">Coming Soon</span>
             <span class="category-tag">Astronomi</span>
-            <div class="icon-box bg-blue">
-                <i class="fas fa-rocket"></i>
+            <div class="cover-box">
+                <i class="fas fa-rocket" style="font-size: 3rem; color: #3b82f6; margin: 50px 0;"></i>
             </div>
             <h3>Orbit Planet</h3>
-            <p>Menjelajahi rahasia tata surya kita yang luas.</p>
-            <a href="astronomi.html" class="btn-baca">BACA SEKARANG</a>
+            <p class="short-desc">Menjelajahi rahasia tata surya kita yang luas luar biasa.</p>
+            <button class="btn-baca btn-disabled" disabled>COMING SOON</button>
         </div>
     </div>
 
+
+    <div id="opacModal" class="opac-modal" onclick="closeOpac()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button class="close-modal" onclick="closeOpac()"><i class="fas fa-times"></i></button>
+            <div class="opac-layout" id="modalDynamicContainer">
+                </div>
+        </div>
+    </div>
+
+    <script>
+        // Database Data Buku OPAC
+        const dataBuku = {
+            buku1: {
+                judul: "Persahabatan SMP",
+                penulis: "Salsabiela",
+                cover: "bukusahabat.jpg",
+                sinopsis: `Beragam orang datang silih berganti dalam kehidupan Anda. Namun, tidak banyak dari mereka yang mampu terus mendukung Anda layaknya seorang sahabat sejati. Yuk, pahami ciri-ciri sahabat sejati seperti berikut ini.<br><br>Manusia sebagai makhluk sosial tentu membutuhkan orang lain. Itulah sebabnya, mempunyai teman sejati sepertinya sudah menjadi suatu keharusan bagi setiap orang. Mengetahui sejumlah ciri teman yang baik akan membantu Anda untuk menghargai hubungan persahabatan yang sedang dijalani. Terlebih bila hal ini sudah berlangsung lama.<br><br>Di samping itu, hal tersebut sekaligus membantu Anda menemukan teman baru yang mungkin akan memberikan lebih banyak makna dalam kehidupan Anda. Semua orang di dunia ini mempunyai teman. Namun, tidak semua orang mempunyai sahabat. Persahabatan bisa lahir dari orang-orang yang sebelumnya saling membenci. Musuhmu bisa menjadi sahabatmu karena kebencian memudar dan berganti dengan perasaan cinta untuk sahabat.<br><br>Buku ini mengungkap seluk-beluk dunia persahabatan. Kamu akan diajak menelusuri makna sahabat, perbedaan teman. Dengan sahabat, cara merawat persahabatan, dan lain sebagainya. Semoga dengan membaca buku ini kamu bisa segera mendapatkan sahabat sejati dan membuat persahabatan tersebut abadi. Salam sahabat.<br><br><b>Materi Utama:</b><br>1. Menjaga Persahabatan.<br>2. Bersahabat dengan Lawan Jenis<br>3. Kisah Persahabatan Sejati.`,
+                meta: {
+                    penerbit: "C-Klik Media",
+                    editor: "Arin Vieta",
+                    isbn: "9786025992841",
+                    terbit: "2019",
+                    halaman: "108 Halaman",
+                    dimensi: "14 x 21 cm",
+                    berat: "0.23 kg",
+                    genre: "Non Fiksi, Pengembangan Diri",
+                    sampul: "Soft Cover"
+                },
+                extraTitle: "Buku Lainnya Karya Salsabiela",
+                extraBooks: [
+                    "Manage Your Time, Change Your Life",
+                    "Bahagia & Betah Di Tempat Kerja",
+                    "Bisnis Ala Milenial"
+                ]
+            }
+        };
+
+        function openOpac(idKey) {
+            const buku = dataBuku[idKey];
+            if(!buku) return;
+
+            // Generate list buku karya penulis lain jika ada
+            let extraHtml = '';
+            if(buku.extraBooks) {
+                extraHtml = `
+                    <div class="section-headline" style="margin-top:20px;">${buku.extraTitle}</div>
+                    <ul class="extra-list">
+                        ${buku.extraBooks.map(b => `<li>${b}</li>`).join('')}
+                    </ul>
+                `;
+            }
+
+            // Render Layout OPAC Moderen
+            const htmlContent = `
+                <div class="modal-cover">
+                    <img src="${buku.cover}" alt="Cover">
+                </div>
+                <div class="modal-details">
+                    <h2>${buku.judul}</h2>
+                    <div class="modal-author">Oleh: ${buku.penulis}</div>
+                    
+                    <div class="section-headline">Sinopsis Buku</div>
+                    <div class="modal-sinopsis">${buku.sinopsis}</div>
+                    
+                    <div class="section-headline">Katalog Informasi Bibliografi (OPAC)</div>
+                    <div class="meta-grid">
+                        <div class="meta-item"><label>Penerbit</label><span>${buku.meta.penerbit || '-'}</span></div>
+                        <div class="meta-item"><label>ISBN</label><span>${buku.meta.isbn || '-'}</span></div>
+                        <div class="meta-item"><label>Tahun Terbit</label><span>${buku.meta.terbit || '-'}</span></div>
+                        <div class="meta-item"><label>Jumlah Hal</label><span>${buku.meta.halaman || '-'}</span></div>
+                        <div class="meta-item"><label>Dimensi</label><span>${buku.meta.dimensi || '-'}</span></div>
+                        <div class="meta-item"><label>Genre</label><span>${buku.meta.genre || '-'}</span></div>
+                    </div>
+                    
+                    ${extraHtml}
+                </div>
+            `;
+
+            document.getElementById('modalDynamicContainer').innerHTML = htmlContent;
+            document.getElementById('opacModal').classList.add('open');
+        }
+
+        function closeOpac() {
+            document.getElementById('opacModal').classList.remove('open');
+        }
+    </script>
 </body>
 </html>
