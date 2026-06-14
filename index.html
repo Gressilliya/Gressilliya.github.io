@@ -911,8 +911,8 @@ loginBtn.addEventListener('click', (e) => {
     e.stopPropagation();
     loginWrapper.classList.toggle('open');
 });
-// Tutup kalau klik di luar
-document.addEventListener('click', (e) => {
+// Tutup kalau klik di luar — pakai mousedown bukan click
+document.addEventListener('mousedown', (e) => {
     if (!loginWrapper.contains(e.target)) {
         loginWrapper.classList.remove('open');
     }
