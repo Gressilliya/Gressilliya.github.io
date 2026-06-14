@@ -612,7 +612,298 @@
             .login-btn { padding: 7px 14px; font-size: 12px; }
             .bento-section { padding: 40px 16px 60px; }
         }
-        
+
+        /* ==========================================================================
+   KODE CSS UTAMA UTUR FOOTER (ELEGAN & FUTURISTIK)
+   ========================================================================== */
+.main-footer {
+    background: rgba(4, 10, 7, 0.95);
+    border-top: 2px solid var(--scanner-green);
+    color: #94a3b8;
+    width: 100%;
+    padding-top: 0;
+    margin-top: 50px;
+    font-family: 'Poppins', sans-serif;
+    box-shadow: 0 -10px 30px rgba(0, 255, 65, 0.05);
+}
+
+/* BANNER ATAS FOOTER */
+.footer-top-banner {
+    background: linear-gradient(90deg, rgba(0, 255, 65, 0.15), rgba(0, 210, 255, 0.15));
+    border-bottom: 1px solid rgba(0, 255, 65, 0.2);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.ftr-top-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.ftr-badges {
+    display: flex;
+    gap: 10px;
+}
+
+.ftr-badge {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 4px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+.ftr-badge.green { background: rgba(0, 255, 65, 0.1); color: var(--scanner-green); border: 1px solid var(--scanner-green); }
+.ftr-badge.yellow { background: rgba(254, 240, 138, 0.1); color: #fde047; border: 1px solid #fde047; }
+.ftr-badge.pink { background: rgba(244, 114, 182, 0.1); color: #f472b6; border: 1px solid #f472b6; }
+
+/* GRID UTAMA CONTAINER */
+.footer-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 50px 20px;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr;
+    gap: 40px;
+}
+
+.footer-column h4 {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 1rem;
+    margin-bottom: 20px;
+    letter-spacing: 1px;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background: var(--neon-blue);
+}
+
+/* KOLOM 1: BRAND INFO & JAM */
+.footer-title {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.footer-tagline {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.ftr-stats {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.ftr-stat {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(0, 255, 65, 0.1);
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    min-width: 80px;
+}
+
+.ftr-stat-num {
+    display: block;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    color: var(--neon-blue);
+    font-size: 1.1rem;
+}
+
+.ftr-stat-lbl {
+    font-size: 0.7rem;
+    color: #64748b;
+}
+
+.jam-operasional {
+    background: rgba(0, 0, 0, 0.2);
+    border-left: 3px solid var(--scanner-green);
+    padding: 12px 15px;
+    border-radius: 0 8px 8px 0;
+}
+
+.op-header {
+    font-size: 0.85rem;
+    color: #fff;
+    margin-bottom: 6px;
+}
+
+.time-list p {
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.time-list span {
+    color: #fff;
+}
+
+.time-list .access-24 {
+    color: var(--scanner-green);
+    font-weight: 500;
+}
+
+/* KOLOM 2: QUICK LINKS */
+.footer-links {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.footer-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+}
+
+.ftr-dot {
+    width: 4px;
+    height: 4px;
+    background: var(--scanner-green);
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: var(--scanner-green);
+    transform: translateX(4px);
+}
+
+.footer-links a:hover .ftr-dot {
+    background: var(--neon-blue);
+    box-shadow: 0 0 8px var(--neon-blue);
+    transform: scale(1.5);
+}
+
+/* KOLOM 3: KONTAK & MEDSOS */
+.ftr-contact-item {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.ftr-contact-icon {
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.ftr-contact-text {
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.ftr-contact-label {
+    display: block;
+    font-size: 0.75rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* KOTAK SOSIAL MEDIA MENGGUNAKAN ICON */
+.social-box {
+    display: flex;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.social-box a {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-box a:hover {
+    color: #000;
+    background: var(--scanner-green);
+    border-color: var(--scanner-green);
+    box-shadow: 0 0 15px var(--scanner-green);
+    transform: translateY(-4px);
+}
+
+/* BOTTOM COPYRIGHT */
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    text-align: center;
+    font-size: 0.8rem;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.footer-bottom strong {
+    color: var(--neon-blue);
+}
+
+/* ==========================================================================
+   ⚡ RESPONSIVE QUERY KHUSUS LAYAR HP (ANTI HANCUR) ⚡
+   ========================================================================== */
+@media (max-width: 768px) {
+    .footer-top-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 12px 15px;
+        gap: 8px;
+    }
+
+    .ftr-top-text {
+        font-size: 0.8rem;
+    }
+
+    .footer-container {
+        grid-template-columns: 1fr; /* Memaksa 3 kolom berbaris vertikal ke bawah */
+        gap: 35px;
+        padding: 30px 15px;
+    }
+
+    .footer-links {
+        grid-template-columns: 1fr; /* Di HP, link disusun 1 baris saja agar lega */
+        gap: 10px;
+    }
+
+    .ftr-stats {
+        justify-content: flex-start;
+    }
+
+    .social-box {
+        margin-top: 20px;
+    }
+}
     </style>
 </head>
 <body>
@@ -901,6 +1192,100 @@
     </div>
 </section>
 
+    </section>
+    
+<footer class="main-footer">
+
+  <div class="footer-top-banner">
+    <span class="ftr-top-text">📚 DigiSmart Library — Platform Literasi Digital #1 untuk SMP</span>
+    <div class="ftr-badges">
+      <span class="ftr-badge green">✅ Gratis</span>
+      <span class="ftr-badge yellow">⭐ Terpercaya</span>
+      <span class="ftr-badge pink">💡 Inovatif</span>
+    </div>
+  </div>
+
+  <div class="footer-container">
+
+    <div class="footer-column info-col">
+      <div class="ftr-brand-icon">📚</div>
+      <h3 class="footer-title">DigiSmart Library</h3>
+      <p class="footer-tagline">Solusi literasi digital modern untuk generasi cerdas masa kini. Belajar jadi lebih seru!</p>
+
+      <div class="ftr-stats">
+        <div class="ftr-stat">
+          <span class="ftr-stat-num">6+</span>
+          <span class="ftr-stat-lbl">Fitur</span>
+        </div>
+        <div class="ftr-stat">
+          <span class="ftr-stat-num">24/7</span>
+          <span class="ftr-stat-lbl">Online</span>
+        </div>
+      </div>
+
+      <div class="jam-operasional">
+        <p class="op-header">🕐 <strong>Jam Operasional</strong></p>
+        <div class="time-list">
+          <p>Senin – Kamis: <span>08:00 – 13:30 WIB</span></p>
+          <p>Jumat – Sabtu: <span>08:00 – 12:00 WIB</span></p>
+          <p>Minggu: <span class="access-24">Akses Digital 24/7 ✨</span></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-column links-col">
+      <h4>🔗 Quick Links</h4>
+      <ul class="footer-links">
+        <li><a href="index.html"><span class="ftr-dot"></span>Beranda</a></li>
+        <li><a href="game.html"><span class="ftr-dot"></span>Fitur Literasi</a></li>
+        <li><a href="koleksi.html"><span class="ftr-dot"></span>Koleksi Buku</a></li>
+        <li><a href="ranking.html"><span class="ftr-dot"></span>Ranking Siswa</a></li>
+        <li><a href="admin.html"><span class="ftr-dot"></span>Admin Panel</a></li>
+        <li><a href="events.html"><span class="ftr-dot"></span>Events Seru</a></li>
+        <li><a href="news.html"><span class="ftr-dot"></span>Berita Terkini</a></li>
+        <li><a href="contactus.html"><span class="ftr-dot"></span>Contact Us</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-column contact-col">
+      <h4>📬 Hubungi Kami</h4>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">📍</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">Alamat</span>
+          Jl. TM Pahlawan Seribu, Tangerang 15322
+        </div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">✉️</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">Email</span>
+          perpus@digismart.sch.id
+        </div>
+      </div>
+      <div class="ftr-contact-item">
+        <div class="ftr-contact-icon">💬</div>
+        <div class="ftr-contact-text">
+          <span class="ftr-contact-label">WhatsApp</span>
+          +62 812-3456-789
+        </div>
+      </div>
+      <div class="social-box">
+        <a href="https://wa.me/628123456789" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="mailto:info@digismart.usu.ac.id"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 <strong>Gressilliya Damanik</strong> — Website Digital Library. All Rights Reserved.</p>
+  </div>
+
+</footer>
+    
 <div id="toastWelcome" class="toast-welcome">
         <i class="fas fa-robot"></i>
         <span id="toastMessage">Selamat datang!</span>
