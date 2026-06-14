@@ -459,6 +459,42 @@
             .hero { padding-top: 18px; min-height: 60vh; }
             .bento-grid { grid-template-columns: 1fr; gap: 20px; }
         }
+
+        /* 1. Amankan posisi tombol Login agar selalu di atas navbar standar */
+.login-menu {
+    position: relative;
+    z-index: 150; /* Naikkan di atas z-index nav kamu yang bernilai 100 */
+}
+
+.dropdown-login {
+    position: absolute;
+    z-index: 200; /* Pastikan menu turunannya berada di lapisan paling atas menu */
+}
+
+/* 2. Atur ulang Search Overlay agar tidak menjadi dinding gaib */
+.search-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 9999; /* Sangat tinggi, tapi hanya aktif saat dipanggil */
+    
+    /* PENTING: Dua baris ini adalah kunci utamanya! */
+    display: none; /* Sembunyikan total secara default agar tidak menghalangi mouse */
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* 3. Kelas aktif ketika ikon search diklik via JavaScript */
+.search-overlay.active {
+    display: flex !important; /* Tampilkan hanya ketika diberi kelas .active */
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+}
+
     </style>
 </head>
 <body>
@@ -608,12 +644,12 @@
         </div>
 
         <div class="search-overlay" id="searchOverlay">
-            <div class="search-box">
-                <i class="fas fa-search inner-search-icon"></i>
-                <input type="text" placeholder="TYPE HERE..." id="searchInput">
-                <i class="fas fa-times close-icon" id="closeBtn"></i>
-            </div>
-        </div>
+    <div class="search-box">
+        <i class="fas fa-search inner-search-icon"></i>
+        <input type="text" placeholder="TYPE HERE..." id="searchInput">
+        <i class="fas fa-times close-icon" id="closeBtn"></i>
+    </div>
+</div>
     </nav>
     </section>
 
@@ -724,5 +760,51 @@ function proteksiFiturSiswa(event, urlTujuan) {
     }
 }
 </script>
+
+<script>
+        // --- 1. FUNGSI PROTEKSI AKSES FITUR SISWA ---
+        function proteksiFiturSiswa(event, urlTujuan) {
+            try {
+                // Mengambil data sesi login dari local storage browser
+                const session = JSON.parse(localStorage.getItem('digi_session'));
+                
+                // Cek apakah ada siswa yang sudah login dengan benar
+                if (session && session.loggedIn) {
+                    // Jika sudah login, izinkan langsung meluncur ke halaman game
+                    window.location.href = urlTujuan;
+                } else {
+                    // Jika belum login (orang tua/umum), cegah masuk halaman
+                    event.preventDefault();
+                    alert("Maaf, fitur ini khusus untuk Siswa! Silakan daftar atau login terlebih dahulu.");
+                    window.location.href = 'login.html';
+                }
+            } catch (error) {
+                // Jika terjadi error sistem, amankan dengan melempar ke halaman login
+                window.location.href = 'login.html';
+            }
+        }
+
+        // --- 2. FUNGSI PEMBUKA & PENUTUP SEARCH OVERLAY ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Mengambil elemen tombol berdasarkan ID asli bawaan kamu
+            const searchBtn = document.getElementById('searchBtn');
+            const searchOverlay = document.getElementById('searchOverlay');
+            const closeBtn = document.getElementById('closeBtn');
+
+            // Jika semua elemen pencarian ditemukan di halaman
+            if (searchBtn && searchOverlay && closeBtn) {
+                
+                // Ketika ikon kaca pembesar diklik -> Dinding pencarian muncul
+                searchBtn.addEventListener('click', function() {
+                    searchOverlay.classList.add('active');
+                });
+
+                // Ketika ikon silang (X) diklik -> Dinding pencarian sembunyi total
+                closeBtn.addEventListener('click', function() {
+                    searchOverlay.classList.remove('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>
