@@ -740,12 +740,9 @@
             <a href="login.html" class="login-btn">
     <i class="fas fa-user"></i> Login
 </a>
-            <div class="login-dropdown" id="loginDropdown">
-                <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login Anggota</a>
-                <a href="daftar.html"><i class="fas fa-user-plus"></i> Daftar Anggota</a>
-            </div>
-        </div>
-
+<a href="daftar.html" class="login-btn" style="background: var(--bg-surface2); color: var(--text); border: 1px solid var(--border);">
+    <i class="fas fa-user-plus"></i> Daftar
+</a>
         <!-- Hamburger -->
         <button class="ham-btn" id="hamBtn" aria-label="Menu">
             <span class="ham-line"></span>
@@ -903,20 +900,6 @@ document.addEventListener('keydown', e => {
     }
 });
 
-/* ── 2. LOGIN DROPDOWN (JS toggle) ── */
-const loginBtn      = document.getElementById('loginBtn');
-const loginWrapper  = document.getElementById('loginWrapper');
-
-loginBtn.addEventListener('click', (e) => {
-    e.stopPropagation();
-    loginWrapper.classList.toggle('open');
-});
-// Tutup kalau klik di luar — pakai mousedown bukan click
-document.addEventListener('mousedown', (e) => {
-    if (!loginWrapper.contains(e.target)) {
-        loginWrapper.classList.remove('open');
-    }
-});
 
 /* ── 3. HAMBURGER DRAWER ── */
 const hamBtn        = document.getElementById('hamBtn');
