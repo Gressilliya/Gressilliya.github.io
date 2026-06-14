@@ -206,6 +206,17 @@
         }
         .btn-disabled:hover { background: transparent !important; color: #64748b !important; box-shadow: none !important; }
 
+        /* Orange variant untuk Coming Soon yang bisa diintip infonya */
+        .btn-soon {
+            border-color: #f59e0b;
+            color: #f59e0b;
+        }
+        .btn-soon:hover {
+            background: #f59e0b;
+            color: #0b1120;
+            box-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+        }
+
         /* --- DYNAMIC OPAC MODAL SYSTEM --- */
         .opac-modal {
             position: fixed;
@@ -285,7 +296,7 @@
             gap: 15px; margin-bottom: 25px; background: rgba(30, 41, 59, 0.3);
             padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);
         }
-        .meta-item { font-size: 0.8rem; }
+        .meta-item { font-size: 0.8rem; text-align: left; }
         .meta-item label { display: block; color: #64748b; font-weight: 600; text-transform: uppercase; font-size: 0.7rem; margin-bottom: 2px; }
         .meta-item span { color: #f1f5f9; font-weight: 500; }
 
@@ -296,6 +307,17 @@
             display: flex; align-items: center; gap: 10px;
         }
         .extra-list li::before { content: "📚"; font-size: 0.8rem; }
+        
+        .modal-action-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+        }
     </style>
 </head>
 <body>
@@ -345,13 +367,13 @@
 
         <div class="book-card">
             <span class="status-badge status-soon">Coming Soon</span>
-            <span class="category-tag">Komik</span>
+            <span class="category-tag">Buku Komputer dan TI</span>
             <div class="cover-box">
-                <img src="komik.jpg" alt="Cover Si Jagoan IT">
+                <img src="bukuu.jpg" alt="Cover Si Jagoan IT">
             </div>
-            <h3>Komik seru</h3>
+            <h3>Si Jagoan IT</h3>
             <p class="short-desc">Kebiasaan Mampu Mengubah Takdir. Belajar teknologi & ulet kerja keras lewat komik kocak!</p>
-            <button class="btn-baca btn-disabled" disabled>COMING SOON</button>
+            <button class="btn-baca btn-soon" onclick="openOpac('buku_jagoanit')">LIHAT KATALOG</button>
         </div>
 
         <div class="book-card">
@@ -371,7 +393,7 @@
         <div class="modal-content" onclick="event.stopPropagation()">
             <button class="close-modal" onclick="closeOpac()"><i class="fas fa-times"></i></button>
             <div class="opac-layout" id="modalDynamicContainer">
-                </div>
+            </div>
         </div>
     </div>
 
@@ -382,7 +404,7 @@
                 judul: "Persahabatan SMP",
                 penulis: "Salsabiela",
                 cover: "bukusahabat.jpg",
-                sinopsis: `Beragam orang datang silih berganti dalam kehidupan Anda. Namun, tidak banyak dari mereka yang mampu terus mendukung Anda layaknya seorang sahabat sejati. Yuk, pahami ciri-ciri sahabat sejati seperti berikut ini.<br><br>Manusia sebagai makhluk sosial tentu membutuhkan orang lain. Itulah sebabnya, mempunyai teman sejati sepertinya sudah menjadi suatu keharusan bagi setiap orang. Mengetahui sejumlah ciri teman yang baik akan membantu Anda untuk menghargai hubungan persahabatan yang sedang dijalani. Terlebih bila hal ini sudah berlangsung lama.<br><br>Di samping itu, hal tersebut sekaligus membantu Anda menemukan teman baru yang mungkin akan memberikan lebih banyak makna dalam kehidupan Anda. Semua orang di dunia ini mempunyai teman. Namun, tidak semua orang mempunyai sahabat. Persahabatan bisa lahir dari orang-orang yang sebelumnya saling membenci. Musuhmu bisa menjadi sahabatmu karena kebencian memudar dan berganti dengan perasaan cinta untuk sahabat.<br><br>Buku ini mengungkap seluk-beluk dunia persahabatan. Kamu akan diajak menelusuri makna sahabat, perbedaan teman. Dengan sahabat, cara merawat persahabatan, dan lain sebagainya. Semoga dengan membaca buku ini kamu bisa segera mendapatkan sahabat sejati dan membuat persahabatan tersebut abadi. Salam sahabat.<br><br><b>Materi Utama:</b><br>1. Menjaga Persahabatan.<br>2. Bersahabat dengan Lawan Jenis<br>3. Kisah Persahabatan Sejati.`,
+                sinopsis: `Beragam orang datang silih berganti dalam kehidupan Anda. Namun, tidak banyak dari mereka yang mampu terus mendukung Anda layaknya seorang sahabat sejati. Yuk, pahami ciri-ciri sahabat sejati seperti berikut ini.<br><br>Manusia sebagai makhluk sosial tentu membutuhkan orang lain. Itulah sebabnya, mempunyai teman sejati sepertinya sudah menjadi suatu keharusan bagi setiap orang. Mengetahui sejumlah ciri teman yang baik akan membantu Anda untuk menghargai hubungan persahabatan yang sedang dijalani. Terlebih bila hal ini sudah berlangsung lama.<br><br>Buku ini mengungkap seluk-beluk dunia persahabatan. Kamu akan diajak menelusuri makna sahabat, perbedaan teman. Dengan sahabat, cara merawat persahabatan, dan lain sebagainya.`,
                 meta: {
                     penerbit: "C-Klik Media",
                     editor: "Arin Vieta",
@@ -399,7 +421,30 @@
                     "Manage Your Time, Change Your Life",
                     "Bahagia & Betah Di Tempat Kerja",
                     "Bisnis Ala Milenial"
-                ]
+                ],
+                isComingSoon: false
+            },
+            buku_jagoanit: {
+                judul: "Si Jagoan IT",
+                penulis: "Moch. Luthfi Rahmadi",
+                cover: "bukuu.jpg",
+                sinopsis: `Mengisahkan perjuangan luar biasa dari anak Pak Santo dan Pak Broto dalam mengelola dan merawat roda usaha mereka. Melalui alur cerita komik yang segar, menarik, sekaligus kocak, buku ini menanamkan nilai-nilai luhur siber dan teknologi bagi generasi muda.<br><br>Pembaca akan diajak memahami pentingnya komitmen kuat, keuletan dalam memecahkan masalah, serta keteguhan sikap untuk terus bekerja keras sejak usia dini. Bahwa pada akhirnya, sebuah kebiasaan yang terasah baik setiap harilah yang mampu mengubah jalannya takdir masa depan seseorang!`,
+                meta: {
+                    penerbit: "Coding",
+                    isbn: "978-979-29-3441-0",
+                    terbit: "2013",
+                    halaman: "xiv + 114 Halaman",
+                    dimensi: "14 x 21 cm",
+                    genre: "Buku Komputer dan TI, Komik Edukasi",
+                    sampul: "Soft Cover"
+                },
+                extraTitle: "Materi Kompetensi",
+                extraBooks: [
+                    "Pengenalan Perangkat Keras Komputer",
+                    "Logika Berpikir Komputasional",
+                    "Etika Kreator Konten Digital Muda"
+                ],
+                isComingSoon: true
             }
         };
 
@@ -418,7 +463,13 @@
                 `;
             }
 
-            // Render Layout OPAC Moderen
+            // Atur tombol aksi di bawah modal berdasarkan status rilis
+            let actionBtnHtml = `<a href="#" class="modal-action-btn" style="background:#2dd4bf; color:#0b1120;">Mulai Membaca</a>`;
+            if (buku.isComingSoon) {
+                actionBtnHtml = `<a href="#" class="modal-action-btn" style="background:#334155; color:#64748b; cursor:not-allowed;" onclick="event.preventDefault()">Buku Belum Dirilis (Coming Soon)</a>`;
+            }
+
+            // Render Layout OPAC Modern
             const htmlContent = `
                 <div class="modal-cover">
                     <img src="${buku.cover}" alt="Cover">
@@ -437,10 +488,13 @@
                         <div class="meta-item"><label>Tahun Terbit</label><span>${buku.meta.terbit || '-'}</span></div>
                         <div class="meta-item"><label>Jumlah Hal</label><span>${buku.meta.halaman || '-'}</span></div>
                         <div class="meta-item"><label>Dimensi</label><span>${buku.meta.dimensi || '-'}</span></div>
-                        <div class="meta-item"><label>Genre</label><span>${buku.meta.genre || '-'}</span></div>
+                        <div class="meta-item"><label>Kategori</label><span>${buku.meta.genre || '-'}</span></div>
                     </div>
                     
                     ${extraHtml}
+                    <div style="margin-top: 30px;">
+                        ${actionBtnHtml}
+                    </div>
                 </div>
             `;
 
