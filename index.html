@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>DigiSmart Library</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* =====================================================
+           VARIABLE COLOR & RESET (Glassmorphism & Cyberpunk Theme)
+        ===================================================== */
+        :root {
+            --bg-dark:      #060c11;
+            --bg-surface:   rgba(15, 28, 36, 0.85);
+            --bg-surface2:  #142532;
+            --accent:       #2dd4bf;
+            --accent-dim:   rgba(45, 212, 191, 0.12);
+            --accent-glow:  rgba(45, 212, 191, 0.3);
+            --text:         #f1f5f9;
+            --text-muted:   #94a3b8;
+            --border:       rgba(45, 212, 191, 0.2);
+            --neon-blue:    #00d2ff;
+            --scanner-green: #00ff41;
+            --transition:   all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            overflow-x: hidden;
+            background-color: var(--bg-dark);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* =====================================================
+           NAVBAR (Modern Semi-Transparent Layout)
+        ===================================================== */
+        .navbar {
+            background: rgba(6, 12, 17, 0.8);
+            padding: 0 40px;
+            height: 75px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            flex-shrink: 0;
+        }
+        .logo-img {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+        .logo-text {
+            color: white;
+            font-weight: 700;
+            font-size: 20px;
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        /* Desktop Navigation Links */
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .dropdown { position: relative; }
+
+        .drop-btn {
+            color: var(--text);
+            background: none;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            padding: 10px 16px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: var(--transition);
+        }
+        .drop-btn:hover {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+        .drop-btn .chevron {
+            font-size: 10px;
+            transition: transform 0.3s;
+        }
+        .dropdown:hover .drop-btn .chevron {
+            transform: rotate(180deg);
+        }
+
+        /* Mega Menu Dropdown */
+        .mega-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #0f1c24;
+            width: 450px;
+            padding: 16px;
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
+            z-index: 1100;
+            animation: dropIn 0.25s ease;
+        }
+        @keyframes dropIn {
+            from { opacity: 0; transform: translateX(-50%) translateY(-10px); }
+            to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+        }
+        .dropdown:hover .mega-menu { display: grid; }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            padding: 12px;
+            border-radius: 10px;
+            transition: var(--transition);
+            background: rgba(255,255,255,0.02);
+            border: 1px solid transparent;
+        }
+        .menu-item:hover {
+            background: var(--accent-dim);
+            border-color: var(--border);
+            transform: translateY(-2px);
+        }
+        .item-icon { font-size: 20px; flex-shrink: 0; }
+        .item-details { display: flex; flex-direction: column; }
+        .item-name { color: white; font-size: 13px; font-weight: 600; }
+        .item-desc { color: var(--text-muted); font-size: 11px; margin-top: 2px; }
+        .full-width-item { grid-column: 1 / -1; }
+
+        /* Actions Right */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .search-trigger {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--accent);
+            font-size: 16px;
+            transition: var(--transition);
+        }
+        .search-trigger:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        .login-wrapper { position: relative; display: flex; align-items: center; }
+        
+        .login-btn {
+            background: linear-gradient(135deg, #0d9488, var(--accent));
+            color: #0a141a;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+            z-index: 10;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--accent-glow);
+        }
+
+        .login-dropdown {
+            display: none;
+            position: absolute;
+            top: calc(100% + 12px);
+            right: 0;
+            background: #0f1c24;
+            min-width: 180px;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 8px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.5);
+            z-index: 1200;
+            animation: dropIn 0.2s ease;
+        }
+        .login-wrapper.open .login-dropdown { display: block; }
+
+        .login-dropdown a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+            text-decoration: none;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            transition: var(--transition);
+        }
+        .login-dropdown a:hover {
+            background: var(--accent-dim);
+            color: var(--accent);
+        }
+        .login-dropdown a i { color: var(--accent); }
+
+        .ham-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--accent-dim);
+            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .ham-btn:hover { background: var(--accent-glow); }
+        .ham-line { width: 20px; height: 2px; background: var(--accent); border-radius: 2px; transition: var(--transition); }
+        .ham-btn.open .ham-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+        .ham-btn.open .ham-line:nth-child(2) { opacity: 0; }
+        .ham-btn.open .ham-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+        /* =====================================================
+           MOBILE DRAWER SIDE PANEL
+        ===================================================== */
+        .drawer-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 1400;
+            backdrop-filter: blur(4px);
+        }
+        .drawer-overlay.open { display: block; }
+
+        .drawer {
+            position: fixed;
+            top: 0; right: 0;
+            width: min(340px, 90vw);
+            height: 100vh;
+            background: #0f1c24;
+            border-left: 1px solid var(--border);
+            z-index: 1500;
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-y: auto;
+        }
+        .drawer.open { transform: translateX(0); }
+
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            background: linear-gradient(135deg, #061824, #0b4f49);
+            border-bottom: 1px solid var(--border);
+        }
+        .drawer-logo { display: flex; align-items: center; gap: 10px; }
+        .drawer-logo img { width: 36px; height: 36px; border-radius: 50%; border: 2px solid var(--accent); }
+        .drawer-logo span { color: white; font-weight: 700; font-size: 16px; font-family: 'Orbitron', sans-serif; }
+        .drawer-close {
+            width: 34px; height: 34px; border-radius: 50%; background: rgba(255,255,255,0.1); border: none;
+            color: white; font-size: 16px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+        }
+
+        .drawer-body { padding: 20px; flex: 1; }
+        .drawer-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); padding-bottom: 8px; border-bottom: 1px solid rgba(45,212,191,0.15); margin-bottom: 12px; }
+        .drawer-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 8px; margin-bottom: 20px; }
+        
+        .drawer-item {
+            display: flex; flex-direction: column; justify-content: center; gap: 4px; text-decoration: none; padding: 12px;
+            border-radius: 10px; background: rgba(255,255,255,0.01); border: 1px solid transparent; transition: var(--transition);
+        }
+        .drawer-item:hover { background: var(--accent-dim); border-color: var(--border); }
+        .drawer-icon { font-size: 18px; }
+        .drawer-name { color: white; font-size: 12px; font-weight: 600; }
+        .drawer-desc { color: var(--text-muted); font-size: 10px; }
+        .drawer-item.span2 { grid-column: 1 / -1; flex-direction: row; justify-content: flex-start; align-items: center; gap: 12px; }
+
+        .drawer-footer { padding: 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; }
+        .drawer-footer a { flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 10px; font-size: 13px; font-weight: 700; text-decoration: none; }
+        .btn-login-drawer { background: linear-gradient(135deg, #0d9488, var(--accent)); color: #0a141a !important; }
+        .btn-daftar-drawer { background: var(--bg-surface2); color: var(--text) !important; border: 1px solid var(--border); }
+
+        /* =====================================================
+           SEARCH OVERLAY
+        ===================================================== */
+        .search-overlay {
+            display: none;
+            position: fixed; inset: 0; background: rgba(4,11,16,0.98); z-index: 2000;
+            justify-content: center; align-items: center;
+        }
+        .search-overlay.active { display: flex; }
+        .search-box { position: relative; width: 90%; max-width: 600px; display: flex; align-items: center; border-bottom: 2px solid var(--accent); padding: 12px; }
+        .search-box input { width: 100%; background: none; border: none; outline: none; color: white; font-size: 22px; font-family: 'Orbitron', sans-serif; padding: 0 45px; }
+        .search-box input::placeholder { color: rgba(255,255,255,0.2); }
+        .s-icon-left { position: absolute; left: 12px; font-size: 20px; color: var(--accent); }
+        .s-icon-right { position: absolute; right: 12px; font-size: 20px; color: var(--text-muted); cursor: pointer; }
+        .s-icon-right:hover { color: #ef4444; }
+
+        /* =====================================================
+           HERO SECTION (High-Tech Matrix Vibe)
+        ===================================================== */
+        .hero {
+            min-height: 85vh;
+            padding-top: 75px;
+            background: radial-gradient(circle at center, #102533 0%, #040a0e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%; height: 200%;
+            background-image:
+                linear-gradient(rgba(45,212,191,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(45,212,191,0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: rotateX(60deg) translateY(-20%);
+            animation: gridMove 25s linear infinite;
+            z-index: 1;
+        }
+        @keyframes gridMove {
+            from { background-position: 0 0; }
+            to   { background-position: 0 1000px; }
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px; 
+            padding: 40px 20px;
+        }
+        .hero-tag {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            font-size: clamp(11px, 2.5vw, 15px);
+            margin-bottom: 16px;
+            text-shadow: 0 0 12px var(--accent-glow);
+        }
+        .main-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(2.2rem, 7.5vw, 4.8rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 1.15;
+            background: linear-gradient(180deg, #ffffff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .main-title span {
+            background: linear-gradient(45deg, #00f2fe 0%, #4facfe 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-p {
+            margin-top: 20px;
+            color: var(--text-muted);
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            max-width: 600px;
+            margin-left: auto; margin-right: auto;
+            line-height: 1.6;
+        }
+
+        /* =====================================================
+           BENTO GRID MODERN CARDS (Isi Folder Final Kamu)
+        ===================================================== */
+        .bento-section {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 60px 24px 100px;
+        }
+        .section-header { text-align: center; margin-bottom: 60px; }
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: clamp(1.8rem, 4.5vw, 2.8rem);
+            font-weight: 900;
+            color: white;
+            letter-spacing: 1px;
+        }
+        .section-desc { color: var(--text-muted); font-size: 15px; margin-top: 10px; }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(min(300px,100%), 1fr));
+            gap: 24px;
+        }
+        
+        /* Base Styling Card Premium */
+        .game-card {
+            border-radius: 24px;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 280px;
+            border: 1px solid rgba(255,255,255,0.04);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        .game-card::before {
+            content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%); pointer-events: none;
+        }
+        .game-card h3 { 
+            font-size: 20px; font-weight: 700;
+            margin-bottom: 12px; display: flex; justify-content: space-between; align-items: center; 
+        }
+        .game-card p  { 
+            font-size: 13.5px; line-height: 1.6; margin-bottom: 24px; color: var(--text-muted); 
+        }
+        .game-btn {
+            width: 100%;
+            padding: 13px;
+            border-radius: 50px;
+            font-weight: 700; font-size: 12.5px;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            text-align: center; text-decoration: none;
+            display: block; transition: var(--transition);
+            cursor: pointer; border: none;
+        }
+
+        /* Skema Warna Gradasi Menawan (Isi Folder Final) */
+        .card-arcade { background: linear-gradient(135deg, #22123b, #090312); }
+        .card-arcade h3 { color: #c084fc; }
+        .card-arcade .game-btn { background: linear-gradient(90deg, #a855f7, #ec4899); color: white; }
+        .card-arcade:hover { transform: translateY(-8px); border-color: #a855f7; box-shadow: 0 10px 25px rgba(168,85,247,0.25); }
+
+        .card-baca { background: linear-gradient(135deg, #0f1e36, #030a16); }
+        .card-baca h3 { color: #38bdf8; }
+        .card-baca .game-btn { background: linear-gradient(90deg, #0284c7, #38bdf8); color: white; }
+        .card-baca:hover { transform: translateY(-8px); border-color: #38bdf8; box-shadow: 0 10px 25px rgba(56,189,248,0.25); }
+
+        .card-media { background: linear-gradient(135deg, #054c38, #012017); }
+        .card-media h3 { color: #34d399; }
+        .card-media .game-btn { background: linear-gradient(90deg, #059669, #34d399); color: white; }
+        .card-media:hover { transform: translateY(-8px); border-color: #34d399; box-shadow: 0 10px 25px rgba(52,211,153,0.25); }
+
+        .card-hoax { background: linear-gradient(135deg, #093822, #02170e); }
+        .card-hoax h3 { color: #22c55e; }
+        .card-hoax .game-btn { background: linear-gradient(90deg, #15803d, #22c55e); color: white; }
+        .card-hoax:hover { transform: translateY(-8px); border-color: #22c55e; box-shadow: 0 10px 25px rgba(34,197,94,0.25); }
+
+        .card-math { background: linear-gradient(135deg, #191645, #2a0b38); }
+        .card-math h3 { color: #818cf8; }
+        .card-math .game-btn { background: linear-gradient(90deg, #4f46e5, #c084fc); color: white; }
+        .card-math:hover { transform: translateY(-8px); border-color: #818cf8; box-shadow: 0 10px 25px rgba(129,140,248,0.25); }
+
+        .card-english { background: linear-gradient(135deg, #044b4f, #012629); }
+        .card-english h3 { color: #2dd4bf; }
+        .card-english .game-btn { background: linear-gradient(90deg, #0d9488, #2dd4bf); color: white; }
+        .card-english:hover { transform: translateY(-8px); border-color: #2dd4bf; box-shadow: 0 10px 25px rgba(45,212,191,0.25); }
+
+        /* =====================================================
+           FOOTER SECTION (Futuristic Layout)
+        ===================================================== */
+        .main-footer {
+            background: #04090c;
+            border-top: 2px solid var(--border);
+            color: #94a3b8;
+            width: 100%;
+            margin-top: 80px;
+        }
+
+        .footer-top-banner {
+            background: linear-gradient(90deg, rgba(45,212,191,0.1), rgba(0,210,255,0.1));
+            border-bottom: 1px solid var(--border);
+            padding: 16px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .ftr-top-text { font-size: 14px; font-weight: 500; color: white; }
+        .ftr-badges { display: flex; gap: 10px; }
+        .ftr-badge { font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 6px; text-transform: uppercase; }
+        .ftr-badge.green { background: rgba(0, 255, 65, 0.08); color: var(--scanner-green); border: 1px solid rgba(0, 255, 65, 0.3); }
+        .ftr-badge.yellow { background: rgba(254, 240, 138, 0.08); color: #fde047; border: 1px solid rgba(254, 240, 138, 0.3); }
+        .ftr-badge.pink { background: rgba(244, 114, 182, 0.08); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.3); }
+
+        .footer-container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 60px 40px;
+            display: grid;
+            grid-template-columns: 1.4fr 1fr 1.2fr;
+            gap: 50px;
+        }
+        .footer-column h4 {
+            font-family: 'Orbitron', sans-serif; color: white; font-size: 15px; margin-bottom: 24px; letter-spacing: 1px; position: relative; padding-bottom: 8px;
+        }
+        .footer-column h4::after { content: ''; position: absolute; bottom: 0; left: 0; width: 35px; height: 2px; background: var(--accent); }
+        
+        .footer-title { font-family: 'Orbitron', sans-serif; color: white; font-size: 22px; margin-bottom: 12px; }
+        .footer-tagline { font-size: 13px; line-height: 1.7; margin-bottom: 24px; }
+        
+        .jam-operasional { background: rgba(255,255,255,0.01); border-left: 3px solid var(--accent); padding: 14px 16px; border-radius: 0 10px 10px 0; border: 1px solid rgba(255,255,255,0.03); border-left: 3px solid var(--accent); }
+        .op-header { font-size: 13.5px; color: white; font-weight: 600; margin-bottom: 8px; }
+        .time-list p { font-size: 12.5px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .time-list span { color: white; }
+        .time-list .access-24 { color: var(--accent); font-weight: 600; }
+
+        .footer-links { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 13.5px; display: flex; align-items: center; gap: 8px; transition: var(--transition); }
+        .ftr-dot { width: 5px; height: 5px; background: var(--accent); border-radius: 50%; transition: var(--transition); }
+        .footer-links a:hover { color: var(--accent); transform: translateX(4px); }
+
+        .ftr-contact-item { display: flex; gap: 14px; margin-bottom: 18px; }
+        .ftr-contact-icon { font-size: 18px; color: var(--accent); margin-top: 2px; }
+        .ftr-contact-text { font-size: 13px; line-height: 1.6; }
+        .ftr-contact-label { display: block; font-size: 11px; color: var(--text-muted); font-weight: 500; }
+
+        .social-box { display: flex; gap: 12px; margin-top: 24px; }
+        .social-box a {
+            width: 38px; height: 38px; border-radius: 10px; background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+            color: var(--text-muted); display: flex; align-items: center; justify-content: center; text-decoration: none; transition: var(--transition);
+        }
+        .social-box a:hover { color: #060c11; background: var(--accent); border-color: var(--accent); box-shadow: 0 0 12px var(--accent-glow); transform: translateY(-3px); }
+
+        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.03); padding: 24px; text-align: center; font-size: 13px; background: rgba(0,0,0,0.2); }
+        .footer-bottom strong { color: var(--accent); }
+
+        /* =====================================================
+           AI CHATBOT WIDGET (Siri-Style Glass Panel)
+        ===================================================== */
+        .ai-widget-container { position: fixed; bottom: 30px; right: 30px; z-index: 9999; }
+        .ai-trigger-btn {
+            width: 60px; height: 60px; border-radius: 50%; background: #060c11; border: 2px solid var(--accent);
+            color: var(--accent); font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(45,212,191,0.3); position: relative; transition: var(--transition);
+        }
+        .ai-trigger-btn::before {
+            content: ''; position: absolute; width: 100%; height: 100%; border-radius: 50%; border: 2px solid var(--accent);
+            animation: siriPulse 2.5s infinite linear; opacity: 0.5;
+        }
+        @keyframes siriPulse { 0% { transform: scale(1); opacity: 0.5; } 100% { transform: scale(1.6); opacity: 0; } }
+
+        .ai-chat-box {
+            position: absolute; bottom: 80px; right: 0; width: 350px; height: 460px;
+            background: rgba(11, 22, 30, 0.95); border: 1px solid var(--border); border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6); display: none; flex-direction: column; overflow: hidden;
+            animation: slideUp 0.3s cubic-bezier(0.25, 1, 0.5, 1); backdrop-filter: blur(10px);
+        }
+        @keyframes slideUp { from { transform: translateY(15px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .ai-chat-header { background: rgba(45,212,191,0.08); border-bottom: 1px solid var(--border); padding: 16px; display: flex; align-items: center; gap: 12px; }
+        .ai-avatar-circle { width: 38px; height: 38px; border-radius: 50%; background: #060c11; border: 1px solid var(--accent); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .ai-status-info h5 { color: white; font-size: 13.5px; font-family: 'Orbitron', sans-serif; }
+        .ai-status-info span { color: var(--accent); font-size: 11px; display: block; }
+        
+        .ai-chat-body { flex: 1; padding: 16px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+        .chat-msg { max-width: 85%; padding: 12px 16px; border-radius: 14px; font-size: 13px; line-height: 1.5; }
+        .chat-msg.bot { background: rgba(255,255,255,0.04); color: #e2e8f0; align-self: flex-start; border-left: 3px solid var(--accent); }
+        .chat-msg.user { background: var(--accent); color: #060c11; font-weight: 600; align-self: flex-end; }
+        
+        .ai-chat-footer { padding: 12px; border-top: 1px solid rgba(255,255,255,0.05); display: flex; gap: 8px; background: #09131a; }
+        .ai-input { flex: 1; background: #050a0e; border: 1px solid var(--border); border-radius: 10px; padding: 12px; color: white; font-size: 13px; outline: none; }
+        .ai-send-btn { background: var(--accent); border: none; color: #060c11; padding: 0 16px; border-radius: 10px; cursor: pointer; font-size: 15px; font-weight: 700; transition: var(--transition); }
+        .ai-send-btn:hover { opacity: 0.9; }
+
+        /* =====================================================
+           RESPONSIVE BREAKPOINTS (Anti Hancur)
+        ===================================================== */
+        @media (max-width: 1024px) {
+            .footer-container { grid-template-columns: 1fr 1fr; gap: 40px; }
+            .footer-column.full-width-tablet { grid-column: 1 / -1; }
+        }
+        @media (max-width: 900px) {
+            .nav-links { display: none !important; }
+            .navbar { padding: 0 24px; }
+        }
+        @media (max-width: 768px) {
+            .footer-top-banner { flex-direction: column; align-items: flex-start; padding: 14px 20px; gap: 10px; }
+            .footer-container { grid-template-columns: 1fr; gap: 35px; padding: 40px 20px; }
+            .footer-links { grid-template-columns: 1fr; }
+        }
+        @media (max-width: 480px) {
+            .navbar { padding: 0 16px; height: 70px; }
+            .logo-text { font-size: 17px; }
+            .login-btn { padding: 8px 16px; font-size: 12.5px; }
+            .bento-section { padding: 40px 16px 80px; }
+            .ai-chat-box { width: calc(100vw - 32px); height: 400px; right: -10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <a href="#" class="logo">
+            <img src="logo.jpg" alt="Logo DigiSmart" class="logo-img">
+            <span class="logo-text">DigiSmart</span>
+        </a>
+        
+        <ul class="nav-links">
+            <li class="dropdown">
+                <button class="drop-btn">Beranda <i class="fas fa-chevron-down chevron"></i></button>
+                <div class="mega-menu">
+                    <a href="about.html" class="menu-item">
+                        <span class="item-icon">ℹ️</span>
+                        <div class="item-details"><span class="item-name">About Us</span><span class="item-desc">Tentang kami</span></div>
+                    </a>
+                    <a href="visi.html" class="menu-item">
+                        <span class="item-icon">🎯</span>
+                        <div class="item-details"><span class="item-name">Visi & Misi</span><span class="item-desc">Tujuan kami</span></div>
+                    </a>
+                </div>
+            </li>
+            <li class="dropdown">
+                <button class="drop-btn">Layanan <i class="fas fa-chevron-down chevron"></i></button>
+                <div class="mega-menu">
+                    <a href="sirkulasi.html" class="menu-item">
+                        <span class="item-icon">🔄</span>
+                        <div class="item-details"><span class="item-name">Sirkulasi</span><span class="item-desc">Peminjaman & Pengembalian</span></div>
+                    </a>
+                    <a href="keanggotaan.html" class="menu-item">
+                        <span class="item-icon">💳</span>
+                        <div class="item-details"><span class="item-name">Keanggotaan</span><span class="item-desc">Kelola kartu anggota</span></div>
+                    </a>
+                </div>
+            </li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="search-trigger" id="searchOpenBtn">
+                <i class="fas fa-search"></i>
+            </div>
+            
+            <div class="login-wrapper" id="loginWrapper">
+                <button class="login-btn" id="loginToggleBtn">
+                    <i class="fas fa-user-shield"></i> Login
+                </button>
+                <div class="login-dropdown">
+                    <a href="login-petugas.html"><i class="fas fa-user-tie"></i> Petugas</a>
+                    <a href="login-siswa.html"><i class="fas fa-user-graduate"></i> Siswa</a>
+                </div>
+            </div>
+
+            <div class="ham-btn" id="hamBtn">
+                <div class="ham-line"></div>
+                <div class="ham-line"></div>
+                <div class="ham-line"></div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="drawer-overlay" id="drawerOverlay"></div>
+    <div class="drawer" id="drawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <img src="logo.jpg" alt="Logo">
+                <span>DigiSmart</span>
+            </div>
+            <button class="drawer-close" id="drawerCloseBtn"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="drawer-body">
+            <div class="drawer-label">Menu Utama</div>
+            <div class="drawer-grid">
+                <a href="#" class="drawer-item"><span class="drawer-icon">🏠</span><span class="drawer-name">Home</span></a>
+                <a href="about.html" class="drawer-item"><span class="drawer-icon">ℹ️</span><span class="drawer-name">About</span></a>
+                <a href="visi.html" class="drawer-item"><span class="drawer-icon">🎯</span><span class="drawer-name">Visi</span></a>
+            </div>
+            
+            <div class="drawer-label">Layanan Digital</div>
+            <div class="drawer-grid">
+                <a href="sirkulasi.html" class="drawer-item span2"><span class="drawer-icon">🔄</span><div><span class="drawer-name">Sirkulasi</span><span class="drawer-desc">Peminjaman Buku</span></div></a>
+                <a href="keanggotaan.html" class="drawer-item span2"><span class="drawer-icon">💳</span><div><span class="drawer-name">Keanggotaan</span><span class="drawer-desc">Kartu Anggota Digital</span></div></a>
+            </div>
+        </div>
+        <div class="drawer-footer">
+            <a href="login-siswa.html" class="btn-login-drawer">Login Siswa</a>
+            <a href="login-petugas.html" class="btn-daftar-drawer">Petugas</a>
+        </div>
+    </div>
+
+    <div class="search-overlay" id="searchOverlay">
+        <div class="search-box">
+            <i class="fas fa-search s-icon-left"></i>
+            <input type="text" placeholder="CARI DI PERPUSTAKAAN DIGITAL...">
+            <i class="fas fa-times s-icon-right" id="searchCloseBtn"></i>
+        </div>
+    </div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-tag">SMART LIBRARY MANAGEMENT SYSTEM</div>
+            <h1 class="main-title">DIGISMART <span>LIBRARY</span></h1>
+            <p class="hero-p">Menyediakan akses koleksi literasi, ruang belajar digital interaktif, dan layanan administrasi otomatis terintegrasi.</p>
+        </div>
+    </header>
+
+    <main class="bento-section">
+        <div class="section-header">
+            <h2 class="section-title">MODUL DIGITAL PERPUSTAKAAN</h2>
+            <p class="section-desc">Pilih menu di bawah ini untuk mengakses ruang belajar dan sistem otomasi.</p>
+        </div>
+
+        <div class="bento-grid">
+            <div class="game-card card-arcade">
+                <div>
+                    <h3>Arcade Literasi <i class="fas fa-gamepad"></i></h3>
+                    <p>Uji wawasan dan kecepatan berpikirmu melalui kuis interaktif seru berbasis game edukasi.</p>
+                </div>
+                <a href="game-literasi.html" class="game-btn">Mulai Bermain</a>
+            </div>
+
+            <div class="game-card card-baca">
+                <div>
+                    <h3>Pojok Baca <i class="fas fa-book-reader"></i></h3>
+                    <p>Akses ribuan judul e-book fiksi maupun non-fiksi resmi langsung dari perangkat pintarmu.</p>
+                </div>
+                <a href="pojok-baca.html" class="game-btn">Buka Buku</a>
+            </div>
+
+            <div class="game-card card-media">
+                <div>
+                    <h3>Media Belajar <i class="fas fa-photo-video"></i></h3>
+                    <p>Tonton video pembelajaran interaktif, animasi ilmiah, dan materi multimedia kreatif.</p>
+                </div>
+                <a href="media-belajar.html" class="game-btn">Lihat Konten</a>
+            </div>
+
+            <div class="game-card card-hoax">
+                <div>
+                    <h3>Hoax Buster <i class="fas fa-user-shield"></i></h3>
+                    <p>Asah kemampuan analisismu membedakan berita fakta dan hoax lewat simulasi agen literasi.</p>
+                </div>
+                <a href="hoax-buster.html" class="game-btn">Masuk Misi</a>
+            </div>
+
+            <div class="game-card card-math">
+                <div>
+                    <h3>Math Game <i class="fas fa-calculator"></i></h3>
+                    <p>Latihan hitung cepat dan asah logika matematika lewat mini-game puzzle numerik yang menantang.</p>
+                </div>
+                <a href="math-game.html" class="game-btn">Asah Otak</a>
+            </div>
+
+            <div class="game-card card-english">
+                <div>
+                    <h3>English Zone <i class="fas fa-language"></i></h3>
+                    <p>Perluas kosakata bahasa Inggrismu melalui latihan interaktif dengan cara yang santai.</p>
+                </div>
+                <a href="english-zone.html" class="game-btn">Belajar Sekarang</a>
+            </div>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-top-banner">
+            <div class="ftr-top-text">Sistem Automasi Perpustakaan Digital Berbasis Web SLiMS v9</div>
+            <div class="ftr-badges">
+                <span class="ftr-badge green">Online 24H</span>
+                <span class="ftr-badge yellow">V.2.0.0</span>
+                <span class="ftr-badge pink">Secure Link</span>
+            </div>
+        </div>
+
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-title">DigiSmart Library</div>
+                <p class="footer-tagline">Solusi modernisasi manajemen perpustakaan sekolah demi menunjang perluasan literasi digital generasi emas.</p>
+                <div class="jam-operasional">
+                    <div class="op-header"><i class="far fa-clock"></i> Jam Layanan Fisik:</div>
+                    <div class="time-list">
+                        <p>Senin - Kamis: <span>08:00 - 13:30 WIB</span></p>
+                        <p>Layanan Web: <span class="access-24">24 Jam Non-Stop</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>Navigasi Cepat</h4>
+                <ul class="footer-links">
+                    <li><a href="#"><div class="ftr-dot"></div> Beranda</a></li>
+                    <li><a href="about.html"><div class="ftr-dot"></div> Tentang Kami</a></li>
+                    <li><a href="visi.html"><div class="ftr-dot"></div> Visi Misi</a></li>
+                    <li><a href="sirkulasi.html"><div class="ftr-dot"></div> Sirkulasi</a></li>
+                    <li><a href="keanggotaan.html"><div class="ftr-dot"></div> Anggota</a></li>
+                    <li><a href="pojok-baca.html"><div class="ftr-dot"></div> Koleksi E-Book</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column full-width-tablet">
+                <h4>Hubungi Kami</h4>
+                <div class="ftr-contact-item">
+                    <i class="fas fa-map-marker-alt ftr-contact-icon"></i>
+                    <div class="ftr-contact-text">
+                        <span class="ftr-contact-label">Alamat Instansi</span>
+                        Jl. Pendidikan No. 41, Kota Medan, Sumatera Utara, Indonesia
+                    </div>
+                </div>
+                <div class="ftr-contact-item">
+                    <i class="fas fa-envelope ftr-contact-icon"></i>
+                    <div class="ftr-contact-text">
+                        <span class="ftr-contact-label">Surel Resmi</span>
+                        support@digismartlibrary.sch.id
+                    </div>
+                </div>
+                <div class="social-box">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                    <a href="#"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 <strong>DigiSmart Library</strong>. All Rights Reserved. Dikembangkan untuk Optimalisasi Literasi Informasi.
+        </div>
+    </footer>
+
+    <div class="ai-widget-container">
+        <button class="ai-trigger-btn" id="aiTriggerBtn">
+            <i class="fas fa-robot"></i>
+        </button>
+        
+        <div class="ai-chat-box" id="aiChatBox">
+            <div class="ai-chat-header">
+                <div class="ai-avatar-circle">
+                    <i class="fas fa-user-astronaut" style="color: var(--accent);"></i>
+                </div>
+                <div class="ai-status-info">
+                    <h5>DigiBot Assistant</h5>
+                    <span><i class="fas fa-circle" style="font-size:8px;"></i> Online System</span>
+                </div>
+            </div>
+            
+            <div class="ai-chat-body" id="aiChatBody">
+                <div class="chat-msg bot">
+                    Halo student! Ada yang bisa aku bantu seputar fitur perpustakaan digital ini? 😊
+                </div>
+            </div>
+            
+            <div class="ai-chat-footer">
+                <input type="text" class="ai-input" id="aiInput" placeholder="Ketik pertanyaanmu di sini...">
+                <button class="ai-send-btn" id="aiSendBtn"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ── 1. FUNGSI LOGIN TOGGLE DROPDOWN (Anti-Blocking-Bug)
+        const loginWrapper = document.getElementById('loginWrapper');
+        const loginToggleBtn = document.getElementById('loginToggleBtn');
+
+        loginToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            loginWrapper.classList.toggle('open');
+        });
+
+        document.addEventListener('click', () => {
+            loginWrapper.classList.remove('open');
+        });
+
+        // ── 2. FUNGSI DRAWER MOBILE NAV (Hamburger Menu)
+        const hamBtn = document.getElementById('hamBtn');
+        const drawer = document.getElementById('drawer');
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+
+        function toggleDrawer() {
+            hamBtn.classList.toggle('open');
+            drawer.classList.toggle('open');
+            drawerOverlay.classList.toggle('open');
+        }
+
+        hamBtn.addEventListener('click', toggleDrawer);
+        drawerCloseBtn.addEventListener('click', toggleDrawer);
+        drawerOverlay.addEventListener('click', toggleDrawer);
+
+        // ── 3. FUNGSI SEARCH OVERLAY PANEL
+        const searchOpenBtn = document.getElementById('searchOpenBtn');
+        const searchCloseBtn = document.getElementById('searchCloseBtn');
+        const searchOverlay = document.getElementById('searchOverlay');
+
+        searchOpenBtn.addEventListener('click', () => {
+            searchOverlay.classList.add('active');
+        });
+        searchCloseBtn.addEventListener('click', () => {
+            searchOverlay.classList.remove('active');
+        });
+
+        // ── 4. FUNGSI WIDGET AI CHATBOT SYSTEM (Sesuai Logika finallll.txt)
+        const aiTriggerBtn = document.getElementById('aiTriggerBtn');
+        const aiChatBox = document.getElementById('aiChatBox');
+        const aiSendBtn = document.getElementById('aiSendBtn');
+        const aiInput = document.getElementById('aiInput');
+        const aiChatBody = document.getElementById('aiChatBody');
+
+        aiTriggerBtn.addEventListener('click', () => {
+            if (aiChatBox.style.display === 'flex') {
+                aiChatBox.style.display = 'none';
+            } else {
+                aiChatBox.style.display = 'flex';
+                aiChatBody.scrollTop = aiChatBody.scrollHeight;
+            }
+        });
+
+        function kirimPesanUser() {
+            let text = aiInput.value.trim();
+            if(!text) return;
+
+            // Render Pesan User
+            let userHtml = `<div class="chat-msg user">${text}</div>`;
+            aiChatBody.innerHTML += userHtml;
+            aiInput.value = '';
+            aiChatBody.scrollTop = aiChatBody.scrollHeight;
+
+            // Proses Jawaban Otomatis Berdasarkan Logika Folder Final
+            setTimeout(() => {
+                let lowerText = text.toLowerCase();
+                let reply = "Maaf, aku belum sepenuhnya paham maksudmu. Coba tanyakan hal lain seputar perpustakaan ya!";
+
+                if (lowerText.includes('pinjam') || lowerText.includes('buku')) {
+                    reply = "📚 <strong>Cara Pinjam Buku:</strong> Silakan login akun dulu di menu atas, pilih koleksi buku, lalu klik tombol klaim pinjam untuk mendapatkan kode QR ambil di perpustakaan besok pagi!";
+                } else if (lowerText.includes('game') || lowerText.includes('hoax')) {
+                    reply = "🎮 <strong>Game Hoax Buster:</strong> Akses game bisa langsung diklik lewat card menu utama setelah kamu sukses melakukan Login Agen ya!";
+                } else if (lowerText.includes('jam') || lowerText.includes('buka') || lowerText.includes('tutup') || lowerText.includes('operasional')) {
+                    reply = "🕐 <strong>Jam Layanan Fisik:</strong> Senin-Kamis buka jam 08:00 - 13:30 WIB. Tapi kalau sistem website perpustakaan digital ini aktif non-stop 24 jam penuh!";
+                } else if (lowerText.includes('halo') || lowerText.includes('hai') || lowerText.includes('p') || lowerText.includes('assalamualaikum')) {
+                    reply = "Haii juga student! Ada yang bisa aku bantu seputar fitur perpustakaan digital ini? 😊";
+                }
+
+                let botHtml = `<div class="chat-msg bot">${reply}</div>`;
+                aiChatBody.innerHTML += botHtml;
+                aiChatBody.scrollTop = aiChatBody.scrollHeight;
+            }, 600);
+        }
+
+        aiSendBtn.addEventListener('click', kirimPesanUser);
+        aiInput.addEventListener('keypress', (e) => {
+            if(e.key === 'Enter') kirimPesanUser();
+        });
+    </script>
+</body>
+</html>
